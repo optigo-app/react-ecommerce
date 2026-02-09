@@ -1,0 +1,135 @@
+
+
+.product-card-group-grid > .product-card-group:nth-child(3n) {
+  transform: translateY(8px);
+}
+
+
+.top-section-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.elv_top_section_img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.loader-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content_1 {
+        height: 900px;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .top-section-container {
+        .loader-container {
+            height: auto !important;
+        }
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 800px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 700px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 650px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 600px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 500px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 400px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 300px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 280px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 250px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 200px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 190px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .top-section-container {
+        .loader-container .content_1 {
+            height: 170px !important;
+        }
+    }
+}
+

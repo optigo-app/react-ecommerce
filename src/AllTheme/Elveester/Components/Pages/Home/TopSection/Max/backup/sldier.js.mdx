@@ -1,0 +1,1441 @@
+
+import React from 'react';
+import { Box, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
+// Swiper Imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+
+// Swiper Styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+// Mock Data
+const products = [
+  { id: 1, name: 'Urban Jacket', price: '$120', img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop' },
+  { id: 2, name: 'Leather Bag', price: '$240', img: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=600&auto=format&fit=crop' },
+  { id: 3, name: 'Summer Hat', price: '$45', img: 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?q=80&w=600&auto=format&fit=crop' },
+  { id: 4, name: 'Sneakers', price: '$180', img: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=600&auto=format&fit=crop' },
+  { id: 5, name: 'Silk Scarf', price: '$90', img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=600&auto=format&fit=crop' },
+  { id: 6, name: 'Wrist Watch', price: '$350', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=600&auto=format&fit=crop' },
+  { id: 7, name: 'Sun Glasses', price: '$150', img: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=600&auto=format&fit=crop' },
+];
+
+const FiveCardSlider = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  return (
+    <Box 
+      sx={{ 
+        width: '100%', 
+        minHeight: '80vh', 
+        bgcolor: '#fff', 
+        display: 'flex', 
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
+        py: 5
+      }}
+    >
+      <Box sx={{ mb: 4, textAlign: 'center' }}>
+        <Typography variant="h4" sx={{ fontWeight: 700, letterSpacing: '-0.5px' }}>
+          Trending Now
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+          Swipe to explore our latest arrivals
+        </Typography>
+      </Box>
+
+      <Box sx={{ width: '100%', position: 'relative' }}>
+        <Swiper
+          modules={[Autoplay, Navigation, Pagination]}
+          // Center mode is crucial here
+          centeredSlides={true} 
+          loop={true}
+          // Default mobile view
+          slidesPerView={1.5} 
+          spaceBetween={20}
+          grabCursor={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+          }}
+          breakpoints={{
+            640: {
+              slidesPerView: 3, // Tablet: 1 center, 2 sides
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 5, // Desktop: 1 center, 2 left, 2 right (Total 5)
+              spaceBetween: 30,
+            },
+          }}
+          // --- CSS SCALING MAGIC ---
+          // This creates the "Center Pop" effect using sx
+          style={{ paddingBottom: '50px', paddingTop: '50px' }}
+        >
+          {products.map((item) => (
+            <SwiperSlide key={item.id}>
+              {({ isActive }) => (
+                <Box
+                  sx={{
+                    position: 'relative',
+                    height: '400px', // Base height
+                    borderRadius: '20px',
+                    overflow: 'hidden',
+                    transition: 'all 0.5s ease-in-out',
+                    // The magic happens here:
+                    transform: isActive ? 'scale(1.1)' : 'scale(0.85)', // Active is 110%, others 85%
+                    opacity: isActive ? 1 : 0.5, // Fade out the sides
+                    filter: isActive ? 'none' : 'grayscale(30%) blur(1px)', // Blur sides slightly
+                    boxShadow: isActive 
+                      ? '0 20px 50px rgba(0,0,0,0.2)' 
+                      : 'none',
+                    bgcolor: '#f5f5f5',
+                  }}
+                >
+                  {/* Image */}
+                  <img 
+                    src={item.img} 
+                    alt={item.name}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                  />
+                  
+                  {/* Overlay Content (Only visible on active slide) */}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      width: '100%',
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                      p: 3,
+                      opacity: isActive ? 1 : 0, // Hide text on side cards
+                      transform: isActive ? 'translateY(0)' : 'translateY(20px)',
+                      transition: 'all 0.4s ease 0.2s',
+                    }}
+                  >
+                    <Typography variant="h6" sx={{ color: '#fff', fontWeight: 600 }}>
+                      {item.name}
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 1 }}>
+                      <Typography variant="body1" sx={{ color: '#ddd' }}>
+                        {item.price}
+                      </Typography>
+                      <Button 
+                        size="small" 
+                        variant="contained" 
+                        sx={{ 
+                            bgcolor: '#fff', 
+                            color: '#000',
+                            borderRadius: '20px',
+                            minWidth: '40px',
+                            '&:hover': { bgcolor: '#f0f0f0' }
+                        }}
+                      >
+                        <ArrowForwardIcon fontSize="small" />
+                      </Button>
+                    </Box>
+                  </Box>
+                </Box>
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
+    </Box>
+  );
+};
+
+export default FiveCardSlider;
+
+
+import React, { useRef } from 'react';
+import { Box, Typography, Button, IconButton, Container, useTheme, useMediaQuery } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
+// Swiper Imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
+
+// Swiper Styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+// Mock Data mimicking your screenshot
+const collections = [
+  { id: 1, title: 'Peacock', subtitle: 'Timeless Heritage', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=600&auto=format&fit=crop' },
+  { id: 2, title: 'Aruna', subtitle: 'Touched by Sun', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop' },
+  { id: 3, title: 'Evil Eye', subtitle: 'Your Style Must-Have', image: 'https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=600&auto=format&fit=crop' }, // Center focus
+  { id: 4, title: 'Honey Bee', subtitle: 'For the women who thrive', image: 'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=600&auto=format&fit=crop' },
+  { id: 5, title: 'Glo', subtitle: 'Shine Bright', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop' },
+];
+
+const JewelryCollectionSlider = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
+  // Custom Navigation Refs
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  return (
+    <Box 
+      sx={{ 
+        width: '100%', 
+        minHeight: '100vh',
+        bgcolor: '#ffffff', // White Theme
+        color: '#1a1a1a',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        py: 8,
+        overflow: 'hidden'
+      }}
+    >
+      <Container maxWidth="lg">
+        
+        {/* --- Header Section --- */}
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Typography 
+            variant="h3" 
+            sx={{ 
+              fontWeight: 800, 
+              mb: 1,
+              fontFamily: '"Playfair Display", serif', // Luxury Serif font suggestion
+              letterSpacing: '-0.5px'
+            }}
+          >
+            Collections You'll Love
+          </Typography>
+          <Typography 
+            variant="body1" 
+            sx={{ color: '#666', fontWeight: 500 }}
+          >
+            Let’s take a glimpse at our featured collections before diving in!
+          </Typography>
+        </Box>
+
+        {/* --- 3D Perspective Swiper --- */}
+        <Box 
+            sx={{ 
+                position: 'relative', 
+                width: '100%',
+                // Styles to override Swiper defaults for the specific 3D look
+                '& .swiper': {
+                    width: '100%',
+                    paddingTop: '50px',
+                    paddingBottom: '50px',
+                },
+                '& .swiper-slide': {
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    width: isMobile ? '280px' : '350px', // Fixed widths for the cards
+                    height: isMobile ? '400px' : '500px',
+                    borderRadius: '24px', // Modern rounded corners
+                    overflow: 'hidden',
+                    // Default state (inactive slides)
+                    filter: 'brightness(0.9)', 
+                    transition: 'all 0.5s ease',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                },
+                '& .swiper-slide-active': {
+                    // Active state (Center slide)
+                    filter: 'brightness(1)',
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.2)', // Stronger shadow for depth
+                }
+            }}
+        >
+          <Swiper
+            effect={'coverflow'}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={'auto'}
+            loop={true}
+            coverflowEffect={{
+              rotate: 0,      // Keep them straight (no rotation like old carousel)
+              stretch: 0,
+              depth: 150,     // Depth perspective
+              modifier: 2.5,  // Multiplier for the effect
+              slideShadows: false, // Disable default ugly shadows
+            }}
+            modules={[EffectCoverflow, Navigation]}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+          >
+            {collections.map((item) => (
+              <SwiperSlide key={item.id}>
+                <Box 
+                  sx={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    position: 'relative',
+                  }}
+                >
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  
+                  {/* Gradient Overlay for Text Readability */}
+                  <Box 
+                    sx={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '50%',
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)',
+                    }}
+                  />
+
+                  {/* Text Content inside the card */}
+                  <Box 
+                    sx={{ 
+                      position: 'absolute', 
+                      bottom: 30, 
+                      left: 0, 
+                      width: '100%', 
+                      textAlign: 'center',
+                      color: 'white'
+                    }}
+                  >
+                    <Typography variant="h4" sx={{ fontFamily: 'cursive', mb: 0.5 }}>
+                      {item.title}
+                    </Typography>
+                    <Typography variant="caption" sx={{ letterSpacing: 1, textTransform: 'uppercase', opacity: 0.9 }}>
+                      {item.subtitle}
+                    </Typography>
+                  </Box>
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Box>
+
+        {/* --- Bottom Navigation & CTA --- */}
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            gap: 4, 
+            mt: 4 
+          }}
+        >
+          {/* Left Arrow */}
+          <IconButton 
+            ref={prevRef}
+            sx={{ 
+              border: '1px solid #1a1a1a', 
+              color: '#1a1a1a',
+              width: 50, 
+              height: 50,
+              transition: '0.3s',
+              '&:hover': { bgcolor: '#1a1a1a', color: 'white' }
+            }}
+          >
+            <ArrowBackIosNewIcon fontSize="small" />
+          </IconButton>
+
+          {/* Center CTA Button */}
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: '#1a1a1a', // Black button for White theme
+              color: '#fff',
+              borderRadius: '50px',
+              padding: '12px 40px',
+              fontWeight: 'bold',
+              letterSpacing: '1px',
+              fontSize: '1rem',
+              boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
+              '&:hover': {
+                bgcolor: '#333',
+                transform: 'translateY(-2px)',
+                boxShadow: '0 15px 25px rgba(0,0,0,0.25)',
+              },
+              transition: 'all 0.3s ease'
+            }}
+          >
+            SHOP NOW!
+          </Button>
+
+          {/* Right Arrow */}
+          <IconButton 
+            ref={nextRef}
+            sx={{ 
+              border: '1px solid #1a1a1a', 
+              color: '#1a1a1a',
+              width: 50, 
+              height: 50,
+              transition: '0.3s',
+              '&:hover': { bgcolor: '#1a1a1a', color: 'white' }
+            }}
+          >
+            <ArrowForwardIosIcon fontSize="small" />
+          </IconButton>
+        </Box>
+
+      </Container>
+    </Box>
+  );
+};
+
+export default JewelryCollectionSlider;
+
+
+import React, { useRef } from 'react';
+import { Box, Typography, IconButton, Button, Container, useTheme, useMediaQuery } from '@mui/material';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+
+// Swiper Imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
+
+// Swiper Styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+
+// Mock Data based on the screenshot
+const collections = [
+  { id: 1, title: 'Peacock', subtitle: 'A timeless heritage', image: 'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=600&auto=format&fit=crop' },
+  { id: 2, title: 'Aruna', subtitle: 'Toned in limited light', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop' },
+  { id: 3, title: 'Evil Eye', subtitle: 'Your Style Must-Have', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=600&auto=format&fit=crop' },
+  { id: 4, title: 'Honey Bee', subtitle: 'For the woman who thrives', image: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=600&auto=format&fit=crop' },
+  { id: 5, title: 'Glo', subtitle: 'Shine Bright', image: 'https://images.unsplash.com/photo-1601121141499-11ad141f2f81?q=80&w=600&auto=format&fit=crop' },
+  { id: 6, title: 'Eternity', subtitle: 'Forever Yours', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop' },
+];
+
+const PremiumCollectionSlider = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Refs for custom navigation
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  return (
+    <Box 
+      sx={{ 
+        width: '100%', 
+        py: { xs: 6, md: 10 }, 
+        bgcolor: '#ffffff', // White Theme Background
+        color: '#1a1a1a', 
+        overflow: 'hidden',
+        fontFamily: "'Playfair Display', serif" // Premium font vibe
+      }}
+    >
+      <Container maxWidth="xl">
+        
+        {/* --- Header Section --- */}
+        <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
+          <Typography 
+            variant="h3" 
+            sx={{ 
+              fontWeight: 700, 
+              mb: 1, 
+              fontSize: { xs: '1.8rem', md: '2.8rem' },
+              letterSpacing: '-0.02em'
+            }}
+          >
+            Collections You'll Love
+          </Typography>
+          <Typography 
+            variant="subtitle1" 
+            sx={{ color: '#666', fontSize: { xs: '0.9rem', md: '1.1rem' } }}
+          >
+            Let's take a glimpse at our featured collections before diving in!
+          </Typography>
+        </Box>
+
+        {/* --- Swiper 3D Coverflow Section --- */}
+        <Box sx={{ width: '100%', position: 'relative' }}>
+          <Swiper
+            modules={[EffectCoverflow, Navigation, Autoplay]}
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView="auto" // Allows custom slide widths via CSS
+            loop={true}
+            speed={800}
+            coverflowEffect={{
+              rotate: 0, // 0 rotation matches your screenshot (flat facing)
+              stretch: -20, // Pulls the side cards closer to the center
+              depth: 150, // Pushes side cards backwards
+              modifier: 2.5, // Amplifies the effect
+              slideShadows: false, // Turned off for a clean white UI
+            }}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+            style={{ padding: '20px 0 60px 0' }}
+          >
+            {collections.map((item) => (
+              <SwiperSlide 
+                key={item.id} 
+                style={{ 
+                  width: isMobile ? '260px' : '320px', // Fixed card widths
+                  height: isMobile ? '340px' : '420px',
+                }}
+              >
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    boxShadow: '0px 10px 30px rgba(0,0,0,0.15)', // Premium soft shadow
+                    bgcolor: '#fff'
+                  }}
+                >
+                  {/* Card Background Image */}
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover' 
+                    }} 
+                  />
+                  
+                  {/* Bottom Text Overlay Gradient */}
+                  <Box 
+                    sx={{ 
+                      position: 'absolute', 
+                      bottom: 0, 
+                      left: 0, 
+                      right: 0, 
+                      height: '50%', 
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'flex-end',
+                      p: 3,
+                      color: '#fff' // Kept white for contrast against images
+                    }}
+                  >
+                    <Typography 
+                      variant="h5" 
+                      sx={{ 
+                        fontFamily: "'Dancing Script', cursive", // Cursive style from screenshot
+                        fontSize: '2rem', 
+                        lineHeight: 1,
+                        mb: 0.5,
+                        textShadow: '0px 2px 4px rgba(0,0,0,0.3)'
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography variant="caption" sx={{ fontSize: '0.8rem', opacity: 0.9 }}>
+                      {item.subtitle}
+                    </Typography>
+                  </Box>
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Box>
+
+        {/* --- Bottom Controls Section --- */}
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            gap: { xs: 2, md: 4 },
+            mt: 2 
+          }}
+        >
+          {/* Custom Left Arrow */}
+          <IconButton
+            ref={prevRef}
+            sx={{
+              width: 44,
+              height: 44,
+              border: '1px solid #e0e0e0',
+              bgcolor: '#fff',
+              color: '#1a1a1a',
+              transition: 'all 0.3s',
+              '&:hover': { bgcolor: '#1a1a1a', color: '#fff' },
+            }}
+          >
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+
+          {/* CTA Button */}
+          <Button
+            variant="contained"
+            disableElevation
+            sx={{
+              bgcolor: '#1a1a1a',
+              color: '#fff',
+              px: { xs: 4, md: 6 },
+              py: 1.5,
+              borderRadius: '30px',
+              fontWeight: 700,
+              fontSize: '0.9rem',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              boxShadow: '0px 4px 14px rgba(0,0,0,0.15)',
+              '&:hover': { bgcolor: '#333' }
+            }}
+          >
+            Shop Now!
+          </Button>
+
+          {/* Custom Right Arrow */}
+          <IconButton
+            ref={nextRef}
+            sx={{
+              width: 44,
+              height: 44,
+              border: '1px solid #e0e0e0',
+              bgcolor: '#fff',
+              color: '#1a1a1a',
+              transition: 'all 0.3s',
+              '&:hover': { bgcolor: '#1a1a1a', color: '#fff' },
+            }}
+          >
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        </Box>
+
+      </Container>
+    </Box>
+  );
+};
+
+export default PremiumCollectionSlider;
+
+
+import React, { useRef } from 'react';
+import { Box, Typography, Button, IconButton, Container, useTheme, useMediaQuery } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+// Swiper Imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
+
+// Swiper Styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+
+// Mock Data (replace with your actual collection data)
+const collections = [
+  {
+    name: 'Peacock',
+    tagline: 'A Timeless Heritage for The Modern Bride',
+    image: 'https://images.unsplash.com/photo-1611601339933-14371d3f9468?q=80&w=600&auto=format&fit=crop',
+  },
+  {
+    name: 'Aruna',
+    tagline: 'Tuned to Timeless Tastes',
+    image: 'https://images.unsplash.com/photo-1617038260897-41a1f1b0457b?q=80&w=600&auto=format&fit=crop',
+  },
+  {
+    name: 'Evil Eye',
+    tagline: 'Your Style Must-Have',
+    image: 'https://images.unsplash.com/photo-1611591437281-462bf4d3ab48?q=80&w=600&auto=format&fit=crop',
+  },
+  {
+    name: 'Honey Bee',
+    tagline: 'For the Queen in Every Woman',
+    image: 'https://images.unsplash.com/photo-1601121141499-17ae80afc83a?q=80&w=600&auto=format&fit=crop',
+  },
+  {
+    name: 'Glo',
+    tagline: 'By Tanishq',
+    image: 'https://images.unsplash.com/photo-1599351431202-1456d4828135?q=80&w=600&auto=format&fit=crop',
+  },
+];
+
+// Custom styles for the Swiper's Coverflow effect
+const swiperStyles = `
+  .swiper-slide {
+    transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out;
+    filter: brightness(0.6);
+  }
+  .swiper-slide-active {
+    filter: brightness(1);
+    transform: scale(1.1) !important; /* Ensure active slide is largest */
+  }
+`;
+
+const CollectionsSlider = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  return (
+    <>
+      <style>{swiperStyles}</style>
+      <Box
+        sx={{
+          width: '100%',
+          py: { xs: 6, md: 10 },
+          // Dark theme with a subtle radial gradient for a "glow" effect
+          background: 'radial-gradient(ellipse at center, #1a2333 0%, #0c1018 70%, #080b10 100%)',
+          color: '#ffffff',
+          overflow: 'hidden',
+        }}
+      >
+        <Container maxWidth="lg">
+          {/* --- Section Titles --- */}
+          <Box sx={{ textAlign: 'center', mb: 5 }}>
+            <Typography
+              variant={isMobile ? 'h4' : 'h3'}
+              component="h2"
+              sx={{ fontWeight: 'bold', mb: 1 }}
+            >
+              Collections You'll Love
+            </Typography>
+            <Typography variant="body1" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+              Let's take a glimpse at our featured collections before diving in!
+            </Typography>
+          </Box>
+
+          {/* --- Swiper Component --- */}
+          <Swiper
+            effect={'coverflow'}
+            grabCursor={true}
+            centeredSlides={true}
+            loop={true}
+            slidesPerView={'auto'}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: isMobile ? 50 : 100, // Distance between slides
+              depth: 150, // 3D depth effect
+              modifier: 1, // Effect multiplier
+              slideShadows: false,
+            }}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+            modules={[EffectCoverflow, Navigation, Autoplay]}
+            className="collectionsSwiper"
+          >
+            {collections.map((collection, index) => (
+              <SwiperSlide key={index} style={{ width: isMobile ? '60%' : '30%', maxWidth: '350px' }}>
+                <Box
+                  sx={{
+                    position: 'relative',
+                    width: '100%',
+                    paddingTop: '133%', // Creates a 3:4 aspect ratio
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                  }}
+                >
+                  <img
+                    src={collection.image}
+                    alt={collection.name}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
+                  {/* --- Text Overlay with Gradient --- */}
+                  <Box sx={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      width: '100%',
+                      p: 3,
+                      textAlign: 'center',
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)'
+                  }}>
+                      <Typography variant="h5" sx={{ fontFamily: '"Playfair Display", serif', fontWeight: 600 }}>{collection.name}</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.7rem' }}>{collection.tagline}</Typography>
+                  </Box>
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* --- Controls Section --- */}
+          <Box sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              mt: 5,
+              gap: 2
+          }}>
+            <IconButton ref={prevRef} sx={{ border: '1px solid rgba(255, 255, 255, 0.5)', color: 'white' }}>
+              <ChevronLeftIcon />
+            </IconButton>
+
+            <Button
+              variant="contained"
+              sx={{
+                borderRadius: '50px',
+                px: 5,
+                py: 1.5,
+                fontWeight: 'bold',
+                color: 'white',
+                background: 'linear-gradient(45deg, #222 30%, #444 90%)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 0 15px rgba(100, 181, 246, 0.3)', // Subtle blue glow
+                '&:hover': {
+                  background: 'linear-gradient(45deg, #333 30%, #555 90%)',
+                  boxShadow: '0 0 25px rgba(100, 181, 246, 0.5)',
+                }
+              }}
+            >
+              SHOP NOW!
+            </Button>
+            
+            <IconButton ref={nextRef} sx={{ border: '1px solid rgba(255, 255, 255, 0.5)', color: 'white' }}>
+              <ChevronRightIcon />
+            </IconButton>
+          </Box>
+
+        </Container>
+      </Box>
+    </>
+  );
+};
+
+export default CollectionsSlider;
+
+
+import React, { useRef } from 'react';
+import { Box, Typography, IconButton, Button, Container, useTheme, useMediaQuery } from '@mui/material';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+
+// Swiper Imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
+
+// Swiper Styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+
+// Mock Data based on the screenshot
+const collections = [
+  { id: 1, title: 'Peacock', subtitle: 'A timeless heritage', image: 'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=600&auto=format&fit=crop' },
+  { id: 2, title: 'Aruna', subtitle: 'Toned in limited light', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop' },
+  { id: 3, title: 'Evil Eye', subtitle: 'Your Style Must-Have', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=600&auto=format&fit=crop' },
+  { id: 4, title: 'Honey Bee', subtitle: 'For the woman who thrives', image: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=600&auto=format&fit=crop' },
+  { id: 5, title: 'Glo', subtitle: 'Shine Bright', image: 'https://images.unsplash.com/photo-1601121141499-11ad141f2f81?q=80&w=600&auto=format&fit=crop' },
+  { id: 6, title: 'Eternity', subtitle: 'Forever Yours', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop' },
+];
+
+const PremiumCollectionSlider = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Refs for custom navigation
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  return (
+    <Box 
+      sx={{ 
+        width: '100%', 
+        py: { xs: 6, md: 10 }, 
+        bgcolor: '#ffffff', // White Theme Background
+        color: '#1a1a1a', 
+        overflow: 'hidden',
+        fontFamily: "'Playfair Display', serif" // Premium font vibe
+      }}
+    >
+      <Container maxWidth="xl">
+        
+        {/* --- Header Section --- */}
+        <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
+          <Typography 
+            variant="h3" 
+            sx={{ 
+              fontWeight: 700, 
+              mb: 1, 
+              fontSize: { xs: '1.8rem', md: '2.8rem' },
+              letterSpacing: '-0.02em'
+            }}
+          >
+            Collections You'll Love
+          </Typography>
+          <Typography 
+            variant="subtitle1" 
+            sx={{ color: '#666', fontSize: { xs: '0.9rem', md: '1.1rem' } }}
+          >
+            Let's take a glimpse at our featured collections before diving in!
+          </Typography>
+        </Box>
+
+        {/* --- Swiper 3D Coverflow Section --- */}
+        <Box sx={{ width: '100%', position: 'relative' }}>
+          <Swiper
+            modules={[EffectCoverflow, Navigation, Autoplay]}
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView="auto" // Allows custom slide widths via CSS
+            loop={true}
+            speed={800}
+            coverflowEffect={{
+              rotate: 0, // 0 rotation matches your screenshot (flat facing)
+              stretch: -20, // Pulls the side cards closer to the center
+              depth: 150, // Pushes side cards backwards
+              modifier: 2.5, // Amplifies the effect
+              slideShadows: false, // Turned off for a clean white UI
+            }}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+            style={{ padding: '20px 0 60px 0' }}
+          >
+            {collections.map((item) => (
+              <SwiperSlide 
+                key={item.id} 
+                style={{ 
+                  width: isMobile ? '260px' : '320px', // Fixed card widths
+                  height: isMobile ? '340px' : '420px',
+                }}
+              >
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    boxShadow: '0px 10px 30px rgba(0,0,0,0.15)', // Premium soft shadow
+                    bgcolor: '#fff'
+                  }}
+                >
+                  {/* Card Background Image */}
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover' 
+                    }} 
+                  />
+                  
+                  {/* Bottom Text Overlay Gradient */}
+                  <Box 
+                    sx={{ 
+                      position: 'absolute', 
+                      bottom: 0, 
+                      left: 0, 
+                      right: 0, 
+                      height: '50%', 
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'flex-end',
+                      p: 3,
+                      color: '#fff' // Kept white for contrast against images
+                    }}
+                  >
+                    <Typography 
+                      variant="h5" 
+                      sx={{ 
+                        fontFamily: "'Dancing Script', cursive", // Cursive style from screenshot
+                        fontSize: '2rem', 
+                        lineHeight: 1,
+                        mb: 0.5,
+                        textShadow: '0px 2px 4px rgba(0,0,0,0.3)'
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography variant="caption" sx={{ fontSize: '0.8rem', opacity: 0.9 }}>
+                      {item.subtitle}
+                    </Typography>
+                  </Box>
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Box>
+
+        {/* --- Bottom Controls Section --- */}
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            gap: { xs: 2, md: 4 },
+            mt: 2 
+          }}
+        >
+          {/* Custom Left Arrow */}
+          <IconButton
+            ref={prevRef}
+            sx={{
+              width: 44,
+              height: 44,
+              border: '1px solid #e0e0e0',
+              bgcolor: '#fff',
+              color: '#1a1a1a',
+              transition: 'all 0.3s',
+              '&:hover': { bgcolor: '#1a1a1a', color: '#fff' },
+            }}
+          >
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+
+          {/* CTA Button */}
+          <Button
+            variant="contained"
+            disableElevation
+            sx={{
+              bgcolor: '#1a1a1a',
+              color: '#fff',
+              px: { xs: 4, md: 6 },
+              py: 1.5,
+              borderRadius: '30px',
+              fontWeight: 700,
+              fontSize: '0.9rem',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              boxShadow: '0px 4px 14px rgba(0,0,0,0.15)',
+              '&:hover': { bgcolor: '#333' }
+            }}
+          >
+            Shop Now!
+          </Button>
+
+          {/* Custom Right Arrow */}
+          <IconButton
+            ref={nextRef}
+            sx={{
+              width: 44,
+              height: 44,
+              border: '1px solid #e0e0e0',
+              bgcolor: '#fff',
+              color: '#1a1a1a',
+              transition: 'all 0.3s',
+              '&:hover': { bgcolor: '#1a1a1a', color: '#fff' },
+            }}
+          >
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        </Box>
+
+      </Container>
+    </Box>
+  );
+};
+
+export default PremiumCollectionSlider;
+
+
+
+import React from 'react';
+import { Box, Typography, Button, Rating } from '@mui/material';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+
+// Swiper Imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+
+// Swiper Styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import BrandsTitle from './BrandsTitle'; // Assuming this is your component
+
+const products = [
+  { id: 1, name: 'Nike Air Jordan', price: '$180', img: 'https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?q=80&w=600&auto=format&fit=crop' },
+  { id: 2, name: 'Sony Headphones', price: '$240', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop' },
+  { id: 3, name: 'Luxury Watch', price: '$3500', img: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=600&auto=format&fit=crop' },
+  { id: 4, name: 'Designer Bag', price: '$1200', img: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=600&auto=format&fit=crop' },
+  { id: 5, name: 'Retro Camera', price: '$850', img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=600&auto=format&fit=crop' },
+  { id: 6, name: 'Smart Sneakers', price: '$220', img: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=600&auto=format&fit=crop' },
+];
+
+const PerspectiveSlider = () => {
+  return (
+    <Box 
+      sx={{ 
+        width: '95%', 
+        margin: '0 auto',
+        bgcolor: '#f8f9fa',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
+        py: 4,
+        borderRadius: { xs: 0, md: 8 } // Remove border radius on mobile for full width feel
+      }}
+    >
+      <BrandsTitle title={"Featured Collection"} Align='center' />
+      
+      <Swiper
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
+        // This is the key logic for your 1, 3, 5 requirements
+        breakpoints={{
+           0: {
+            slidesPerView: 1, // Show 1.3 slides (Main + small peek of others)
+            spaceBetween: 20
+          },
+          480: {
+            slidesPerView: 1.3, // Show 1.3 slides (Main + small peek of others)
+            spaceBetween: 20
+          },
+          600: {
+            slidesPerView: 2,
+            spaceBetween: 30
+          },
+          768: {
+            slidesPerView: 3, // Show 3 slides exactly
+            spaceBetween: 30
+          },
+          1200: {
+           slidesPerView: 3, // Show 3 slides exactly
+            spaceBetween: 30
+          } ,
+           2000: {
+            slidesPerView: 5, // Show 5 slides exactly
+            spaceBetween: 40
+          },
+          3000: {
+            slidesPerView: 5, // Show 5 slides exactly
+            spaceBetween: 40
+          }
+        }}
+        coverflowEffect={{
+          rotate: 0,        // Keep cards flat, no rotation looks cleaner nowadays
+          stretch: 0,       // No stretching
+          depth: 100,       // Depth of the z-axis (how far back side slides go)
+          modifier: 2.5,    // Multiplier for the effect
+          slideShadows: false, 
+        }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        }}
+        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+        style={{ width: '100%', paddingTop: '50px', paddingBottom: '50px' }}
+      >
+        {products.map((item) => (
+          <SwiperSlide key={item.id} style={{ height: 'auto' }}> 
+            {({ isActive }) => (
+              <Box
+                sx={{
+                  position: 'relative',
+                  // Responsive height: smaller on mobile, tall on desktop
+                  height: { xs: '350px', md: '450px' }, 
+                  borderRadius: '24px',
+                  bgcolor: '#fff',
+                  overflow: 'hidden',
+                  // Shadow logic
+                  boxShadow: isActive 
+                    ? '0 20px 40px rgba(0,0,0,0.2)' 
+                    : '0 5px 10px rgba(0,0,0,0.05)',
+                  transition: 'all 0.4s ease',
+                  // Active logic: Center is clear, Sides are smaller/faded
+                  transform: isActive ? 'scale(1)' : 'scale(0.9)', 
+                  filter: isActive ? 'none' : 'blur(1px) grayscale(20%)',
+                  opacity: isActive ? 1 : 0.6,
+                }}
+              >
+                {/* Product Image */}
+                <img 
+                  src={item.img} 
+                  alt={item.name} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover',
+                    display: 'block'
+                  }} 
+                />
+
+                {/* Floating Info Card (Only visible on active slide) */}
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    p: 2,
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                    transform: isActive ? 'translateY(0)' : 'translateY(20px)',
+                    opacity: isActive ? 1 : 0,
+                    transition: 'all 0.4s ease 0.1s', // Slight delay for smoother effect
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
+                    height: '100%'
+                  }}
+                >
+                  <Box 
+                    sx={{ 
+                      bgcolor: 'rgba(255,255,255,0.95)',
+                      backdropFilter: 'blur(10px)',
+                      borderRadius: '16px',
+                      p: 2,
+                    }}
+                  >
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Typography variant="h6" fontWeight="bold" noWrap sx={{ maxWidth: '60%' }}>
+                        {item.name}
+                      </Typography>
+                      <Typography variant="h6" color="primary" fontWeight="bold">
+                        {item.price}
+                      </Typography>
+                    </Box>
+                    
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
+                      <Rating value={5} readOnly size="small" sx={{ color: '#faaf00' }} />
+                      <Button 
+                        variant="contained" 
+                        size="small"
+                        startIcon={<ShoppingBagIcon />}
+                        sx={{ 
+                          borderRadius: '20px', 
+                          bgcolor: '#000', 
+                          color: '#fff', 
+                          textTransform: 'none',
+                          '&:hover': { bgcolor: '#333' } 
+                        }}
+                      >
+                        Buy
+                      </Button>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            )}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Box>
+  );
+};
+
+export default PerspectiveSlider;
+
+
+import React from 'react';
+import { Box, Typography, Button, Rating, useTheme, useMediaQuery } from '@mui/material';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+
+// Swiper Imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+
+// Swiper Styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import BrandsTitle from './BrandsTitle';
+
+const products = [
+  { id: 1, name: 'Nike Air Jordan', price: '$180', img: 'https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?q=80&w=600&auto=format&fit=crop' },
+  { id: 2, name: 'Sony Headphones', price: '$240', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop' },
+  { id: 3, name: 'Luxury Watch', price: '$3500', img: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=600&auto=format&fit=crop' },
+  { id: 4, name: 'Designer Bag', price: '$1200', img: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=600&auto=format&fit=crop' },
+  { id: 5, name: 'Retro Camera', price: '$850', img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=600&auto=format&fit=crop' },
+  { id: 6, name: 'Smart Sneakers', price: '$220', img: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=600&auto=format&fit=crop' },
+    { id: 1, name: 'Nike Air Jordan', price: '$180', img: 'https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?q=80&w=600&auto=format&fit=crop' },
+  { id: 2, name: 'Sony Headphones', price: '$240', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop' },
+  { id: 3, name: 'Luxury Watch', price: '$3500', img: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=600&auto=format&fit=crop' },
+  { id: 4, name: 'Designer Bag', price: '$1200', img: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=600&auto=format&fit=crop' },
+  { id: 5, name: 'Retro Camera', price: '$850', img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=600&auto=format&fit=crop' },
+  { id: 6, name: 'Smart Sneakers', price: '$220', img: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=600&auto=format&fit=crop' },
+
+];
+
+const PerspectiveSlider = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  return (
+    <Box 
+      sx={{ 
+        width: '90%', 
+        bgcolor: '#f8f9fa', // Clean white/grey ambient
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
+        py: 2 ,
+        borderRadius:8
+      }}
+    >
+    <BrandsTitle title={"Featured Collection"} Align='center' />
+      <Swiper
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
+        slidesPerView={1}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 3 },
+          1200: { slidesPerView: 5 }
+        }}
+        coverflowEffect={{
+          rotate: 30,       // The "Tilt" (Angle of side cards)
+          stretch: 0,       // Spacing
+          depth: 200,       // This controls size difference (Higher = outer cards get smaller)
+          modifier: 1,      // Intensity of the effect
+          slideShadows: false, // Turn off ugly default black shadows
+        }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        }}
+        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+        style={{ width: '100%', padding: '60px 0' }}
+      >
+        {products.map((item) => (
+          <SwiperSlide key={item.id}>
+            {({ isActive }) => (
+              <Box
+                sx={{
+                  position: 'relative',
+                  height: isMobile ? '350px' : '450px',
+                  borderRadius: '24px',
+                  bgcolor: '#fff',
+                  overflow: 'hidden',
+                  boxShadow: isActive 
+                    ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)' // Big shadow for Center
+                    : '0 10px 15px -3px rgba(0, 0, 0, 0.1)',   // Small shadow for others
+                  transition: 'all 0.5s ease',
+                  // Visual Logic: Center is bright, Sides are faded
+                  filter: isActive ? 'none' : 'grayscale(40%) contrast(0.9)',
+                  opacity: isActive ? 1 : 0.7,
+                }}
+              >
+                {/* Product Image */}
+                <img 
+                  src={item.img} 
+                  alt={item.name} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover' 
+                  }} 
+                />
+
+                {/* Floating Info Card (Only visible on active/center slide) */}
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 20,
+                    left: 20,
+                    right: 20,
+                    bgcolor: 'rgba(255,255,255,0.95)',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '16px',
+                    p: 2,
+                    transform: isActive ? 'translateY(0)' : 'translateY(150%)', // Slide up animation
+                    opacity: isActive ? 1 : 0,
+                    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)', // Bouncy effect
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 1
+                  }}
+                >
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Typography variant="h6" fontWeight="bold">
+                      {item.name}
+                    </Typography>
+                    <Typography variant="h6" color="primary" fontWeight="bold">
+                      {item.price}
+                    </Typography>
+                  </Box>
+                  
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
+                    <Rating value={5} readOnly size="small" sx={{ color: '#000' }} />
+                    <Button 
+                      variant="contained" 
+                      color="inherit"
+                      size="small"
+                      startIcon={<ShoppingBagIcon />}
+                      sx={{ borderRadius: '20px', bgcolor: '#000', color: '#fff', '&:hover': { bgcolor: '#333' } }}
+                    >
+                      Buy
+                    </Button>
+                  </Box>
+                </Box>
+
+              </Box>
+            )}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Box>
+  );
+};
+
+export default PerspectiveSlider;

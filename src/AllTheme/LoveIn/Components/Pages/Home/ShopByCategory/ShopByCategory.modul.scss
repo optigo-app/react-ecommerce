@@ -1,0 +1,76 @@
+
+
+.shopbycategoryTitle{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    color: rgb(95,73,122);
+}
+
+.shopbycategoryDesc{
+    color: rgb(95,73,122);
+    display: flex;
+    justify-content: center;
+}
+
+.shopByCategoryBox{
+    margin: 30px;
+    padding: 15px 15px 0px 15px;
+    background-color: rgba(251, 249, 249, 0.7);
+    font-family: 'Ubuntu', sans-serif;
+}
+.shopByCategoryBoxImg{
+    height: 200px;
+    width: 200px;
+}
+
+.shopByCategoryBox1Main{
+    display: flex;
+}
+
+.shopByCategoryBox2Main{
+    display: flex;
+}
+
+.daimondEveryTitleDescs {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+@media screen and (max-width: 550px) {
+
+    .shopbycategoryTitle{
+        margin: 0px!important;
+        font-size: 21px!important;
+
+    }
+    .ShopBYCateMAin{
+        margin-top: 10px!important;
+    }
+    .shopbycategoryDescC{
+        font-size: 14px!important;
+        margin: 0px!important;
+    }
+
+    .shopByCategoryBox{
+        width: 50%!important;
+        margin: 5px!important;
+    }
+
+    .shopByCategoryBoxImg{
+        height: 80%!important;
+        width: 100%!important;
+    }
+
+    .shopByCategoryBox{
+        padding: 0px!important;
+    }
+    .daimondEveryTitleDescsDiv{
+       display: none;  
+    }
+
+    /* .shopByCategoryBox2Main{
+        display: none!important;
+    } */
+}

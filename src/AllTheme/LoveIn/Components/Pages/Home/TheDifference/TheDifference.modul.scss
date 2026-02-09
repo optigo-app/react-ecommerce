@@ -1,0 +1,250 @@
+@import '../../../scss/variable.scss';
+
+
+// .lovPAgeMain {
+
+//     .lovRock {
+//         display: flex;
+//         justify-content: center;
+//         margin-inline: 20%;
+//     }
+
+//     .lovRockBox {
+//         /* border: 1px solid; */
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         width: 15%;
+//         text-align: center;
+//         margin: 15px;
+//         margin-inline: 30px;
+//         cursor: pointer;
+//     }
+
+//     .lovTitle {
+//         text-align: center;
+//         font-size: $fontSize5;
+//         margin-bottom: 50px;
+//         font-family: $homePageFontFamily;
+//         color: $homePageFontColor;
+//     }
+
+//     // .lovBoxName {
+//     //     font-size: $fontSize2;
+//     //     color: $homePageFontColor;
+//     //     font-family: $homePageFontFamily;
+//     //     max-height: 80px;
+//     //     line-height: 12px;
+//     //     height: 68px;
+//     //     overflow: hidden;
+//     //     text-overflow: ellipsis;
+//     //     width: 160px;
+//     //     display: -webkit-box;
+//     //     -webkit-line-clamp: 3;
+//     //     -webkit-box-orient: vertical;
+//     //     box-sizing: border-box;
+//     // }
+
+//     .lovRockBoxSub2 {
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//     }
+
+//     .learnMore {
+//         margin-top: auto;
+//         color: $homePageFontColor;
+//         font-family: $homePageFontFamily;
+//         font-size: $fontSize1;
+//         letter-spacing: 1.5px;
+//         width: fit-content;
+//     }
+
+
+//     .lovRockBox {
+//         position: relative;
+//         width: 40%;
+//         /* Other styles for lovRockBox */
+//     }
+
+//     .learnMore {
+//         position: relative;
+//         text-decoration: none;
+//         color: $homePageFontColor;
+//         margin: 0px;
+//     }
+
+//     .learnMore::before {
+//         content: '';
+//         position: absolute;
+//         bottom: 0;
+//         left: 100%;
+//         /* Initially positioned outside */
+//         width: 0%;
+//         height: 1px;
+//         background-color: $homePageFontColor;
+//         transition: width 0.3s ease-out, left 0.3s ease-out;
+//         /* Added 'left' property for transition */
+//     }
+
+//     .lovRockBox:hover .learnMore::before {
+//         width: 100%;
+//         left: 0;
+//         right: auto;
+//         transition: width 0.3s ease-out;
+//     }
+
+
+//     .simple-card__img {
+//         margin-bottom: 10px;
+//         max-height: 45px;
+//     }
+
+//     .lovRockMobileDffres {
+//         display: flex !important;
+//     }
+
+
+//     @media screen and (max-width: 1440px) {
+//         .lovRock {
+//             margin-inline: 5px;
+//         }
+
+//         .lovRockBox {
+//             width: 70% !important;
+//             margin-inline: 5px !important;
+//         }
+
+//         .lovTitle {
+//             margin: 0px !important;
+//         }
+//     }
+
+//     @media screen and (max-width: 650px) {
+//         .lovRock {
+//             display: flex;
+//             flex-direction: column;
+//             justify-content: center;
+//             align-items: center;
+//         }
+
+//         .lovPAgeMain {
+//             padding-block: 0px !important;
+//         }
+
+//         .lovRockBox {
+//             width: 60% !important;
+//             display: flex !important;
+//             flex-direction: initial !important;
+//         }
+
+//         .lovRockBoxSub1 {
+//             width: 40% !important;
+//         }
+
+//         .lovTitle {
+//             font-size: 18px !important;
+//         }
+
+//         .lovRockBoxSub2 {
+//             width: 60% !important;
+//         }
+
+//         .lovBoxName {
+//             font-size: 12px !important;
+//             font-weight: 500;
+//             text-align: left;
+//         }
+
+//         .learnMore {
+//             text-align: left;
+//             color: $homePageFontColor;
+//             font-weight: 800 !important;
+//             font-size: 10px;
+//         }
+//     }
+// }\\\
+
+
+.lovPAgeMain {
+  background: $darkBackground;
+  .lovTitle {
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 50px;
+    color: $textColor;
+    font-family: $primaryFontFamily;
+    font-weight: 500 !important;
+  }
+
+  .lov_lovRock {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  @media screen and (max-width: 1700px) {
+    .lov_lovRock {
+      margin-top: 15px;
+    }
+  }
+
+  .lov_deffrence_img {
+    max-width: 50px;
+    margin-bottom: 0.8rem;
+  }
+
+  .lov_deffrence_img_dia {
+    max-width: 5rem;
+  }
+
+  .lov_diffrence_box1_main {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .lov_diffrence_box1_main_dia {
+    display: flex;
+    justify-content: center;
+  }
+
+  .lov_lovBoxName {
+    margin: 0;
+    font-size: $fontSize3;
+    color: #7d7595;
+    font-family: $Pfonts;
+    max-height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    width: 160px;
+    font-family: $homePageFontFamily;
+    // display: -webkit-box;
+    // -webkit-line-clamp: 2;
+    // -webkit-box-orient: vertical;
+    // box-sizing: border-box;
+  }
+
+  .lov_diffrence_box2_main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 7px;
+  }
+
+  .lov_learnMore,
+  .lov_learnMore_N {
+    margin-top: 10px;
+    font-family: $Pfonts;
+    font-size: 12px;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  .lov_learnMore:hover,
+  .lov_learnMore_N:hover {
+    text-decoration: underline;
+  }
+}

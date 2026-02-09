@@ -1,0 +1,306 @@
+/* vara css
+.vaara {
+    &-banner {
+        position: relative;
+        height: 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        @media screen and (max-width: 768px) {
+          height: 200px;
+          h1 {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    &-terms {
+      min-height: 100vh;
+      background-color: #ffffff;
+    }
+    
+    &-main {
+        margin: 0 auto;
+        width: 60%;
+      padding: 2rem;
+      @media screen and (max-width: 1400px) {
+        width: 85%;
+      }
+      @media screen and (max-width: 1000px) {
+        width: 85%;
+      }
+      @media screen and (max-width: 768px) {
+        width: 95%;
+      }
+    }
+  
+    &-title {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+  
+    &-introduction {
+      color: #666;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      text-wrap: pretty;
+      text-align: justify;
+    }
+  
+    &-section {
+      margin-bottom: 3rem;
+  
+      &-title {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+        color:         rgb(215, 178, 86);
+      }
+  
+      &-content {
+        margin-bottom: 1.5rem;
+      }
+    }
+  
+    &-subtitle {
+      font-size: 1.125rem;
+      color: #444;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      text-wrap: pretty;
+      text-align: justify;
+    }
+  
+    &-text {
+      color: #666;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+      text-wrap: pretty;
+      text-align: justify;
+    }
+  
+    &-conclusion {
+      color: #666;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #eaeaea;
+      text-wrap: pretty;
+      text-align: justify;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .vaara {
+      &-main {
+        padding: 1rem;
+      }
+  
+      &-title {
+        font-size: 1.65rem;
+        margin-bottom: 1.5rem;
+      }
+  
+      &-section {
+        margin-bottom: 2rem;
+  
+        &-title {
+          font-size: 1.25rem;
+        }
+      }
+  
+      &-subtitle {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  */
+
+/* shinjini css */
+
+
+.smr {
+
+  &-banner {
+    position: relative;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+
+    @media screen and (max-width: 768px) {
+      height: 200px;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  &-terms {
+    min-height: 100vh;
+    background-color: #ffffff;
+  }
+
+  &-main {
+    margin: 0 auto;
+    width: 100%;
+    padding: 2rem;
+    @media screen and (max-width: 500px) { 
+      padding: 2rem 0.5rem !important;
+    }
+  }
+
+  &-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  &-introduction {
+    color: #666;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+    text-wrap: pretty;
+    text-align: justify;
+  }
+
+  &-section {
+    margin-bottom: 3rem;
+
+    &-title {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      color: rgb(9, 9, 10);
+      text-decoration: underline;
+    }
+
+    &-content {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &-subtitle {
+    font-size: 1.125rem;
+    color: #444;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    text-wrap: pretty;
+    text-align: justify;
+  }
+
+  &-text {
+    color: #666;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    text-wrap: pretty;
+    text-align: justify;
+  }
+
+  &-conclusion {
+    color: #666;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eaeaea;
+    text-wrap: pretty;
+    text-align: justify;
+  }
+}
+
+@media (max-width: 768px) {
+  .shinjini {
+    &-main {
+      padding: 1rem;
+    }
+
+    &-title {
+      font-size: 1.65rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &-section {
+      margin-bottom: 2rem;
+
+      &-title {
+        font-size: 1.25rem;
+      }
+    }
+
+    &-subtitle {
+      font-size: 1rem;
+    }
+  }
+}
+
+
+/* Ellior numbered list */
+.smr-ellior-list {
+  padding-left: 24px;
+  margin-top: 28px;
+}
+
+/* Each point */
+.smr-ellior-item {
+  margin-bottom: 26px;
+}
+
+/* Title like: 1. Acceptance of Terms */
+.smr-ellior-title {
+  display: block;
+  font-size: 18px;      /* clear heading size */
+  font-weight: 600;     /* semi-bold, legal style */
+  color: #000;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* Description text */
+.smr-ellior-item p {
+  margin: 0;
+  font-size: 16px;      /* standard policy text */
+  font-weight: 400;
+  line-height: 1.7;
+  color: #222;
+}
+
+.smr-ellior-email {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.smr-ellior-label {
+  font-weight: 500;
+  color: #000;
+}
+
+.smr-ellior-email-box {
+  padding: 6px 12px;
+  border: 1px solid #000;
+  background-color: #fff;
+  color: #000;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+}

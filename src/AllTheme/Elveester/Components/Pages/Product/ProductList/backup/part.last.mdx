@@ -1,0 +1,1542 @@
+
+
+
+      <div className="elv_Productlists_Main_div">
+        <div className="elv_Productlists_lists_div">
+          <div className="elv_Productlists_lists_header">
+            <div className="elv_Productlists_lists_header_breadcrumb">
+              <div className="elv_Productslists_lists_name">
+                <div className="elv_Productlists_details">
+                  <span className="elv_Productlists_details_1">
+                    {location?.search?.charAt(1) == "S" ? (
+                      <>
+                        {decodeURIComponent(location?.pathname?.split("/")[2])}
+                      </>
+                    ) : (
+                      <>
+                        {BreadCumsObj()?.menuname && (
+                          <span
+                            onClick={() =>
+                              handleBreadcums({
+                                [BreadCumsObj()?.FilterKey]:
+                                  BreadCumsObj()?.FilterVal,
+                              })
+                            }
+                          >
+                            {BreadCumsObj()?.menuname}
+                          </span>
+                        )}
+                      </>
+                    )}
+                  </span>
+                  <span className="elv_Productlists_details_2">
+                    &nbsp;&nbsp;&nbsp;{isOnlyProdLoading || isProdLoading ? <></> : afterFilterCount}
+                  </span>
+                  <span className="elv_Productlists_details_3">
+                    &nbsp;{afterFilterCount === 1 ? "Design" : "Designs"}
+                  </span>
+                </div>
+                <div role="presentation">
+                  {productListData?.length > 0 ? (
+                    <>
+                      <div
+                        className="elv_breadcrumbs"
+                        style={{ marginLeft: "3px" ,
+                          display:'flex',
+                          alignItems:'center',
+                          marginTop:'8px'
+                         }}
+                      >
+                        <span
+                          onClick={() => {
+                            navigate("/");
+                          }}
+                        >
+                          {"Home >"}{" "}
+                        </span>
+                        {location?.search?.charAt(1) == "N" && (
+                          <div
+                            className="smr_breadcums_port"
+                            style={{ marginLeft: "3px" }}
+                          >
+                            <span>{"New Arrival"}</span>
+                          </div>
+                        )}
+
+                        {location?.search?.charAt(1) == "S" ? (
+                          <span>
+                            {decodeURIComponent(
+                              location?.pathname?.split("/")[2]
+                            )}
+                          </span>
+                        ) : (
+                          <>
+                            {/* {decodeURI(location?.pathname).slice(3).replaceAll("/"," > ").slice(0,-2)} */}
+                            {IsBreadCumShow && (
+                              <>
+                                {BreadCumsObj()?.menuname && (
+                                  <span
+                                    onClick={() =>
+                                      handleBreadcums({
+                                        [BreadCumsObj()?.FilterKey]:
+                                          BreadCumsObj()?.FilterVal,
+                                      })
+                                    }
+                                  >
+                                    {BreadCumsObj()?.menuname}
+                                  </span>
+                                )}
+
+                                {BreadCumsObj()?.FilterVal1 && (
+                                  <span
+                                    onClick={() =>
+                                      handleBreadcums({
+                                        [BreadCumsObj()?.FilterKey]:
+                                          BreadCumsObj()?.FilterVal,
+                                        [BreadCumsObj()?.FilterKey1]:
+                                          BreadCumsObj()?.FilterVal1,
+                                      })
+                                    }
+                                  >
+                                    {` > ${BreadCumsObj()?.FilterVal1 ||
+                                      BreadCumsObj()?.FilterVal
+                                      }`}
+                                  </span>
+                                )}
+
+                                {BreadCumsObj()?.FilterVal2 && (
+                                  <span
+                                    onClick={() =>
+                                      handleBreadcums({
+                                        [BreadCumsObj()?.FilterKey]:
+                                          BreadCumsObj()?.FilterVal,
+                                        [BreadCumsObj()?.FilterKey1]:
+                                          BreadCumsObj()?.FilterVal1,
+                                        [BreadCumsObj()?.FilterKey2]:
+                                          BreadCumsObj()?.FilterVal2,
+                                      })
+                                    }
+                                  >
+                                    {` > ${BreadCumsObj()?.FilterVal2}`}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </>
+                  ) : null}
+                </div>
+              </div>
+              <div className="elv_Productlists_lists_header_logo">
+                <span>
+                  <p className="elv_Productlist_ptitle">
+                    <img
+                      className="elv_Productlist_logo"
+                      src={`${storImagePath()}/images/HomePage/MainBanner/featuresImage.png`}
+                      alt="Logo"
+                      draggable={false}
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+                  </p>
+                </span>
+              </div>
+            </div>
+            <div className="elv_filteration_block_div">
+              <div className="elv_filteration_rows">
+                <div
+                  onClick={handleShowFilter}
+                  className={`${filter
+                    ? "elv_filteration_rows_1_filter"
+                    : "elv_filteration_rows_1"
+                    }`}
+                >
+                  {filter ? (
+                    <>
+                      <span
+                        className={`${filter
+                          ? "elv_filter_content_1_filter"
+                          : "elv_filter_content_1"
+                          }`}
+                        onClick={toggleDrawer(true)}
+                      >
+                        Filter
+                      </span>
+                      <span className="elv_filter_icon_1">
+                        &nbsp;
+                        <FilterListIcon onClick={toggleDrawer(true)} />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="elv_filter_content_1">
+                        {showFilter ? "Show Filter" : "hide filter"}
+                      </span>
+                      <span className="elv_filter_icon_1">
+                        {/* &nbsp; */}
+                        <FilterListIcon style={{ fontSize: "26px" }} />
+                      </span>
+                    </>
+                  )}
+                </div>
+                <div
+                  className={`${filter
+                    ? "elv_filteration_rows_2_filter"
+                    : "elv_filteration_rows_2"
+                    }`}
+                >
+                  <div
+                    className={
+                      maxwidth1000px || openGridModal
+                        ? "elv_filter_row2_inner_div_hide"
+                        : "elv_filter_row2_inner_div"
+                    }
+                  >
+                    {/* <div className="elv_filter_row2_label">
+                      <label className={maxwidth1000px || openGridModal ? 'elv_filter_sort_by_hide' : ''}>Sort by : </label>
+                    </div> */}
+                    <div
+                      style={{
+                        m: 1,
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        border: "none",
+                      }}
+                    >
+                      <select
+                        value={trend}
+                        onChange={(e) => {
+                          handleSortby(e);
+                          handleChangeTrend(e);
+                          setIsOnlyProdLoading(true);
+                        }}
+                        className="elv_trend_drp"
+                      >
+                        <option value="Recommended">Recommended</option>
+                        <option value="New">New</option>
+                        <option value="Trending">Trending</option>
+                        <option value="Bestseller">
+                          Bestseller
+                        </option>
+                        {storeInit?.IsStockWebsite === 1 && (
+                          <option value="In Stock">In Stock</option>
+                        )}
+                        {/* {storeInit?.IsHomeBestSeller === 1 && (
+                          <option value="Bestseller">Bestseller</option>
+                        )} */}
+                        <option value="PRICE LOW TO HIGH">
+                          Price Low to High
+                        </option>
+                        <option value="PRICE HIGH TO LOW">
+                          Price High to Low
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                {openGridModal ? (
+                  <>
+                    <div className={`elv_filteration_rows_3_combo`}>
+                      <span
+                        className={`${filter
+                          ? "elv_filter_content_2_filter"
+                          : "elv_filter_content_2"
+                          }`}
+                        onClick={handleOpen}
+                      >
+                        Combo
+                      </span>
+                      <span className="elv_filter_icon_1">
+                        &nbsp;
+                        <SortIcon onClick={handleOpen} />
+                      </span>
+                      <Modal open={openModal} onClose={handleClose}>
+                        <Box sx={modalStyle}>
+                          {storeInit?.IsMetalCustomization === 1 && (
+                            <div className={`elv_filteration_rows_3`}>
+                              <div className="">
+                                <div
+                                  className=""
+                                  style={{ paddingLeft: "0.7rem" }}
+                                >
+                                  <label>Metal :</label>
+                                </div>
+                                <FormControl
+                                  style={{
+                                    m: 1,
+                                    width: "100%",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    border: "none",
+                                  }}
+                                >
+                                  <Select
+                                    value={selectedMetalId}
+                                    onChange={(e) => {
+                                      setSelectedMetalId(e.target.value);
+                                      setIsOnlyProdLoading(true);
+                                    }}
+                                    displayEmpty
+                                    inputProps={{
+                                      "aria-label": "Without label",
+                                    }}
+                                    className="elv_metal_drp"
+                                  >
+                                    {metalType?.map((item, index) => (
+                                      <MenuItem
+                                        key={index}
+                                        value={item.Metalid}
+                                      >
+                                        {item.metaltype}
+                                      </MenuItem>
+                                    ))}
+                                  </Select>
+                                </FormControl>
+                              </div>
+                            </div>
+                          )}
+                          {storeInit?.IsDiamondCustomization === 1 && (
+                            <div className="elv_filteration_rows_4">
+                              <div className="">
+                                <div
+                                  className=""
+                                  style={{
+                                    paddingLeft: "0.7rem",
+                                    marginTop: "1rem",
+                                  }}
+                                >
+                                  <label>Diamond :</label>
+                                </div>
+                                <FormControl
+                                  style={{
+                                    m: 1,
+                                    width: "100%",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    border: "none",
+                                  }}
+                                >
+                                  <Select
+                                    value={selectedDiaId}
+                                    onChange={(e) => {
+                                      setSelectedDiaId(e.target.value);
+                                      setIsOnlyProdLoading(true);
+                                    }}
+                                    displayEmpty
+                                    inputProps={{
+                                      "aria-label": "Without label",
+                                    }}
+                                    className="elv_diamond_drp"
+                                  >
+                                    {diamondType?.map((item, index) => {
+                                      return (
+                                        <MenuItem
+                                          key={index}
+                                          value={`${item?.QualityId},${item?.ColorId}`}
+                                        >
+                                          {`${item.Quality}#${item?.color}`}
+                                        </MenuItem>
+                                      );
+                                    })}
+                                  </Select>
+                                </FormControl>
+                              </div>
+                            </div>
+                          )}
+                        </Box>
+                      </Modal>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {storeInit?.IsMetalCustomization === 1 && (
+                      <div className={`elv_filteration_rows_3`}>
+                        <div className="elv_filter_row3_inner_div">
+                          {/* <div className="elv_filter_row3_label">
+                            <label>
+                              Metal :
+                            </label>
+                          </div> */}
+                          <div
+                            style={{
+                              m: 1,
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "center",
+                              border: "none",
+                            }}
+                          >
+                            <select
+                              value={selectedMetalId}
+                              onChange={(e) => {
+                                setSelectedMetalId(e.target.value);
+                                setIsOnlyProdLoading(true);
+                              }}
+                              displayEmpty
+                              inputProps={{ "aria-label": "Without label" }}
+                              className="elv_metal_drp"
+                            >
+                              {metalType?.map((item, index) => (
+                                <option key={index} value={item.Metalid}>
+                                  {item.metaltype}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {storeInit?.IsDiamondCustomization === 1 && (
+                      <div className="elv_filteration_rows_4">
+                        <div className="elv_filter_row4_inner_div">
+                          {/* <div className="elv_filter_row4_label">
+                            <label>Diamond :</label>
+                          </div> */}
+                          <div
+                            style={{
+                              m: 1,
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "center",
+                              border: "none",
+                            }}
+                          >
+                            <select
+                              value={selectedDiaId}
+                              onChange={(e) => {
+                                setSelectedDiaId(e.target.value);
+                                setIsOnlyProdLoading(true);
+                              }}
+                              displayEmpty
+                              inputProps={{ "aria-label": "Without label" }}
+                              className="elv_diamond_drp"
+                            >
+                              {diamondType?.map((item, index) => {
+                                return (
+                                  <option
+                                    key={index}
+                                    value={`${item?.QualityId},${item?.ColorId}`}
+                                  >
+                                    {`${item.Quality}#${item?.color}`}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {filter ? (
+                  <>
+                    <div
+                      className={
+                        openGridModal
+                          ? `${filter
+                            ? "elv_filteration_rows_5_filter_dots"
+                            : "elv_filteration_rows_5"
+                          }`
+                          : `${filter
+                            ? "elv_filteration_rows_5_filter"
+                            : "elv_filteration_rows_5"
+                          }`
+                      }
+                    >
+                      <div className="elv_grid_view">
+                        {openGridModal ? (
+                          <>
+                            <CiMenuKebab
+                              onClick={handleGridToggles}
+                              style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                            />
+                            <Popover
+                              id={id}
+                              open={open}
+                              anchorEl={anchorEl}
+                              onClose={handleClosePopover}
+                              anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "left",
+                              }}
+                              transformOrigin={{
+                                vertical: "top",
+                                horizontal: "left",
+                              }}
+                            >
+                              <div style={{ padding: "10px" }}>
+                                <div
+                                  // style={{
+                                  //   display: "flex",
+                                  //   justifyContent: "center",
+                                  //   flexDirection: "row",
+                                  //   gap: "5px",
+                                  // }}
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    flexDirection: "column",
+                                    gap: "10px",
+                                  }}
+                                >
+                                  {/* {activeIconsBtns.map((iconConfig, index) => {
+                                    const isActive = iconConfig.name === activeIcon;
+                                    const IconComponent = iconConfig.name === 'single_view' ? StopRoundedIcon : iconConfig.name === 'double_view' ? ViewStreamIcon : null;
+
+                                    return (
+                                      IconComponent && (
+                                        <div
+                                          key={index}
+                                          label={IconComponent}
+                                          onClick={() => handleActiveIcons(iconConfig.name)}
+                                          style={{
+                                            paddingRight: "8px",
+                                            fontSize: iconConfig.name === 'double_view' ? "2rem" : "2.2rem",
+                                            color: isActive ? "#000" : "#A2A2A2",
+                                            cursor: "pointer",
+                                          }}
+                                        />
+                                      )
+                                    );
+                                  })} */}
+                                  {activeIconsBtns.map((iconConfig, index) => {
+                                    const isActive =
+                                      iconConfig.name === activeIcon;
+
+                                    const label =
+                                      iconConfig.name === "single_view"
+                                        ? "Single View"
+                                        : iconConfig.name === "double_view"
+                                          ? "Double View"
+                                          : null;
+
+                                    return (
+                                      label && (
+                                        <div
+                                          key={index}
+                                          onClick={() =>
+                                            handleActiveIcons(iconConfig.name)
+                                          }
+                                          style={{
+                                            fontSize: "14px",
+                                            textAlign: "center",
+                                            color: isActive
+                                              ? "#000"
+                                              : "#A2A2A2",
+                                            cursor: "pointer",
+                                          }}
+                                        >
+                                          {label}
+                                        </div>
+                                      )
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </Popover>
+                          </>
+                        ) : (
+                          <>
+                            {/* {activeIconsBtns?.map((iconConfig, index) => {
+                              const isActive = iconConfig.name === activeIcon;
+                              const IconComponent = 
+                              iconConfig.name === "window"
+                                ? WindowIcon
+                                : iconConfig.name === "apps"
+                                  ? AppsIcon
+                                  : null;
+
+                              return (
+                                IconComponent && ( */}
+                            <TfiLayoutGrid4Alt
+                              // key={index}
+                              onClick={() =>
+                                handleActiveIcons("view_grid")
+                              }
+                              style={{
+                                paddingRight: "8px",
+                                fontSize: "1.8rem",
+                                color: "#000",
+                                cursor: "pointer",
+                              }}
+                            />
+                            {/* )
+                              );
+                            })} */}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div
+                      className={`${filter
+                        ? "elv_filteration_rows_5_filter"
+                        : "elv_filteration_rows_5"
+                        }`}
+                    >
+                      <div className="elv_grid_view">
+                        {/* {activeIconsBtns.map((iconConfig, index) => {
+                          const isActive = iconConfig.name === activeIcon;
+                          let IconComponent = null;
+
+                          switch (iconConfig.name) {
+                            case "window":
+                              IconComponent = WindowIcon;
+                              break;
+                            case "apps":
+                              IconComponent = AppsIcon;
+                              break;
+                            case "view_grid":
+                              IconComponent = TfiLayoutGrid4Alt;
+                              break;
+                            default:
+                              IconComponent = null;
+                          }
+
+                          return ( 
+                        IconComponent && ( */}
+                        <TfiLayoutGrid4Alt
+                          // key={index}
+                          onClick={() =>
+                            handleActiveIcons("view_grid")
+                          }
+                          sx={{
+                            paddingRight:
+                              iconConfig.name === "view_grid"
+                                ? "2px"
+                                : "8px",
+                            fontSize:
+                              iconConfig.name === "view_grid"
+                                ? "2.1rem"
+                                : "2rem",
+                            color: "#000",
+                            cursor: "pointer",
+                          }}
+                          fontSize={
+                            iconConfig?.name === "view_grid"
+                              ? "1.25rem"
+                              : "2rem"
+                          }
+                          color={"#000"}
+                          paddingRight={
+                            iconConfig.name === "view_grid"
+                              ? "2px"
+                              : "8px"
+                          }
+                          cursor={"pointer"}
+                        />
+                        {/* )
+                          );
+                        })} */}
+                      </div>
+                    </div>
+
+                    {/* <div
+                      className={`${filter ? "elv_filteration_rows_5_filter" : "elv_filteration_rows_5"}`}
+                    >
+                      <div className="elv_grid_view">
+                        <TfiLayoutGrid4Alt
+                          key="view_grid"
+                          onClick={() => handleActiveIcons("view_grid")}
+                          sx={{
+                            paddingRight: "2px",
+                            fontSize: "2.1rem",
+                            color: activeIcon === "view_grid" ? "#000" : "#A2A2A2",
+                            cursor: "pointer",
+                          }}
+                          fontSize="1.25rem"
+                          color={activeIcon === "view_grid" ? "#000" : "#A2A2A2"}
+                          paddingRight="2px"
+                          cursor="pointer"
+                        />
+                      </div>
+                    </div> */}
+                  </>
+                )}
+              </div>
+            </div>
+            {isProdLoading ? (
+              <>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flex: "100%",
+                  }}
+                >
+                  {!maxwidth1400px ? (
+                    <>
+                      <ProductListSkeleton />
+                      <ProductFilterSkeleton />
+                    </>
+                  ) :
+                    <ProductFilterSkeleton />
+                  }
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="elv_filtered_data">
+                  <div className="elv_filtered_data_div">
+                    <div
+                      className={
+                        showFilter === false &&
+                          filter === false &&
+                          filterData?.length > 0
+                          ? "elv_filtered_data_category"
+                          : "elv_filtered_data_category_other"
+                      }
+                    >
+                      {openDrawer ? (
+                        <Drawer
+                          open={filterData?.length > 0 ? openDrawer : ""}
+                          onClose={toggleDrawer(false)}
+                          PaperProps={{
+                            sx: {
+                              width: drawerWidth,
+                            },
+                          }}
+                        >
+                          <div className="elv_filtered_category_div ">
+                            <div className="elv_filtered_data_div_filter_drawer">
+                              <div className="elv_filtered_data_text">Filter</div>
+                              <div
+                                className="elv_filter_data_clearAll"
+                                onClick={() => handelFilterClearAll()}
+                              >
+                                {
+                                  // Object.values(filterChecked).filter(
+                                  //   (ele) => ele.checked
+                                  // )?.length
+                                  //  > 
+                                  // 0 
+                                  showClearAllButton()
+                                    ? (
+                                      "Clear All"
+                                    ) : (
+                                      <span>{`Total Products: ${afterFilterCount || 0
+                                        }`}</span>
+                                    )}
+                              </div>
+                            </div>
+                            {filterData?.map((item, index) => {
+                              return (
+                                <>
+                                  {!item?.id?.includes("Range") &&
+                                    !item?.id?.includes("Price") && (
+                                      <Accordion
+                                        key={index}
+                                        className="accordian"
+                                      >
+                                        <AccordionSummary
+                                          expandIcon={<ExpandMoreIcon />}
+                                          aria-controls="panel1-content"
+                                          id="panel1-header"
+                                          className="elv_category_names"
+                                        >
+                                          {item?.Fil_DisName}
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                          {(
+                                            JSON.parse(item?.options) ?? []
+                                          ).map((opt) => {
+                                            return (
+                                              <>
+                                                <CustomFormControlLabel
+                                                  key={opt?.id}
+                                                  label={
+                                                    <CustomLabel
+                                                      text={opt.Name}
+                                                    />
+                                                  }
+                                                  control={
+                                                    <Checkbox
+                                                      name={`${item?.id}${opt?.id}`}
+                                                      checked={
+                                                        filterChecked[
+                                                          `${item?.id}${opt?.id}`
+                                                        ]?.checked === undefined
+                                                          ? false
+                                                          : filterChecked[
+                                                            `${item?.id}${opt?.id}`
+                                                          ]?.checked
+                                                      }
+                                                      style={{
+                                                        color: "#7f7d85",
+                                                        padding: 0,
+                                                        width: "10px",
+                                                      }}
+                                                      onClick={(e) => {
+                                                        handleCheckboxChange(
+                                                          e,
+                                                          item?.id,
+                                                          opt?.Name
+                                                        );
+                                                        setIsOnlyProdLoading(
+                                                          true
+                                                        );
+                                                        // setOpenDrawer(false);
+                                                      }}
+                                                      size="small"
+                                                    />
+                                                  }
+                                                />
+                                              </>
+                                            );
+                                          })}
+                                        </AccordionDetails>
+                                      </Accordion>
+                                    )}
+                                  {storeInit?.IsPriceShow == 1 && item?.id?.includes("Price") && (
+                                    <Accordion className="accordian" sx={{ paddingInline: 0, borderBottom: "none" }}>
+                                      <AccordionSummary
+                                        sx={{ paddingInline: "16px" }}
+                                        expandIcon={<ExpandMoreIcon sx={{ width: "20px" }} />}
+                                        aria-controls="panel1-content"
+                                        id="panel1-header"
+                                      >
+                                        <span className="elv_category_names">{item.Fil_DisName}</span>
+                                      </AccordionSummary>
+
+                                      <AccordionDetails
+                                        sx={{
+                                          display: "flex",
+                                          flexDirection: "column",
+                                          gap: "8px",
+                                          minHeight: "fit-content",
+                                          maxHeight: "300px",
+                                          overflow: "auto",
+                                        }}
+                                      >
+                                        {(JSON.parse(item?.options) ?? []).map((opt, i) => (
+                                          <div key={i}>
+                                            <CustomFormControlLabel
+                                              control={
+                                                <Checkbox
+                                                  name={`Price${i}${i}`}
+                                                  checked={!!filterChecked[`Price${i}${i}`]?.checked}
+                                                  style={{ color: "#7f7d85", padding: 0, width: "10px" }}
+                                                  onClick={(e) => {
+                                                    handleCheckboxChange(e, item?.id, opt);
+                                                    setIsOnlyProdLoading(true);
+                                                  }}
+                                                  size="small"
+                                                />
+                                              }
+                                              className="elv_subCategory_name_price"
+                                              label={
+                                                <CustomLabel
+                                                  text={
+                                                    opt?.Minval == 0
+                                                      ? `Under ${decodeEntities(loginCurrency?.CurrencyCode ?? storeInit?.CurrencyCode)} ${formatter(opt?.Maxval)}`
+                                                      : opt?.Maxval == 0
+                                                        ? `Over ${decodeEntities(loginCurrency?.CurrencyCode ?? storeInit?.CurrencyCode)} ${formatter(opt?.Minval)}`
+                                                        : `${decodeEntities(loginCurrency?.CurrencyCode ?? storeInit?.CurrencyCode)} ${formatter(opt?.Minval)} - ${decodeEntities(loginCurrency?.CurrencyCode ?? storeInit?.CurrencyCode)} ${formatter(opt?.Maxval)}`
+                                                  }
+                                                />
+                                              }
+                                            />
+                                          </div>
+                                        ))}
+
+                                        {/* 👇 Add your Input Range below the price checkboxes */}
+                                        <hr style={{ marginBlock: "0.5rem" }} />
+                                        <span style={{ textAlign: "center" }}>OR</span>
+                                        <hr style={{ marginBlock: "0.5rem" }} />
+                                        {JSON.parse(item?.options)?.length > 0 && (
+                                          <PriceRangeInputs
+                                            priceValue={priceRangeValue}
+                                            setpriceValue={setPriceRangeValue}
+                                            lowestPrice={lowestPrice}
+                                            highestPrice={highestPrice}
+                                            setLowestPrice={setLowestPrice}
+                                            setHighestPrice={setHighestPrice}
+                                            setProductListData={setProductListData}
+                                            setAfterFilterCount={setAfterFilterCount}
+                                            setPriceRangeValue={setPriceRangeValue}
+                                            setIsOnlyProdLoading={setIsOnlyProdLoading}
+                                            selectedMetalId={selectedMetalId}
+                                            selectedDiaId={selectedDiaId}
+                                            selectedCsId={selectedCsId}
+                                            prodListType={prodListType}
+                                            cookie={cookie}
+                                            filterChecked={filterChecked}
+                                            isReset={isReset}
+                                            setIsReset={setIsReset}
+                                          />
+                                        )}
+                                      </AccordionDetails>
+                                    </Accordion>
+                                  )}
+                                  {item?.Name?.includes("Diamond") && (
+                                    <Accordion elevation={0}>
+                                      <AccordionSummary
+                                        sx={{
+                                          paddingInline: "16px",
+                                          '& .MuiAccordionSummary-content.Mui-expanded': {
+                                            marginBlock: '0 !important',
+                                          },
+                                          '&.Mui-expanded': {
+                                            minHeight: '20px',
+                                          },
+                                        }}
+                                        expandIcon={
+                                          <ExpandMoreIcon
+                                            sx={{ width: "20px" }}
+                                          />
+                                        }
+                                      >
+                                        <span className="elv_category_names">
+                                          {item?.Fil_DisName}
+                                        </span>
+                                      </AccordionSummary>
+                                      <AccordionDetails
+                                        sx={{
+                                          display: "flex",
+                                          flexDirection: "column",
+                                          gap: "4px",
+                                          minHeight: "fit-content",
+                                          maxHeight: "300px",
+                                          overflow: "auto",
+                                          paddingBottom: "40px !important",
+                                        }}
+                                      >
+                                        <Box
+                                          sx={{
+                                            width: "100%",
+                                            height: 88,
+                                            paddingInline: "5px",
+                                          }}
+                                        // onChange={(e) =>
+                                        //   setIsOnlyProdLoading(true)
+                                        // }
+                                        >
+                                          {/* {RangeFilterView(item)} */}
+                                          <RangeFilterView ele={item} sliderValue={sliderValue} setSliderValue={setSliderValue} handleRangeFilterApi={handleRangeFilterApi} prodListType={prodListType} cookie={cookie} show={show} setShow={setShow} appliedRange1={appliedRange1} setAppliedRange1={setAppliedRange1} />
+                                        </Box>
+                                      </AccordionDetails>
+                                    </Accordion>
+                                  )}
+                                  {item?.Name?.includes("Gross") && (
+                                    <Accordion elevation={0}>
+                                      <AccordionSummary
+                                        sx={{
+                                          paddingInline: "16px",
+                                          '& .MuiAccordionSummary-content.Mui-expanded': {
+                                            marginBlock: '0 !important',
+                                          },
+                                          '&.Mui-expanded': {
+                                            minHeight: '20px',
+                                          },
+                                        }}
+                                        expandIcon={
+                                          <ExpandMoreIcon
+                                            sx={{ width: "20px" }}
+                                          />
+                                        }
+                                      >
+                                        <span className="elv_category_names">
+                                          {item?.Fil_DisName}
+                                        </span>
+                                      </AccordionSummary>
+                                      <AccordionDetails
+                                        sx={{
+                                          display: "flex",
+                                          flexDirection: "column",
+                                          gap: "4px",
+                                          minHeight: "fit-content",
+                                          maxHeight: "300px",
+                                          overflow: "auto",
+                                          paddingBottom: "40px !important",
+                                        }}
+                                      >
+                                        <Box
+                                          sx={{
+                                            width: "100%",
+                                            height: 88,
+                                            paddingInline: "5px",
+                                          }}
+                                        // onChange={(e) =>
+                                        //   setIsOnlyProdLoading(true)
+                                        // }
+                                        >
+                                          {/* {RangeFilterView2(item)} */}
+                                          <RangeFilterView2 ele={item} sliderValue2={sliderValue2} setSliderValue2={setSliderValue2} handleRangeFilterApi2={handleRangeFilterApi2} prodListType={prodListType} cookie={cookie} show2={show2} setShow2={setShow2} appliedRange3={appliedRange3} setAppliedRange3={setAppliedRange3} />
+                                        </Box>
+                                      </AccordionDetails>
+                                    </Accordion>
+                                  )}
+                                  {item?.Name?.includes("NetWt") && (
+                                    <Accordion elevation={0}>
+                                      <AccordionSummary
+                                        sx={{
+                                          paddingInline: "16px",
+                                          '& .MuiAccordionSummary-content.Mui-expanded': {
+                                            marginBlock: '0 !important',
+                                          },
+                                          '&.Mui-expanded': {
+                                            minHeight: '20px',
+                                          },
+                                        }}
+                                        expandIcon={
+                                          <ExpandMoreIcon
+                                            sx={{ width: "20px" }}
+                                          />
+                                        }
+                                      >
+                                        <span className="elv_category_names">
+                                          {item?.Fil_DisName}
+                                        </span>
+                                      </AccordionSummary>
+                                      <AccordionDetails
+                                        sx={{
+                                          display: "flex",
+                                          flexDirection: "column",
+                                          gap: "4px",
+                                          minHeight: "fit-content",
+                                          maxHeight: "300px",
+                                          overflow: "auto",
+                                          paddingBottom: "40px !important",
+                                        }}
+                                      >
+                                        <Box
+                                          sx={{
+                                            width: "100%",
+                                            height: 88,
+                                            paddingInline: "5px",
+                                          }}
+                                        // onChange={(e) =>
+                                        //   setIsOnlyProdLoading(true)
+                                        // }
+                                        >
+                                          {/* {RangeFilterView1(item)} */}
+                                          <RangeFilterView1 ele={item} sliderValue1={sliderValue1} setSliderValue1={setSliderValue1} handleRangeFilterApi1={handleRangeFilterApi1} prodListType={prodListType} cookie={cookie} show1={show1} setShow1={setShow1} appliedRange2={appliedRange2} setAppliedRange2={setAppliedRange2} />
+                                        </Box>
+                                      </AccordionDetails>
+                                    </Accordion>
+                                  )}
+                                </>
+                              );
+                            })}
+                          </div>
+                        </Drawer>
+                      ) : (
+                        <div className="elv_filtered_category_div ">
+                          <div className="elv_filtered_data_div_filter">
+                            <div className="elv_filtered_data_text">Filter</div>
+                            <div
+                              className="elv_filter_data_clearAll"
+                              onClick={() => handelFilterClearAll()}
+                            >
+                              {
+                                // Object.values(filterChecked).filter(
+                                //   (ele) => ele.checked
+                                // )?.length > 0 
+                                showClearAllButton()
+                                  ? (
+                                    "Clear All"
+                                  ) : (
+                                    <span>{`Total Products: ${afterFilterCount || 0
+                                      }`}</span>
+                                  )}
+                            </div>
+                          </div>
+                          {filterData?.map((item, index) => {
+                            return (
+                              <>
+                                {!item?.id?.includes("Range") &&
+                                  !item?.id?.includes("Price") && (
+                                    <Accordion
+                                      key={index}
+                                      className="accordian"
+                                    >
+                                      <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1-content"
+                                        id="panel1-header"
+                                        className="elv_category_names"
+                                      >
+                                        {item?.Fil_DisName}
+                                      </AccordionSummary>
+                                      <AccordionDetails className="filter_details_mui">
+                                        {(JSON.parse(item?.options) ?? []).map(
+                                          (opt) => {
+                                            return (
+                                              <>
+                                                <FormControlLabel
+                                                  className="elv_subCategory_name_allfilter"
+                                                  key={opt?.id}
+                                                  label={
+                                                    <CustomLabel
+                                                      text={opt.Name}
+                                                    />
+                                                  }
+                                                  control={
+                                                    <Checkbox
+                                                      name={`${item?.id}${opt?.id}`}
+                                                      checked={
+                                                        filterChecked[
+                                                          `${item?.id}${opt?.id}`
+                                                        ]?.checked === undefined
+                                                          ? false
+                                                          : filterChecked[
+                                                            `${item?.id}${opt?.id}`
+                                                          ]?.checked
+                                                      }
+                                                      style={{
+                                                        color: "#7f7d85",
+                                                        padding: 0,
+                                                        width: "10px",
+                                                      }}
+                                                      onClick={(e) => {
+                                                        handleCheckboxChange(
+                                                          e,
+                                                          item?.id,
+                                                          opt?.Name
+                                                        );
+                                                        setIsOnlyProdLoading(
+                                                          true
+                                                        );
+                                                      }}
+                                                      size="small"
+                                                    />
+                                                  }
+                                                />
+                                              </>
+                                            );
+                                          }
+                                        )}
+                                      </AccordionDetails>
+                                    </Accordion>
+                                  )}
+                                {storeInit?.IsPriceShow == 1 && item?.id?.includes("Price") && (
+                                  <Accordion className="accordian"
+                                    sx={{
+                                      borderBottom: "none !important"
+                                    }}
+                                  >
+                                    <AccordionSummary
+                                      sx={{ paddingInline: 0 }}
+                                      expandIcon={
+                                        <ExpandMoreIcon
+                                          sx={{ width: "20px" }}
+                                        />
+                                      }
+                                      aria-controls="panel1-content"
+                                      id="panel1-header"
+                                    >
+                                      <span className="elv_category_names">
+                                        {item.Fil_DisName}
+                                      </span>
+                                    </AccordionSummary>
+                                    <AccordionDetails
+                                      sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "4px",
+                                        minHeight: "fit-content",
+                                        maxHeight: "300px",
+                                        overflow: "auto",
+                                      }}
+                                    >
+                                      {(JSON.parse(item?.options) ?? []).map(
+                                        (opt, i) => (
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              alignItems: "center",
+                                              justifyContent: "space-between",
+                                              gap: "12px",
+                                            }}
+                                            key={i}
+                                          >
+                                            <FormControlLabel
+                                              control={
+                                                <Checkbox
+                                                  name={`Price${i}${i}`}
+                                                  checked={
+                                                    filterChecked[
+                                                      `Price${i}${i}`
+                                                    ]?.checked === undefined
+                                                      ? false
+                                                      : filterChecked[
+                                                        `Price${i}${i}`
+                                                      ]?.checked
+                                                  }
+                                                  style={{
+                                                    color: "#7f7d85",
+                                                    padding: 0,
+                                                    width: "10px",
+                                                  }}
+                                                  onClick={(e) => {
+                                                    {
+                                                      handleCheckboxChange(
+                                                        e,
+                                                        item?.id,
+                                                        opt
+                                                      );
+                                                      setIsOnlyProdLoading(
+                                                        true
+                                                      );
+                                                    }
+                                                  }}
+                                                  size="small"
+                                                />
+                                              }
+                                              className="elv_subCategory_name_price"
+                                              label={
+                                                <CustomLabel
+                                                  text={
+                                                    opt?.Minval == 0
+                                                      ? `Under ${decodeEntities(
+                                                        loginCurrency?.CurrencyCode ??
+                                                        storeInit?.CurrencyCode
+                                                      )} ${formatter(
+                                                        opt?.Maxval
+                                                      )}`
+                                                      : opt?.Maxval == 0
+                                                        ? `Over ${decodeEntities(
+                                                          loginCurrency?.CurrencyCode ??
+                                                          storeInit?.CurrencyCode
+                                                        )} ${formatter(
+                                                          opt?.Minval
+                                                        )}`
+                                                        : `${decodeEntities(
+                                                          loginCurrency?.CurrencyCode ??
+                                                          storeInit?.CurrencyCode
+                                                        )} ${formatter(
+                                                          opt?.Minval
+                                                        )} - ${decodeEntities(
+                                                          loginCurrency?.CurrencyCode ??
+                                                          storeInit?.CurrencyCode
+                                                        )} ${formatter(
+                                                          opt?.Maxval
+                                                        )}`
+                                                  }
+                                                />
+                                              }
+                                            />
+                                          </div>
+                                        )
+                                      )}
+                                      <hr style={{ marginBlock: "0.5rem" }} />
+                                      <span style={{ textAlign: "center" }}>OR</span>
+                                      <hr style={{ marginBlock: "0.5rem" }} />
+                                      {JSON.parse(item?.options)?.length > 0 && (
+                                        <PriceRangeInputs
+                                          priceValue={priceRangeValue}
+                                          setpriceValue={setPriceRangeValue}
+                                          lowestPrice={lowestPrice}
+                                          highestPrice={highestPrice}
+                                          setLowestPrice={setLowestPrice}
+                                          setHighestPrice={setHighestPrice}
+                                          setProductListData={setProductListData}
+                                          setAfterFilterCount={setAfterFilterCount}
+                                          setPriceRangeValue={setPriceRangeValue}
+                                          setIsOnlyProdLoading={setIsOnlyProdLoading}
+                                          selectedMetalId={selectedMetalId}
+                                          selectedDiaId={selectedDiaId}
+                                          selectedCsId={selectedCsId}
+                                          prodListType={prodListType}
+                                          cookie={cookie}
+                                          filterChecked={filterChecked}
+                                          isReset={isReset}
+                                          setIsReset={setIsReset}
+                                        />
+                                      )}
+                                    </AccordionDetails>
+                                  </Accordion>
+                                )}
+                                {item?.Name?.includes("Diamond") && (
+                                  <Accordion elevation={0}>
+                                    <AccordionSummary
+                                      sx={{
+                                        paddingInline: 0,
+                                        '& .MuiAccordionSummary-content.Mui-expanded': {
+                                          marginBlock: '0 !important',
+                                        },
+                                        '&.Mui-expanded': {
+                                          minHeight: '20px',
+                                        },
+                                      }}
+                                      expandIcon={
+                                        <ExpandMoreIcon
+                                          sx={{ width: "20px" }}
+                                        />
+                                      }
+                                    >
+                                      <span className="elv_category_names">
+                                        {item.Fil_DisName}
+                                      </span>
+                                    </AccordionSummary>
+                                    <AccordionDetails
+                                      sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "4px",
+                                        minHeight: "fit-content",
+                                        maxHeight: "300px",
+                                        overflow: "auto",
+                                        paddingBottom: "30px !important",
+                                      }}
+                                    >
+                                      <Box
+                                        sx={{ width: 203, height: 88 }}
+                                      // onChange={(e) =>
+                                      //   setIsOnlyProdLoading(true)
+                                      // }
+                                      >
+                                        {/* {RangeFilterView(item)} */}
+                                        <RangeFilterView ele={item} sliderValue={sliderValue} setSliderValue={setSliderValue} handleRangeFilterApi={handleRangeFilterApi} prodListType={prodListType} cookie={cookie} show={show} setShow={setShow} appliedRange1={appliedRange1} setAppliedRange1={setAppliedRange1} />
+                                      </Box>
+                                    </AccordionDetails>
+                                  </Accordion>
+                                )}
+                                {item?.Name?.includes("Gross") && (
+                                  <Accordion elevation={0}>
+                                    <AccordionSummary
+                                      sx={{
+                                        paddingInline: 0,
+                                        '& .MuiAccordionSummary-content.Mui-expanded': {
+                                          marginBlock: '0 !important',
+                                        },
+                                        '&.Mui-expanded': {
+                                          minHeight: '20px',
+                                        },
+                                      }}
+                                      expandIcon={
+                                        <ExpandMoreIcon
+                                          sx={{ width: "20px" }}
+                                        />
+                                      }
+                                    >
+                                      <span className="elv_category_names">
+                                        {item.Fil_DisName}
+                                      </span>
+                                    </AccordionSummary>
+                                    <AccordionDetails
+                                      sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "4px",
+                                        minHeight: "fit-content",
+                                        maxHeight: "300px",
+                                        overflow: "auto",
+                                        paddingBottom: "30px !important",
+                                      }}
+                                    >
+                                      <Box
+                                        sx={{ width: 203, height: 88 }}
+                                      // onChange={(e) =>
+                                      //   setIsOnlyProdLoading(true)
+                                      // }
+                                      >
+                                        {/* {RangeFilterView2(item)} */}
+                                        <RangeFilterView2 ele={item} sliderValue2={sliderValue2} setSliderValue2={setSliderValue2} handleRangeFilterApi2={handleRangeFilterApi2} prodListType={prodListType} cookie={cookie} show2={show2} setShow2={setShow2} appliedRange3={appliedRange3} setAppliedRange3={setAppliedRange3} />
+                                      </Box>
+                                    </AccordionDetails>
+                                  </Accordion>
+                                )}
+                                {item?.Name?.includes("NetWt") && (
+                                  <Accordion elevation={0}>
+                                    <AccordionSummary
+                                      sx={{
+                                        paddingInline: 0,
+                                        '& .MuiAccordionSummary-content.Mui-expanded': {
+                                          marginBlock: '0 !important',
+                                        },
+                                        '&.Mui-expanded': {
+                                          minHeight: '20px',
+                                        },
+                                      }}
+                                      expandIcon={
+                                        <ExpandMoreIcon
+                                          sx={{ width: "20px" }}
+                                        />
+                                      }
+                                    >
+                                      <span className="elv_category_names">
+                                        {item.Fil_DisName}
+                                      </span>
+                                    </AccordionSummary>
+                                    <AccordionDetails
+                                      sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "4px",
+                                        minHeight: "fit-content",
+                                        maxHeight: "300px",
+                                        overflow: "auto",
+                                        paddingBottom: "30px !important",
+                                      }}
+                                    >
+                                      <Box
+                                        sx={{ width: 203, height: 88 }}
+                                      // onChange={(e) =>
+                                      //   setIsOnlyProdLoading(true)
+                                      // }
+                                      >
+                                        {/* {RangeFilterView1(item)} */}
+                                        <RangeFilterView1 ele={item} sliderValue1={sliderValue1} setSliderValue1={setSliderValue1} handleRangeFilterApi1={handleRangeFilterApi1} prodListType={prodListType} cookie={cookie} show1={show1} setShow1={setShow1} appliedRange2={appliedRange2} setAppliedRange2={setAppliedRange2} />
+                                      </Box>
+                                    </AccordionDetails>
+                                  </Accordion>
+                                )}
+                              </>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                    {isOnlyProdLoading ? (
+                      <>
+                        {!maxwidth1400px ? (
+                          <ProductFilterSkeleton />
+                        ) :
+                          <>
+                            {/* <ProductListSkeleton /> */}
+                            <ProductFilterSkeleton />
+                          </>
+                        }
+                      </>
+                    ) : (
+                      <>
+                        {productListData.length == 0 ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              width: "80%",
+                              fontSize: "25px",
+                              marginTop: "5rem",
+                            }}
+                          >
+                            Products not found
+                          </div>
+                        ) : (
+                          <>
+                            <div
+                              className={
+                                showFilter
+                                  ? "elv_filtered_data_by_grid"
+                                  : "elv_filtered_data_by_grid_other_1"
+                              }
+                            >
+                              <div className="elv_filtered_data_grid_div">
+                                {activeIconsBtns.map((iconConfig, index) => {
+                                  const isActive =
+                                    iconConfig.name === activeIcon;
+                                  return (
+                                    isActive && (
+                                      <React.Fragment key={index}>
+                                        {productListData.map(
+                                          (item, productIndex) => {
+                                            return (
+                                              <Product_Card
+                                                key={productIndex}
+                                                class1={iconConfig.class1}
+                                                class2={iconConfig.class2}
+                                                class3={iconConfig.class3}
+                                                calcVal={iconConfig.calcWidth}
+                                                productData={item}
+                                                handleCartandWish={
+                                                  handleCartandWish
+                                                }
+                                                cartArr={cartArr}
+                                                wishArr={wishArr}
+                                                loginCurrency={loginCurrency}
+                                                imageUrl={getDynamicImages(
+                                                  item.designno,
+                                                  item.ImageExtension
+                                                )}
+                                                videoUrl={getDynamicVideo(
+                                                  item.designno,
+                                                  item.VideoCount,
+                                                  item.VideoExtension
+                                                )}
+                                                RollImageUrl={getDynamicRollImages(
+                                                  item.designno,
+                                                  item.ImageCount,
+                                                  item.ImageExtension
+                                                )}
+                                                handleMoveToDetail={
+                                                  handleMoveToDetail
+                                                }
+                                                ImageCount={item?.ImageCount}
+                                                VideoCount={item?.VideoCount}
+                                                formatter={formatter}
+                                                showFilter={showFilter}
+                                                filter={filter}
+                                                filterData={filterData}
+                                                noImageFound={noImageFound}
+                                                productIndex={productIndex}
+                                                activeIcon={activeIcon}
+                                              />
+                                            )
+                                          }
+                                        )}
+                                      </React.Fragment>
+                                    )
+                                  );
+                                })}
+                                {/* {storeInit?.IsProductListPagination == 1 &&
+                                  Math.ceil(
+                                    afterFilterCount / storeInit.PageSize
+                                  ) > 1 && (
+                                    <div className="pagination-container">
+                                      <Pagination
+                                        count={Math.ceil(afterFilterCount / storeInit.PageSize)}
+                                        size={maxwidth464px ? "small" : "large"}
+                                        shape="circular"
+                                        onChange={handelPageChange}
+                                        page={currPage}
+                                        showFirstButton
+                                        showLastButton
+                                        renderItem={(item) => (
+                                          <PaginationItem
+                                            {...item}
+                                            sx={{
+                                              pointerEvents: item.page === currPage ? 'none' : 'auto',
+                                            }}
+                                          />
+                                        )}
+                                      />
+                                    </div>
+                                  )} */}
+                                {storeInit?.IsProductListPagination == 1 &&
+                                  Math.ceil(
+                                    afterFilterCount / storeInit.PageSize
+                                  ) > 1 &&
+                                  <EditablePagination
+                                    currentPage={currPage}
+                                    totalItems={afterFilterCount}
+                                    itemsPerPage={storeInit.PageSize}
+                                    onPageChange={handelPageChange}
+                                    inputPage={inputPage}
+                                    setInputPage={setInputPage}
+                                    handlePageInputChange={handlePageInputChange}
+                                    maxwidth464px={maxwidth464px}
+                                    totalPages={totalPages}
+                                    currPage={currPage}
+                                    isShowButton={false}
+                                  />
+                                }
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>

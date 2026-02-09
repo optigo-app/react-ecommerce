@@ -1,0 +1,1956 @@
+
+// import React, { useState, useRef } from "react";
+// import {
+//   Box,
+//   Button,
+//   Checkbox,
+//   Container,
+//   FormControl,
+//   FormControlLabel,
+//   FormHelperText,
+//   Grid,
+//   InputLabel,
+//   MenuItem,
+//   Paper,
+//   Select,
+//   TextField,
+//   Typography,
+//   CircularProgress,
+//   Divider,
+//   Stepper,
+//   Step,
+//   StepButton,
+//   Fade,
+//   Chip,
+//   Alert,
+// } from "@mui/material";
+// import {
+//   Business as BusinessIcon,
+//   Person as PersonIcon,
+//   Description as DocumentIcon,
+//   VerifiedUser as VerifiedIcon,
+//   CloudUpload as UploadIcon,
+//   CheckCircle as CheckIcon,
+//   ArrowBack as ArrowBackIcon,
+//   ArrowForward as ArrowForwardIcon,
+// } from "@mui/icons-material";
+// import { useNavigate } from "react-router-dom";
+
+// const STEPS = [
+//   { label: "Business Information", icon: BusinessIcon },
+//   { label: "Authorized Representative", icon: PersonIcon },
+//   { label: "Business Documents", icon: DocumentIcon },
+//   { label: "Declarations & Consent", icon: VerifiedIcon },
+// ];
+
+// const KYCRegistrationForm = () => {
+//   const [activeStep, setActiveStep] = useState(0);
+//   const [completedSteps, setCompletedSteps] = useState(new Set());
+//   const sectionRefs = useRef([]);
+
+//   const [formData, setFormData] = useState({
+//     company_name: "",
+//     entity_type: "",
+//     industry_category: "",
+//     gst_number: "",
+//     pan_number: "",
+//     iec_code: "",
+//     address_line: "",
+//     city: "",
+//     state: "",
+//     country: "",
+//     pincode: "",
+//     first_name: "",
+//     last_name: "",
+//     contact: "",
+//     email: "",
+//     trade_license: null,
+//     gst_certificate: null,
+//     iec_certificate: null,
+//     udyam_certificate: null,
+//     declaration: false,
+//     consent: false,
+//   });
+
+//   const [errors, setErrors] = useState({});
+//   const [loading, setLoading] = useState(false);
+//   const [submitSuccess, setSubmitSuccess] = useState(false);
+//   const navigation = useNavigate();
+
+//   const handleInputChange = (e) => {
+//     const { name, value, type, checked } = e.target;
+//     setFormData((prev) => ({
+//       ...prev,
+//       [name]: type === "checkbox" ? checked : value,
+//     }));
+//   };
+
+//   const handleSelectChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const handleFileChange = (e) => {
+//     const { name, files } = e.target;
+//     if (files && files[0]) {
+//       setFormData((prev) => ({ ...prev, [name]: files[0] }));
+//     }
+//   };
+
+//   const handleNext = () => {
+//     setCompletedSteps((prev) => new Set(prev).add(activeStep));
+//     if (activeStep < STEPS.length - 1) {
+//       setActiveStep((prev) => prev + 1);
+//       scrollToSection(activeStep + 1);
+//     }
+//   };
+
+//   const handleBack = () => {
+//     if (activeStep > 0) {
+//       setActiveStep((prev) => prev - 1);
+//       scrollToSection(activeStep - 1);
+//     }
+//   };
+
+//   const handleStepClick = (step) => {
+//     setActiveStep(step);
+//     scrollToSection(step);
+//   };
+
+//   const scrollToSection = (step) => {
+//     sectionRefs.current[step]?.scrollIntoView({
+//       behavior: "smooth",
+//       block: "start",
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     try {
+//       const formDataToSend = new FormData();
+
+//       Object.keys(formData).forEach((key) => {
+//         const value = formData[key];
+//         if (value !== null && typeof value !== "object") {
+//           formDataToSend.append(key, String(value));
+//         }
+//       });
+
+//       if (formData.trade_license) formDataToSend.append("trade_license", formData.trade_license);
+//       if (formData.gst_certificate) formDataToSend.append("gst_certificate", formData.gst_certificate);
+//       if (formData.iec_certificate) formDataToSend.append("iec_certificate", formData.iec_certificate);
+//       if (formData.udyam_certificate) formDataToSend.append("udyam_certificate", formData.udyam_certificate);
+
+//       const API_URL = "https://api.example.com/v1/kyc/register";
+
+//       const response = await fetch(API_URL, {
+//         method: "POST",
+//         body: formDataToSend,
+//       });
+
+//       if (!response.ok) throw new Error("Registration failed");
+
+//       const result = await response.json();
+//       console.log("Registration result:", result);
+
+//       setSubmitSuccess(true);
+//       setCompletedSteps(new Set([0, 1, 2, 3]));
+
+//       setTimeout(() => {
+//         navigation("/success");
+//       }, 2000);
+//     } catch (error) {
+//       console.error("Submission error:", error);
+//       setErrors({ submit: "Registration failed. Please try again." });
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const isStepComplete = (step) => completedSteps.has(step);
+
+//   const FileUploadField = ({ label, name, file, required = false }) => (
+//     <Box>
+//       <Typography
+//         variant="body2"
+//         sx={{
+//           mb: 1.5,
+//           fontWeight: 500,
+//           fontSize: "0.875rem",
+//         }}
+//       >
+//         {label} {required && <span style={{ color: "#ef4444" }}>*</span>}
+//       </Typography>
+//       <Button
+//         component="label"
+//         variant="outlined"
+//         startIcon={file ? <CheckIcon sx={{ color: "#10b981" }} /> : <UploadIcon />}
+//         fullWidth
+//         sx={{
+//           justifyContent: "flex-start",
+//           textTransform: "none",
+//           py: 1.75,
+//           px: 2.5,
+//           border: file ? "1.5px solid #10b981" : "1.5px solid rgba(255, 255, 255, 0.1)",
+//           bgcolor: "rgba(255, 255, 255, 0.02)",
+//           backdropFilter: "blur(10px)",
+//           color: file ? "#10b981" : "#9ca3af",
+//           fontWeight: 500,
+//           transition: "all 0.2s ease",
+//           "&:hover": {
+//             bgcolor: "rgba(255, 255, 255, 0.05)",
+//             borderColor: file ? "#10b981" : "rgba(255, 255, 255, 0.2)",
+//           },
+//           display: 'inline-flex',
+//           textOverflow: 'ellipsis',
+//           overflow: 'hidden',
+//           whiteSpace: 'nowrap',
+//           maxWidth: '100%',
+//         }}
+//       >
+//         {file ? file.name : "Choose file"}
+//         <input
+//           type="file"
+//           name={name}
+//           hidden
+//           onChange={handleFileChange}
+//           accept=".pdf,.jpg,.jpeg,.png"
+//         />
+//       </Button>
+//     </Box>
+//   );
+
+//   const SectionHeader = ({ title, icon: Icon, stepIndex }) => (
+//     <Box
+//       ref={(el) => (sectionRefs.current[stepIndex] = el)}
+//       sx={{
+//         display: "flex",
+//         alignItems: "center",
+//         gap: 2,
+//         mb: 2,
+//         pb: 2,
+//         borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
+//       }}
+//     >
+//       <Box
+//         sx={{
+//           display: "flex",
+//           alignItems: "center",
+//           justifyContent: "center",
+//           width: 48,
+//           height: 48,
+//           borderRadius: "12px",
+//           bgcolor: isStepComplete(stepIndex)
+//             ? "rgba(16, 185, 129, 0.15)"
+//             : "rgba(139, 92, 246, 0.15)",
+//           border: "1px solid",
+//           borderColor: isStepComplete(stepIndex)
+//             ? "rgba(16, 185, 129, 0.3)"
+//             : "rgba(139, 92, 246, 0.3)",
+//         }}
+//       >
+//         {isStepComplete(stepIndex) ? (
+//           <CheckIcon sx={{ fontSize: 24, color: "#10b981" }} />
+//         ) : (
+//           <Icon sx={{ fontSize: 24, color: "#8b5cf6" }} />
+//         )}
+//       </Box>
+//       <Box sx={{ flex: 1 }}>
+//         <Typography
+//           variant="h6"
+//           sx={{
+//             fontWeight: 600,
+//             fontSize: "1.25rem",
+//             letterSpacing: "-0.02em",
+//           }}
+//         >
+//           {title}
+//         </Typography>
+//         <Typography
+//           variant="caption"
+//           sx={{
+//             color: "#9ca3af",
+//             fontSize: "0.813rem",
+//           }}
+//         >
+//           Step {stepIndex + 1} of {STEPS.length}
+//         </Typography>
+//       </Box>
+//       {isStepComplete(stepIndex) && (
+//         <Chip
+//           label="Completed"
+//           size="small"
+//           sx={{
+//             bgcolor: "rgba(16, 185, 129, 0.15)",
+//             color: "#10b981",
+//             fontWeight: 600,
+//             fontSize: "0.75rem",
+//             border: "1px solid rgba(16, 185, 129, 0.3)",
+//           }}
+//         />
+//       )}
+//     </Box>
+//   );
+
+//   return (
+//     <Box
+//       sx={{
+//         minHeight: "100vh",
+//         pb: 8,
+//         pt: 3,
+//       }}
+//     >
+//       <Container maxWidth="lg">
+//         <Paper
+//           elevation={0}
+//           sx={{
+//             bgcolor: "#12121208",
+//             backdropFilter: "blur(20px)",
+//             border: "1px solid rgba(255, 255, 255, 0.06)",
+//             p: 3,
+//             mb: 3,
+//             position: "sticky",
+//             top: "90px",
+//             zIndex: 1000,
+//             borderRadius: "20px",
+//           }}
+//         >
+//           <Stepper activeStep={activeStep} alternativeLabel>
+//             {STEPS.map((step, index) => (
+//               <Step key={step.label} completed={isStepComplete(index)}>
+//                 <StepButton
+//                   onClick={() => handleStepClick(index)}
+//                   sx={{
+//                     "& .MuiStepLabel-label": {
+//                       color: isStepComplete(index)
+//                         ? "#10b981" // completed step color
+//                         : activeStep === index
+//                           ? "#8b5cf6" // active step color
+//                           : "#6b7280", // inactive step color
+//                       fontWeight: activeStep === index ? 700 : 500,
+//                     },
+//                     "& .MuiStepIcon-root": {
+//                       color: isStepComplete(index)
+//                         ? "#10b981" // icon green if done
+//                         : activeStep === index
+//                           ? "#8b5cf6" // purple if current
+//                           : "#9ca3af", // gray otherwise
+//                     },
+//                     "&:hover": {
+//                       backgroundColor: "rgba(139, 92, 246, 0.08)", // subtle hover
+//                       borderRadius: 2,
+//                     },
+//                     cursor: "pointer",
+//                   }}
+//                 >
+//                   {step.label}
+//                 </StepButton>
+//               </Step>
+//             ))}
+//           </Stepper>
+//         </Paper>
+
+//         {submitSuccess && (
+//           <Fade in={submitSuccess}>
+//             <Alert
+//               severity="success"
+//               icon={<CheckIcon />}
+//               sx={{
+//                 mb: 3,
+//                 bgcolor: "rgba(16, 185, 129, 0.15)",
+//                 color: "#10b981",
+//                 border: "1px solid rgba(16, 185, 129, 0.3)",
+//                 borderRadius: "12px",
+//                 "& .MuiAlert-icon": {
+//                   color: "#10b981",
+//                 },
+//               }}
+//             >
+//               Registration submitted successfully! Redirecting...
+//             </Alert>
+//           </Fade>
+//         )}
+
+//         <Paper
+//           component="form"
+//           onSubmit={handleSubmit}
+//           elevation={0}
+//           sx={{
+//             bgcolor: "#12121208",
+//             backdropFilter: "blur(20px)",
+//             border: "1px solid rgba(255, 255, 255, 0.06)",
+//             borderRadius: "20px",
+//             overflow: "hidden",
+//           }}
+//         >
+//           <Grid container>
+//             {/* Sidebar Navigation */}
+//             <Grid
+//               item
+//               xs={12}
+//               md={3.5}
+//               sx={{
+//                 borderRight: "1px solid rgba(255, 255, 255, 0.06)",
+//                 // { md: "1px solid rgba(255, 255, 255, 0.06)" },
+//                 borderBottom: { xs: "1px solid rgba(255, 255, 255, 0.06)", md: "none" },
+//                 p: 4,
+//               }}
+//             >
+//               <Typography
+//                 variant="h5"
+//                 sx={{
+//                   fontWeight: 700,
+//                   mb: 1,
+//                   letterSpacing: "-0.02em",
+//                 }}
+//               >
+//                 B2B Customer Registration
+//               </Typography>
+//               <Typography
+//                 variant="body2"
+//                 sx={{
+//                   mb: 4,
+//                   fontSize: "0.875rem",
+//                   color: "#9ca3af",
+//                 }}
+//               >
+//                 Complete all steps to register your business
+//               </Typography>
+
+//               <Divider sx={{ mb: 3, bgcolor: "rgba(255, 255, 255, 0.06)" }} />
+
+//               <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+//                 {STEPS.map((step, index) => {
+//                   const Icon = step.icon;
+//                   const isActive = activeStep === index;
+//                   const isComplete = isStepComplete(index);
+
+//                   return (
+//                     <Button
+//                       key={index}
+//                       fullWidth
+//                       onClick={() => handleStepClick(index)}
+//                       sx={{
+//                         justifyContent: "flex-start",
+//                         textAlign: "left",
+//                         py: 1.5,
+//                         px: 2,
+//                         borderRadius: "12px",
+//                         textTransform: "none",
+//                         backgroundColor: isActive
+//                           ? "rgba(139,92,246,0.15)"
+//                           : "transparent",
+//                         border: "1.5px solid",
+//                         borderColor: isActive
+//                           ? "rgba(139,92,246,0.4)"
+//                           : isComplete
+//                             ? "rgba(16,185,129,0.4)"
+//                             : "transparent",
+//                         color: isComplete
+//                           ? "#10b981"
+//                           : isActive
+//                             ? "#8b5cf6"
+//                             : "#d1d5db",
+//                         fontWeight: isActive ? 700 : 500,
+//                         fontSize: "0.95rem",
+//                         "&:hover": {
+//                           backgroundColor: isActive
+//                             ? "rgba(139,92,246,0.2)"
+//                             : "rgba(255,255,255,0.05)",
+//                           borderColor: isActive
+//                             ? "rgba(139,92,246,0.6)"
+//                             : isComplete
+//                               ? "rgba(16,185,129,0.6)"
+//                               : "rgba(255,255,255,0.1)",
+//                         },
+//                       }}
+//                       startIcon={
+//                         isComplete ? (
+//                           <CheckIcon sx={{ fontSize: 18, color: "#10b981" }} />
+//                         ) : (
+//                           <Icon sx={{ fontSize: 18 }} />
+//                         )
+//                       }
+//                     >
+//                       {step.label}
+//                     </Button>
+//                   );
+//                 })}
+//               </Box>
+
+//             </Grid>
+
+//             <Grid item xs={12} md={8.5} sx={{ p: 4 }}>
+//               {activeStep === 0 && (
+//                 <Fade in={activeStep === 0}>
+//                   <Box>
+//                     <SectionHeader
+//                       title="Business Information"
+//                       icon={BusinessIcon}
+//                       stepIndex={0}
+//                     />
+//                     <Divider />
+//                     <Grid container spacing={3} sx={{ mt: 2 }}>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="Company / Firm Name"
+//                           name="company_name"
+//                           value={formData.company_name}
+//                           onChange={handleInputChange}
+//                           error={!!errors.company_name}
+//                           helperText={errors.company_name}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FormControl
+//                           fullWidth
+//                           required
+//                           error={!!errors.entity_type}
+//                         >
+//                           <InputLabel>Type of Entity</InputLabel>
+//                           <Select
+//                             name="entity_type"
+//                             value={formData.entity_type}
+//                             onChange={handleSelectChange}
+//                             label="Type of Entity"
+//                           >
+//                             <MenuItem value="">-- Select --</MenuItem>
+//                             <MenuItem value="Proprietorship">Proprietorship</MenuItem>
+//                             <MenuItem value="Partnership">Partnership</MenuItem>
+//                             <MenuItem value="Pvt Ltd">Pvt Ltd</MenuItem>
+//                             <MenuItem value="LLP">LLP</MenuItem>
+//                             <MenuItem value="Public Ltd">Public Ltd</MenuItem>
+//                           </Select>
+//                           {errors.entity_type && (
+//                             <FormHelperText>{errors.entity_type}</FormHelperText>
+//                           )}
+//                         </FormControl>
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FormControl
+//                           fullWidth
+//                           required
+//                           error={!!errors.industry_category}
+//                         >
+//                           <InputLabel>Industry Category</InputLabel>
+//                           <Select
+//                             name="industry_category"
+//                             value={formData.industry_category}
+//                             onChange={handleSelectChange}
+//                             label="Industry Category"
+//                           >
+//                             <MenuItem value="">-- Select --</MenuItem>
+//                             <MenuItem value="Retailer">Retailer</MenuItem>
+//                             <MenuItem value="Wholesaler">Wholesaler</MenuItem>
+//                             <MenuItem value="Distributor">Distributor</MenuItem>
+//                             <MenuItem value="Manufacturer">Manufacturer</MenuItem>
+//                             <MenuItem value="Other">Other</MenuItem>
+//                           </Select>
+//                         </FormControl>
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="GST Number"
+//                           name="gst_number"
+//                           value={formData.gst_number}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="PAN (Permanent Account Number)"
+//                           name="pan_number"
+//                           value={formData.pan_number}
+//                           onChange={handleInputChange}
+//                           inputProps={{
+//                             style: { textTransform: "uppercase" },
+//                           }}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="Import Export Code (if applicable)"
+//                           name="iec_code"
+//                           value={formData.iec_code}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="Address"
+//                           name="address_line"
+//                           value={formData.address_line}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="City"
+//                           name="city"
+//                           value={formData.city}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="State"
+//                           name="state"
+//                           value={formData.state}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="Pincode"
+//                           name="pincode"
+//                           value={formData.pincode}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="Country"
+//                           name="country"
+//                           value={formData.country}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                     </Grid>
+//                   </Box>
+//                 </Fade>
+//               )}
+
+//               {/* Step 1: Authorized Representative */}
+//               {activeStep === 1 && (
+//                 <Fade in={activeStep === 1}>
+//                   <Box>
+//                     <SectionHeader
+//                       title="Authorized Representative Details"
+//                       icon={PersonIcon}
+//                       stepIndex={1}
+//                     />
+//                     <Divider />
+//                     <Grid container spacing={3} sx={{ mt: 2 }}>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="First Name"
+//                           name="first_name"
+//                           value={formData.first_name}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="Last Name"
+//                           name="last_name"
+//                           value={formData.last_name}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="Contact Number"
+//                           name="contact"
+//                           value={formData.contact}
+//                           onChange={handleInputChange}
+//                           type="tel"
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="Email Address"
+//                           name="email"
+//                           value={formData.email}
+//                           onChange={handleInputChange}
+//                           type="email"
+//                         />
+//                       </Grid>
+//                     </Grid>
+//                   </Box>
+//                 </Fade>
+//               )}
+
+//               {/* Step 2: Documents Upload */}
+//               {activeStep === 2 && (
+//                 <Fade in={activeStep === 2}>
+//                   <Box>
+//                     <SectionHeader
+//                       title="Business Documents Upload"
+//                       icon={DocumentIcon}
+//                       stepIndex={2}
+//                     />
+//                     <Divider />
+//                     <Grid container spacing={3} sx={{ mt: 2 }}>
+//                       <Grid item xs={12} md={6}>
+//                         <FileUploadField
+//                           label="Trade License / Shop & Establishment Certificate"
+//                           name="trade_license"
+//                           file={formData.trade_license}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FileUploadField
+//                           label="GST Certificate"
+//                           name="gst_certificate"
+//                           file={formData.gst_certificate}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FileUploadField
+//                           label="Import Export Code (IEC) Certificate"
+//                           name="iec_certificate"
+//                           file={formData.iec_certificate}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FileUploadField
+//                           label="Udyam Registration (if applicable)"
+//                           name="udyam_certificate"
+//                           file={formData.udyam_certificate}
+//                         />
+//                       </Grid>
+//                     </Grid>
+//                     <Box
+//                       sx={{
+//                         mt: 3,
+//                         p: 2.5,
+//                         bgcolor: "rgba(59, 130, 246, 0.08)",
+//                         border: "1px solid rgba(59, 130, 246, 0.2)",
+//                         borderRadius: "12px",
+//                       }}
+//                     >
+//                       <Typography variant="body2">
+//                         <strong>Note:</strong> Upload documents in PDF, JPG, JPEG, or PNG format. Maximum file size: 5MB per document.
+//                       </Typography>
+//                     </Box>
+//                   </Box>
+//                 </Fade>
+//               )}
+
+//               {/* Step 3: Declarations & Consent */}
+//               {activeStep === 3 && (
+//                 <Fade in={activeStep === 3}>
+//                   <Box>
+//                     <SectionHeader
+//                       title="Declarations & Consent"
+//                       icon={VerifiedIcon}
+//                       stepIndex={3}
+//                     />
+//                     <Divider />
+//                     <Box
+//                       sx={{
+//                         p: 3,
+//                         borderRadius: "12px",
+//                       }}
+//                     >
+//                       <Box sx={{ mb: 3 }}>
+//                         <FormControlLabel
+//                           control={
+//                             <Checkbox
+//                               name="declaration"
+//                               checked={formData.declaration}
+//                               onChange={handleInputChange}
+//                             />
+//                           }
+//                           label={
+//                             <Typography
+//                               sx={{
+//                                 fontSize: "0.938rem",
+//                                 lineHeight: 1.6,
+//                               }}
+//                             >
+//                               I/We hereby declare that the information and documents provided are true and correct. *
+//                             </Typography>
+//                           }
+//                         />
+//                       </Box>
+
+//                       <Box>
+//                         <FormControlLabel
+//                           control={
+//                             <Checkbox
+//                               name="consent"
+//                               checked={formData.consent}
+//                               onChange={handleInputChange}
+//                             />
+//                           }
+//                           label={
+//                             <Typography
+//                               sx={{
+//                                 fontSize: "0.938rem",
+//                                 lineHeight: 1.6,
+//                               }}
+//                             >
+//                               I/We consent to the use of my/our data in accordance with the Privacy Policy & Terms & Conditions. *
+//                             </Typography>
+//                           }
+//                         />
+//                       </Box>
+//                     </Box>
+
+//                     <Box
+//                       sx={{
+//                         mt: 3,
+//                         p: 2.5,
+//                         bgcolor: "rgba(251, 191, 36, 0.08)",
+//                         border: "1px solid rgba(251, 191, 36, 0.2)",
+//                         borderRadius: "12px",
+//                       }}
+//                     >
+//                       <Typography
+//                         variant="body2"
+//                         sx={{
+//                           color: "#fbbf24",
+//                           fontSize: "0.875rem",
+//                           lineHeight: 1.6,
+//                         }}
+//                       >
+//                         <strong>Important:</strong> By submitting this form, you acknowledge that all information provided is accurate and complete. False information may result in application rejection.
+//                       </Typography>
+//                     </Box>
+//                   </Box>
+//                 </Fade>
+//               )}
+
+//               {/* Navigation Buttons */}
+//               <Box
+//                 sx={{
+//                   display: "flex",
+//                   justifyContent: "space-between",
+//                   alignItems: "center",
+//                   mt: 5,
+//                   pt: 4,
+//                   borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+//                 }}
+//               >
+//                 <Button
+//                   onClick={handleBack}
+//                   disabled={activeStep === 0}
+//                   startIcon={<ArrowBackIcon />}
+//                   sx={{
+//                     px: 3,
+//                     py: 1.25,
+//                     fontSize: "0.938rem",
+//                     fontWeight: 600,
+//                     textTransform: "none",
+//                     border: "1px solid rgba(255, 255, 255, 0.1)",
+//                     borderRadius: "10px",
+//                     bgcolor: "rgba(255, 255, 255, 0.02)",
+//                     transition: "all 0.2s ease",
+//                     "&:hover": {
+//                       bgcolor: "rgba(255, 255, 255, 0.05)",
+//                       borderColor: "rgba(255, 255, 255, 0.2)",
+//                     },
+//                     "&:disabled": {
+//                       color: "#4b5563",
+//                       borderColor: "rgba(255, 255, 255, 0.05)",
+//                     },
+//                   }}
+//                 >
+//                   Back
+//                 </Button>
+
+//                 <Box sx={{ display: "flex", gap: 2 }}>
+//                   <Button
+//                     onClick={() => navigation("/LoginOption")}
+//                     sx={{
+//                       px: 3,
+//                       py: 1.25,
+//                       fontSize: "0.938rem",
+//                       fontWeight: 600,
+//                       color: "#9ca3af",
+//                       textTransform: "none",
+//                       border: "2px solid rgba(255, 255, 255, 0.1)",
+//                       borderRadius: "10px",
+//                       bgcolor: "transparent",
+//                       transition: "all 0.2s ease",
+//                       "&:hover": {
+//                         bgcolor: "rgba(255, 255, 255, 0.03)",
+//                         borderColor: "#10264E",
+//                       },
+//                     }}
+//                   >
+//                     Back to Login
+//                   </Button>
+
+//                   {activeStep === STEPS.length - 1 ? (
+//                     <Button
+//                       type="submit"
+//                       variant="contained"
+//                       disabled={loading}
+//                       startIcon={
+//                         loading ? (
+//                           <CircularProgress size={18} sx={{ color: "#fff" }} />
+//                         ) : (
+//                           <CheckIcon />
+//                         )
+//                       }
+//                       sx={{
+//                         px: 4,
+//                         py: 1.25,
+//                         fontSize: "0.938rem",
+//                         fontWeight: 600,
+//                         textTransform: "none",
+//                         borderRadius: "10px",
+//                         background: "#10264E",
+//                         transition: "all 0.2s ease",
+//                         "&:hover": {
+//                           background: "#10264E",
+//                           transform: "translateY(-1px)",
+//                         },
+//                         "&:disabled": {
+//                           background: "rgba(139, 92, 246, 0.3)",
+//                           color: "rgba(255, 255, 255, 0.5)",
+//                         },
+//                       }}
+//                     >
+//                       {loading ? "Submitting..." : "Submit Registration"}
+//                     </Button>
+//                   ) : (
+//                     <Button
+//                       onClick={handleNext}
+//                       variant="contained"
+//                       endIcon={<ArrowForwardIcon />}
+//                       sx={{
+//                         px: 4,
+//                         py: 1.25,
+//                         fontSize: "0.938rem",
+//                         fontWeight: 600,
+//                         textTransform: "none",
+//                         borderRadius: "10px",
+//                         background: "#10264E",
+//                         transition: "all 0.2s ease",
+//                         "&:hover": {
+//                           background: "#10264E",
+//                           transform: "translateY(-1px)",
+//                         },
+//                       }}
+//                     >
+//                       Continue
+//                     </Button>
+//                   )}
+//                 </Box>
+//               </Box>
+
+//               {errors.submit && (
+//                 <Alert
+//                   severity="error"
+//                   sx={{
+//                     mt: 3,
+//                     bgcolor: "rgba(239, 68, 68, 0.15)",
+//                     color: "#ef4444",
+//                     border: "1px solid rgba(239, 68, 68, 0.3)",
+//                     borderRadius: "12px",
+//                     "& .MuiAlert-icon": {
+//                       color: "#ef4444",
+//                     },
+//                   }}
+//                 >
+//                   {errors.submit}
+//                 </Alert>
+//               )}
+//             </Grid>
+//           </Grid>
+//         </Paper>
+//       </Container>
+//     </Box>
+//   );
+// };
+
+// export default KYCRegistrationForm;
+
+// import React, { useState, useRef } from "react";
+// import {
+//   Box,
+//   Button,
+//   Checkbox,
+//   Container,
+//   FormControl,
+//   FormControlLabel,
+//   FormHelperText,
+//   Grid,
+//   InputLabel,
+//   MenuItem,
+//   Paper,
+//   Select,
+//   TextField,
+//   Typography,
+//   CircularProgress,
+//   Divider,
+//   Stepper,
+//   Step,
+//   StepButton,
+//   Fade,
+//   Chip,
+//   Alert,
+// } from "@mui/material";
+// import {
+//   Business as BusinessIcon,
+//   Person as PersonIcon,
+//   Description as DocumentIcon,
+//   VerifiedUser as VerifiedIcon,
+//   CloudUpload as UploadIcon,
+//   CheckCircle as CheckIcon,
+//   ArrowBack as ArrowBackIcon,
+//   ArrowForward as ArrowForwardIcon,
+// } from "@mui/icons-material";
+// import { useNavigate } from "react-router-dom";
+
+// const STEPS = [
+//   { label: "Business Information", icon: BusinessIcon },
+//   { label: "Authorized Representative", icon: PersonIcon },
+//   { label: "Business Documents", icon: DocumentIcon },
+//   { label: "Declarations & Consent", icon: VerifiedIcon },
+// ];
+
+// const KYCRegistrationForm = () => {
+//   const [activeStep, setActiveStep] = useState(0);
+//   const [completedSteps, setCompletedSteps] = useState(new Set());
+//   const sectionRefs = useRef([]);
+
+//   const [formData, setFormData] = useState({
+//     company_name: "",
+//     entity_type: "",
+//     industry_category: "",
+//     gst_number: "",
+//     pan_number: "",
+//     iec_code: "",
+//     address_line: "",
+//     city: "",
+//     state: "",
+//     country: "",
+//     pincode: "",
+//     first_name: "",
+//     last_name: "",
+//     contact: "",
+//     email: "",
+//     trade_license: null,
+//     gst_certificate: null,
+//     iec_certificate: null,
+//     udyam_certificate: null,
+//     declaration: false,
+//     consent: false,
+//   });
+
+//   const [errors, setErrors] = useState({});
+//   const [loading, setLoading] = useState(false);
+//   const [submitSuccess, setSubmitSuccess] = useState(false);
+//   const navigation = useNavigate();
+
+//   const handleInputChange = (e) => {
+//     const { name, value, type, checked } = e.target;
+//     setFormData((prev) => ({
+//       ...prev,
+//       [name]: type === "checkbox" ? checked : value,
+//     }));
+//   };
+
+//   const handleSelectChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({ ...prev, [name]: value }));
+
+//   };
+
+//   const handleFileChange = (e) => {
+//     const { name, files } = e.target;
+//     if (files && files[0]) {
+//       setFormData((prev) => ({ ...prev, [name]: files[0] }));
+
+//     }
+//   };
+//   const handleNext = () => {
+//     setCompletedSteps((prev) => new Set(prev).add(activeStep));
+//     if (activeStep < STEPS.length - 1) {
+//       setActiveStep((prev) => prev + 1);
+//       scrollToSection(activeStep + 1);
+//     }
+//   };
+
+//   const handleBack = () => {
+//     if (activeStep > 0) {
+//       setActiveStep((prev) => prev - 1);
+//       scrollToSection(activeStep - 1);
+//     }
+//   };
+
+//   const handleStepClick = (step) => {
+//   //   console.log(step,"step")
+//   //   // if (completedSteps.has(step) || step === activeStep || step === activeStep + 1) {
+//   //   //   setActiveStep(step);
+//   //   //   scrollToSection(step);
+//   //   // }
+//   //   setActiveStep(step);
+//   // scrollToSection(step);
+//   // if (step <= activeStep + 1) {
+//     setActiveStep(step);
+//   //   scrollToSection(step);
+//   // }
+//   };
+
+//   const scrollToSection = (step) => {
+//     sectionRefs.current[step]?.scrollIntoView({
+//       behavior: "smooth",
+//       block: "start",
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     try {
+//       const formDataToSend = new FormData();
+
+//       Object.keys(formData).forEach((key) => {
+//         const value = formData[key];
+//         if (value !== null && typeof value !== "object") {
+//           formDataToSend.append(key, String(value));
+//         }
+//       });
+
+//       if (formData.trade_license) formDataToSend.append("trade_license", formData.trade_license);
+//       if (formData.gst_certificate) formDataToSend.append("gst_certificate", formData.gst_certificate);
+//       if (formData.iec_certificate) formDataToSend.append("iec_certificate", formData.iec_certificate);
+//       if (formData.udyam_certificate) formDataToSend.append("udyam_certificate", formData.udyam_certificate);
+
+//       const API_URL = "https://api.example.com/v1/kyc/register";
+
+//       const response = await fetch(API_URL, {
+//         method: "POST",
+//         body: formDataToSend,
+//       });
+
+//       if (!response.ok) throw new Error("Registration failed");
+
+//       const result = await response.json();
+//       console.log("Registration result:", result);
+
+//       setSubmitSuccess(true);
+//       setCompletedSteps(new Set([0, 1, 2, 3]));
+
+//       setTimeout(() => {
+//         navigation("/success");
+//       }, 2000);
+//     } catch (error) {
+//       console.error("Submission error:", error);
+//       setErrors({ submit: "Registration failed. Please try again." });
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const isStepComplete = (step) => completedSteps.has(step);
+//   const isStepAccessible = (step) => {
+//     return isStepComplete(step) || step === activeStep || (step === activeStep + 1 && isStepComplete(activeStep));
+//   };
+
+//   const FileUploadField = ({ label, name, file, required = false }) => (
+//     <Box>
+//       <Typography
+//         variant="body2"
+//         sx={{
+//           mb: 1.5,
+//           fontWeight: 500,
+//           fontSize: "0.875rem",
+//         }}
+//       >
+//         {label} {required && <span style={{ color: "#ef4444" }}>*</span>}
+//       </Typography>
+//       <Button
+//         component="label"
+//         variant="outlined"
+//         startIcon={file ? <CheckIcon sx={{ color: "#10b981" }} /> : <UploadIcon />}
+//         fullWidth
+//         sx={{
+//           justifyContent: "flex-start",
+//           textTransform: "none",
+//           py: 1.75,
+//           px: 2.5,
+//           border: file ? "1.5px solid #10b981" : "1.5px solid rgba(255, 255, 255, 0.1)",
+//           bgcolor: "rgba(255, 255, 255, 0.02)",
+//           backdropFilter: "blur(10px)",
+//           color: file ? "#10b981" : "#9ca3af",
+//           fontWeight: 500,
+//           transition: "all 0.2s ease",
+//           "&:hover": {
+//             bgcolor: "rgba(255, 255, 255, 0.05)",
+//             borderColor: file ? "#10b981" : "rgba(255, 255, 255, 0.2)",
+//           },
+//         }}
+//       >
+//         {file ? file.name : "Choose file"}
+//         <input
+//           type="file"
+//           name={name}
+//           hidden
+//           onChange={handleFileChange}
+//           accept=".pdf,.jpg,.jpeg,.png"
+//         />
+//       </Button>
+//     </Box>
+//   );
+
+//   const SectionHeader = ({ title, icon: Icon, stepIndex }) => (
+//     <Box
+//       ref={(el) => (sectionRefs.current[stepIndex] = el)}
+//       sx={{
+//         display: "flex",
+//         alignItems: "center",
+//         gap: 2,
+//         mb: 2,
+//         pb: 2,
+//         borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
+//       }}
+//     >
+//       <Box
+//         sx={{
+//           display: "flex",
+//           alignItems: "center",
+//           justifyContent: "center",
+//           width: 48,
+//           height: 48,
+//           borderRadius: "12px",
+//           bgcolor: isStepComplete(stepIndex)
+//             ? "rgba(16, 185, 129, 0.15)"
+//             : "rgba(139, 92, 246, 0.15)",
+//           border: "1px solid",
+//           borderColor: isStepComplete(stepIndex)
+//             ? "rgba(16, 185, 129, 0.3)"
+//             : "rgba(139, 92, 246, 0.3)",
+//         }}
+//       >
+//         {isStepComplete(stepIndex) ? (
+//           <CheckIcon sx={{ fontSize: 24, color: "#10b981" }} />
+//         ) : (
+//           <Icon sx={{ fontSize: 24, color: "#8b5cf6" }} />
+//         )}
+//       </Box>
+//       <Box sx={{ flex: 1 }}>
+//         <Typography
+//           variant="h6"
+//           sx={{
+//             fontWeight: 600,
+//             fontSize: "1.25rem",
+//             letterSpacing: "-0.02em",
+//           }}
+//         >
+//           {title}
+//         </Typography>
+//         <Typography
+//           variant="caption"
+//           sx={{
+//             color: "#9ca3af",
+//             fontSize: "0.813rem",
+//           }}
+//         >
+//           Step {stepIndex + 1} of {STEPS.length}
+//         </Typography>
+//       </Box>
+//       {isStepComplete(stepIndex) && (
+//         <Chip
+//           label="Completed"
+//           size="small"
+//           sx={{
+//             bgcolor: "rgba(16, 185, 129, 0.15)",
+//             color: "#10b981",
+//             fontWeight: 600,
+//             fontSize: "0.75rem",
+//             border: "1px solid rgba(16, 185, 129, 0.3)",
+//           }}
+//         />
+//       )}
+//     </Box>
+//   );
+
+//   return (
+//     <Box
+//       sx={{
+//         minHeight: "100vh",
+//         pb: 8,
+//         pt: 3,
+//       }}
+//     >
+//       <Container maxWidth="lg">
+//         <Paper
+//           elevation={0}
+//           sx={{
+//             bgcolor: "#12121208",
+//             backdropFilter: "blur(20px)",
+//             border: "1px solid rgba(255, 255, 255, 0.06)",
+//             p: 3,
+//             mb: 3,
+//             position: "sticky",
+//             top: '90px',
+//             zIndex: 1000,
+//             borderRadius: "20px"
+//           }}
+//         >
+//           <Stepper activeStep={activeStep} alternativeLabel>
+//             {STEPS.map((step, index) => (
+//               <Step key={step.label} completed={isStepComplete(index)}>
+//                 <StepButton
+//                   onClick={() => handleStepClick(index)}
+//                   sx={{
+//                     "& .MuiStepLabel-label": {
+//                       color: isStepComplete(index)
+//                         ? "#10b981"
+//                         : activeStep === index
+//                           ? "#8b5cf6"
+//                           : "#6b7280",
+//                       fontWeight: activeStep === index ? 600 : 500,
+//                       fontSize: "0.875rem",
+//                     },
+//                     "& .MuiStepIcon-root": {
+//                       color: isStepComplete(index)
+//                         ? "#10b981"
+//                         : activeStep === index
+//                           ? "#8b5cf6"
+//                           : "#374151",
+//                       fontSize: "1.75rem",
+//                     },
+//                     "& .MuiStepIcon-text": {
+//                       fill: "#fff",
+//                       fontWeight: 600,
+//                     },
+//                   }}
+//                 >
+//                   {step.label}
+//                 </StepButton>
+//               </Step>
+//             ))}
+//           </Stepper>
+//         </Paper>
+
+//         {submitSuccess && (
+//           <Fade in={submitSuccess}>
+//             <Alert
+//               severity="success"
+//               icon={<CheckIcon />}
+//               sx={{
+//                 mb: 3,
+//                 bgcolor: "rgba(16, 185, 129, 0.15)",
+//                 color: "#10b981",
+//                 border: "1px solid rgba(16, 185, 129, 0.3)",
+//                 borderRadius: "12px",
+//                 "& .MuiAlert-icon": {
+//                   color: "#10b981",
+//                 },
+//               }}
+//             >
+//               Registration submitted successfully! Redirecting...
+//             </Alert>
+//           </Fade>
+//         )}
+
+//         <Paper
+//           component="form"
+//           onSubmit={handleSubmit}
+//           elevation={0}
+//           sx={{
+//             bgcolor: "#12121208",
+//             backdropFilter: "blur(20px)",
+//             border: "1px solid rgba(255, 255, 255, 0.06)",
+//             borderRadius: "20px",
+//             overflow: "hidden",
+//           }}
+//         >
+//           <Grid container>
+//             {/* Sidebar Navigation */}
+//             <Grid
+//               item
+//               xs={12}
+//               md={3.5}
+//               sx={{
+//                 borderRight: { md: "1px solid rgba(255, 255, 255, 0.06)" },
+//                 borderBottom: { xs: "1px solid rgba(255, 255, 255, 0.06)", md: "none" },
+//                 p: 4,
+//               }}
+//             >
+//               <Typography
+//                 variant="h5"
+//                 sx={{
+//                   fontWeight: 700,
+//                   mb: 1,
+//                   letterSpacing: "-0.02em",
+//                 }}
+//               >
+//                 B2B Customer Registration
+//               </Typography>
+//               <Typography
+//                 variant="body2"
+//                 sx={{
+//                   mb: 4,
+//                   fontSize: "0.875rem",
+//                 }}
+//               >
+//                 Complete all steps to register your business
+//               </Typography>
+
+//               <Divider sx={{ mb: 3, bgcolor: "rgba(255, 255, 255, 0.06)" }} />
+
+//               <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+//                 {STEPS.map((step, index) => {
+//                   const Icon = step.icon;
+//                   const isActive = activeStep === index;
+//                   const isComplete = isStepComplete(index);
+//                   const isAccessible = isStepAccessible(index);
+
+//                   return (
+//                     <Button
+//                       key={index}
+//                       onClick={() => handleStepClick(index)}
+//                       sx={{
+//                         justifyContent: "flex-start",
+//                         textAlign: "left",
+//                         py: 1.75,
+//                         px: 2.5,
+//                         borderRadius: "12px",
+//                         textTransform: "none",
+//                         bgcolor: isActive ? "#10264E" : "transparent",
+//                         border: "1px solid",
+//                         borderColor: isActive
+//                           ? "rgba(139, 92, 246, 0.3)"
+//                           : "transparent",
+//                         color: isComplete
+//                           ? "#10b981"
+//                           : isActive
+//                             ? "#8b5cf6"
+//                             : isAccessible
+//                               ? "#e5e7eb"
+//                               : "#6b7280",
+//                         fontWeight: isActive ? 600 : 500,
+//                         fontSize: "0.938rem",
+//                         transition: "all 0.2s ease",
+//                       }}
+//                       startIcon={
+//                         isComplete ? (
+//                           <CheckIcon sx={{ fontSize: 20 }} />
+//                         ) : (
+//                           <Icon sx={{ fontSize: 20 }} />
+//                         )
+//                       }
+//                     >
+//                       {step.label}
+//                     </Button>
+//                   );
+//                 })}
+//               </Box>
+//             </Grid>
+
+//             <Grid item xs={12} md={8.5} sx={{ p: 4 }}>
+//               {activeStep === 0 && (
+//                 <Fade in={activeStep === 0}>
+//                   <Box>
+//                     <SectionHeader
+//                       title="Business Information"
+//                       icon={BusinessIcon}
+//                       stepIndex={0}
+//                     />
+//                     <Divider />
+//                     <Grid container spacing={3} sx={{ mt: 2 }}>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="Company / Firm Name"
+//                           name="company_name"
+//                           value={formData.company_name}
+//                           onChange={handleInputChange}
+//                           error={!!errors.company_name}
+//                           helperText={errors.company_name}
+
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FormControl
+//                           fullWidth
+//                           required
+//                           error={!!errors.entity_type}
+//                         >
+//                           <InputLabel>Type of Entity</InputLabel>
+//                           <Select
+//                             name="entity_type"
+//                             value={formData.entity_type}
+//                             onChange={handleSelectChange}
+//                             label="Type of Entity"
+//                           >
+//                             <MenuItem value="">-- Select --</MenuItem>
+//                             <MenuItem value="Proprietorship">Proprietorship</MenuItem>
+//                             <MenuItem value="Partnership">Partnership</MenuItem>
+//                             <MenuItem value="Pvt Ltd">Pvt Ltd</MenuItem>
+//                             <MenuItem value="LLP">LLP</MenuItem>
+//                             <MenuItem value="Public Ltd">Public Ltd</MenuItem>
+//                           </Select>
+//                           {errors.entity_type && (
+//                             <FormHelperText>{errors.entity_type}</FormHelperText>
+//                           )}
+//                         </FormControl>
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FormControl
+//                           fullWidth
+//                           required
+//                           error={!!errors.industry_category}
+
+//                         >
+//                           <InputLabel>Industry Category</InputLabel>
+//                           <Select
+//                             name="industry_category"
+//                             value={formData.industry_category}
+//                             onChange={handleSelectChange}
+//                             label="Industry Category"
+//                           >
+//                             <MenuItem value="">-- Select --</MenuItem>
+//                             <MenuItem value="Retailer">Retailer</MenuItem>
+//                             <MenuItem value="Wholesaler">Wholesaler</MenuItem>
+//                             <MenuItem value="Distributor">Distributor</MenuItem>
+//                             <MenuItem value="Manufacturer">Manufacturer</MenuItem>
+//                             <MenuItem value="Other">Other</MenuItem>
+//                           </Select>
+//                         </FormControl>
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="GST Number"
+//                           name="gst_number"
+//                           value={formData.gst_number}
+//                           onChange={handleInputChange}
+
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="PAN (Permanent Account Number)"
+//                           name="pan_number"
+//                           value={formData.pan_number}
+//                           onChange={handleInputChange}
+//                           inputProps={{
+//                             style: { textTransform: "uppercase" },
+//                           }}
+
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="Import Export Code (if applicable)"
+//                           name="iec_code"
+//                           value={formData.iec_code}
+//                           onChange={handleInputChange}
+
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="Address"
+//                           name="address_line"
+//                           value={formData.address_line}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="City"
+//                           name="city"
+//                           value={formData.city}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="State"
+//                           name="state"
+//                           value={formData.state}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="Pincode"
+//                           name="pincode"
+//                           value={formData.pincode}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           label="Country"
+//                           name="country"
+//                           value={formData.country}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                     </Grid>
+//                   </Box>
+//                 </Fade>
+//               )}
+
+//               {/* Step 1: Authorized Representative */}
+//               {activeStep === 1 && (
+//                 <Fade in={activeStep === 1}>
+//                   <Box>
+//                     <SectionHeader
+//                       title="Authorized Representative Details"
+//                       icon={PersonIcon}
+//                       stepIndex={1}
+//                     /> <Divider />
+//                     <Grid container spacing={3} sx={{ mt: 2 }}>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="First Name"
+//                           name="first_name"
+//                           value={formData.first_name}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="Last Name"
+//                           name="last_name"
+//                           value={formData.last_name}
+//                           onChange={handleInputChange}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="Contact Number"
+//                           name="contact"
+//                           value={formData.contact}
+//                           onChange={handleInputChange}
+//                           type="tel"
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <TextField
+//                           fullWidth
+//                           required
+//                           label="Email Address"
+//                           name="email"
+//                           value={formData.email}
+//                           onChange={handleInputChange}
+//                           type="email"
+//                         />
+//                       </Grid>
+//                     </Grid>
+//                   </Box>
+//                 </Fade>
+//               )}
+
+//               {/* Step 2: Documents Upload */}
+//               {activeStep === 2 && (
+//                 <Fade in={activeStep === 2}>
+//                   <Box>
+//                     <SectionHeader
+//                       title="Business Documents Upload"
+//                       icon={DocumentIcon}
+//                       stepIndex={2}
+//                     />
+//                     <Divider />
+//                     <Grid container spacing={3} sx={{ mt: 2 }}>
+//                       <Grid item xs={12} md={6}>
+//                         <FileUploadField
+//                           label="Trade License / Shop & Establishment Certificate"
+//                           name="trade_license"
+//                           file={formData.trade_license}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FileUploadField
+//                           label="GST Certificate"
+//                           name="gst_certificate"
+//                           file={formData.gst_certificate}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FileUploadField
+//                           label="Import Export Code (IEC) Certificate"
+//                           name="iec_certificate"
+//                           file={formData.iec_certificate}
+//                         />
+//                       </Grid>
+//                       <Grid item xs={12} md={6}>
+//                         <FileUploadField
+//                           label="Udyam Registration (if applicable)"
+//                           name="udyam_certificate"
+//                           file={formData.udyam_certificate}
+//                         />
+//                       </Grid>
+//                     </Grid>
+//                     <Box
+//                       sx={{
+//                         mt: 3,
+//                         p: 2.5,
+//                         bgcolor: "rgba(59, 130, 246, 0.08)",
+//                         border: "1px solid rgba(59, 130, 246, 0.2)",
+//                         borderRadius: "12px",
+//                       }}
+//                     >
+//                       <Typography
+//                         variant="body2"
+//                       >
+//                         <strong>Note:</strong> Upload documents in PDF, JPG, JPEG, or PNG format. Maximum file size: 5MB per document.
+//                       </Typography>
+//                     </Box>
+//                   </Box>
+//                 </Fade>
+//               )}
+
+//               {/* Step 3: Declarations & Consent */}
+//               {activeStep === 3 && (
+//                 <Fade in={activeStep === 3}>
+//                   <Box>
+//                     <SectionHeader
+//                       title="Declarations & Consent"
+//                       icon={VerifiedIcon}
+//                       stepIndex={3}
+//                     />
+//                     <Divider />
+//                     <Box
+//                       sx={{
+//                         p: 3,
+//                         borderRadius: "12px",
+//                       }}
+//                     >
+//                       <Box sx={{ mb: 3 }}>
+//                         <FormControlLabel
+//                           control={
+//                             <Checkbox
+//                               name="declaration"
+//                               checked={formData.declaration}
+//                               onChange={handleInputChange}
+//                             />
+//                           }
+//                           label={
+//                             <Typography
+//                               sx={{
+//                                 fontSize: "0.938rem",
+//                                 lineHeight: 1.6,
+//                               }}
+//                             >
+//                               I/We hereby declare that the information and documents provided are true and correct. *
+//                             </Typography>
+//                           }
+//                         />
+//                       </Box>
+
+//                       <Box>
+//                         <FormControlLabel
+//                           control={
+//                             <Checkbox
+//                               name="consent"
+//                               checked={formData.consent}
+//                               onChange={handleInputChange}
+//                             />
+//                           }
+//                           label={
+//                             <Typography
+//                               sx={{
+//                                 fontSize: "0.938rem",
+//                                 lineHeight: 1.6,
+//                               }}
+//                             >
+//                               I/We consent to the use of my/our data in accordance with the Privacy Policy & Terms & Conditions. *
+//                             </Typography>
+//                           }
+//                         />
+//                       </Box>
+//                     </Box>
+
+//                     <Box
+//                       sx={{
+//                         mt: 3,
+//                         p: 2.5,
+//                         bgcolor: "rgba(251, 191, 36, 0.08)",
+//                         border: "1px solid rgba(251, 191, 36, 0.2)",
+//                         borderRadius: "12px",
+//                       }}
+//                     >
+//                       <Typography
+//                         variant="body2"
+//                         sx={{
+//                           color: "#fbbf24",
+//                           fontSize: "0.875rem",
+//                           lineHeight: 1.6,
+//                         }}
+//                       >
+//                         <strong>Important:</strong> By submitting this form, you acknowledge that all information provided is accurate and complete. False information may result in application rejection.
+//                       </Typography>
+//                     </Box>
+//                   </Box>
+//                 </Fade>
+//               )}
+
+//               {/* Navigation Buttons */}
+//               <Box
+//                 sx={{
+//                   display: "flex",
+//                   justifyContent: "space-between",
+//                   alignItems: "center",
+//                   mt: 5,
+//                   pt: 4,
+//                   borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+//                 }}
+//               >
+//                 <Button
+//                   onClick={handleBack}
+//                   disabled={activeStep === 0}
+//                   startIcon={<ArrowBackIcon />}
+//                   sx={{
+//                     px: 3,
+//                     py: 1.25,
+//                     fontSize: "0.938rem",
+//                     fontWeight: 600,
+//                     textTransform: "none",
+//                     border: "1px solid",
+//                     borderRadius: "10px",
+//                     bgcolor: "rgba(255, 255, 255, 0.02)",
+//                     transition: "all 0.2s ease",
+//                     "&:disabled": {
+//                       color: "#4b5563",
+//                       borderColor: "rgba(255, 255, 255, 0.05)",
+//                     },
+//                   }}
+//                 >
+//                   Back
+//                 </Button>
+
+//                 <Box sx={{ display: "flex", gap: 2 }}>
+//                   <Button
+//                     onClick={() => navigation("/LoginOption")}
+//                     sx={{
+//                       px: 3,
+//                       py: 1.25,
+//                       fontSize: "0.938rem",
+//                       fontWeight: 600,
+//                       color: "#9ca3af",
+//                       textTransform: "none",
+//                       border: "2px solid rgba(255, 255, 255, 0.1)",
+//                       borderRadius: "10px",
+//                       bgcolor: "transparent",
+//                       transition: "all 0.2s ease",
+//                       "&:hover": {
+//                         bgcolor: "rgba(255, 255, 255, 0.03)",
+//                         borderColor: "#10264E",
+//                       },
+//                     }}
+//                   >
+//                     Back to Login
+//                   </Button>
+
+//                   {activeStep === STEPS.length - 1 ? (
+//                     <Button
+//                       type="submit"
+//                       variant="contained"
+//                       disabled={loading}
+//                       startIcon={
+//                         loading ? (
+//                           <CircularProgress size={18} sx={{ color: "#fff" }} />
+//                         ) : (
+//                           <CheckIcon />
+//                         )
+//                       }
+//                       sx={{
+//                         px: 4,
+//                         py: 1.25,
+//                         fontSize: "0.938rem",
+//                         fontWeight: 600,
+//                         textTransform: "none",
+//                         borderRadius: "10px",
+//                         background: "#10264E",
+//                         transition: "all 0.2s ease",
+//                         "&:hover": {
+//                           background: "#10264E",
+//                           transform: "translateY(-1px)",
+//                         },
+//                         "&:disabled": {
+//                           background: "rgba(139, 92, 246, 0.3)",
+//                           color: "rgba(255, 255, 255, 0.5)",
+//                         },
+//                       }}
+//                     >
+//                       {loading ? "Submitting..." : "Submit Registration"}
+//                     </Button>
+//                   ) : (
+//                     <Button
+//                       onClick={handleNext}
+//                       variant="contained"
+//                       endIcon={<ArrowForwardIcon />}
+//                       sx={{
+//                         px: 4,
+//                         py: 1.25,
+//                         fontSize: "0.938rem",
+//                         fontWeight: 600,
+//                         textTransform: "none",
+//                         borderRadius: "10px",
+//                         background: "#10264E",
+//                         transition: "all 0.2s ease",
+//                         "&:hover": {
+//                           background: "#10264E",
+//                           transform: "translateY(-1px)",
+//                         },
+//                       }}
+//                     >
+//                       Continue
+//                     </Button>
+//                   )}
+//                 </Box>
+//               </Box>
+
+//               {/* Error Display */}
+//               {errors.submit && (
+//                 <Alert
+//                   severity="error"
+//                   sx={{
+//                     mt: 3,
+//                     bgcolor: "rgba(239, 68, 68, 0.15)",
+//                     color: "#ef4444",
+//                     border: "1px solid rgba(239, 68, 68, 0.3)",
+//                     borderRadius: "12px",
+//                     "& .MuiAlert-icon": {
+//                       color: "#ef4444",
+//                     },
+//                   }}
+//                 >
+//                   {errors.submit}
+//                 </Alert>
+//               )}
+//             </Grid>
+//           </Grid>
+//         </Paper>
+//       </Container>
+//     </Box>
+//   );
+// };
+
+// export default KYCRegistrationForm;
