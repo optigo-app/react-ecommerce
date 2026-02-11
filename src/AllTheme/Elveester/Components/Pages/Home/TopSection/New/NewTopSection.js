@@ -21,12 +21,13 @@ import MaxEstablishedExcellence from "../Max/MaxEstablishedExcellence";
 import MaxAffiliation from "../Max/MaxAffiliation";
 import MaxCountdownUI from "../Max/MaxCountdownUI";
 import CategorySlider from "../Max/Category";
-import CollectionsSlider from "../Max/MaxSlider";
+import CollectionsSlider from "../Max/CollectionsSlider";
 import MaxDesignSet from "../Max/MaxDesignSet";
 import MaxNewArrivalsSection from '../Max/MaxNewArrival';
 import MaxBestSeller from "../Max/MaxBestSeller";
 import MaxStore from "../Max/MaxStore";
 import StoreLocator from "../Max/SingleStore";
+import MaxShopBanner from "../Max/MaxShopBanner/MaxShopBanner";
 
 
 
@@ -39,7 +40,6 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
     collection: [],
     category: [],
   });
-
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -140,8 +140,9 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
           {isSetupforMax && (
             <>
               <CategorySlider />
-              <MaxCollection banner={bannerlist?.categoryBanner} />
-              <CollectionsSlider />
+              {/* <MaxCollection banner={bannerlist?.categoryBanner} /> */}
+              <MaxShopBanner />
+              <CollectionsSlider/>
               <MaxDesignSet/>
               <MaxGalleryView banner={bannerlist?.photoGallery} />
               <MaxNewArrivalsSection />

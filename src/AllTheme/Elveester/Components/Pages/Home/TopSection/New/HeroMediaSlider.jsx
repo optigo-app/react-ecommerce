@@ -81,7 +81,6 @@ const HeroMediaSlider = ({ media = [], isSingleVideo = false }) => {
         // pagination={{
         //   clickable: true,
         //   dynamicBullets: true,
-          
         // }}
         effect="fade"
         style={{ width: "100%", height: "100%" }}
@@ -118,7 +117,7 @@ const HeroMediaSlider = ({ media = [], isSingleVideo = false }) => {
               ) : (
                 <Box
                   component="img"
-                  src={item.src }
+                  src={item.src}
                   alt={item.alt || `slide-${index}`}
                   onError={(e) => {
                     e.target.src = "/fallback.jpg";

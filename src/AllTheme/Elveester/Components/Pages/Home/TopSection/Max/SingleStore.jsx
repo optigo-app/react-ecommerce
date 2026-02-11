@@ -1,110 +1,159 @@
-import { Box, Typography, Button, Grid, Container } from "@mui/material";
+import { Box, Typography, Grid, Container } from "@mui/material";
 import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 import MaxHeader from "./Header";
+import { useEffect, useState } from "react";
 
 const StoreLocator = () => {
-    const Storeimage = storImagePath() + "/images/store.jpg";
-
+    // Ensure this path function is working as expected in your project
+    const Storeimage = storImagePath() + "/images/storeImage/store.png";
+    const [companyInfoData, setCompanuInfoData] = useState();
+    useEffect(() => {
+        let interval;
+        const fetchData = () => {
+            const companyInfoDataStr = sessionStorage?.getItem("CompanyInfoData");
+            if (companyInfoDataStr) {
+                const parsedCompanyInfo = JSON?.parse(companyInfoDataStr);
+                setCompanuInfoData(parsedCompanyInfo);
+            }
+        }
+        fetchData();
+        interval = setInterval(fetchData, 1000);
+        return () => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        };
+    }, [])
     return (
-        <>
-        
-            <Box
-                sx={{
-                    width: "100%",
-                    py: 8,
-                    bgcolor: "#fff",
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection:'column'
-                }}
-            >
-                <MaxHeader title="Physical Store " alignment="center" />
-                <Container maxWidth="xl">
-                    <Grid container spacing={6} alignItems="center">
-                        <Grid item xs={12} md={7}>
-                            <Box
-                                component="img"
-                                src={Storeimage}
-                                alt="Discover our store"
+        <Box
+            sx={{
+                width: "100%",
+                py: 8,
+                bgcolor: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: 'column'
+            }}
+        >
+            <MaxHeader title="Physical Store " alignment="center" />
+
+            <Container maxWidth="xl" sx={{ mt: 4 }}>
+                <Grid container spacing={4} alignItems="center">
+                    {/* Image Section */}
+                    <Grid item xs={12} md={7}>
+                        <Box
+                            component="img"
+                            src={Storeimage}
+                            alt="Discover our store"
+                            sx={{
+                                width: "100%",
+                                height: "100%",
+                                // Adjusted aspect ratio to look more substantial like the reference
+                                aspectRatio: { xs: "16/9", md: "16/10" },
+                                objectFit: "cover",
+                                borderRadius: "12px",
+                                // Subtle shadow for depth
+                                boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+                                display: "block",
+                            }}
+                        />
+                    </Grid>
+
+                    {/* Address Card Section */}
+                    <Grid item xs={12} md={5}>
+                        <Box
+                            sx={{
+                                backgroundColor: "#FFF6F0", // Matches the peach/cream background
+                                borderRadius: "12px",
+                                p: { xs: 3, md: 5 }, // More padding for a premium look
+                                boxShadow: "none", // The reference looks flat/clean without a heavy shadow here
+                                height: "fit-content", // KEY FIX: Removes scrollbar
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center"
+                            }}
+                        >
+                            {/* Small Label */}
+                            <Typography
+                                variant="caption"
                                 sx={{
-                                    width: "100%",
-                                    height: "auto",
-                                    aspectRatio: { xs: "16/9", md: "16/9" },
-                                    objectFit: "cover",
-                                    borderRadius: 4,
-                                    boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                                    display: "block",
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={5}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: { xs: "center", md: "center" },
-                                    textAlign: { xs: "center", md: "center" },
-                                    gap: 1.5,
+                                    color: "#D46A2C",
+                                    fontWeight: 700,
+                                    letterSpacing: 0.5,
+                                    fontSize: "0.85rem",
+                                    mb: 0.5
                                 }}
                             >
+                                {companyInfoData?.FrontEndCity}
+                            </Typography>
+
+                            {/* Main Title */}
+                            <Typography
+                                variant="h4"
+                                sx={{
+                                    fontWeight: 600,
+                                    color: "#2F2F2F", // Darker grey for better contrast
+                                    fontFamily: 'serif', // Optional: if you have a serif font configured
+                                    mb: 2
+                                }}
+                            >
+                                {companyInfoData?.FrontEndState}
+                            </Typography>
+
+                            {/* Contact Row */}
+                            <Box sx={{ display: "flex", alignItems: "baseline", flexWrap: "wrap", mb: 1 }}>
                                 <Typography
-                                    variant="h2"
-                                    component="h2"
-                                    fontWeight={600}
+                                    variant="body1"
+                                    sx={{ color: "#4A4A4A", fontWeight: 500, mr: 1 }}
+                                >
+                                    Contact:
+                                </Typography>
+                                <Typography
+                                    variant="body1"
+                                    component="a"
+                                    href={`tel:${companyInfoData?.FrontEndContactno1}`}
                                     sx={{
-                                        fontSize: {
-                                            xs: "1.75rem",   // Mobile
-                                            sm: "2.25rem",   // Tablet
-                                            md: "2.75rem",   // Small desktop
-                                            lg: "3.25rem",   // Desktop
-                                            xl: "3.75rem",   // Large desktop
-                                        },
-                                        textAlign: { xs: "center", md: "center" },
-                                        mb: { xs: 2, md: 2 },
+                                        color: "#0066CC", // Standard link blue
+                                        fontWeight: 500,
+                                        textDecoration: "none"
                                     }}
                                 >
-                                    Discover Our Store
+                                    9632587412
+                                </Typography>
+                            </Box>
+
+                            {/* Address Text */}
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    color: "#555",
+                                    lineHeight: 1.6,
+                                    fontSize: "0.95rem",
+                                    mb: 2
+                                }}
+                            >
+                                {companyInfoData?.FrontEndAddress},{" "}
+                                {companyInfoData?.FrontEndCity},{" "}
+                                {companyInfoData?.FrontEndState} -{" "}
+                                {companyInfoData?.FrontEndZipCode}
+                            </Typography>
+
+                            {/* Details: Timings & Services */}
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                <Typography variant="body2" sx={{ color: "#4A4A4A", fontSize: "0.9rem" }}>
+                                    <Box component="span" sx={{ fontWeight: 700, color: "#000" }}>Timings:</Box> 11:00 am to 9:00 pm
                                 </Typography>
 
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    size="large"
-                                    sx={{
-                                        // Responsive padding
-                                        px: { xs: 6, sm: 10, md: 12, lg: 15 },
-                                        py: { xs: 1.2, sm: 1.5 },
-
-                                        // Responsive font size
-                                        fontSize: { xs: "0.85rem", sm: "0.9rem" },
-                                        fontWeight: 700,
-                                        textTransform: "none",
-                                        borderRadius: "6px",
-                                        boxShadow: "none",
-                                        bgcolor: "black",
-
-                                        // Full width on mobile, auto on larger screens
-                                        width: { xs: "100%", sm: "auto" },
-                                        minWidth: { sm: "200px", md: "280px" },
-
-                                        // Center on mobile, left align on desktop
-                                        display: "block",
-                                        mx: { xs: "auto", md: 0 },
-
-                                        "&:hover": {
-                                            backgroundColor: "#1a1a1aff",
-                                            boxShadow: "0 4px 12px rgba(51, 75, 73, 0.4)",
-                                        },
-                                    }}
-                                >
-                                    Find Store
-                                </Button>
+                                <Typography variant="body2" sx={{ color: "#4A4A4A", fontSize: "0.9rem" }}>
+                                    <Box component="span" sx={{ fontWeight: 700, color: "#000" }}>Services:</Box> In-house stylist | Bridal Studio |
+                                    Design Customization
+                                </Typography>
                             </Box>
-                        </Grid>
+                        </Box>
                     </Grid>
-                </Container>
-            </Box>
-        </>
+                </Grid>
+            </Container>
+        </Box>
     );
 };
 

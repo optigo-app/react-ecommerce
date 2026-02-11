@@ -4,47 +4,56 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import BrandsTitle from './BrandsTitle';
 import MaxHeader from './Header';
+import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
+import { useNavigate } from 'react-router-dom';
+
 
 const collections = [
   {
     id: 1,
-    title: 'Peacock',
+    title: 'Everyday wear',
+    slug: "Everyday wear",
     subtitle: 'A Timeless Heritage for The Modern Bride',
-    img: 'https://www.candere.com/media/home_page_images/featured_collection/Peacock.jpg',
+    img: `${storImagePath()}/Banner/iconicCollection/Everyday wear.png`,
   },
   {
     id: 2,
-    title: 'Aruna',
+    title: 'Gen-z drops',
+    slug: "Gen-z drops",
     subtitle: 'Tuned to Timeless Tastes',
-    img: 'https://www.candere.com/media/home_page_images/featured_collection/Aruna.jpg',
+    img: `${storImagePath()}/Banner/iconicCollection/Gen-z drops.png`,
   },
   {
     id: 3,
-    title: 'Evil Eye',
+    title: 'Night Out Glam',
+    slug: "Night Out Glam",
     subtitle: 'Your Style Must-Have',
-    img: 'https://www.candere.com/media/home_page_images/featured_collection/Evil-Eye.jpg',
+    img: `${storImagePath()}/Banner/iconicCollection/Night out glam.png`,
   },
   {
     id: 4,
-    title: 'Honey Bee',
+    title: 'Shopping All',
+    slug: "Shopping All",
     subtitle: 'For the Queen in Every Woman',
-    img: 'https://www.candere.com/media/home_page_images/featured_collection/Honey-Bee.jpg',
+    img: `${storImagePath()}/Banner/iconicCollection/Shop all.png`,
   },
   {
     id: 5,
-    title: 'Glo',
+    title: 'Wedding Collection',
+    slug: "Wedding Collection",
     subtitle: 'By Tanishq',
-    img: 'https://www.candere.com/media/home_page_images/featured_collection/Glo.jpg',
+    img: `${storImagePath()}/Banner/iconicCollection/wedding collection.png`,
   },
 ];
 
 const CARD_WIDTH = 320; // Base width of a card
 const CARD_HEIGHT = 450; // Base height
 
-const CustomCarousel = () => {
+const CollectionsSlider = () => {
   const [activeIndex, setActiveIndex] = useState(2);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
 
   const length = collections.length;
 
@@ -121,6 +130,35 @@ const CustomCarousel = () => {
     return styles;
   };
 
+  const handleNavigate = (name) => {
+    let finalData = {
+      menuname: name,
+      FilterKey: "Collection",
+      FilterVal: name,
+      FilterKey1: "",
+      FilterVal1: "",
+      FilterKey2: "",
+      FilterVal2: "",
+    };
+    sessionStorage.setItem("menuparams", JSON.stringify(finalData));
+    const queryParameters1 = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`].filter(Boolean).join("/");
+    const queryParameters = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`]
+      .join(",");
+    const otherparamUrl = Object.entries({
+      b: finalData?.FilterKey,
+      g: finalData?.FilterKey1,
+      c: finalData?.FilterKey2,
+    })
+      .filter(([key, value]) => value !== undefined)
+      .map(([key, value]) => value)
+      .filter(Boolean)
+      .join(",");
+    const paginationParam = [`page=${finalData.page ?? 1}`, `size=${finalData.size ?? 50}`].join("&");
+    let menuEncoded = `${queryParameters}/${otherparamUrl}`;
+    const url = `/p/${finalData?.menuname}/${queryParameters1}/?M=${btoa(menuEncoded)}`;
+    navigate(url);
+  };
+
   return (
     <Box
       sx={{
@@ -150,11 +188,11 @@ const CustomCarousel = () => {
         />
       </Box> */}
       <Box textAlign="center" mb={5}>
-       <MaxHeader 
-       title={"Iconic Collection"}
+        <MaxHeader
+          title={"Iconic Collection"}
           subtitle={"Let's take a glimpse at our featured collections before diving in!"}
-       alignment="center"  />
-        </Box> 
+          alignment="center" />
+      </Box>
       {/* Carousel Container */}
       <Box
         sx={{
@@ -174,16 +212,17 @@ const CustomCarousel = () => {
               key={item.id}
               sx={{
                 position: 'absolute',
+                cursor: 'pointer',
                 width: isMobile ? 200 : CARD_WIDTH,
                 height: isMobile ? 280 : CARD_HEIGHT,
                 borderRadius: '20px',
-                background: `url(${item.img})`,
+                background: `url("${item.img}")`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 transition: 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)',
                 ...styles
               }}
-              onClick={() => setActiveIndex(i)}
+              onClick={() => activeIndex == i ? handleNavigate(item.slug) : setActiveIndex(i)}
             >
             </Box>
           );
@@ -219,26 +258,30 @@ const CustomCarousel = () => {
             fontSize="small"
           />
         </IconButton>
-
-
+        {/* shop now! btn */}
         <Button
-          variant="contained"
-          onClick={() => console.log('Shop Now Clicked')}
+          variant="outlined"
+          size="large"
           sx={{
-            borderRadius: '30px',
-            bgcolor: '#2b3a67',
-            border: '1px solid #444',
-            px: 4,
-            py: 1.5,
-            fontWeight: 'bold',
-            letterSpacing: '1px',
-            boxShadow: '0 0 15px rgba(255,255,255,1)',
-            '&:hover': { bgcolor: '#333' }
+            px: { xs: 6, sm: 10, md: 12 },
+            py: { xs: 1.5, sm: 2 },
+            fontSize: { xs: "0.8rem", sm: "0.9rem" },
+            fontWeight: 600,
+            textTransform: "uppercase",
+            letterSpacing: "0.15rem",
+            color: "#333",
+            boxShadow: "0 4px 40px 0 rgba(0,0,0,0.1)",
+            display: "block",
+            borderColor: "#333",
+            mx: "auto",
+            "&:hover": {
+              backgroundColor: '#333',
+              color: '#fff',
+            },
           }}
         >
-          SHOP NOW!
+          Shop Now!
         </Button>
-
         <IconButton
           onClick={handleNext}
           sx={{
@@ -269,4 +312,4 @@ const CustomCarousel = () => {
   );
 };
 
-export default CustomCarousel;
+export default CollectionsSlider;

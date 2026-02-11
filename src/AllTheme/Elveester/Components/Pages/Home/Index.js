@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { el_companyLogo, el_loginState } from "../../Recoil/atom";
 import { Helmet } from "react-helmet-async";
 import useHomeBannerImages from "../../../../../utils/Glob_Functions/ThemesBanner/ThemesBanner";
+import { storImagePath } from "../../../../../utils/Glob_Functions/GlobalFunction";
 
 const NewTopSection = lazy(() => import("./TopSection/New/NewTopSection"));
 // const TabBasedNewSection = lazy(() => import("./TopSection/New/TabBasedNewSection"));
@@ -16,6 +17,12 @@ const NewTopSection = lazy(() => import("./TopSection/New/NewTopSection"));
 // const CompanyData = lazy(() => import("./ComapnayData/CompanyData"));
 // const AffiliationData = lazy(() => import("./PromoComponent/BrandsComponent/AffiliationData"));
 // const SocialMediaSection = lazy(() => import("./SocialMediaSection/SocialMediaSection"));
+
+const carouselSlider = [
+  `${storImagePath()}/Banner/carousel/Slider 1.jpg`,
+  `${storImagePath()}/Banner/carousel/Slider 2.jpg`,
+  `${storImagePath()}/Banner/carousel/Slider 3.jpg`,
+  `${storImagePath()}/Banner/carousel/Slider 4.jpg`,]
 
 function Home() {
   const banner = useHomeBannerImages();
@@ -76,17 +83,17 @@ function Home() {
       <div style={{ position: "relative !important" }}>
         {isLogin ? (
           <>
-           <NewTopSection
-           bannerlist={banner}
-            demoVideo={banner?.demoVideo}
-           carousel={banner?.carousel?.image} isLogin={isLogin} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} />
+            <NewTopSection
+              bannerlist={banner}
+              demoVideo={banner?.demoVideo}
+              carousel={carouselSlider} isLogin={isLogin} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} />
             {/* <TabBasedNewSection
 
               carousel={banner?.carousel?.image}
               isLogin={isLogin}
               socialMediaBanner={banner?.socialMediaBanner2}
               banner={banner?.mainBanner}
-            /> */}       
+            /> */}
           </>
 
         ) : (
@@ -101,12 +108,12 @@ function Home() {
             <CompanyData />
             <AffiliationData banner={banner?.affiliation} />
             <SocialMediaSection banner={banner?.socialMediaBanner2} /> */}
-          
+
             <NewTopSection
-            bannerlist={banner}
-            middleBanner={banner?.middleBanner}
-            demoVideo={banner?.demoVideo}
-            isLogin={isLogin} carousel={banner?.carousel?.image} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} />
+              bannerlist={banner}
+              middleBanner={banner?.middleBanner}
+              demoVideo={banner?.demoVideo}
+              isLogin={isLogin} carousel={banner?.carousel?.image} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} />
           </>
         )}
       </div>

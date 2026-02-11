@@ -37,21 +37,16 @@ const locations = [
 ];
 
 const MaxStore = () => {
-  return (
-    <Box
-      sx={{
-        py: 8, // Padding top/bottom
-                px: { xs: 2, sm: 3, md: 4 },
 
-      }}
-    >
+  return (
+    <Box sx={{ py: 8, px: { xs: 2, sm: 3, md: 4 } }}>
       <Box>
-         <Box textAlign="center" mb={6} zIndex={20}>
-                <BrandsTitle
-                  title={"Physical Store"}
-                  Align='left'
-                />
-              </Box>
+        <Box textAlign="center" mb={6} zIndex={20}>
+          <BrandsTitle
+            title={"Physical Store"}
+            Align='left'
+          />
+        </Box>
 
         <Grid container spacing={1} justifyContent="center">
           {locations.map((loc, index) => (
