@@ -58,7 +58,8 @@ export const syncProductListAtom = atom({
 const isSetup = "elvee" ;
 // const isSetup = "demo" ;
 const theme = "max" ;
-export const isSetupforMax = theme !== "max" ;
+// export const isSetupforMax = theme !== "max" ;
+export const isSetupforMax = theme === "max" ;
 
 export const IsSetupFor = isSetup === "demo" ;
 

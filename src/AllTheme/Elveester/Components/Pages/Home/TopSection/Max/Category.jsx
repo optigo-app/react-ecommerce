@@ -17,16 +17,16 @@ import MaxHeader from "./Header";
 // "Pendant set": `${storImagePath()}/images/Category/PendantSet.webp`,
 
 const categories = [
-  { id: 101, label: "Earrings", image: `${storImagePath()}/Category/earring.webp` },
-  { id: 102, label: "Chain", image: `${storImagePath()}/Category/chain.webp` },
-  { id: 103, label: "Bangle", image: `${storImagePath()}/Category/bangle.webp` },
-  { id: 105, label: "Bangles", image: `${storImagePath()}/Category/Bangles.webp` },
-  { id: 106, label: "Mangalsutra", image: `${storImagePath()}/Category/mangalsutra.webp` },
-  { id: 107, label: "Rings", image: `${storImagePath()}/Category/rings.webp` },
-  { id: 108, label: "Bracelets", image: `${storImagePath()}/Category/bracelets.webp` },
-  { id: 101, label: "Necklaces", image: `${storImagePath()}/Category/necklaces.webp` },
-  { id: 102, label: "Earrings", image: `${storImagePath()}/Category/earrings.webp` },
-  { id: 103, label: "Pendant", image: `${storImagePath()}/Category/pendant.webp` },
+  { id: 101, label: "Bangal", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Mens'chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` },
 ];
 
 // http://elvee.web/WebSiteStaticImage/Category/pendants.webp

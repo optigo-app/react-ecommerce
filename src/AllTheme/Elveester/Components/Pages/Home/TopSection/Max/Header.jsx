@@ -29,7 +29,7 @@ const MaxHeader = ({ alignment = "left", title, subtitle, extra }) => {
       {subtitle && (
         <Typography
           variant="subtitle1"
-          color="text.secondary"
+          color="common.black"
           sx={{ textAlign: alignment, mt: 0.5 }}
         >
           {subtitle}

@@ -131,16 +131,21 @@ const MaxNewArrivalsSection = () => {
       {/* Header */}
       <Box
         sx={{
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
           alignItems: "center",
-          justifyContent: "center",
         }}
       >
         {/* <SectionHeader>
           <SectionTitle variant="overline">New Arrivals</SectionTitle>
         </SectionHeader> */}
-        <MaxHeader title="New In" subtitle={"Every debut tells a story of artistry, of elegance, of you"} alignment="center" />
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <Box sx={{
+          display: { xs: "none", sm: "none", md: "block" }
+        }} />
+        <Box sx={{ justifySelf: "center", textAlign: "center" }}>
+          <MaxHeader title="New In" subtitle={"Every debut tells a story of artistry, of elegance, of you"} alignment="center" />
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" } }}>
           <IconButton
             onClick={() => swiperRef.current?.slidePrev()}
             sx={{
@@ -241,7 +246,7 @@ const MaxNewArrivalsSection = () => {
                 alt={product?.TitleLine}
                 title={formatTitleLine(product?.TitleLine) ? formatTitleLine(product?.TitleLine) : ""}
                 product={product}
-                price={storeInit?.IsPriceShow == 1 ? `${islogin ? loginUserDetail?.CurrencyCode : storeInit?.CurrencyCode} ${formatter(product?.UnitCostWithMarkUp)}` : ""}
+                price={storeInit?.IsPriceShow == 1 ? `${formatter(product?.UnitCostWithMarkUp)} ${islogin ? loginUserDetail?.CurrencyCode : storeInit?.CurrencyCode}` : ""}
                 details={
                   <Box
                     sx={{
@@ -515,9 +520,9 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
           <Typography
             variant="body1"
             sx={{
-              fontWeight: 600,
+              fontWeight: 400,
               lineHeight: 1,
-              color: "#954b00",
+              color: "",
               textAlign: "center",
               whiteSpace: "nowrap",
               overflow: "hidden",
@@ -526,15 +531,21 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
               fontSize: { xs: "0.82rem", sm: "0.9rem", md: "0.94rem", lg: "1rem" },
             }}
           >
-            {price || "0"}
+            from {price || "0"}
           </Typography>
         </ElveeTooltip>
 
         {/* --- DETAILS GRID (always keeps shape) --- */}
         <Box sx={{ mt: 1 }}>
-          <Grid container spacing={0.8}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center", // centers the row
+              gap:0.5
+            }}>
             {/* --- NWT --- */}
-            <Grid item xs={6}>
+            <Grid item>
               <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                 <Typography
                   variant="body2"
@@ -560,9 +571,17 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
                 </Typography>
               </Box>
             </Grid>
+            {Dwt &&
+              (<Box
+                sx={{
+                  width: "1.15px",
+                  height: "1.25rem",
+                  bgcolor: "#ccc",
+                }} />)
+            }
 
             {/* --- DWT --- */}
-            <Grid item xs={6}>
+            {Dwt && <Grid item>
               <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, justifyContent: "flex-end" }}>
                 <Typography
                   variant="body2"
@@ -587,8 +606,9 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
                   {Dwt ? `${Dwt}${Dpcs ? ` / ${Dpcs}` : ""}` : "0"}
                 </Typography>
               </Box>
-            </Grid>
-          </Grid>
+            </Grid>}
+
+          </Box>
         </Box>
       </CardContent>
     </Card>
