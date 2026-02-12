@@ -28,6 +28,88 @@ const categories = [
   { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
   { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
   { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` },
+  { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` }, { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` }, { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` }, { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` }, { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` }, { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` }, { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` }, { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` }, { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
+  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
+  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { id: 101, label: "Necklaces", slug: "NACKLACE ", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { id: 102, label: "Ring", slug: "Ring", image: `${storImagePath()}/Category/new-image/RING1.jpg` },
+  { id: 103, label: "Pendant", slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent_or.jpg` },
 ];
 
 // http://elvee.web/WebSiteStaticImage/Category/pendants.webp
@@ -39,6 +121,35 @@ const CategorySlider = () => {
   // We use state for navigation refs to ensure Swiper picks them up after render
   const [prevEl, setPrevEl] = useState(null);
   const [nextEl, setNextEl] = useState(null);
+  const navigate = useNavigate();
+  const handleNavigate = (name) => {
+    let finalData = {
+      menuname: name,
+      FilterKey: "Collection",
+      FilterVal: name,
+      FilterKey1: "",
+      FilterVal1: "",
+      FilterKey2: "",
+      FilterVal2: "",
+    };
+    sessionStorage.setItem("menuparams", JSON.stringify(finalData));
+    const queryParameters1 = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`].filter(Boolean).join("/");
+    const queryParameters = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`]
+      .join(",");
+    const otherparamUrl = Object.entries({
+      b: finalData?.FilterKey,
+      g: finalData?.FilterKey1,
+      c: finalData?.FilterKey2,
+    })
+      .filter(([key, value]) => value !== undefined)
+      .map(([key, value]) => value)
+      .filter(Boolean)
+      .join(",");
+    const paginationParam = [`page=${finalData.page ?? 1}`, `size=${finalData.size ?? 50}`].join("&");
+    let menuEncoded = `${queryParameters}/${otherparamUrl}`;
+    const url = `/p/${finalData?.menuname}/${queryParameters1}/?M=${btoa(menuEncoded)}`;
+    navigate(url);
+  };
 
   return (
     <Box
@@ -97,7 +208,7 @@ const CategorySlider = () => {
           >
             {categories.map((cat) => (
               <SwiperSlide key={cat.id} style={{ height: "auto" }}>
-                <CategoryCard item={cat} />
+                <CategoryCard item={cat} handleNavigate={handleNavigate} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -107,36 +218,8 @@ const CategorySlider = () => {
   );
 };
 
-const CategoryCard = ({ item }) => {
-  const navigate = useNavigate();
-  const handleNavigate = (name) => {
-    let finalData = {
-      menuname: name,
-      FilterKey: "Collection",
-      FilterVal: name,
-      FilterKey1: "",
-      FilterVal1: "",
-      FilterKey2: "",
-      FilterVal2: "",
-    };
-    sessionStorage.setItem("menuparams", JSON.stringify(finalData));
-    const queryParameters1 = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`].filter(Boolean).join("/");
-    const queryParameters = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`]
-      .join(",");
-    const otherparamUrl = Object.entries({
-      b: finalData?.FilterKey,
-      g: finalData?.FilterKey1,
-      c: finalData?.FilterKey2,
-    })
-      .filter(([key, value]) => value !== undefined)
-      .map(([key, value]) => value)
-      .filter(Boolean)
-      .join(",");
-    const paginationParam = [`page=${finalData.page ?? 1}`, `size=${finalData.size ?? 50}`].join("&");
-    let menuEncoded = `${queryParameters}/${otherparamUrl}`;
-    const url = `/p/${finalData?.menuname}/${queryParameters1}/?M=${btoa(menuEncoded)}`;
-    navigate(url);
-  };
+const CategoryCard = ({ item, handleNavigate }) => {
+
   return (
     <Box
       sx={{
@@ -146,7 +229,7 @@ const CategoryCard = ({ item }) => {
         cursor: "pointer",
         group: "true",
       }}
-    onClick={() => handleNavigate(item.slug)}
+      onClick={() => handleNavigate(item.slug)}
     >
       <Box
         className="img-container"
