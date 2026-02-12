@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Box, Typography } from "@mui/material";
 
-const MaxHeader = ({ alignment = "left", title, subtitle, extra }) => {
+const MaxHeader = ({ alignment = "left", title, subtitle, extra, noExtraMb = false }) => {
   return (
     <Box
       sx={{
@@ -11,11 +11,12 @@ const MaxHeader = ({ alignment = "left", title, subtitle, extra }) => {
           alignment === "left"
             ? "flex-start"
             : alignment === "center"
-            ? "center"
-            : "flex-end",
+              ? "center"
+              : "flex-end",
         flexDirection: "column",
         px: 2,
-        marginBlock:'44px'
+        marginBlock: '44px',
+        marginBottom: { xs: noExtraMb ? "15px" : "44px", md: "44px" }
       }}
     >
       <Typography
