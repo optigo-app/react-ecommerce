@@ -143,7 +143,7 @@ const MaxNewArrivalsSection = () => {
           display: { xs: "none", sm: "none", md: "block" }
         }} />
         <Box sx={{ justifySelf: "center", textAlign: "center" }}>
-          <MaxHeader title="New In" subtitle={"Every debut tells a story of artistry, of elegance, of you"} alignment="center" />
+          <MaxHeader title="New In" subtitle={"Every debut tells a story of artistry, of elegance, of you"} alignment="center" noExtraMb={true} />
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" } }}>
           <IconButton

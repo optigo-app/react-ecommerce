@@ -27,7 +27,7 @@ import MaxNewArrivalsSection from '../Max/MaxNewArrival';
 import MaxBestSeller from "../Max/MaxBestSeller";
 import MaxStore from "../Max/MaxStore";
 import StoreLocator from "../Max/SingleStore";
-import MaxShopBanner from "../Max/MaxShopBanner/MaxShopBanner";
+import MaxShopBanner from "../Max/MaxShopBanner";
 
 
 
@@ -78,7 +78,8 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
     fetchHomeCollection();
   }, []);
 
-  const isVideo = !islogin;
+  // const isVideo = !islogin; //if want to play video on not logged in
+  const isVideo = false;
   const isDemo =  IsSetupFor ? false : isVideo;
   const mediaData = isDemo
     ? [
@@ -136,7 +137,7 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
           {showMarquee && <MarqueeBar />}
           {showMarquee && <JewelryShowcase data={SectionData} />}
           {showMarquee && <NewArrivalsSection />}
-          {ShowBeforeLogin && <PromoComponent1 banner={middleBanner} />}
+          {/* {ShowBeforeLogin && <PromoComponent1 banner={middleBanner} />} */}
           {isSetupforMax && (
             <>
               <CategorySlider />
