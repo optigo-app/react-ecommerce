@@ -139,7 +139,7 @@ export const CategoryGrid = ({
           }} style={{padding:"20px 0 20px 20px",display:"flex",justifyContent:"center"}}>
           {data?.slice(0, AlbumShowMore)?.map((val, i) => {
             return (
-              <SwiperSlide style={{boxShadow: "0px 4px 24px rgba(0, 0, 0, 0.1)",minHeight:"400px"}}>
+              <SwiperSlide style={{boxShadow: "0px 4px 24px rgba(0, 0, 0, 0.1)",minHeight:"400px",borderRadius:"10px"}}>
                 <div key={i} className="elvee_card-grid">
                   <div className="details_elvee_overlay" onClick={() => handleNavigate(val?.AlbumName)}>
                     <div className="total_Album_elvee">
