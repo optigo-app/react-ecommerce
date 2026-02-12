@@ -12,22 +12,22 @@ import SocialMediaVideoSection from "./VideoSection";
 
 const sliderData = [
   {
-    imageUrl: "/images/HomePage/SocialMedia/socialMedia1.jpg",
+    imageUrl: "/images/HomePage/SocialMedia/common_img.png",
     link: "https://www.instagram.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/instagram.png`,
   },
   {
-    imageUrl: "/images/HomePage/SocialMedia/socialMedia2.jpg",
+    imageUrl: "/images/HomePage/SocialMedia/common_img.png",
     link: "https://in.pinterest.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/pinterest.png`,
   },
   {
-    imageUrl: "/images/HomePage/SocialMedia/socialMedia3.jpg",
+    imageUrl: "/images/HomePage/SocialMedia/common_img.png",
     link: "https://www.facebook.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/facebook.png`,
   },
   {
-    imageUrl: "/images/HomePage/SocialMedia/socialMedia4.jpg",
+    imageUrl: "/images/HomePage/SocialMedia/common_img.png",
     link: "https://www.linkedin.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/linkedin.png`,
   },
@@ -82,9 +82,10 @@ const IconWrapper = styled(Box)(({ theme }) => ({
 export default function SocialMediaSection({ banner, demoVideo }) {
   const updatedSlides = sliderData.map((item, i) => ({
     ...item,
-    imageUrl: banner?.image?.[i] || item.imageUrl,
+    imageUrl: storImagePath() + item.imageUrl,
     ...(IsSetupFor && demoVideo?.[i] ? { demoVideo: demoVideo[i] } : {}),
   }));
+  console.log(updatedSlides, "=>gauranga")
 
   if (IsSetupFor) {
     return (

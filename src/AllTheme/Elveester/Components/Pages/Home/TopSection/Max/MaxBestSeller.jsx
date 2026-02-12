@@ -133,20 +133,25 @@ const MaxBestSeller = () => {
       <Box>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
+            display: "grid",
+            gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
             alignItems: "center",
-            px: { xs: 1, md: 2 },
           }}
         >
           {/* <SectionHeader>
                         <SectionTitle variant="overline">BestSeller</SectionTitle>
                     </SectionHeader> */}
-          <MaxHeader title="BestSeller" alignment="center" />
+          <Box sx={{
+            display: { xs: "none", sm: "none", md: "block" }
+          }} />
+          <Box sx={{ justifySelf: "center", textAlign: "center" }}>
+
+            <MaxHeader title="BestSeller" alignment="center" />
+          </Box>
 
           {/* Desktop Navigation */}
           {!isMobile && (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" } }}>
               <NavButton onClick={handlePrev}>
                 <ChevronLeft />
               </NavButton>
@@ -271,54 +276,54 @@ const ProductCard = ({ item, storeInit, loginUserDetail, onClick }) => {
           </Typography>
         </Box> */}
         <Box
-  className="info-overlay"
-  sx={{
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    width: "100%",
-    // Use auto height with padding for a better fit
-    height: "auto", 
-    minHeight: "15%",
-    
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    
-    // Spacing
-    py: 2, // Vertical padding (top/bottom)
-    px: 3, // Horizontal padding
-    
-    // --- THE APPLE GLASS EFFECT ---
-    background: "rgba(255, 255, 255, 0.65)", // Semi-transparent white
-    backdropFilter: "blur(20px) saturate(180%)", // The "Liquid" Blur magic
-    WebkitBackdropFilter: "blur(20px) saturate(180%)", // Safari/Apple support
-    borderTop: "1px solid rgba(255, 255, 255, 0.4)", // Subtle frost edge
-    boxShadow: "0px -4px 20px rgba(0, 0, 0, 0.1)", // Soft shadow lifting it up
-    
-    // Transitions & Visibility
-    transform: "translateY(100%)", // Hidden down initially
-    opacity: 0,
-    zIndex: 10,
-    transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-  }}
->
-  <Typography
-    sx={{
-      fontWeight: 700, // Thicker font for premium feel
-      color: "#1a1a1a", // Soft black, not harsh #000
-      fontSize: "16px",
-      letterSpacing: "0.5px",
-      textTransform: "uppercase", // Often looks cleaner for currency
-      // Ensures text stays readable if background image is dark
-      textShadow: "0px 1px 1px rgba(255,255,255,0.8)", 
-    }}
-  >
-    {loginUserDetail?.CurrencyCode ?? storeInit?.CurrencyCode} &nbsp;
-    {formatter(item?.UnitCostWithMarkUp)}
-  </Typography>
-</Box>
+          className="info-overlay"
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            // Use auto height with padding for a better fit
+            height: "auto",
+            minHeight: "15%",
+
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+
+            // Spacing
+            py: 2, // Vertical padding (top/bottom)
+            px: 3, // Horizontal padding
+
+            // --- THE APPLE GLASS EFFECT ---
+            background: "rgba(255, 255, 255, 0.65)", // Semi-transparent white
+            backdropFilter: "blur(20px) saturate(180%)", // The "Liquid" Blur magic
+            WebkitBackdropFilter: "blur(20px) saturate(180%)", // Safari/Apple support
+            borderTop: "1px solid rgba(255, 255, 255, 0.4)", // Subtle frost edge
+            boxShadow: "0px -4px 20px rgba(0, 0, 0, 0.1)", // Soft shadow lifting it up
+
+            // Transitions & Visibility
+            transform: "translateY(100%)", // Hidden down initially
+            opacity: 0,
+            zIndex: 10,
+            transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: 700, // Thicker font for premium feel
+              color: "#1a1a1a", // Soft black, not harsh #000
+              fontSize: "16px",
+              letterSpacing: "0.5px",
+              textTransform: "uppercase", // Often looks cleaner for currency
+              // Ensures text stays readable if background image is dark
+              textShadow: "0px 1px 1px rgba(255,255,255,0.8)",
+            }}
+          >
+            {loginUserDetail?.CurrencyCode ?? storeInit?.CurrencyCode} &nbsp;
+            {formatter(item?.UnitCostWithMarkUp)}
+          </Typography>
+        </Box>
       </Box>
 
       <Box sx={{ mt: 2.5 }}>

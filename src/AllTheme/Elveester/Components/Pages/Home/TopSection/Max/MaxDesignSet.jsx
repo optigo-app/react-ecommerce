@@ -228,34 +228,39 @@ const MaxDesignSet = ({ data }) => {
         <>
           <Box 
             sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              gap: 2
+              display: "grid",
+              gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
+              alignItems: "center",
             }}
           >
+            <Box sx={{
+              display: { xs: "none", sm: "none", md: "block" }
+            }} />
             {/* <BrandsTitle title={"Complete Your Look"} my={0} /> */}
-            <MaxHeader title={"Complete Your Look"}  alignment="center"  />
-            {((storeInit?.IsB2BWebsite !== 1) || (storeInit?.IsB2BWebsite === 1 && islogin)) && (
-               <Button 
-                 variant="outlined" 
-                 onClick={(e) => handleNavigate(e)}
-                 href="/Lookbook"
-                 sx={{ 
-                   textTransform: 'uppercase', 
-                   fontWeight: 500,
-                   borderColor: '#333',
-                   color: '#333',
-                   '&:hover': {
+            <Box sx={{ justifySelf: "center", textAlign: "center" }}>
+              <MaxHeader title={"Complete Your Look"} alignment="center" noExtraMb={true}/>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" } }}>
+              {((storeInit?.IsB2BWebsite !== 1) || (storeInit?.IsB2BWebsite === 1 && islogin)) && (
+                <Button
+                  variant="outlined"
+                  onClick={(e) => handleNavigate(e)}
+                  href="/Lookbook"
+                  sx={{
+                    textTransform: 'uppercase',
+                    fontWeight: 500,
+                    borderColor: '#333',
+                    color: '#333',
+                    '&:hover': {
                       backgroundColor: '#333',
                       color: '#fff'
-                   }
-                 }}
-               >
-                 View More
-               </Button>
-            )}
+                    }
+                  }}
+                >
+                  View More
+                </Button>
+              )}
+            </Box>
           </Box>
           
           {designSetList?.slice(0, 1)?.map((slide, index) => (
