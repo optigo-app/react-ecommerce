@@ -1,7 +1,7 @@
 import { REACT_APP_WEB } from "../../../../env";
 import { CommonAPI } from "../../CommonAPI/CommonAPI";
 
-export const HomeCollectionPageApi = async (visiterId = "" ) => {
+export const HomeCollectionPageApi = async (visiterId = "") => {
     try {
         const storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
         const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
@@ -15,8 +15,8 @@ export const HomeCollectionPageApi = async (visiterId = "" ) => {
         const customerEmail = storeInit?.IsB2BWebsite == 0 && (isLogin == false || isLogin == null) ? visiterId : loginUserDetail?.userid ?? "";
 
         const selectedTab = sessionStorage?.getItem("selectedTabPersistence") ?? "";
-
-const shouldPassMenuFilter =  REACT_APP_WEB === "elvee.web" ;
+        const domain = window.location.host;
+        const shouldPassMenuFilter = REACT_APP_WEB === "elvee.web";
         const data = {
             FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`,
             Customerid: `${customerId ?? 0}`,
@@ -25,6 +25,7 @@ const shouldPassMenuFilter =  REACT_APP_WEB === "elvee.web" ;
                 MenuFilterKey: "product_type",
                 MenuFilterVal: selectedTab,
             }),
+            domainname: domain
         };
 
         const encData = JSON.stringify(data);
