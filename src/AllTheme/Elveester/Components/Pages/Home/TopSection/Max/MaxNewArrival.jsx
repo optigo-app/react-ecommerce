@@ -1,6 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Typography, IconButton, Card, CardMedia, CardContent, Chip, Button, useTheme, useMediaQuery, Tooltip, Grid } from "@mui/material";
-import { FavoriteBorder, ArrowForward, ChevronLeft, ChevronRight } from "@mui/icons-material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Card,
+  CardMedia,
+  CardContent,
+  Chip,
+  Button,
+  useTheme,
+  useMediaQuery,
+  Tooltip,
+  Grid,
+} from "@mui/material";
+import {
+  FavoriteBorder,
+  ArrowForward,
+  ChevronLeft,
+  ChevronRight,
+} from "@mui/icons-material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -11,7 +29,12 @@ import Cookies from "js-cookie";
 import { useRecoilValue } from "recoil";
 import { el_loginState } from "../../../../Recoil/atom";
 import Pako from "pako";
-import { formatRedirectTitleLine, formatter, formatTitleLine, storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
+import {
+  formatRedirectTitleLine,
+  formatter,
+  formatTitleLine,
+  storImagePath,
+} from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 import { useNavigate } from "react-router-dom";
 import imageNotFound from "../../../../Assets/image-not-found.jpg";
 import ElveeTooltip from "../New/PremiumTooltip";
@@ -43,7 +66,9 @@ const MaxNewArrivalsSection = () => {
   const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
 
   const callAPI = () => {
-    const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
+    const loginUserDetail = JSON.parse(
+      sessionStorage.getItem("loginUserDetail"),
+    );
     const storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
     const visiterID = Cookies.get("visiterId");
     let finalID;
@@ -76,7 +101,7 @@ const MaxNewArrivalsSection = () => {
       newArrivalData.map(async (item) => {
         const imageURL = `${imageUrl}${item?.designno}~1.jpg`;
         return { ...item, validatedImageURL: imageURL };
-      })
+      }),
     );
     setValidatedData(validatedData);
   };
@@ -108,7 +133,9 @@ const MaxNewArrivalsSection = () => {
     sessionStorage.setItem("scrollToProduct2", `product-${index}`);
     let encodeObj = compressAndEncode(JSON.stringify(obj));
     // navigation(`/d/${titleLine.replace(/\s+/g, `_`)}${titleLine?.length > 0 ? "_" : ""}${designNo}?p=${encodeObj}`)
-    navigation(`/d/${formatRedirectTitleLine(titleLine)}${designNo}?p=${encodeObj}`);
+    navigation(
+      `/d/${formatRedirectTitleLine(titleLine)}${designNo}?p=${encodeObj}`,
+    );
   };
 
   const decodeEntities = (html) => {
@@ -140,18 +167,34 @@ const MaxNewArrivalsSection = () => {
         {/* <SectionHeader>
           <SectionTitle variant="overline">New Arrivals</SectionTitle>
         </SectionHeader> */}
-        <Box sx={{
-          display: { xs: "none", sm: "none", md: "block" }
-        }} />
+        <Box
+          sx={{
+            display: { xs: "none", sm: "none", md: "block" },
+          }}
+        />
         <Box sx={{ justifySelf: "center", textAlign: "center" }}>
-          <MaxHeader title="New In" subtitle={"Every debut tells a story of artistry, of elegance, of you"} alignment={{ xs: "left", sm: "center" }} noExtraMb={true} />
+          <MaxHeader
+            title="New In"
+            subtitle={
+              "Every debut tells a story of artistry, of elegance, of you"
+            }
+            alignment={{ xs: "left", sm: "center" }}
+            noExtraMb={true}
+          />
         </Box>
-        <Box sx={{
-          display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" }, position: { xs: "absolute", sm: "", md: "" },
-          right: { xs: "0", sm: "0", md: "" },
-          top: 0,
-          marginTop: "44px"
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            justifySelf: { xs: "center", sm: "center", md: "end" },
+            marginBottom: { xs: "44px", sm: "44px", md: "0px" },
+            position: { xs: "absolute", sm: "", md: "" },
+            right: { xs: "0", sm: "0", md: "" },
+            top: 0,
+            marginTop: "44px",
+          }}
+        >
           <IconButton
             onClick={() => swiperRef.current?.slidePrev()}
             sx={{
@@ -192,7 +235,9 @@ const MaxNewArrivalsSection = () => {
           </IconButton>
           <Tooltip title="Show More">
             <IconButton
-              onClick={() => navigation(`/p/NewArrival/?N=${btoa("NewArrival")}`)}
+              onClick={() =>
+                navigation(`/p/NewArrival/?N=${btoa("NewArrival")}`)
+              }
               sx={{
                 ml: 1,
                 border: "1px solid #e0e0e0",
@@ -247,12 +292,31 @@ const MaxNewArrivalsSection = () => {
           {validatedData?.map((product, index) => (
             <SwiperSlide key={product.id}>
               <ProductCard
-                onNavigation={() => handleNavigation(product?.designno, product?.autocode, product?.TitleLine, index)}
-                image={product?.ImageCount >= 1 ? product?.validatedImageURL : imageNotFound}
+                onNavigation={() =>
+                  handleNavigation(
+                    product?.designno,
+                    product?.autocode,
+                    product?.TitleLine,
+                    index,
+                  )
+                }
+                image={
+                  product?.ImageCount >= 1
+                    ? product?.validatedImageURL
+                    : imageNotFound
+                }
                 alt={product?.TitleLine}
-                title={formatTitleLine(product?.TitleLine) ? formatTitleLine(product?.TitleLine) : ""}
+                title={
+                  formatTitleLine(product?.TitleLine)
+                    ? formatTitleLine(product?.TitleLine)
+                    : ""
+                }
                 product={product}
-                price={storeInit?.IsPriceShow == 1 ? `${formatter(product?.UnitCostWithMarkUp)} ${islogin ? loginUserDetail?.CurrencyCode : storeInit?.CurrencyCode}` : ""}
+                price={
+                  storeInit?.IsPriceShow == 1
+                    ? `${formatter(product?.UnitCostWithMarkUp)} ${islogin ? loginUserDetail?.CurrencyCode : storeInit?.CurrencyCode}`
+                    : ""
+                }
                 details={
                   <Box
                     sx={{
@@ -300,49 +364,62 @@ const MaxNewArrivalsSection = () => {
                       </Box>
                     )}
 
-                    {storeInit?.IsDiamondWeight == 1 && (product?.Dwt != "0" || product?.Dpcs != "0") && (
-                      <Box
-                        sx={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          px: 1,
-                          py: 0.25,
-                          borderRadius: "6px",
-                          bgcolor: "#f7f7f7",
-                          fontSize: "0.70rem",
-                          color: "#555",
-                        }}
-                      >
-                        <b style={{ color: "#222" }}>DWT:</b>&nbsp;
-                        {(product?.Dwt || 0)?.toFixed(3)} / {product?.Dpcs || 0}
-                      </Box>
-                    )}
+                    {storeInit?.IsDiamondWeight == 1 &&
+                      (product?.Dwt != "0" || product?.Dpcs != "0") && (
+                        <Box
+                          sx={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            px: 1,
+                            py: 0.25,
+                            borderRadius: "6px",
+                            bgcolor: "#f7f7f7",
+                            fontSize: "0.70rem",
+                            color: "#555",
+                          }}
+                        >
+                          <b style={{ color: "#222" }}>DWT:</b>&nbsp;
+                          {(product?.Dwt || 0)?.toFixed(3)} /{" "}
+                          {product?.Dpcs || 0}
+                        </Box>
+                      )}
 
-                    {storeInit?.IsStoneWeight == 1 && (product?.CSwt != "0" || product?.CSpcs != "0") && (
-                      <Box
-                        sx={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          px: 1,
-                          py: 0.25,
-                          borderRadius: "6px",
-                          bgcolor: "#f7f7f7",
-                          fontSize: "0.70rem",
-                          color: "#555",
-                        }}
-                      >
-                        <b style={{ color: "#222" }}>CWT:</b>&nbsp;
-                        {(product?.CSwt || 0)?.toFixed(3)} / {product?.CSpcs || 0}
-                      </Box>
-                    )}
+                    {storeInit?.IsStoneWeight == 1 &&
+                      (product?.CSwt != "0" || product?.CSpcs != "0") && (
+                        <Box
+                          sx={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            px: 1,
+                            py: 0.25,
+                            borderRadius: "6px",
+                            bgcolor: "#f7f7f7",
+                            fontSize: "0.70rem",
+                            color: "#555",
+                          }}
+                        >
+                          <b style={{ color: "#222" }}>CWT:</b>&nbsp;
+                          {(product?.CSwt || 0)?.toFixed(3)} /{" "}
+                          {product?.CSpcs || 0}
+                        </Box>
+                      )}
                   </Box>
                 }
                 designNo={product?.designno}
-                Nwt={Number(product?.Nwt) !== 0 && (product?.Nwt || 0)?.toFixed(3)}
-                Gwt={Number(product?.Gwt) !== 0 && (product?.Gwt || 0)?.toFixed(3)}
-                Dwt={Number(product?.Dwt) !== 0 && (product?.Dwt || 0)?.toFixed(3)}
+                Nwt={
+                  Number(product?.Nwt) !== 0 && (product?.Nwt || 0)?.toFixed(3)
+                }
+                Gwt={
+                  Number(product?.Gwt) !== 0 && (product?.Gwt || 0)?.toFixed(3)
+                }
+                Dwt={
+                  Number(product?.Dwt) !== 0 && (product?.Dwt || 0)?.toFixed(3)
+                }
                 Dpcs={Number(product?.Dpcs) !== 0 && (product?.Dpcs || 0)}
-                CSwt={Number(product?.CSwt) !== 0 && (product?.CSwt || 0)?.toFixed(3)}
+                CSwt={
+                  Number(product?.CSwt) !== 0 &&
+                  (product?.CSwt || 0)?.toFixed(3)
+                }
                 CSpcs={Number(product?.CSpcs) !== 0 && (product?.CSpcs || 0)}
               />
             </SwiperSlide>
@@ -355,7 +432,21 @@ const MaxNewArrivalsSection = () => {
 
 export default MaxNewArrivalsSection;
 
-const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo, Nwt, Gwt, Dwt, Dpcs, CSwt, CSpcs }) => {
+const ProductCard = ({
+  onNavigation,
+  image,
+  alt,
+  title,
+  price,
+  details,
+  designNo,
+  Nwt,
+  Gwt,
+  Dwt,
+  Dpcs,
+  CSwt,
+  CSpcs,
+}) => {
   return (
     <Card
       sx={{
@@ -364,7 +455,7 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
         boxShadow: "none",
       }}
     >
-      <ElveeTooltip title={' New Arrival'} arrow placement="top">
+      <ElveeTooltip title={" New Arrival"} arrow placement="top">
         <Box
           sx={{
             position: "absolute",
@@ -497,7 +588,12 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
               overflow: "hidden",
               textOverflow: "ellipsis",
               minHeight: "1.3em",
-              fontSize: { xs: "0.82rem", sm: "0.9rem", md: "0.94rem", lg: "1rem" },
+              fontSize: {
+                xs: "0.82rem",
+                sm: "0.9rem",
+                md: "0.94rem",
+                lg: "1rem",
+              },
             }}
           >
             {title || ""}
@@ -516,7 +612,12 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
               textOverflow: "ellipsis",
               minHeight: "1em",
               mb: 1,
-              fontSize: { xs: "0.82rem", sm: "0.9rem", md: "0.94rem", lg: "1rem" },
+              fontSize: {
+                xs: "0.82rem",
+                sm: "0.9rem",
+                md: "0.94rem",
+                lg: "1rem",
+              },
             }}
           >
             {designNo || ""}
@@ -534,7 +635,12 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
               overflow: "hidden",
               textOverflow: "ellipsis",
               minHeight: "1em",
-              fontSize: { xs: "0.82rem", sm: "0.9rem", md: "0.94rem", lg: "1rem" },
+              fontSize: {
+                xs: "0.82rem",
+                sm: "0.9rem",
+                md: "0.94rem",
+                lg: "1rem",
+              },
             }}
           >
             from {price || "0"}
@@ -548,8 +654,9 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
               display: "flex",
               alignItems: "center",
               justifyContent: "center", // centers the row
-              gap:0.5
-            }}>
+              gap: 0.5,
+            }}
+          >
             {/* --- NWT --- */}
             <Grid item>
               <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
@@ -577,43 +684,52 @@ const ProductCard = ({ onNavigation, image, alt, title, price, details, designNo
                 </Typography>
               </Box>
             </Grid>
-            {Dwt &&
-              (<Box
+            {Dwt && (
+              <Box
                 sx={{
                   width: "1.15px",
                   height: "1.25rem",
                   bgcolor: "#ccc",
-                }} />)
-            }
+                }}
+              />
+            )}
 
             {/* --- DWT --- */}
-            {Dwt && <Grid item>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, justifyContent: "flex-end" }}>
-                <Typography
-                  variant="body2"
+            {Dwt && (
+              <Grid item>
+                <Box
                   sx={{
-                    fontWeight: 500,
-                    fontSize: { xs: "0.62rem", sm: "0.8rem", md: "0.85rem" },
-                    color: Dwt ? "#000" : "transparent", // hidden but spacing preserved
-                    letterSpacing: "0.02em",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.5,
+                    justifyContent: "flex-end",
                   }}
                 >
-                  DWT&nbsp;:
-                </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 500,
+                      fontSize: { xs: "0.62rem", sm: "0.8rem", md: "0.85rem" },
+                      color: Dwt ? "#000" : "transparent", // hidden but spacing preserved
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    DWT&nbsp;:
+                  </Typography>
 
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontWeight: 500,
-                    fontSize: { xs: "0.62rem", sm: "0.8rem", md: "0.85rem" },
-                    color: Dwt ? "#000" : "transparent",
-                  }}
-                >
-                  {Dwt ? `${Dwt}${Dpcs ? ` / ${Dpcs}` : ""}` : "0"}
-                </Typography>
-              </Box>
-            </Grid>}
-
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 500,
+                      fontSize: { xs: "0.62rem", sm: "0.8rem", md: "0.85rem" },
+                      color: Dwt ? "#000" : "transparent",
+                    }}
+                  >
+                    {Dwt ? `${Dwt}${Dpcs ? ` / ${Dpcs}` : ""}` : "0"}
+                  </Typography>
+                </Box>
+              </Grid>
+            )}
           </Box>
         </Box>
       </CardContent>

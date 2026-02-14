@@ -85,7 +85,6 @@ export default function SocialMediaSection({ banner, demoVideo }) {
     imageUrl: storImagePath() + item.imageUrl,
     ...(IsSetupFor && demoVideo?.[i] ? { demoVideo: demoVideo[i] } : {}),
   }));
-  console.log(updatedSlides, "=>gauranga")
 
   if (IsSetupFor) {
     return (
