@@ -136,6 +136,7 @@ const MaxBestSeller = () => {
             display: "grid",
             gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
             alignItems: "center",
+            position: { xs: "relative", sm: "relative", md: "" }
           }}
         >
           {/* <SectionHeader>
@@ -146,12 +147,17 @@ const MaxBestSeller = () => {
           }} />
           <Box sx={{ justifySelf: "center", textAlign: "center" }}>
 
-            <MaxHeader title="BestSeller" alignment="center" />
+            <MaxHeader title="BestSeller" alignment={{ xs: "left", sm: "center" }} />
           </Box>
 
           {/* Desktop Navigation */}
           {!isMobile && (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" } }}>
+            <Box sx={{
+              display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" }, position: { xs: "absolute", sm: "", md: "" },
+              right: { xs: "0", sm: "0", md: "" },
+              top: 0,
+              marginTop: "44px"
+            }}>
               <NavButton onClick={handlePrev}>
                 <ChevronLeft />
               </NavButton>

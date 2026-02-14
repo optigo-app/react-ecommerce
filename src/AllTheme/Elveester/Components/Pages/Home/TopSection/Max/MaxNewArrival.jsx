@@ -134,6 +134,7 @@ const MaxNewArrivalsSection = () => {
           display: "grid",
           gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
           alignItems: "center",
+          position: { xs: "relative", sm: "relative", md: "" }
         }}
       >
         {/* <SectionHeader>
@@ -143,9 +144,14 @@ const MaxNewArrivalsSection = () => {
           display: { xs: "none", sm: "none", md: "block" }
         }} />
         <Box sx={{ justifySelf: "center", textAlign: "center" }}>
-          <MaxHeader title="New In" subtitle={"Every debut tells a story of artistry, of elegance, of you"} alignment="center" noExtraMb={true} />
+          <MaxHeader title="New In" subtitle={"Every debut tells a story of artistry, of elegance, of you"} alignment={{ xs: "left", sm: "center" }} noExtraMb={true} />
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" } }}>
+        <Box sx={{
+          display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" }, position: { xs: "absolute", sm: "", md: "" },
+          right: { xs: "0", sm: "0", md: "" },
+          top: 0,
+          marginTop: "44px"
+        }}>
           <IconButton
             onClick={() => swiperRef.current?.slidePrev()}
             sx={{
