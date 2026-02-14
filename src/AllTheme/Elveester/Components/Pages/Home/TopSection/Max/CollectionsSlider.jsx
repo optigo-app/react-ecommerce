@@ -181,7 +181,31 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
     }),
   };
 
-  const FilterData = SectionData?.filter((cat) => ImagesDemo?.CollectionImages[normalizeKey(cat?.CategoryName)]) || [];
+//   {
+//     "Status": "200",
+//     "Message": "Success",
+//     "Data": {
+//         "rd": [
+//             {
+//                 "CollectionName": "Everyday Wear"
+//             },
+//             {
+//                 "CollectionName": "Gen-z drops"
+//             },
+//             {
+//                 "CollectionName": "Night Out Glam"
+//             },
+//             {
+//                 "CollectionName": "Shopping All"
+//             },
+//             {
+//                 "CollectionName": "Wedding Collection"
+//             }
+//         ]
+//     }
+// }
+
+  const FilterData = SectionData?.filter((cat) => ImagesDemo?.CollectionImages[normalizeKey(cat?.CollectionName)]) || [];
 
   if (IsLoading) {
     return (

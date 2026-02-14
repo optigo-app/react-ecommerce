@@ -1,4 +1,4 @@
-import { IsSetupFor } from "../Recoil/atom";
+import { IsSetupFor ,isSetupforMax } from "../Recoil/atom";
 
 const ORG_URL = "https://www.elvee.in";
 const DEMO_URL_ADDRESS = "https://sonasons.optigoapps.com";
@@ -336,11 +336,86 @@ const SonasonsDefaultMetadata = {
   keywords: "Sonasons, sonasons, bridal jewelry, elegant jewelry, fashion jewelry, Sonasons jewels, Sonasons Jewels Private Limited",
 };
 
+
+  const isElveebreadcrumbData = [{ name: "Home", url: "https://www.elvee.in" }];
+
+  const isSonasonsbreadcrumbData = [{ name: "Home", url: "https://sonasons.optigoapps.com/" }];
+
+
+const createSchema = ({  logoUrl }) => {
+  if (isSetupforMax === true) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Sonasons",
+      url: `https://sonasons.optigoapps.com/n`,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `https://sonasons.optigoapps.com/n/search?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+      about: {
+        "@type": "Organization",
+        name: "Sonasons",
+        url: `https://sonasons.optigoapps.com/n`,
+        logo: logoUrl || "https://sonasons.optigoapps.com/n/default-logo.png", // fallback logo
+        sameAs: [
+          "https://www.instagram.com/sonasons", 
+          "https://www.facebook.com/sonasons",
+          "https://www.linkedin.com/company/sonasons"
+        ],
+      },
+      author: {
+        "@type": "Organization",
+        name: "Sonasons Team",
+      },
+    };
+  } else {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Elvee Jewels Private Limited",
+      url: `${window.location.origin}`,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${window.location.origin}/search?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+      about: {
+        "@type": "Organization",
+        name: "Elvee Jewels Private Limited",
+        url: `${window.location.origin}`,
+        logo: logoUrl || "/default-elvee-logo.png", // fallback logo
+        sameAs: [
+          "https://www.instagram.com/elvee.jewels",
+          "https://in.pinterest.com/elvee_jewels",
+          "https://www.facebook.com/elveejewels",
+          "https://www.linkedin.com/company/elvee-jewels"
+        ],
+      },
+      author: {
+        "@type": "Organization",
+        name: "Elvee Jewels Team",
+      },
+    };
+  }
+};
+
+// Usage
+
 const metaData = IsSetupFor ? SonasonsMetaData : ElveeMetaData;
 const defaultMetadata = IsSetupFor ? SonasonsDefaultMetadata : ElveeDefaultMetadata;
-
+const breadcrumbData = isSetupforMax ? isSonasonsbreadcrumbData : isElveebreadcrumbData;
 
 export {
     metaData,
-    defaultMetadata
+    defaultMetadata ,
+    createSchema,
+    breadcrumbData
 }
