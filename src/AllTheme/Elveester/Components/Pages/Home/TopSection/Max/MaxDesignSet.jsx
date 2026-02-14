@@ -229,7 +229,7 @@ const MaxDesignSet = ({ data }) => {
           <Box 
             sx={{ 
               display: "grid",
-              gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
+              gridTemplateColumns: { xs: "auto", sm: "auto 1fr", md: "1fr auto 1fr" },
               alignItems: "center",
             }}
           >
@@ -240,7 +240,7 @@ const MaxDesignSet = ({ data }) => {
             <Box sx={{ justifySelf: "center", textAlign: "center" }}>
               <MaxHeader title={"Complete Your Look"} alignment="center" noExtraMb={true}/>
             </Box>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" } }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "end", md: "end" }, marginTop: { sm: "27px", md: "0px" }, marginBottom: { xs: "25px", sm: "0px", md: "0px" } }}>
               {((storeInit?.IsB2BWebsite !== 1) || (storeInit?.IsB2BWebsite === 1 && islogin)) && (
                 <Button
                   variant="outlined"

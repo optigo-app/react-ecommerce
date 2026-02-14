@@ -1,11 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import { Box, Typography, IconButton, useTheme, useMediaQuery, styled } from "@mui/material";
-import { ChevronLeftRounded as ChevronLeft, ChevronRightRounded as ChevronRight } from "@mui/icons-material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+  styled,
+} from "@mui/material";
+import {
+  ChevronLeftRounded as ChevronLeft,
+  ChevronRightRounded as ChevronRight,
+} from "@mui/icons-material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { formatRedirectTitleLine, formatter } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
+import {
+  formatRedirectTitleLine,
+  formatter,
+} from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { el_loginState } from "../../../../Recoil/atom";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +55,9 @@ const MaxBestSeller = () => {
   const [validatedData, setValidatedData] = useState([]);
 
   const callAllApi = () => {
-    const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
+    const loginUserDetail = JSON.parse(
+      sessionStorage.getItem("loginUserDetail"),
+    );
     const storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
     const visiterID = Cookies.get("visiterId");
     let finalID;
@@ -87,7 +102,7 @@ const MaxBestSeller = () => {
       bestSellerData.map(async (item) => {
         const imageURL = `${imageUrl}${item?.designno}~1.jpg`;
         return { ...item, validatedImageURL: imageURL };
-      })
+      }),
     );
     setValidatedData(validatedData);
   };
@@ -107,7 +122,9 @@ const MaxBestSeller = () => {
     };
     sessionStorage.setItem("scrollToProduct1", `product-${index}`);
     let encodeObj = compressAndEncode(JSON.stringify(obj));
-    navigation(`/d/${formatRedirectTitleLine(titleLine)}${designNo}?p=${encodeObj}`);
+    navigation(
+      `/d/${formatRedirectTitleLine(titleLine)}${designNo}?p=${encodeObj}`,
+    );
   };
 
   const handlePrev = () => {
@@ -136,22 +153,39 @@ const MaxBestSeller = () => {
             display: "grid",
             gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
             alignItems: "center",
+            position: { xs: "relative", sm: "relative", md: "" },
           }}
         >
           {/* <SectionHeader>
                         <SectionTitle variant="overline">BestSeller</SectionTitle>
                     </SectionHeader> */}
-          <Box sx={{
-            display: { xs: "none", sm: "none", md: "block" }
-          }} />
+          <Box
+            sx={{
+              display: { xs: "none", sm: "none", md: "block" },
+            }}
+          />
           <Box sx={{ justifySelf: "center", textAlign: "center" }}>
-
-            <MaxHeader title="BestSeller" alignment="center" />
+            <MaxHeader
+              title="BestSeller"
+              alignment={{ xs: "left", sm: "center" }}
+            />
           </Box>
 
           {/* Desktop Navigation */}
           {!isMobile && (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "center", md: "end" }, marginBottom: { xs: "44px", sm: "44px", md: "0px" } }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                justifySelf: { xs: "center", sm: "center", md: "end" },
+                marginBottom: { xs: "44px", sm: "44px", md: "0px" },
+                position: { xs: "absolute", sm: "", md: "" },
+                right: { xs: "0", sm: "0", md: "" },
+                top: 0,
+                marginTop: "44px",
+              }}
+            >
               <NavButton onClick={handlePrev}>
                 <ChevronLeft />
               </NavButton>
@@ -184,7 +218,19 @@ const MaxBestSeller = () => {
                   height: "auto",
                 }}
               >
-                <ProductCard onClick={() => handleNavigation(item?.designno, item?.autocode, item?.TitleLine, index)} item={item} storeInit={storeInit} loginUserDetail={loginUserDetail} />
+                <ProductCard
+                  onClick={() =>
+                    handleNavigation(
+                      item?.designno,
+                      item?.autocode,
+                      item?.TitleLine,
+                      index,
+                    )
+                  }
+                  item={item}
+                  storeInit={storeInit}
+                  loginUserDetail={loginUserDetail}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
