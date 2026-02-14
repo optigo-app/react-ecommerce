@@ -9,7 +9,7 @@ export const HomeCategoryApi = async (visiterId) => {
         const userLogin = sessionStorage.getItem('LoginUser');
 
         const dataSource = userLogin ? loginUserDetail : storeInit;
-
+        const domain = window.location.host;
         // 👤 Dynamic user context
         const customerId =
             storeInit?.IsB2BWebsite == 0 && (isLogin == false || isLogin == null)
@@ -25,6 +25,8 @@ export const HomeCategoryApi = async (visiterId) => {
             FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`,
             Customerid: `${customerId ?? 0}`,
             PackageId: `${dataSource?.PackageId ?? 1}`,
+            domainname: domain
+
         };
 
         const encData = JSON.stringify(data);

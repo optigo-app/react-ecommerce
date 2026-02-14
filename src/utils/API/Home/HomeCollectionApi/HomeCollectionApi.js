@@ -1,6 +1,6 @@
 import { CommonAPI } from "../../CommonAPI/CommonAPI";
 
-export const HomeCollectionApi = async (visiterId = "" ) => {
+export const HomeCollectionApi = async (visiterId = "") => {
     try {
         const storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
         const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
@@ -13,10 +13,12 @@ export const HomeCollectionApi = async (visiterId = "" ) => {
 
         const customerEmail = storeInit?.IsB2BWebsite == 0 && (isLogin == false || isLogin == null) ? visiterId : loginUserDetail?.userid ?? "";
 
+        const domain = window.location.host;
         const data = {
             FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`,
             Customerid: `${customerId ?? 0}`,
             PackageId: `${dataSource?.PackageId}`,
+            domainname: domain
         };
 
         const encData = JSON.stringify(data);
