@@ -13,7 +13,7 @@ export const HomeCollectionApi = async (visiterId = "") => {
 
         const customerEmail = storeInit?.IsB2BWebsite == 0 && (isLogin == false || isLogin == null) ? visiterId : loginUserDetail?.userid ?? "";
 
-        const domain = window.location.host;
+        const domain = window.location.hostname;
         const data = {
             FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`,
             Customerid: `${customerId ?? 0}`,

@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 import { el_companyLogo, el_loginState } from "../../Recoil/atom";
 import { Helmet } from "react-helmet-async";
 import useHomeBannerImages from "../../../../../utils/Glob_Functions/ThemesBanner/ThemesBanner";
-import { storImagePath } from "../../../../../utils/Glob_Functions/GlobalFunction";
 
 const NewTopSection = lazy(() => import("./TopSection/New/NewTopSection"));
 // const TabBasedNewSection = lazy(() => import("./TopSection/New/TabBasedNewSection"));
@@ -18,15 +17,10 @@ const NewTopSection = lazy(() => import("./TopSection/New/NewTopSection"));
 // const AffiliationData = lazy(() => import("./PromoComponent/BrandsComponent/AffiliationData"));
 // const SocialMediaSection = lazy(() => import("./SocialMediaSection/SocialMediaSection"));
 
-const carouselSlider = [
-  `${storImagePath()}/Banner/carousel/Slider 1.jpg`,
-  `${storImagePath()}/Banner/carousel/Slider 2.jpg`,
-  `${storImagePath()}/Banner/carousel/Slider 3.jpg`,
-  `${storImagePath()}/Banner/carousel/Slider 4.jpg`,]
+
 
 function Home() {
   const banner = useHomeBannerImages();
-  console.log("🚀 ~ Home ~ banner:", banner)
   const compnyLogo = useRecoilValue(el_companyLogo);
   const isLogin = useRecoilValue(el_loginState);
 
@@ -86,7 +80,7 @@ function Home() {
             <NewTopSection
               bannerlist={banner}
               demoVideo={banner?.demoVideo}
-              carousel={carouselSlider} isLogin={isLogin} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} />
+              carousel={banner?.carousel?.image} isLogin={isLogin} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} />
             {/* <TabBasedNewSection
 
               carousel={banner?.carousel?.image}

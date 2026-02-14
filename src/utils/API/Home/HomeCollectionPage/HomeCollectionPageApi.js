@@ -15,7 +15,7 @@ export const HomeCollectionPageApi = async (visiterId = "") => {
         const customerEmail = storeInit?.IsB2BWebsite == 0 && (isLogin == false || isLogin == null) ? visiterId : loginUserDetail?.userid ?? "";
 
         const selectedTab = sessionStorage?.getItem("selectedTabPersistence") ?? "";
-        const domain = window.location.host;
+        const domain = window.location.hostname;
         const shouldPassMenuFilter = REACT_APP_WEB === "elvee.web";
         const data = {
             FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`,

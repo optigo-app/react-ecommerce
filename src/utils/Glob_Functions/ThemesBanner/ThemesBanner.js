@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { storImagePath } from "../GlobalFunction";
-import { IsSetupFor } from "../../../AllTheme/Elveester/Components/Recoil/atom";
+import { IsSetupFor, isSetupforMax } from "../../../AllTheme/Elveester/Components/Recoil/atom";
 
 
 const format = "png";
@@ -118,8 +118,8 @@ const useHomeBannerImages = () => {
       image: [],
       video: [],
     },
-    demoVideo :{
-      video :[]
+    demoVideo: {
+      video: []
     }
   });
 
@@ -402,28 +402,37 @@ const useHomeBannerImages = () => {
 
       },
       carousel: {
-        image: [
-          `${storImagePath()}/Banner/carousel/Slider 1.webp`,
-          `${storImagePath()}/Banner/carousel/Slider 2.webp`,
-          `${storImagePath()}/Banner/carousel/Slider 3.webp`,
-          `${storImagePath()}/Banner/carousel/Slider 4.webp`,
-          `${storImagePath()}/Banner/carousel/Slider 5.webp`,
-           ...(IsSetupFor ? [
-      `${storImagePath()}/Banner/carousel/Slider 6.webp`,
-      `${storImagePath()}/Banner/carousel/Slider 7.webp`,
-      `${storImagePath()}/Banner/carousel/Slider 8.webp`,
-    ] : [])
-        ]
+        image: isSetupforMax
+          ? [
+            `${storImagePath()}/Banner/carousel/Slider 1.jpg`,
+            `${storImagePath()}/Banner/carousel/Slider 2.jpg`,
+            `${storImagePath()}/Banner/carousel/Slider 3.jpg`,
+            `${storImagePath()}/Banner/carousel/Slider 4.jpg`,
+          ]
+          : [
+            `${storImagePath()}/Banner/carousel/Slider 1.webp`,
+            `${storImagePath()}/Banner/carousel/Slider 2.webp`,
+            `${storImagePath()}/Banner/carousel/Slider 3.webp`,
+            `${storImagePath()}/Banner/carousel/Slider 4.webp`,
+            `${storImagePath()}/Banner/carousel/Slider 5.webp`,
+            ...(IsSetupFor
+              ? [
+                `${storImagePath()}/Banner/carousel/Slider 6.webp`,
+                `${storImagePath()}/Banner/carousel/Slider 7.webp`,
+                `${storImagePath()}/Banner/carousel/Slider 8.webp`,
+              ]
+              : []),
+          ],
       },
       demoVideo: {
-         video: [
-    ...(IsSetupFor ? [
-      `${storImagePath()}/Banner/1.mp4`,
-      `${storImagePath()}/Banner/2.mp4`,
-      `${storImagePath()}/Banner/3.mp4`,
-      `${storImagePath()}/Banner/4.mp4`,
-    ] : [])
-  ]
+        video: [
+          ...(IsSetupFor ? [
+            `${storImagePath()}/Banner/1.mp4`,
+            `${storImagePath()}/Banner/2.mp4`,
+            `${storImagePath()}/Banner/3.mp4`,
+            `${storImagePath()}/Banner/4.mp4`,
+          ] : [])
+        ]
       }
     };
     setBanners(bannerData);
