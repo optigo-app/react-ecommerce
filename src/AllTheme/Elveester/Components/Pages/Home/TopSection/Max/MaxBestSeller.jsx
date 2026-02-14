@@ -153,7 +153,7 @@ const MaxBestSeller = () => {
             display: "grid",
             gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
             alignItems: "center",
-            position: { xs: "relative", sm: "relative", md: "" },
+            position: { xs: "relative", sm: "relative", md: "" }
           }}
         >
           {/* <SectionHeader>
