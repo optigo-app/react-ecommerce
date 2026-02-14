@@ -1,46 +1,38 @@
 import React, { useRef, useState } from "react";
-import { Box, Typography, IconButton, Container, useTheme, useMediaQuery, Fade } from "@mui/material";
+import { Box, Typography, IconButton, Container, useTheme, useMediaQuery, Fade, Skeleton } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, FreeMode } from "swiper/modules";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
-import BrandsTitle from "./BrandsTitle";
 import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 import MaxHeader from "./Header";
 import { useNavigate } from "react-router-dom";
 
-// 1. Fixed Data: Ensure IDs are unique to prevent React rendering errors
-// "Pendant set": `${storImagePath()}/images/Category/PendantSet.webp`,
-
 const categories = [
-  { id: 101, label: "Bangal", slug: "", image: `${storImagePath()}/Category/new-image/bangal.jpg` },
-  { id: 102, label: "Bangals", slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
-  { id: 103, label: "Bracelate", slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
-  { id: 105, label: "Earings", slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
-  { id: 106, label: "Mangalsutra", slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
-  { id: 107, label: "Men's Bracelate", slug: "", image: `${storImagePath()}/Category/new-image/Men's Bracelate.jpg` },
-  { id: 108, label: "Men's chain", slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
+  { slug: "Ring", image: `${storImagePath()}/Category/new-image/rings.jpg` },
+  { slug: "Bangles", image: `${storImagePath()}/Category/new-image/Bangals1.png` },
+  { slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent.jpg` },
+  { slug: "Bracelet", image: `${storImagePath()}/Category/new-image/BRACELATE2.jpg` },
+  { slug: "EARING", image: `${storImagePath()}/Category/new-image/Earings1.png` },
+  { slug: "NACKLACE", image: `${storImagePath()}/Category/new-image/NECKLACE1.jpg` },
+  { slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg` },
+  { slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
 ];
 
-// http://elvee.web/WebSiteStaticImage/Category/pendants.webp
-// http://elvee.web/WebSiteStaticImage/images/Category/earrings.webp
-
-
-const CategorySlider = () => {
-  const theme = useTheme();
-  // We use state for navigation refs to ensure Swiper picks them up after render
+const CategorySlider = ({ SectionData, IsLoading }) => {
   const [prevEl, setPrevEl] = useState(null);
   const [nextEl, setNextEl] = useState(null);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const handleNavigate = (name) => {
     let finalData = {
       menuname: name,
-      FilterKey: "Collection",
+      FilterKey: "Category",
       FilterVal: name,
       FilterKey1: "",
       FilterVal1: "",
@@ -49,8 +41,7 @@ const CategorySlider = () => {
     };
     sessionStorage.setItem("menuparams", JSON.stringify(finalData));
     const queryParameters1 = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`].filter(Boolean).join("/");
-    const queryParameters = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`]
-      .join(",");
+    const queryParameters = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`].join(",");
     const otherparamUrl = Object.entries({
       b: finalData?.FilterKey,
       g: finalData?.FilterKey1,
@@ -65,6 +56,43 @@ const CategorySlider = () => {
     const url = `/p/${finalData?.menuname}/${queryParameters1}/?M=${btoa(menuEncoded)}`;
     navigate(url);
   };
+
+  const buildNormalizedMap = (obj) => {
+    const map = {};
+    Object.entries(obj).forEach(([key, value]) => {
+      map[normalizeKey(key)] = value;
+    });
+    return map;
+  };
+  const normalizeKey = (key) => key?.toString().trim().toLowerCase();
+
+  const getImage = (map, key) => {
+    const normalized = normalizeKey(key);
+    return map[normalized] || `/fallback-image.jpg`;
+  };
+
+  const ImagesDemo = {
+    categoryImages: buildNormalizedMap({
+      Ring: `${storImagePath()}/Category/new-image/rings.jpg`,
+      Bangles: `${storImagePath()}/Category/new-image/Bangals1.png`,
+      Pendants: `${storImagePath()}/Category/new-image/pendent.jpg`,
+      Bracelet: `${storImagePath()}/Category/new-image/BRACELATE2.jpg`,
+      EARING: `${storImagePath()}/Category/new-image/Earings1.png`,
+      NACKLACE: `${storImagePath()}/Category/new-image/NECKLACE1.jpg`,
+      Mangalsutra: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg`,
+      "Men's chain": `${storImagePath()}/Category/new-image/Mens'chain.jpg`,
+    }),
+  };
+
+  const FilterData = SectionData?.filter((cat) => ImagesDemo?.categoryImages[normalizeKey(cat?.CategoryName)]) || [];
+
+  if (IsLoading) {
+    return <CategorySkeleton isMobile={isMobile} />;
+  }
+
+  if (FilterData?.length === 0) {
+    return;
+  }
 
   return (
     <Box
@@ -89,10 +117,7 @@ const CategorySlider = () => {
           padding: "0 !important",
         }}
       >
-        {/* <BrandsTitle title={"Essence of Style"} Align="center" /> */}
-        <MaxHeader
-          title={"Essence of Style"}
-          alignment="center" />
+        <MaxHeader title={"Essence of Style"} alignment="center" />
 
         <Box sx={{ position: "relative", px: { xs: 0, sm: 0, md: 4 } }}>
           <NavButton direction="left" ref={setPrevEl} />
@@ -121,9 +146,9 @@ const CategorySlider = () => {
               paddingRight: "10px",
             }}
           >
-            {categories.map((cat) => (
-              <SwiperSlide key={cat.id} style={{ height: "auto" }}>
-                <CategoryCard item={cat} handleNavigate={handleNavigate} />
+            {FilterData?.map((cat, i) => (
+              <SwiperSlide key={i} onClick={() => handleNavigate(cat.CategoryName)} style={{ height: "auto" }}>
+                <CategoryCard CategoryName={cat.CategoryName} imgsrc={getImage(ImagesDemo.categoryImages, cat?.CategoryName)} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -133,8 +158,7 @@ const CategorySlider = () => {
   );
 };
 
-const CategoryCard = ({ item, handleNavigate }) => {
-
+const CategoryCard = ({ CategoryName, imgsrc }) => {
   return (
     <Box
       sx={{
@@ -144,7 +168,6 @@ const CategoryCard = ({ item, handleNavigate }) => {
         cursor: "pointer",
         group: "true",
       }}
-      onClick={() => handleNavigate(item.slug)}
     >
       <Box
         className="img-container"
@@ -162,8 +185,8 @@ const CategoryCard = ({ item, handleNavigate }) => {
         }}
       >
         <img
-          src={item.image}
-          alt={item.label}
+          src={imgsrc}
+          alt={CategoryName}
           loading="lazy"
           style={{
             width: "100%",
@@ -187,7 +210,7 @@ const CategoryCard = ({ item, handleNavigate }) => {
           textAlign: "center",
         }}
       >
-        {item.label}
+        {CategoryName}
       </Typography>
     </Box>
   );
@@ -226,3 +249,34 @@ const NavButton = React.forwardRef(({ direction }, ref) => {
 });
 
 export default CategorySlider;
+
+const CategorySkeleton = ({ isMobile }) => {
+  const CARD_SIZE = isMobile ? 100 : 160;
+  const slides = isMobile ? 4 : 6;
+
+  return (
+    <Box
+      sx={{
+        width: "100%",
+        pb: 2,
+        py: 4,
+        mx: "auto",
+      }}
+    >
+      {/* Header Skeleton */}
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
+        <Skeleton variant="text" width={isMobile ? "50%" : "30%"} height={50} animation="wave" />
+      </Box>
+
+      {/* Carousel Skeleton */}
+      <Box sx={{ display: "flex", gap: 3, px: 2, overflowX: "auto", alignItems: "center", justifyContent: "center" }}>
+        {[...Array(slides)].map((_, i) => (
+          <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <Skeleton variant="circular" width={CARD_SIZE} height={CARD_SIZE} animation="wave" sx={{ mb: 1 }} />
+            <Skeleton variant="text" width={CARD_SIZE * 0.6} height={16} animation="wave" />
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+};

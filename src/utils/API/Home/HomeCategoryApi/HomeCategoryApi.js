@@ -9,7 +9,7 @@ export const HomeCategoryApi = async (visiterId) => {
         const userLogin = sessionStorage.getItem('LoginUser');
 
         const dataSource = userLogin ? loginUserDetail : storeInit;
-        const domain = window.location.host;
+        const domain = window.location.hostname;
         // 👤 Dynamic user context
         const customerId =
             storeInit?.IsB2BWebsite == 0 && (isLogin == false || isLogin == null)

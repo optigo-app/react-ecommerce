@@ -40,6 +40,7 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
     collection: [],
     category: [],
   });
+  const [IsFetched, setIsFetched] = useState(true)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -69,8 +70,10 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
         collection: response?.Data?.rd ?? [],
         category: Response?.Data?.rd ?? [],
       });
+      setIsFetched(false)
     } catch (error) {
       console.error("Error fetching home collection:", error);
+      setIsFetched(false)
     }
   };
 
@@ -80,7 +83,7 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
 
   // const isVideo = !islogin; //if want to play video on not logged in
   const isVideo = false;
-  const isDemo =  IsSetupFor ? false : isVideo;
+  const isDemo = IsSetupFor ? false : isVideo;
   const mediaData = isDemo
     ? [
       {
@@ -93,10 +96,12 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
       type: "image",
       src: img,
     })) || [];
+    
+  console.log("🚀 ~ NewTopSection ~ mediaData:", mediaData)
 
   const showMarquee = isLogin && !isSetupforMax;
 
-  const ShowBeforeLogin = !IsSetupFor && !isLogin ;
+  const ShowBeforeLogin = !IsSetupFor && !isLogin;
 
 
   return (
@@ -140,17 +145,17 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
           {/* {ShowBeforeLogin && <PromoComponent1 banner={middleBanner} />} */}
           {isSetupforMax && (
             <>
-              <CategorySlider />
+              <CategorySlider IsLoading={IsFetched} SectionData={SectionData.category} />
               {/* <MaxCollection banner={bannerlist?.categoryBanner} /> */}
               <MaxShopBanner />
-              <CollectionsSlider/>
-              <MaxDesignSet/>
+              <CollectionsSlider IsLoading={IsFetched} SectionData={SectionData.collection} />
+              <MaxDesignSet />
               <MaxGalleryView banner={bannerlist?.photoGallery} />
               <MaxNewArrivalsSection />
               <MaxBestSeller />
               {/* <MaxStore/> */}
-              <StoreLocator/>
-             {isLogin && <SocialMediaSection banner={socialMediaBanner} demoVideo={demoVideo?.video} />}
+              <StoreLocator />
+              {isLogin && <SocialMediaSection banner={socialMediaBanner} demoVideo={demoVideo?.video} />}
               {/* <MaxDesignSet data={banner?.lookbookBanner} /> */}
               {/* {!isLogin && <MaxBrandsComponent banner={bannerlist?.brandlogo} />} */}
               {/* {!isLogin && <ProTwo banner={bannerlist?.collectionBanner} />} */}
