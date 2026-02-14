@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { el_companyLogo, el_loginState } from "../../Recoil/atom";
 import { Helmet } from "react-helmet-async";
 import useHomeBannerImages from "../../../../../utils/Glob_Functions/ThemesBanner/ThemesBanner";
+import { createSchema ,breadcrumbData } from "../../meta/content";
 
 const NewTopSection = lazy(() => import("./TopSection/New/NewTopSection"));
 // const TabBasedNewSection = lazy(() => import("./TopSection/New/TabBasedNewSection"));
@@ -23,40 +24,12 @@ function Home() {
   const banner = useHomeBannerImages();
   const compnyLogo = useRecoilValue(el_companyLogo);
   const isLogin = useRecoilValue(el_loginState);
-
-  const breadcrumbData = [{ name: "Home", url: "https://www.elvee.in" }];
-
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Elvee Jewels Private Limited",
-    url: `${window.location.origin}`,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${window.location.origin}/search?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
-    about: {
-      "@type": "Organization",
-      name: "Elvee Jewels Private Limited",
-      url: `${window.location.origin}`,
-      logo: `${compnyLogo}`,
-      sameAs: ["https://www.instagram.com/elvee.jewels", "https://in.pinterest.com/elvee_jewels", "https://www.facebook.com/elveejewels", "https://www.linkedin.com/company/elvee-jewels"],
-    },
-    author: {
-      "@type": "Organization",
-      name: "Elvee Jewels Team",
-    },
-  };
-
-  const generateBreadcrumbJsonLd = (breadcrumbs) => {
+  const Schema = createSchema({logoUrl : compnyLogo});
+  const generateBreadcrumbJsonLd = (bcd) => {
     return {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      itemListElement: bcd?.map((breadcrumb, index) => ({
         "@type": "ListItem",
         position: index + 1,
         name: breadcrumb.name,
@@ -70,8 +43,8 @@ function Home() {
   return (
     <>
       <Helmet>
-        <link rel="canonical" href="https://www.elvee.in/" />
-        <script type="application/ld+json">{JSON.stringify(productSchema, null, 2)}</script>
+        <link rel="canonical" href={breadcrumbData[0].url} />
+        <script type="application/ld+json">{JSON.stringify(Schema, null, 2)}</script>
         <script type="application/ld+json">{JSON.stringify(jsonLd, null, 2)}</script>
       </Helmet>
       <div style={{ position: "relative !important" }}>
