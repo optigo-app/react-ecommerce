@@ -100,7 +100,7 @@ const MaxBestSeller = () => {
     if (!bestSellerData?.length) return;
     const validatedData = await Promise.all(
       bestSellerData.map(async (item) => {
-        const imageURL = `${imageUrl}${item?.designno}~1.jpg`;
+        const imageURL = `${imageUrl}${item?.designno}~1.${item?.ImageExtension || 'webp'}`;
         return { ...item, validatedImageURL: imageURL };
       }),
     );
