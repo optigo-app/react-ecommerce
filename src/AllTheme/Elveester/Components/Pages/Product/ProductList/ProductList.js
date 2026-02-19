@@ -619,6 +619,9 @@ const ProductList = () => {
         let SearchVar = "";
         let productlisttype;
         let NewArrivalVar = "";
+        let TrendingVar = '';
+        let BestSellerVar = '';
+        let AlbumVar = '';
         let menuDecode = atob(location?.search?.split("=")[1]);
         const decodedLower = menuDecode.toLowerCase();
         const hasCollection = decodedLower.includes("collection");
@@ -635,6 +638,16 @@ const ProductList = () => {
             case "S":
               SearchVar = ele;
               break;
+                case 'T':
+            TrendingVar = ele;
+            break;
+          case 'B':
+            BestSellerVar = ele;
+            break;
+          case 'A':
+            AlbumVar = ele;
+            break;
+
             default:
               return "";
           }
@@ -655,6 +668,16 @@ const ProductList = () => {
         if (NewArrivalVar) {
           productlisttype = NewArrivalVar.split("=")[1];
         }
+        if (TrendingVar) {
+        productlisttype = TrendingVar.split("=")[1]
+      } 
+       if (BestSellerVar) {
+        productlisttype = BestSellerVar.split("=")[1]
+      }
+
+      if (AlbumVar) {
+        productlisttype = AlbumVar.split("=")[1]
+      }
 
         setprodListType(productlisttype);
         setDetailsMenu(productlisttype);

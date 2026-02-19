@@ -322,6 +322,7 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
               color: "#fff",
             },
           }}
+          onClick={() => handleNavigate(FilterData[activeIndex].CollectionName)}
         >
           Shop Now!
         </Button>

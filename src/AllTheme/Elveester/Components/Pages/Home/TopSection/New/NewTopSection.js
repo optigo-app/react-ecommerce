@@ -97,7 +97,6 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
       src: img,
     })) || [];
     
-  console.log("🚀 ~ NewTopSection ~ mediaData:", mediaData)
 
   const showMarquee = isLogin && !isSetupforMax;
 

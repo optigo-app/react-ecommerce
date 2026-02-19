@@ -120,7 +120,13 @@ const BreadCrumbBar = ({ isFiltering, decodeURIComponent, productListData, IsBre
           sx={chipPrimaryStyles}
         />
       )}
-
+      {location?.search?.charAt(1) === "A" && (
+        <Chip
+          label={location?.pathname?.split("/")[2]?.replaceAll('%20', '')}
+          size={isMobile ? "small" : "medium"}
+          sx={chipPrimaryStyles}
+        />
+      )}
       {location?.search?.charAt(1) === "S" && (
         <Chip
           label={decodeURIComponent(location?.pathname?.split("/")[2])}
@@ -128,6 +134,21 @@ const BreadCrumbBar = ({ isFiltering, decodeURIComponent, productListData, IsBre
           sx={chipBaseStyles}
         />
       )}
+       {location?.search?.charAt(1) === "T" && (
+        <Chip
+          label={'Trending'}
+          size={isMobile ? "small" : "medium"}
+          sx={chipBaseStyles}
+        />
+      )}
+       {location?.search?.charAt(1) === "B" && (
+        <Chip
+          label={'Best Seller'}
+          size={isMobile ? "small" : "medium"}
+          sx={chipBaseStyles}
+        />
+      )}
+      
 
       {IsBreadCumShow && (
         <>
