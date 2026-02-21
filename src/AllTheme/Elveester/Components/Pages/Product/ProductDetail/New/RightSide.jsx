@@ -60,8 +60,8 @@ const RightSide = ({ TitleLine, DesignNo, collection, description,
         return txt.value;
     };
 
-    console.log("🚀 ~ RightSide ~ selectCsQC:", selectCsQC)
-const isAddedToCart = addToCardFlag !== null ? addToCardFlag : (singleProd?.IsInCart === 1);
+    const isAddedToCart = addToCardFlag !== null ? addToCardFlag : (singleProd?.IsInCart === 1);
+    const CurrencyCode = loginData?.loginData ?? storeInit?.CurrencyCode;
 
     return (
         <>
@@ -176,7 +176,7 @@ const isAddedToCart = addToCardFlag !== null ? addToCardFlag : (singleProd?.IsIn
                         >
                             <span
                                 dangerouslySetInnerHTML={{
-                                    __html: decodeEntities(loginData?.CurrencyCode),
+                                    __html: decodeEntities(CurrencyCode),
                                 }}
                             />
 
@@ -542,7 +542,7 @@ const isAddedToCart = addToCardFlag !== null ? addToCardFlag : (singleProd?.IsIn
                     {/* Action Buttons */}
                     {loadingdata || isPriceloading ? (
                         // Render a Skeleton/Loader instead of the button
-                           <Box
+                        <Box
                             sx={{
                                 display: "flex",
                                 gap: 2,
@@ -550,11 +550,11 @@ const isAddedToCart = addToCardFlag !== null ? addToCardFlag : (singleProd?.IsIn
                                 mb: 4,
                             }}
                         >
-                        <Skeleton variant="rectangular" width="100%" height={50}
-                        sx={{
+                            <Skeleton variant="rectangular" width="100%" height={50}
+                                sx={{
                                     borderRadius: 2,
-                        }}
-                        />
+                                }}
+                            />
                         </Box>
                     ) : (
 
@@ -569,29 +569,29 @@ const isAddedToCart = addToCardFlag !== null ? addToCardFlag : (singleProd?.IsIn
                         >
                             {/* ADD / REMOVE CART */}
                             <MotionButton
-    fullWidth
-    variant="contained"
-    whileTap={{ scale: 0.97 }}
-    onClick={() => handleCart(!isAddedToCart)} // Pass the OPPOSITE of current state
-    sx={{
-        height: 52,
-        borderRadius: 2,
-        fontSize: "15px",
-        fontWeight: 600,
-        letterSpacing: "0.4px",
-        textTransform: "none",
-        // Use the helper variable
-        backgroundColor: isAddedToCart ? "#000" : "#ffffff",
-        color: isAddedToCart ? "#ffffff" : "#000",
-        border: "1.5px solid #000",
-        boxShadow: "0 3px 8px rgba(0,0,0,0.12)",
-        "&:hover": {
-            backgroundColor: isAddedToCart ? "#000" : "#eef3fa",
-        },
-    }}
->
-    {isAddedToCart ? "REMOVE FROM CART" : "ADD TO CART"}
-</MotionButton>
+                                fullWidth
+                                variant="contained"
+                                whileTap={{ scale: 0.97 }}
+                                onClick={() => handleCart(!isAddedToCart)} // Pass the OPPOSITE of current state
+                                sx={{
+                                    height: 52,
+                                    borderRadius: 2,
+                                    fontSize: "15px",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.4px",
+                                    textTransform: "none",
+                                    // Use the helper variable
+                                    backgroundColor: isAddedToCart ? "#000" : "#ffffff",
+                                    color: isAddedToCart ? "#ffffff" : "#000",
+                                    border: "1.5px solid #000",
+                                    boxShadow: "0 3px 8px rgba(0,0,0,0.12)",
+                                    "&:hover": {
+                                        backgroundColor: isAddedToCart ? "#000" : "#eef3fa",
+                                    },
+                                }}
+                            >
+                                {isAddedToCart ? "REMOVE FROM CART" : "ADD TO CART"}
+                            </MotionButton>
 
 
                             {/* WISHLIST */}

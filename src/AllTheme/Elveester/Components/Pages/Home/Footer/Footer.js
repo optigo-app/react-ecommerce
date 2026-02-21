@@ -42,6 +42,15 @@ const PremiumFooter = ({ el_companyTitleLogo, el_companyTitleLogoM }) => {
     const isLogin = useRecoilState(el_loginState)
     const storeInit = JSON?.parse(sessionStorage?.getItem("storeInit"));
     const [selectedFooteVal, setSelectedVal] = useState(0);
+const year = React.useMemo(() => new Date().getFullYear(), []);
+
+const MoveToTop = ()=>{
+    window.scrollTo({
+        top:0 ,
+        left : 0 ,
+        behavior:"smooth"
+    })
+}
 
     useEffect(() => {
         let interval;
@@ -204,10 +213,12 @@ const PremiumFooter = ({ el_companyTitleLogo, el_companyTitleLogoM }) => {
                                     mb: 3,
                                     fontSize: { xs: '1.5rem', md: '1.75rem' },
                                 }}
+                                onClick={MoveToTop}
                             >
                                 <Box
                                     component={Link}
                                     to="/"
+                                    onClick={MoveToTop}
                                 >
                                     <Box
                                         component="img"
@@ -663,7 +674,7 @@ const PremiumFooter = ({ el_companyTitleLogo, el_companyTitleLogoM }) => {
                             }
                         }}
                     >
-                        Copyright &#169; 2025 {storeInit?.companyname}. All Rights Reserved.
+                        Copyright &#169; {year} {storeInit?.companyname}. All Rights Reserved.
                     </Typography>
                 </Box>
             </Box>

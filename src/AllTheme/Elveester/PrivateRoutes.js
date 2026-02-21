@@ -25,7 +25,7 @@ const PrivateRoutes = ({ isLoginStatus }) => {
     location?.pathname
   )}${location?.search}`;
 
-  if (storeInit?.IsB2BWebsite != 0) {
+  if (storeInit && storeInit.IsB2BWebsite != 0) {
     if (!isLoginStatus) {
       if (
         location.pathname.startsWith("/p") ||

@@ -1770,6 +1770,7 @@ const Lookbook = () => {
                                           className="el_lookBookSubImage"
                                           loading="lazy"
                                           src={imageSrc}
+                                          data-image-url={imageSrc}
                                           alt={`Sub image ${subIndex} for slide ${index}`}
                                           onClick={() =>
                                             handleNavigation(
@@ -1849,6 +1850,7 @@ const Lookbook = () => {
                                     className="el_lookBookImg"
                                     loading="lazy"
                                     src={ProdCardImageFunc(slide)}
+                                    data-image-url={ProdCardImageFunc(slide)}
                                     alt={`Slide ${index}`}
                                     onError={() => handleImageError(index)}
                                     // onMouseEnter={() => handleHoverImages(index)}
@@ -2007,6 +2009,7 @@ const Lookbook = () => {
                                             className="el_lookBookSubImage"
                                             loading="lazy"
                                             src={imageSrc}
+                                             data-image-url={imageSrc}
                                             alt={`Sub image ${subIndex} for slide ${index}`}
                                             onClick={() =>
                                               handleNavigation(
@@ -2089,6 +2092,7 @@ const Lookbook = () => {
                                                 className="el_lookBookSubImage"
                                                 loading="lazy"
                                                 src={imageSrc}
+                                                 data-image-url={imageSrc}
                                                 alt={`Sub image ${subIndex} for slide ${index}`}
                                                 onClick={() =>
                                                   handleNavigation(
@@ -2183,6 +2187,7 @@ const Lookbook = () => {
                                         <img
                                           src={ProdCardImageFunc(slide)}
                                           alt=""
+                                          data-image-url={ProdCardImageFunc(slide)}
                                           className="el_lb3ctl_img"
                                           onError={() => handleImageError(index)}
                                           style={{
@@ -2263,9 +2268,10 @@ const Lookbook = () => {
                                                     src={
                                                       ele?.ImageCount > 0
                                                         // ? `${storeInit?.CDNDesignImageFol}${ele?.designno}~1.${ele?.ImageExtension}`
-                                                        ? `${storeInit?.CDNDesignImageFolThumb}${ele?.designno}~1.jpg`
+                                                        ? `${storeInit?.CDNDesignImageFolThumb}${ele?.designno}~1.${ele?.ImageExtension}`
                                                         : imageNotFound
                                                     }
+                                                    data-image-url={`${storeInit?.CDNDesignImageFolThumb}${ele?.designno}~1.${ele?.ImageExtension}`}
                                                     onError={(e) => {
                                                       e.target.src = imageNotFound;
                                                     }}
@@ -2476,6 +2482,7 @@ const Lookbook = () => {
                                       <img
                                         src={ProdCardImageFunc(slide)}
                                         alt=""
+                                        data-image-url={ProdCardImageFunc(slide)}
                                         className="ctl_Paginationimg"
                                         // ref={SwiperSlideRef}
                                         onLoad={handleImageLoad}

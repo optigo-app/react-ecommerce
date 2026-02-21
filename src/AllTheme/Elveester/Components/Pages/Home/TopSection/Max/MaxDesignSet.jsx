@@ -14,14 +14,14 @@ import '../../../../../../SmilingRock/Components/Pages/Home/DesignSet/DesignSet2
 import { formatter } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 
 // MUI Imports
-import { 
-  Box, 
-  Typography, 
-  Button, 
-  Paper, 
-  IconButton, 
-  useMediaQuery, 
-  useTheme, 
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  IconButton,
+  useMediaQuery,
+  useTheme,
   Fade
 } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -56,7 +56,7 @@ const MaxDesignSet = ({ data }) => {
   const productRefs = useRef({});
   const scrollRetries = useRef(0);
   const maxRetries = 10;
-  
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -143,7 +143,7 @@ const MaxDesignSet = ({ data }) => {
     let encodeObj = compressAndEncode(JSON.stringify(obj));
     navigate(
       `/d/${titleLine?.replace(/\s+/g, `_`)}${titleLine?.length > 0 ? "_" : ""
-      }${designNo}?p=${encodeObj}` 
+      }${designNo}?p=${encodeObj}`
     );
   };
 
@@ -196,13 +196,20 @@ const MaxDesignSet = ({ data }) => {
   };
 
   const handleNavigate = (e) => {
-    if (islogin) {
+    if (storeInit?.IsB2BWebsite != 0) {
+      if (islogin) {
+        if (e.button === 0 && !e.metaKey && !e.ctrlKey) {
+          e.preventDefault();
+          navigate("/Lookbook");
+        }
+      } else {
+        navigate("/LoginOption");
+      }
+    } else {
       if (e.button === 0 && !e.metaKey && !e.ctrlKey) {
         e.preventDefault();
         navigate("/Lookbook");
       }
-    } else {
-      navigate("/LoginOption");
     }
   };
 
@@ -214,10 +221,10 @@ const MaxDesignSet = ({ data }) => {
   };
 
   return (
-    <Box 
-      ref={designSetRef} 
+    <Box
+      ref={designSetRef}
       onContextMenu={(e) => { e.preventDefault() }}
-      sx={{ 
+      sx={{
         width: '95%',
         margin: '0 auto',
         padding: { xs: '20px 0', md: '60px 0' },
@@ -226,8 +233,8 @@ const MaxDesignSet = ({ data }) => {
     >
       {designSetList?.length !== 0 && (
         <>
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               display: "grid",
               gridTemplateColumns: { xs: "auto", sm: "auto 1fr", md: "1fr auto 1fr" },
               alignItems: "center",
@@ -238,7 +245,7 @@ const MaxDesignSet = ({ data }) => {
             }} />
             {/* <BrandsTitle title={"Complete Your Look"} my={0} /> */}
             <Box sx={{ justifySelf: "center", textAlign: "center" }}>
-              <MaxHeader title={"Complete Your Look"} alignment="center" noExtraMb={true}/>
+              <MaxHeader title={"Complete Your Look"} alignment="center" noExtraMb={true} />
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "end", md: "end" }, marginTop: { sm: "27px", md: "0px" }, marginBottom: { xs: "25px", sm: "0px", md: "0px" } }}>
               {((storeInit?.IsB2BWebsite !== 1) || (storeInit?.IsB2BWebsite === 1 && islogin)) && (
@@ -262,7 +269,7 @@ const MaxDesignSet = ({ data }) => {
               )}
             </Box>
           </Box>
-          
+
           {designSetList?.slice(0, 1)?.map((slide, index) => (
             <Box
               key={index}
@@ -321,20 +328,20 @@ const MaxDesignSet = ({ data }) => {
                   sx={{
                     position: 'absolute',
                     zIndex: 2,
-                    
+
                     // --- RESPONSIVE POSITIONS ---
                     // Mobile: Anchored to Bottom, Full Width
                     bottom: { xs: 0, md: 'auto' },
                     left: { xs: 0, md: 'auto' },
-                    right: { xs: 0, md: '60px' }, 
+                    right: { xs: 0, md: '60px' },
                     top: { xs: 'auto', md: '50%' },
-                    
+
                     transform: { xs: 'none', md: 'translateY(-50%)' },
-                    
+
                     // Sizing
                     width: { xs: '100%', md: '350px' },
                     maxWidth: { xs: '100%', md: '350px' },
-                    
+
                     // Styles
                     backgroundColor: 'rgba(255, 255, 255, 0.95)',
                     // backdropFilter: 'blur(12px)',
@@ -356,12 +363,12 @@ const MaxDesignSet = ({ data }) => {
                         {parseDesignDetails(slide?.Designdetail)?.map(
                           (detail, subIndex) => (
                             <SwiperSlide key={`detail-${detail?.id}`}>
-                              <Box 
-                                sx={{ 
-                                  display: 'flex', 
+                              <Box
+                                sx={{
+                                  display: 'flex',
                                   // --- KEY CHANGE: Row on Mobile, Column on Desktop ---
                                   flexDirection: { xs: 'row', md: 'column' },
-                                  alignItems: 'center', 
+                                  alignItems: 'center',
                                   justifyContent: { xs: 'flex-start', md: 'center' },
                                   gap: { xs: 2, md: 0 },
                                   cursor: 'pointer',
@@ -376,12 +383,12 @@ const MaxDesignSet = ({ data }) => {
                                 }
                               >
                                 {/* Image Wrapper */}
-                                <Box sx={{ 
+                                <Box sx={{
                                   // Fixed smaller width on mobile
-                                  width: { xs: '100px', sm: '120px', md: '100%' }, 
+                                  width: { xs: '100px', sm: '120px', md: '100%' },
                                   height: { xs: '100px', sm: '120px', md: 'auto' },
-                                  borderRadius: '12px', 
-                                  overflow: 'hidden', 
+                                  borderRadius: '12px',
+                                  overflow: 'hidden',
                                   mb: { xs: 0, md: 2 },
                                   backgroundColor: '#fff',
                                   flexShrink: 0 // Prevent shrinking
@@ -397,27 +404,27 @@ const MaxDesignSet = ({ data }) => {
                                       e.target.src = imageNotFound;
                                       e.target.alt = "no-image-found";
                                     }}
-                                    style={{ 
-                                      width: '100%', 
-                                      height: '100%', 
-                                      objectFit: 'cover', 
-                                      display: 'block' 
+                                    style={{
+                                      width: '100%',
+                                      height: '100%',
+                                      objectFit: 'cover',
+                                      display: 'block'
                                     }}
                                   />
                                 </Box>
-                                
+
                                 {/* Text Wrapper for Left Alignment on Mobile */}
-                                <Box sx={{ 
-                                  flex: 1, 
-                                  display: 'flex', 
+                                <Box sx={{
+                                  flex: 1,
+                                  display: 'flex',
                                   flexDirection: 'column',
                                   alignItems: { xs: 'flex-start', md: 'center' },
                                   textAlign: { xs: 'left', md: 'center' }
                                 }}>
-                                  <Typography 
-                                    variant="h6" 
-                                    sx={{ 
-                                      fontWeight: 600, 
+                                  <Typography
+                                    variant="h6"
+                                    sx={{
+                                      fontWeight: 600,
                                       color: '#2a2a2a',
                                       fontSize: '1rem',
                                       mb: 0.5,
@@ -426,11 +433,11 @@ const MaxDesignSet = ({ data }) => {
                                   >
                                     {detail?.designno}
                                   </Typography>
-                                  
+
                                   {detail?.TitleLine && (
-                                    <Typography 
-                                      variant="body2" 
-                                      sx={{ 
+                                    <Typography
+                                      variant="body2"
+                                      sx={{
                                         color: '#666',
                                         mb: 0.5,
                                         fontSize: '0.8rem'
@@ -441,10 +448,10 @@ const MaxDesignSet = ({ data }) => {
                                   )}
 
                                   {storeInit?.IsPriceShow == 1 && (
-                                    <Typography 
-                                      variant="body1" 
-                                      sx={{ 
-                                        fontWeight: 700, 
+                                    <Typography
+                                      variant="body1"
+                                      sx={{
+                                        fontWeight: 700,
                                         color: '#000',
                                         mt: 0.5
                                       }}
@@ -472,42 +479,42 @@ const MaxDesignSet = ({ data }) => {
                   </Swiper>
 
                   {ShowButton() && (
-                    <Box 
-                      sx={{ 
-                        display: 'flex', 
-                        justifyContent: 'center', 
-                        gap: 2, 
-                        
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: 2,
+
                         // --- Floating Buttons on Mobile ---
                         position: { xs: 'absolute', md: 'static' },
                         // Slightly overlapping the top edge on mobile
-                        top: { xs: '-20px', md: 'auto' }, 
+                        top: { xs: '-20px', md: 'auto' },
                         right: { xs: '15px', md: 'auto' },
                         marginTop: { xs: 0, md: 2 }
                       }}
                     >
-                      <IconButton 
-                        onClick={handlePrevious} 
+                      <IconButton
+                        onClick={handlePrevious}
                         size="small"
-                        sx={{ 
-                          border: '1px solid #ccc', 
+                        sx={{
+                          border: '1px solid #ccc',
                           bgcolor: '#fff',
                           color: '#333',
                           boxShadow: { xs: '0 4px 8px rgba(0,0,0,0.15)', md: 'none' },
-                          '&:hover': { bgcolor: '#000', color: '#fff', borderColor: '#000' } 
+                          '&:hover': { bgcolor: '#000', color: '#fff', borderColor: '#000' }
                         }}
                       >
                         <ChevronLeftIcon fontSize="inherit" />
                       </IconButton>
-                      <IconButton 
-                        onClick={handleNext} 
+                      <IconButton
+                        onClick={handleNext}
                         size="small"
-                        sx={{ 
-                          border: '1px solid #ccc', 
+                        sx={{
+                          border: '1px solid #ccc',
                           bgcolor: '#fff',
                           color: '#333',
                           boxShadow: { xs: '0 4px 8px rgba(0,0,0,0.15)', md: 'none' },
-                          '&:hover': { bgcolor: '#000', color: '#fff', borderColor: '#000' } 
+                          '&:hover': { bgcolor: '#000', color: '#fff', borderColor: '#000' }
                         }}
                       >
                         <ChevronRightIcon fontSize="inherit" />

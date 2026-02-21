@@ -524,7 +524,7 @@ const ProductCard = ({ product, index, productData, StoreInit, calcVal, videoUrl
                   >
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: decodeEntities(loginCurrency?.CurrencyCode ?? StoreInit?.CurrencyCode),
+                        __html: decodeEntities(loginCurrency?.CurrencyCode ?? StoreInit?.CurrencyCode)
                       }}
                       style={{ paddingRight: "0.4rem" }}
                     />

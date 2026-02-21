@@ -10,28 +10,52 @@ import { storImagePath } from "../../../../../../utils/Glob_Functions/GlobalFunc
 import { IsSetupFor } from "../../../Recoil/atom";
 import SocialMediaVideoSection from "./VideoSection";
 
+// const sliderData = [
+//   {
+//     imageUrl: "/images/HomePage/SocialMedia/common_img.png",
+//     link: "https://www.instagram.com/",
+//     icon: `${storImagePath()}/images/HomePage/SocialLinks/instagram.png`,
+//   },
+//   {
+//     imageUrl: "/images/HomePage/SocialMedia/common_img.png",
+//     link: "https://in.pinterest.com/",
+//     icon: `${storImagePath()}/images/HomePage/SocialLinks/pinterest.png`,
+//   },
+//   {
+//     imageUrl: "/images/HomePage/SocialMedia/common_img.png",
+//     link: "https://www.facebook.com/",
+//     icon: `${storImagePath()}/images/HomePage/SocialLinks/facebook.png`,
+//   },
+//   {
+//     imageUrl: "/images/HomePage/SocialMedia/common_img.png",
+//     link: "https://www.linkedin.com/",
+//     icon: `${storImagePath()}/images/HomePage/SocialLinks/linkedin.png`,
+//   },
+// ];
+
 const sliderData = [
   {
-    imageUrl: "/images/HomePage/SocialMedia/common_img.png",
+    imageUrl: "/images/HomePage/SocialMedia/socialMedia1.jpg",
     link: "https://www.instagram.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/instagram.png`,
   },
   {
-    imageUrl: "/images/HomePage/SocialMedia/common_img.png",
+    imageUrl: "/images/HomePage/SocialMedia/socialMedia2.jpg",
     link: "https://in.pinterest.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/pinterest.png`,
   },
   {
-    imageUrl: "/images/HomePage/SocialMedia/common_img.png",
+    imageUrl: "/images/HomePage/SocialMedia/socialMedia3.jpg",
     link: "https://www.facebook.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/facebook.png`,
   },
   {
-    imageUrl: "/images/HomePage/SocialMedia/common_img.png",
+    imageUrl: "/images/HomePage/SocialMedia/socialMedia4.jpg",
     link: "https://www.linkedin.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/linkedin.png`,
   },
 ];
+// https://www.elvee.in/WebSiteStaticImage/Banner/socialmediabanner1.png
 
 // ------- Styled Components -------
 const SectionHeader = styled(Box)(({ theme }) => ({
@@ -80,11 +104,13 @@ const IconWrapper = styled(Box)(({ theme }) => ({
 
 // ------- Main Component -------
 export default function SocialMediaSection({ banner, demoVideo }) {
-  const updatedSlides = sliderData.map((item, i) => ({
-    ...item,
-    imageUrl: storImagePath() + item.imageUrl,
-    ...(IsSetupFor && demoVideo?.[i] ? { demoVideo: demoVideo[i] } : {}),
-  }));
+
+    const updatedSlides = sliderData.map((item, i) => ({
+      ...item,
+      imageUrl: banner?.image?.[i] || item.imageUrl,
+      ...(IsSetupFor && demoVideo?.[i] ? { demoVideo: demoVideo[i] } : {}),
+    }));
+    
 
   if (IsSetupFor) {
     return (

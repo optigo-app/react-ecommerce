@@ -1,10 +1,42 @@
+.forgot_container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+.paddingTopMobileSet{
+    padding: '5rem';
+    @media screen and (max-width: 480px) {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .forgot_container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+}
+
+/* Card / White Box */
 .smling-forgot-main {
-    margin-inline: 6%;
+    width: 100%;
     background-color: white;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 480px) {
+    .smling-forgot-main {
+        padding: 30px 20px;
+        border-radius: 6px;
+    }
 }
 
 .labGrowForgot {
-    width: 28rem;
     margin: 10px;
 }
 
@@ -37,7 +69,6 @@
 
 .submitBtnForgot {
     height: 40px;
-    width: 27rem;
     border: 1px solid black;
     margin-top: 10px;
     font-size: 14px;
@@ -63,14 +94,3 @@
     display: none !important;
 }
 
-
-@media screen and (max-width: 700px) {
-    .labGrowForgot {
-        width: 95%;
-    }
-
-    .submitBtnForgot {
-        width: 90%;
-    }
-
-}

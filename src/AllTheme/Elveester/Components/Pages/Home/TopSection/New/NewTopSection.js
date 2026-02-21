@@ -141,7 +141,7 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
           {showMarquee && <MarqueeBar />}
           {showMarquee && <JewelryShowcase data={SectionData} />}
           {showMarquee && <NewArrivalsSection />}
-          {/* {ShowBeforeLogin && <PromoComponent1 banner={middleBanner} />} */}
+          {!isSetupforMax &&  ShowBeforeLogin && <PromoComponent1 banner={middleBanner} />}
           {isSetupforMax && (
             <>
               <CategorySlider IsLoading={IsFetched} SectionData={SectionData.category} />
