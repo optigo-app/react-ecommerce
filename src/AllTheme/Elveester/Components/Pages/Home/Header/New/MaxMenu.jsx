@@ -63,6 +63,13 @@ const MaxNavbar = () => {
     const navItemRefs = useRef({});
 
 
+    const MoveToTop = ()=>{
+    window.scrollTo({
+        top:0 ,
+        left : 0 ,
+        behavior:"smooth"
+    })
+}
 
     const IsB2BWebsiteChek = storeinit?.IsB2BWebsite;
 
@@ -489,7 +496,9 @@ const MaxNavbar = () => {
                                         <MenuIcon size={22} />
                                     </IconButton>
                                 )}
-                                <Box component={Link} to="/">
+                                <Box component={Link} to="/"
+                                onClick={MoveToTop}
+                                >
                                     <Box component="img" src={compnyLogo} alt="SHAYN" sx={{ width: IsSetupFor ? "150px" : "110px", cursor: "pointer" }} className="el_without_headerLogo_side" />
                                 </Box>
                             </Box>
@@ -956,7 +965,9 @@ const MaxNavbar = () => {
                         borderBottom: `1px solid ${alpha("#fff", 0.1)}`,
                     }}
                 >
-                    <Box component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
+                    <Box
+                    onClick={MoveToTop}
+                    component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
 
                     <Box
                         sx={{

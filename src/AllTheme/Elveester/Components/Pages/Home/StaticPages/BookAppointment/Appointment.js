@@ -185,7 +185,7 @@ const Appointment = () => {
         <div className="eleev_appointment_page">
             <div className="elvee_banner_app"
                 style={{
-                    padding: IsSetupFor ? "0" : "0 7rem",
+                    padding: IsSetupFor ? "0 2rem" : "0 7rem",
                     backgroundColor: IsSetupFor ? '#fafafa' : ''
                 }}
             >

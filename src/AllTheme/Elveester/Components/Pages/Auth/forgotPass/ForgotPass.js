@@ -120,7 +120,7 @@ export default function ForgotPass() {
 
     return (
         <div className='paddingTopMobileSet' style={{
-            backgroundColor: 'rgba(66, 66, 66, 0.05)'
+            backgroundColor: 'rgba(66, 66, 66, 0.05)',
         }}>
             {isLoading && (
                 <div className="loader-overlay">
@@ -149,7 +149,17 @@ export default function ForgotPass() {
                             className='AuthScreenSubTitle'
                         >{ }</p>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+                        <div
+                            style={{
+                                width: '100%',
+                                margin: '0 auto',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center'
+                            }}
+                            className='forgot_container'
+                        >
                             <TextField
                                 autoFocus
                                 id="outlined-password-input"
@@ -157,7 +167,8 @@ export default function ForgotPass() {
                                 type={showPassword ? 'text' : 'password'}
                                 autoComplete="current-password"
                                 className='labgrowRegister'
-                                style={{ margin: '15px' }}
+                                sx={{ mt: 2 }}
+                                fullWidth
                                 value={password}
                                 onChange={handlePasswordChange}
                                 onKeyDown={(event) => {
@@ -189,7 +200,8 @@ export default function ForgotPass() {
                                 type={showConfirmPassword ? 'text' : 'password'}
                                 autoComplete="current-password"
                                 className='labgrowRegister'
-                                style={{ margin: '15px' }}
+                                sx={{ mt: 2 }}
+                                fullWidth
                                 value={confirmPassword}
                                 onChange={(e) => handleInputChange(e, setConfirmPassword, 'confirmPassword')}
                                 error={!!errors.confirmPassword}
@@ -210,8 +222,12 @@ export default function ForgotPass() {
                                 }}
                             />
 
-                            <button className='submitBtnForgot btn-bg-elvee' onClick={handleSubmit}>Change Password</button>
-                            <button className='submitBtnForgot ' onClick={() => navigation('/')}>CANCEL</button>
+                            <button className='submitBtnForgot btn-bg-elvee'
+                                style={{ width: '100%' }}
+                                onClick={handleSubmit}>Change Password</button>
+                            <button
+                                style={{ width: '100%', marginBottom: "40px" }}
+                                className='submitBtnForgot ' onClick={() => navigation('/')}>CANCEL</button>
                         </div>
 
                     </div>
