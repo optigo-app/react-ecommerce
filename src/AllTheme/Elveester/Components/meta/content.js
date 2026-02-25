@@ -164,7 +164,7 @@ const ElveeMetaData = {
 };
 
 const ElveeDefaultMetadata = {
-  title: "Elvee Jewels Private Limited - Elegant Gold & Silver Jewelry Collections",
+  title: "Elvee",
   description: "Elvee Jewels is a prestigious bridal jewelry brand crafting timeless pieces that celebrate romance, elegance, and cultural heritage with sophistication.",
   canonical: URL_ADDRESS,
   keywords: "Elvee, elvee ,bridal jewelry, elegant jewelry, fashion jewelry, Elvee jewels, ELvee Jewels Private limited, elveester, Elveester",
@@ -330,7 +330,7 @@ const SonasonsMetaData = {
 };
 
 const SonasonsDefaultMetadata = {
-  title: "Sonasons Jewels Private Limited - Elegant Gold & Silver Jewelry Collections",
+  title: "Sonasons",
   description: "Sonasons Jewels is a prestigious bridal jewelry brand crafting timeless pieces that celebrate romance, elegance, and cultural heritage with sophistication.",
   canonical: URL_ADDRESS,
   keywords: "Sonasons, sonasons, bridal jewelry, elegant jewelry, fashion jewelry, Sonasons jewels, Sonasons Jewels Private Limited",
@@ -342,72 +342,133 @@ const SonasonsDefaultMetadata = {
   const isSonasonsbreadcrumbData = [{ name: "Home", url: "https://sonasons.optigoapps.com/" }];
 
 
-const createSchema = ({  logoUrl }) => {
+// const createSchema = ({  logoUrl }) => {
+//   if (isSetupforMax === true) {
+//     return {
+//       "@context": "https://schema.org",
+//       "@type": "WebSite",
+//       name: "Sonasons",
+//        "alternateName": "Sonasons Jewellery",
+//       url: `https://sonasons.optigoapps.com/n`,
+//       potentialAction: {
+//         "@type": "SearchAction",
+//         target: {
+//           "@type": "EntryPoint",
+//           urlTemplate: `https://sonasons.optigoapps.com/n/search?q={search_term_string}`,
+//         },
+//         "query-input": "required name=search_term_string",
+//       },
+//       about: {
+//         "@type": "Organization",
+//         name: "Sonasons",
+//         url: `https://sonasons.optigoapps.com/n`,
+//         logo: logoUrl || "https://sonasons.optigoapps.com/n/default-logo.png", // fallback logo
+//         sameAs: [
+//           "https://www.instagram.com/sonasons", 
+//           "https://www.facebook.com/sonasons",
+//           "https://www.linkedin.com/company/sonasons"
+//         ],
+//       },
+//       author: {
+//         "@type": "Organization",
+//         name: "Sonasons Team",
+//       },
+//     };
+//   } else {
+//     return {
+//       "@context": "https://schema.org",
+//       "@type": "WebSite",
+//       name: "Elvee",
+//       alternateName: "Elvee Jewels Private Limited",
+//       url: `${URL_ADDRESS}`,
+//          potentialAction: {
+//       "@type": "SearchAction",
+//       target: "https://www.elvee.in/search?q={search_term_string}",
+//       "query-input": "required name=search_term_string"
+//     },
+//       about: {
+//         "@type": "Organization",
+//         name: "Elvee",
+//         alternateName: "Elvee Jewels Private Limited",
+//         url: `${URL_ADDRESS}`,
+//         logo: logoUrl || "/default-elvee-logo.png", // fallback logo
+//         sameAs: [
+          // "https://www.instagram.com/elvee.jewels",
+          // "https://in.pinterest.com/elvee_jewels",
+          // "https://www.facebook.com/elveejewels",
+          // "https://www.linkedin.com/company/elvee-jewels"
+//         ],
+//       },
+//       author: {
+//         "@type": "Organization",
+//         name: "Elvee Jewels Team",
+//       },
+//     };
+//   }
+// };
+
+// Usage
+
+
+const createSchema = ({ logoUrl }) => {
   if (isSetupforMax === true) {
-    return {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "Sonasons",
-      url: `https://sonasons.optigoapps.com/n`,
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `https://sonasons.optigoapps.com/n/search?q={search_term_string}`,
-        },
-        "query-input": "required name=search_term_string",
+    return [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Sonasons",
+        alternateName: "Sonasons Jewellery",
+        url: "https://sonasons.optigoapps.com/",
+        potentialAction: {
+          "@type": "SearchAction",
+          target: "https://sonasons.optigoapps.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       },
-      about: {
+      {
+        "@context": "https://schema.org",
         "@type": "Organization",
         name: "Sonasons",
-        url: `https://sonasons.optigoapps.com/n`,
-        logo: logoUrl || "https://sonasons.optigoapps.com/n/default-logo.png", // fallback logo
+        url: "https://sonasons.optigoapps.com/",
+        logo: logoUrl,
         sameAs: [
-          "https://www.instagram.com/sonasons", 
+          "https://www.instagram.com/sonasons",
           "https://www.facebook.com/sonasons",
           "https://www.linkedin.com/company/sonasons"
-        ],
-      },
-      author: {
-        "@type": "Organization",
-        name: "Sonasons Team",
-      },
-    };
+        ]
+      }
+    ];
   } else {
-    return {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "Elvee Jewels Private Limited",
-      url: `${window.location.origin}`,
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${window.location.origin}/search?q={search_term_string}`,
-        },
-        "query-input": "required name=search_term_string",
+    return [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Elvee",
+        alternateName: "Elvee Jewels Private Limited",
+        url: "https://www.elvee.in/",
+        potentialAction: {
+          "@type": "SearchAction",
+          target: "https://www.elvee.in/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       },
-      about: {
+      {
+        "@context": "https://schema.org",
         "@type": "Organization",
-        name: "Elvee Jewels Private Limited",
-        url: `${window.location.origin}`,
-        logo: logoUrl || "/default-elvee-logo.png", // fallback logo
+        name: "Elvee",
+        alternateName: "Elvee Jewels Private Limited",
+        url: "https://www.elvee.in/",
+        logo: 'https://www.elvee.in/WebSiteStaticImage/logoIcon/webLogo.png',
         sameAs: [
-          "https://www.instagram.com/elvee.jewels",
+         "https://www.instagram.com/elvee.jewels",
           "https://in.pinterest.com/elvee_jewels",
           "https://www.facebook.com/elveejewels",
           "https://www.linkedin.com/company/elvee-jewels"
-        ],
-      },
-      author: {
-        "@type": "Organization",
-        name: "Elvee Jewels Team",
-      },
-    };
+        ]
+      }
+    ];
   }
 };
-
-// Usage
 
 const metaData = IsSetupFor ? SonasonsMetaData : ElveeMetaData;
 const defaultMetadata = IsSetupFor ? SonasonsDefaultMetadata : ElveeDefaultMetadata;

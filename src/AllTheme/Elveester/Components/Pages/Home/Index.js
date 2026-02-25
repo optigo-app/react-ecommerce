@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { el_companyLogo, el_loginState } from "../../Recoil/atom";
 import { Helmet } from "react-helmet-async";
 import useHomeBannerImages from "../../../../../utils/Glob_Functions/ThemesBanner/ThemesBanner";
-import { createSchema ,breadcrumbData } from "../../meta/content";
+import { createSchema, breadcrumbData } from "../../meta/content";
 
 const NewTopSection = lazy(() => import("./TopSection/New/NewTopSection"));
 // const TabBasedNewSection = lazy(() => import("./TopSection/New/TabBasedNewSection"));
@@ -24,7 +24,7 @@ function Home() {
   const banner = useHomeBannerImages();
   const compnyLogo = useRecoilValue(el_companyLogo);
   const isLogin = useRecoilValue(el_loginState);
-  const Schema = createSchema({logoUrl : compnyLogo});
+  const Schema = createSchema({ logoUrl: compnyLogo });
   const generateBreadcrumbJsonLd = (bcd) => {
     return {
       "@context": "https://schema.org",
@@ -44,7 +44,12 @@ function Home() {
     <>
       <Helmet>
         <link rel="canonical" href={breadcrumbData[0].url} />
-        <script type="application/ld+json">{JSON.stringify(Schema, null, 2)}</script>
+        {/* <script type="application/ld+json">{JSON.stringify(Schema, null, 2)}</script> */}
+        {Schema.map((item, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(item)}
+          </script>
+        ))}
         <script type="application/ld+json">{JSON.stringify(jsonLd, null, 2)}</script>
       </Helmet>
       <div style={{ position: "relative !important" }}>

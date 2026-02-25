@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
- <head>
+  <head>
+    <title>sonasons</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -20,201 +19,73 @@
     <meta property="twitter:image" content="https://sonasons.optigoapps.com/WebSiteStaticImage/logoIcon/MetaShareImage.jpg" />
     <link rel="apple-touch-icon" sizes="180x180" href="https://sonasons.optigoapps.com/WebSiteStaticImage/logoIcon/apple-touch-icon.png" />
     <meta name="mobile-web-app-capable" content="yes" />
+    <meta property="og:site_name" content="Sonasons" />
     <meta name="application-name" content="Best Store for Online Jewellery Shopping" />
     <link rel="icon" sizes="192x192" content="https://sonasons.optigoapps.com/WebSiteStaticImage/logoIcon/androidCh2.png" />
     <link rel="preload" as="image" href="https://sonasons.optigoapps.com/Banner/Homepagemainbanner4.png" type="image/png" fetchpriority="high" />
   </head>
-</head>
 
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-  }
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 
-  .container-Loader {
-    width: 100%;
-    height: 100svh;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .logo-loader {
-    opacity: 0;
-    animation: fadeInLogo 1s ease-in-out forwards;
-    animation-delay: 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .logo-loader img {
-    width: 100%;
-    height: auto;
-  }
-
-  .progress-bar-loader {
-    position: absolute;
-    bottom: 4rem;
-    left: 50%;
-    transform: translateX(-48%);
-    height: 4px;
-    width: 60%;
-    max-width: 300px;
-    background-color: transparent;
-    overflow: hidden;
-  }
-
-  .progress-bar-loader::before {
-    content: '';
-    display: block;
-    height: 100%;
-    width: 100%;
-    background-color: #000;
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: progressAnim 2s ease-in-out forwards;
-  }
-
-  @keyframes fadeInLogo {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Sonasons",
+      "alternateName": "Sonasons Jewellery",
+      "url": "https://sonasons.optigoapps.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://sonasons.optigoapps.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
+  </script>
 
-    to {
-      opacity: 1;
-      transform: scale(1);
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Sonasons",
+      "url": "https://sonasons.optigoapps.com/",
+      "logo": "https://sonasons.optigoapps.com/WebSiteStaticImage/logoIcon/MetaShareImage.jpg",
+      "sameAs": ["https://www.instagram.com/sonasons", "https://www.facebook.com/sonasons"]
     }
-  }
+  </script>
 
-  @keyframes progressAnim {
-    0% {
-      transform: scaleX(0);
-    }
+  <script defer>
+    window.onload = function () {
+      // Check if the internet is available
+      if (navigator.onLine) {
+        setTimeout(function () {
+          var script = document.createElement("script");
+          script.src = "https://checkout.razorpay.com/v1/checkout.js";
+          script.type = "text/javascript";
+          document.body.appendChild(script);
+        }, 6000);
+        setTimeout(function () {
+          const head = document.head;
+          const link = document.createElement("link");
+          link.href = "https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rosarivo:ital@0;1&family=Arizonia&family=Lato:wght@300;400&family=Montserrat:wght@400;500&family=Playfair+Display&family=Tenor+Sans&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Nunito:wght@200..1000&family=Cedarville+Cursive&display=swap";
+          link.rel = "stylesheet";
+          head.appendChild(link);
 
-    100% {
-      transform: scaleX(1);
-    }
-  }
+          const link6 = document.createElement("link");
+          link6.href = "https://db.onlinewebfonts.com/c/8c6cc8824a468b33768701915664b3e9?family=FreightDisp+Pro+Medium";
+          link6.rel = "stylesheet";
+          head.appendChild(link6);
+        }, 10000);
+      } else {
+        console.log("No internet connection. Scripts will not be loaded.");
+      }
 
-  .image_banner_sm {
-    width: 100%;
-    height: 100svh;
-    display: none;
-    transition: height 0.2s ease-in;
-    animation: slideInFromBottom 0.2s ease-in-out forwards;
-
-    img {
-      width: 100%;
-      object-fit: cover;
-      height: 100%;
-      transition: 0.3s ease-in-out;
-    }
-  }
-
-  @keyframes slideInFromBottom {
-    0% {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  #root {
-    display: none;
-    animation: slideDownAndFadeIn 1.2s ease-in forwards;
-  }
-</style>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <div class="container-Loader">
-    <div class="logo-loader">
-      <img src="./mobileLogo.png" alt="Company Logo">
-    </div>
-    <div class="progress-bar-loader"></div>
-  </div>
-</body>
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<!-- <script defer>
-  document.querySelector('#root').style.display = 'none';
-  document.querySelector('.image_banner_sm').style.display = 'none';
-  window.onload = function () {
-    setTimeout(function () {
-      document.querySelector('.container-Loader').style.display = 'none';
-      // document.querySelector('.image_banner_sm').style.display = 'block';
-      document.querySelector('#root').style.display = 'block';
-    }, 500);
-    // setTimeout(() => {
-    //   document.querySelector('.image_banner_sm').style.display = 'none';
-    //   document.querySelector('#root').style.display = 'block';
-    // }, 5000);
-    setTimeout(function () {
-      var script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      script.type = 'text/javascript';
-      document.body.appendChild(script);
-    }, 6000);
-
-    setTimeout(function () {
-      const head = document.head;
-      const link = document.createElement('link');
-      link.href = "https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rosarivo:ital@0;1&family=Arizonia&family=Lato:wght@300;400&family=Montserrat:wght@400;500&family=Playfair+Display&family=Tenor+Sans&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Nunito:wght@200..1000&family=Cedarville+Cursive&display=swap";
-      link.rel = "stylesheet";
-      head.appendChild(link);
-      const link6 = document.createElement('link');
-      link6.href = "https://db.onlinewebfonts.com/c/8c6cc8824a468b33768701915664b3e9?family=FreightDisp+Pro+Medium";
-      link6.rel = "stylesheet";
-      head.appendChild(link6);
-    }, 10000);
-
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-  };
-</script> -->
-
-<script defer>
-  window.onload = function () {
-    // Check if the internet is available
-    if (navigator.onLine) {
-      setTimeout(function () {
-        var script = document.createElement("script");
-        script.src = "https://checkout.razorpay.com/v1/checkout.js";
-        script.type = "text/javascript";
-        document.body.appendChild(script);
-      }, 6000);
-      setTimeout(function () {
-        const head = document.head;
-        const link = document.createElement("link");
-        link.href =
-          "https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rosarivo:ital@0;1&family=Arizonia&family=Lato:wght@300;400&family=Montserrat:wght@400;500&family=Playfair+Display&family=Tenor+Sans&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Nunito:wght@200..1000&family=Cedarville+Cursive&display=swap";
-        link.rel = "stylesheet";
-        head.appendChild(link);
-
-        const link6 = document.createElement("link");
-        link6.href =
-          "https://db.onlinewebfonts.com/c/8c6cc8824a468b33768701915664b3e9?family=FreightDisp+Pro+Medium";
-        link6.rel = "stylesheet";
-        head.appendChild(link6);
-      }, 10000);
-    } else {
-      console.log("No internet connection. Scripts will not be loaded.");
-    }
-  };
-</script>
-
-
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+    };
+  </script>
 </html>
