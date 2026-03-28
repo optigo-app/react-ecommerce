@@ -72,8 +72,10 @@ export default function ThemeRoutes() {
 
   const [title, setTitle] = useState("Loading...");
   const [storeInitData, setStoreInitData] = useState(() => {
-    // Priority: window.__storeInit (set by AppLoader) > sessionStorage
-    if (window.__storeInit) return window.__storeInit;
+    if (window.__storeInit) {
+      console.log("window.__storeInit", window.__storeInit);
+      return window.__storeInit
+    };
     const saved = sessionStorage.getItem("storeInit");
     return saved ? JSON.parse(saved) : null;
   });
@@ -108,13 +110,7 @@ export default function ThemeRoutes() {
     smrMA_setCompanyTitleLogo(mobileLogo);
   }, []);
 
-  // ============================================================
-  // Polling timer: continuously check for storeInit availability
-  // Reads from window.__storeInit (set by AppLoader/loadInit.js)
-  // or sessionStorage as fallback. If not found after 15s, refetch.
-  // ============================================================
   useEffect(() => {
-    // Already have data from state initialization
     if (storeInitData) {
       console.log("✅ ThemeRoutes: storeInit already available from state init");
       onStoreInitReady(storeInitData);
@@ -122,20 +118,16 @@ export default function ThemeRoutes() {
     }
 
     let attempts = 0;
-    const MAX_ATTEMPTS = 75; // 75 x 200ms = 15 seconds
-    const POLL_INTERVAL = 200; // check every 200ms
+    const MAX_ATTEMPTS = 75;
+    const POLL_INTERVAL = 200;
 
     const timerId = setInterval(() => {
       attempts++;
-
-      // Check window.__storeInit first (fastest, no JSON parse)
       const windowData = window.__storeInit;
       if (windowData) {
         console.log(`✅ ThemeRoutes: Found window.__storeInit on poll attempt ${attempts}`);
         clearInterval(timerId);
         setStoreInitData(windowData);
-
-        // Also ensure sessionStorage is synced
         if (!sessionStorage.getItem("storeInit")) {
           sessionStorage.setItem("storeInit", JSON.stringify(windowData));
         }
@@ -150,7 +142,6 @@ export default function ThemeRoutes() {
         return;
       }
 
-      // Fallback: check sessionStorage
       const sessionData = sessionStorage.getItem("storeInit");
       if (sessionData) {
         console.log(`✅ ThemeRoutes: Found sessionStorage storeInit on poll attempt ${attempts}`);
@@ -161,7 +152,6 @@ export default function ThemeRoutes() {
         return;
       }
 
-      // Timeout: refetch as last resort
       if (attempts >= MAX_ATTEMPTS) {
         console.warn("⚠️ ThemeRoutes: storeInit not found after 15s, refetching...");
         clearInterval(timerId);
@@ -172,11 +162,9 @@ export default function ThemeRoutes() {
     return () => clearInterval(timerId);
   }, []);
 
-  // Called once storeInit data is available
   const onStoreInitReady = (initData) => {
     if (!initData) return;
 
-    // Update theme if the JSON has a different Themeno
     if (initData.Themeno && initData.Themeno !== currentTheme) {
       setCurrentTheme(initData.Themeno);
     }
@@ -184,7 +172,6 @@ export default function ThemeRoutes() {
     setIsStoreInitLoaded(true);
     setTitle(initData.BrowserTitle || "Jewelry Store");
 
-    // Set up visitor ID from CompanyInfoData
     const CompanyinfoData = window.__CompanyInfoData
       || JSON.parse(sessionStorage.getItem("CompanyInfoData") || "null");
 
@@ -201,7 +188,6 @@ export default function ThemeRoutes() {
             Cookies.remove("visiterId", { path: "/" });
           }
         } catch (e) {
-          // visiterId cookie is a plain string, not JSON — that's fine
         }
       }
     }
@@ -215,7 +201,6 @@ export default function ThemeRoutes() {
     }
   };
 
-  // Last-resort refetch if polling times out
   const refetchStoreInit = async () => {
     try {
       const path = `${storInitDataPath()}/StoreInit.json`;
@@ -317,10 +302,7 @@ export default function ThemeRoutes() {
 
   return (
     <>
-      {/* Render metadata immediately with fallback */}
       {storeInitData?.DomainForNo == 2 ? <MetaData1 storeInitData={storeInitData} title={title} /> : <MetaData2 title={title} />}
-
-      {/* Render theme immediately based on detected/current theme */}
       <Themes themeNumber={currentTheme} />
     </>
   );

@@ -18,6 +18,8 @@ const Ornaz_App = React.lazy(() => import("./AllTheme/Ornaz/Ornaz_App"));
 const Procatalog_App = React.lazy(() => import("./AllTheme/Pocatalog/Procatalog_App"));
 const HemratnaProcatalog_App = React.lazy(() => import("./AllTheme/hemratnaProcatalog/HemratnaProcatalog_App"));
 
+const IsShreeDiamond = true;
+
 const themeConfig = {
   1: { Component: SmilingRock_App, Loader: LoadingFallback },
   2: { Component: DaimondTine_App, Loader: PacificLoadingFallback },
@@ -30,7 +32,10 @@ const themeConfig = {
   9: { Component: Procatalog_MobileApp_App, Loader: ProcatalogLoadingFallback },
   10: { Component: StamFordJewels_App, Loader: OjasviLoadingFallback },
   11: { Component: RoopJewellers_App, Loader: VaraLoadingFallback },
-  12: { Component: MalakanJewels_App, Loader: KamalikaJewelssLoadingFallback },
+  12: {
+    Component: MalakanJewels_App, Loader:
+      IsShreeDiamond ? ShreeDiamondsLoadingFallback : KamalikaJewelssLoadingFallback
+  },
   13: { Component: LoveIn_App, Loader: ShinjiniLoadingFallback },
   14: { Component: Ornaz_App, Loader: ShreeDiamondsLoadingFallback },
 };
@@ -96,7 +101,7 @@ export const themeEnvConfig = {
 
   "malakan.web": {
     Component: MalakanJewels_App,
-    Loader: KamalikaJewelssLoadingFallback,
+    Loader: IsShreeDiamond ? ShreeDiamondsLoadingFallback : KamalikaJewelssLoadingFallback
   },
 
   "lovein.web": {

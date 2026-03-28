@@ -14,6 +14,7 @@ import { LoginWithEmailAPI } from "../../utils/API/Auth/LoginWithEmailAPI";
 import { Suspense } from "react";
 import { Box } from "@mui/material";
 import usePerformanceTracker from "../../utils/Glob_Functions/usePerformanceTracker";
+import { ShreeDiamondsLoadingFallback } from '../../LoadingFallbacks'
 
 // import Home from "./Components/Pages/Home/Index";
 // import Header from "./Components/Pages/Home/Header/Header";
@@ -182,28 +183,6 @@ const MalakanJewels_App = () => {
     }
   }
 
-  const LoadingFallback = () => (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh'
-      }}
-    >
-      {/* <CircularProgress sx={{ color: 'rgba(255,  87, 34, 0.8)' }} /> */}
-      <img
-        src={loaderImg}
-        alt="Loading..."
-        height="100%"
-        width="auto"
-        loading="lazy"
-        style={{
-          animation: 'scaleUpDown 1.5s ease-in-out infinite', // Apply the animation here
-        }}
-      />
-    </Box>
-  );
 
   function ProductListWrapper() {
     return (
@@ -242,7 +221,7 @@ const MalakanJewels_App = () => {
   }
 
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <Suspense fallback={<ShreeDiamondsLoadingFallback />}>
       <Helmet>
         <title>{localData?.BrowserTitle}</title>
       </Helmet>
