@@ -119,7 +119,6 @@ const Header2 = () => {
     const handleLogout = () => {
         setislogin(false);
         sessionStorage.setItem('LoginUser', false);
-        sessionStorage.removeItem('storeInit');
         sessionStorage.removeItem('loginUserDetail');
         sessionStorage.removeItem('remarks');
         sessionStorage.removeItem('selectedAddressId');

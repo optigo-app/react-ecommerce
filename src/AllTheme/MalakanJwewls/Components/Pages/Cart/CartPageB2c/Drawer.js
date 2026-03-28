@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import CartTableData from "./CartTableData"
 import { mala_loginState } from '../../../Recoil/atom';
+import { getSession } from '../../../../../../hooks/useSession';
 
 const Cart = ({
   isOpen,
@@ -40,25 +41,25 @@ const Cart = ({
   const islogin = useRecoilValue(mala_loginState);
   const [totalPrice, setTotalPrice] = useState();
   const [storeInitData, setStoreInitData] = useState();
-  const loginInfo = JSON.parse(sessionStorage.getItem("loginUserDetail"));
+  const loginInfo = getSession("loginUserDetail");
 
   useEffect(() => {
-    const storeinitData = JSON.parse(sessionStorage.getItem('storeInit'));
+    const storeinitData = getSession('storeInit');
     setStoreInitData(storeinitData)
   }, [])
 
   useEffect(() => {
     setTimeout(() => {
-      if(items){
+      if (items) {
         let priceData = items?.reduce((total, item) => total + item?.FinalCost, 0);
         setTotalPrice(priceData)
       }
     }, 300);
-  },[items])
+  }, [items])
 
   const redirectUrl = `/loginOption/?LoginRedirect=/Delivery`;
   const handlePlaceOrder = () => {
-    let storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
+    let storeInit = getSession("storeInit");
     if (storeInit?.IsB2BWebsite == 0 && islogin == false || islogin == null) {
       // navigate('/LoginOption')
       navigate(redirectUrl);
@@ -107,7 +108,7 @@ const Cart = ({
                 <CartTableData
                   key={index}
                   cartData={item}
-                  qtyCount={qtyCount} 
+                  qtyCount={qtyCount}
                   CurrencyData={CurrencyData}
                   CartCardImageFunc={CartCardImageFunc}
                   noImageFound={noImageFound}
@@ -142,8 +143,8 @@ const Cart = ({
                         ),
                       }}
                     /> */}
-                     {loginInfo?.CurrencyCode ?? storeInitData?.CurrencyCode}
-                     {" "}{totalPrice}
+                    {loginInfo?.CurrencyCode ?? storeInitData?.CurrencyCode}
+                    {" "}{totalPrice}
                   </span>
                 }{' - '}CHECKOUT</button>
             </div>

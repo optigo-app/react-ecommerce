@@ -24,7 +24,6 @@ const MobileViewComp = () => {
     const handleLogout = () => {
         setIsLoginState('false')
         sessionStorage.setItem('LoginUser', 'false');
-        sessionStorage.removeItem('storeInit');
         sessionStorage.removeItem('loginUserDetail');
         sessionStorage.removeItem('remarks');
         sessionStorage.removeItem('selectedAddressId');
@@ -42,18 +41,18 @@ const MobileViewComp = () => {
         setFname(loginUserDetail?.firstname);
         setLasnane(loginUserDetail?.lastname);
         setUserMobile(loginUserDetail?.defaddress_shippingmobile)
-    },[])
+    }, [])
 
-  const {IsPriceShow} = JSON?.parse(sessionStorage?.getItem('storeInit')) ?? {} ;
+    const { IsPriceShow } = JSON?.parse(sessionStorage?.getItem('storeInit')) ?? {};
 
 
-  return (
-    <div className='mobComp_Account_SMRM'>
+    return (
+        <div className='mobComp_Account_SMRM'>
             <div className='sticky-header'>
                 <MobViewHeader title="My Account" />
             </div>
-        <div style={{marginBottom:'100px'}} className='smr_Smiling_AccountMain'>
-            {/* <div className='titleMain'>
+            <div style={{ marginBottom: '100px' }} className='smr_Smiling_AccountMain'>
+                {/* <div className='titleMain'>
                 <div style={{ width: '100%' }}>
                     <p style={{ margin: '0px', fontSize: '25px', fontWeight: 600, paddingInline: '10px' }}>{fName + ' ' + lastNamr}</p>
                     <p style={{ margin: '0px', fontSize: '15px', paddingInline: '10px' }}>+91 {userMobile}</p>
@@ -82,43 +81,43 @@ const MobileViewComp = () => {
                 </div>
 
             </div> */}
-            
-            <div className='smlingAccountTabMobileView YourAccountPageTabs' style={{ marginTop: '15px' }}>
-                <div className='menuMainAccount' onClick={() => naviagation('/QuotationQuote')}>
-                    <p className='menuMainAccountTitle'>Quote</p>
+
+                <div className='smlingAccountTabMobileView YourAccountPageTabs' style={{ marginTop: '15px' }}>
+                    <div className='menuMainAccount' onClick={() => naviagation('/QuotationQuote')}>
+                        <p className='menuMainAccountTitle'>Quote</p>
                         <FaChevronRight />
-                </div>
-                <div className='menuMainAccount' onClick={() => naviagation('/QuotationJob')}>
-                    <p className='menuMainAccountTitle'>Jobs</p>
+                    </div>
+                    <div className='menuMainAccount' onClick={() => naviagation('/QuotationJob')}>
+                        <p className='menuMainAccountTitle'>Jobs</p>
                         <FaChevronRight />
-                </div>
-                <div className='menuMainAccount' onClick={() => naviagation('/Sales')}>
-                    <p className='menuMainAccountTitle'>Sales</p>
+                    </div>
+                    <div className='menuMainAccount' onClick={() => naviagation('/Sales')}>
+                        <p className='menuMainAccountTitle'>Sales</p>
                         <FaChevronRight />
-                </div>
-                <div className='menuMainAccount' onClick={() => naviagation('/SalesReport')}>
-                    <p className='menuMainAccountTitle' >Sales Report</p>
+                    </div>
+                    <div className='menuMainAccount' onClick={() => naviagation('/SalesReport')}>
+                        <p className='menuMainAccountTitle' >Sales Report</p>
                         <FaChevronRight />
-                </div>
-                <div className='menuMainAccount' onClick={() => naviagation('/Memo')}>
-                    <p className='menuMainAccountTitle' >Memo</p>
+                    </div>
+                    <div className='menuMainAccount' onClick={() => naviagation('/Memo')}>
+                        <p className='menuMainAccountTitle' >Memo</p>
                         <FaChevronRight />
-                </div>
-                <div className='menuMainAccount' onClick={() => naviagation('/DesignWiseSalesReport')}>
-                    <p className='menuMainAccountTitle'>Design Wise Sales Report</p>
+                    </div>
+                    <div className='menuMainAccount' onClick={() => naviagation('/DesignWiseSalesReport')}>
+                        <p className='menuMainAccountTitle'>Design Wise Sales Report</p>
                         <FaChevronRight />
-                </div>
-               {IsPriceShow == 1 && <div className='menuMainAccount' onClick={() => naviagation('/AccountLedger')}>
-                    <p className='menuMainAccountTitle'>Account Ledger</p>
+                    </div>
+                    {IsPriceShow == 1 && <div className='menuMainAccount' onClick={() => naviagation('/AccountLedger')}>
+                        <p className='menuMainAccountTitle'>Account Ledger</p>
                         <FaChevronRight />
-                </div>}
-                {/* <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px', marginBottom: '30px' }}>
+                    </div>}
+                    {/* <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px', marginBottom: '30px' }}>
                         <p className='smilingAccountLogoutMobile' onClick={handleLogout}>LOG OUT</p>
                 </div> */}
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default MobileViewComp

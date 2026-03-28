@@ -25,6 +25,7 @@ import { mala_cartB2CDrawer, mala_CartCount, mala_companyLogo, mala_companyLogoM
 import { MdLogout } from "react-icons/md";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import useGlobalPreventSave from "../../../../../../utils/Glob_Functions/useGlobalPreventSave";
+import { getSession } from "../../../../../../hooks/useSession";
 
 
 const Header = () => {
@@ -43,7 +44,7 @@ const Header = () => {
   const [wishCountNum, setWishCountNum] = useRecoilState(mala_WishCount);
 
   const [searchText, setSearchText] = useState("");
-  let storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
+  let storeinit = getSession("storeInit");
   const IsB2BWebsiteChek = storeinit?.IsB2BWebsite;
   const IsCartNo = storeinit?.CartNo;
   const location = useLocation();

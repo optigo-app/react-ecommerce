@@ -11,6 +11,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import { GetCountAPI } from '../../../../../../utils/API/GetCount/GetCountAPI';
 import { mala_CartCount, mala_companyLogo, mala_loginState, mala_WishCount } from '../../../Recoil/atom';
+import { getSession } from '../../../../../../hooks/useSession';
 
 
 const Header2 = () => {
@@ -83,8 +84,8 @@ const Header2 = () => {
 
 
     useEffect(() => {
-        let storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
-        let isUserLogin = JSON.parse(sessionStorage.getItem("LoginUser"));
+        let storeinit = getSession("storeInit");
+        let isUserLogin = getSession("LoginUser");
 
         console.log("callll");
 
@@ -121,7 +122,6 @@ const Header2 = () => {
     const handleLogout = () => {
         setislogin(false);
         sessionStorage.setItem('LoginUser', false);
-        sessionStorage.removeItem('storeInit');
         sessionStorage.removeItem('loginUserDetail');
         sessionStorage.removeItem('remarks');
         sessionStorage.removeItem('selectedAddressId');
@@ -143,8 +143,8 @@ const Header2 = () => {
         window.scrollTo({
             left: 0,
             behavior: 'smooth'
-          });
-          
+        });
+
     };
 
 
@@ -153,7 +153,7 @@ const Header2 = () => {
         window.scrollTo({
             left: 0,
             behavior: 'smooth'
-          });  
+        });
     };
 
     const toggleOverlay = () => {

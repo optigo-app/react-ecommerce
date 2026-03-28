@@ -16,13 +16,14 @@ import { Link } from '@mui/material';
 import gradientColors from "../LookBook/color.json"
 import { formatRedirectTitleLine, formatter, formatTitleLine, storImagePath } from "../../../../../../utils/Glob_Functions/GlobalFunction";
 import { mala_loginState } from "../../../Recoil/atom";
+import { getSession } from "../../../../../../hooks/useSession";
 
 const DesignSet2 = () => {
 
   const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState();
   const [designSetList, setDesignSetList] = useState([]);
-  const loginUserDetail = JSON.parse(sessionStorage.getItem('loginUserDetail'));
+  const loginUserDetail = getSession('loginUserDetail');
   const [storeInit, setStoreInit] = useState({});
   const islogin = useRecoilValue(mala_loginState);
   const [swiper, setSwiper] = useState(null);
@@ -30,8 +31,8 @@ const DesignSet2 = () => {
 
   useEffect(() => {
 
-    const loginUserDetail = JSON.parse(sessionStorage.getItem('loginUserDetail'));
-    const storeInit = JSON.parse(sessionStorage.getItem('storeInit'));
+    const loginUserDetail = getSession('loginUserDetail');
+    const storeInit = getSession('storeInit');
     const { IsB2BWebsite } = storeInit;
     const visiterID = Cookies.get('visiterId');
     let finalID;
@@ -41,10 +42,10 @@ const DesignSet2 = () => {
       finalID = loginUserDetail?.id || '0';
     }
 
-    let storeinit = JSON.parse(sessionStorage.getItem('storeInit'));
+    let storeinit = getSession('storeInit');
     setStoreInit(storeinit);
 
-    let data = JSON.parse(sessionStorage.getItem('storeInit'));
+    let data = getSession('storeInit');
     setImageUrl(data?.DesignSetImageFol);
     setImageUrlDesignSet(data?.DesignImageFol);
 

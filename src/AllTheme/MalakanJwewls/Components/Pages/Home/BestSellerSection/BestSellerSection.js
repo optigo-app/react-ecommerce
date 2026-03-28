@@ -10,6 +10,7 @@ import Pako from 'pako';
 import { useRecoilValue } from 'recoil';
 import Cookies from 'js-cookie';
 import { mala_loginState } from '../../../Recoil/atom';
+import { getSession } from '../../../../../../hooks/useSession';
 
 const BestSellerSection = () => {
 
@@ -18,7 +19,7 @@ const BestSellerSection = () => {
     const[storeInit,setStoreInit]=useState({});
 
     const navigation = useNavigate();
-    const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
+    const loginUserDetail = getSession("loginUserDetail");
     const islogin = useRecoilValue(mala_loginState);
     const [hoveredItem, setHoveredItem] = useState(null);
 
@@ -36,8 +37,8 @@ const BestSellerSection = () => {
 
     useEffect(() => {
 
-      const loginUserDetail = JSON.parse(sessionStorage.getItem('loginUserDetail'));
-      const storeInit = JSON.parse(sessionStorage.getItem('storeInit'));
+      const loginUserDetail = getSession('loginUserDetail');
+      const storeInit = getSession('storeInit');
       const { IsB2BWebsite } = storeInit;
       const visiterID = Cookies.get('visiterId');
       let finalID;
@@ -47,10 +48,10 @@ const BestSellerSection = () => {
           finalID = loginUserDetail?.id || '0';
       }
 
-        let storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
+        let storeinit = getSession("storeInit");
         setStoreInit(storeinit)
 
-        let data = JSON.parse(sessionStorage.getItem('storeInit'))
+        let data = getSession('storeInit')
         setImageUrl(data?.DesignImageFol);
 
         Get_Tren_BestS_NewAr_DesigSet_Album("GETBestSeller" , finalID).then((response) => {
@@ -220,7 +221,7 @@ export default BestSellerSection;
 //     };
 
 //     useEffect(() => {
-//         let data = JSON.parse(sessionStorage.getItem('storeInit'))
+//         let data = getSession('storeInit')
 //         setImageUrl(data?.DesignImageFol);
 
 //         Get_Tren_BestS_NewAr_DesigSet_Album("GETBestSeller").then((response) => {

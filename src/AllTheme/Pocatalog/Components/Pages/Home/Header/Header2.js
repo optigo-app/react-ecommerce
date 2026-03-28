@@ -121,7 +121,6 @@ const Header2 = () => {
     const handleLogout = () => {
         setislogin(false);
         sessionStorage.setItem('LoginUser', false);
-        sessionStorage.removeItem('storeInit');
         sessionStorage.removeItem('loginUserDetail');
         sessionStorage.removeItem('remarks');
         sessionStorage.removeItem('selectedAddressId');
@@ -485,7 +484,7 @@ const Header2 = () => {
 
                     <div className='smiling_Top_header_div3'>
                         <ul className="nav_ul_shop">
-                          
+
 
                             {islogin ? (
                                 <>
@@ -576,7 +575,7 @@ const Header2 = () => {
                     className={`Smining-Top-Header-fixed-main ${isHeaderFixed ? "fixed" : ""}  ${serachsShowOverlay ? "searchoverly" : ""}`}
                 >
                     <div className='smiling_Top_header_sub' style={{ width: '100%' }}>
-                    <div className='smiling_Top_header_div2'>
+                        <div className='smiling_Top_header_div2'>
                             <a href="/">
                                 <img src={compnyLogo} loading='lazy' className='smr_logo_header_Fixed' />
                             </a>
@@ -629,7 +628,7 @@ const Header2 = () => {
                                     FUN FACT
                                 </li>
 
-  <li
+                                <li
                                     className="nav_li_smining_Fixed nav_li_smining_Mobile"
                                     style={{ cursor: "pointer" }}
                                     onClick={() => navigation("/aboutUs")}
@@ -647,10 +646,10 @@ const Header2 = () => {
                                 {/* } */}
                             </ul>
                         </div>
-                        
+
                         <div className='smiling_Top_header_div3'>
                             <ul className="nav_ul_shop">
-                              
+
                                 {islogin ? (
                                     <>
                                         <li

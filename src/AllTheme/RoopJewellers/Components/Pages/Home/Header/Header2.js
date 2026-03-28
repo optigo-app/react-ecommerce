@@ -121,7 +121,6 @@ const Header2 = () => {
     const handleLogout = () => {
         setislogin(false);
         sessionStorage.setItem('LoginUser', false);
-        sessionStorage.removeItem('storeInit');
         sessionStorage.removeItem('loginUserDetail');
         sessionStorage.removeItem('remarks');
         sessionStorage.removeItem('selectedAddressId');
@@ -143,8 +142,8 @@ const Header2 = () => {
         window.scrollTo({
             left: 0,
             behavior: 'smooth'
-          });
-          
+        });
+
     };
 
 
@@ -153,7 +152,7 @@ const Header2 = () => {
         window.scrollTo({
             left: 0,
             behavior: 'smooth'
-          });  
+        });
     };
 
     const toggleOverlay = () => {

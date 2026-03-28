@@ -14,7 +14,7 @@ export const AppLoader = () => {
     setStatus(0);
     try {
       const success = await loadStoreInit();
-      const isStored = sessionStorage.getItem("storeInit");
+      const isStored = window.__storeInit || sessionStorage.getItem("storeInit");
 
       if (success && isStored) {
         console.log("✅ AppLoader: Init Success");

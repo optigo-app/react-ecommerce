@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import { formatter, storImagePath } from '../../../../../../utils/Glob_Functions/GlobalFunction';
 import noImageFound from "../../../Assets/image-not-found.jpg"
 import { stam_loginState } from '../../../Recoil/atom';
+import { getSession } from '../../../../../../hooks/useSession';
 
 const NewArrival = () => {
     const [newArrivalData, setNewArrivalData] = useState('');
@@ -21,8 +22,8 @@ const NewArrival = () => {
     const islogin = useRecoilValue(stam_loginState);
 
     useEffect(() => {
-        const loginUserDetail = JSON.parse(sessionStorage.getItem('loginUserDetail'));
-        const storeInit = JSON.parse(sessionStorage.getItem('storeInit'));
+        const loginUserDetail = getSession('loginUserDetail');
+        const storeInit = getSession('storeInit');
         const { IsB2BWebsite } = storeInit;
         const visiterID = Cookies.get('visiterId');
         let finalID;

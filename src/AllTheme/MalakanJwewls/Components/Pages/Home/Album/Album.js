@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useRecoilValue } from "recoil";
 import { mala_loginState } from "../../../Recoil/atom";
+import { getSession } from "../../../../../../hooks/useSession";
 
 const Album = () => {
   const [albumData, setAlbumData] = useState();
@@ -16,8 +17,8 @@ const Album = () => {
     let data = JSON?.parse(sessionStorage.getItem("storeInit"));
     setImageUrl(data?.AlbumImageFol);
 
-    const loginUserDetail = JSON?.parse(sessionStorage?.getItem('loginUserDetail'));
-    const storeInit = JSON?.parse(sessionStorage?.getItem('storeInit'));
+    const loginUserDetail = getSession('loginUserDetail');
+    const storeInit = getSession('storeInit');
     const { IsB2BWebsite } = storeInit;
     const visiterID = Cookies.get('visiterId');
     let finalID;

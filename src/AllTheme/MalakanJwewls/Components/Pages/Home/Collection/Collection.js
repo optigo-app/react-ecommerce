@@ -9,24 +9,25 @@ import { Get_Tren_BestS_NewAr_DesigSet_Album } from "../../../../../../utils/API
 import Cookies from "js-cookie";
 import Pako from "pako";
 import { mala_loginState } from "../../../Recoil/atom";
+import { getSession } from "../../../../../../hooks/useSession";
 
 const Collection = () => {
   const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState();
   const [designSetList, setDesignSetList] = useState([]);
-  const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
+  const loginUserDetail = getSession("loginUserDetail");
   const [storeInit, setStoreInit] = useState({});
   const islogin = useRecoilValue(mala_loginState);
   const [swiper, setSwiper] = useState(null);
 
   useEffect(() => {
-    let storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
+    let storeinit = getSession("storeInit");
     setStoreInit(storeinit);
   }, [])
 
   useEffect(() => {
-    const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
-    // const storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
+    const loginUserDetail = getSession("loginUserDetail");
+    // const storeInit = getSession("storeInit");
     const IsB2BWebsite = storeInit?.IsB2BWebsite;
     const visiterID = Cookies.get("visiterId");
     let finalID;
@@ -36,10 +37,10 @@ const Collection = () => {
       finalID = loginUserDetail?.id || "0";
     }
 
-    let storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
+    let storeinit = getSession("storeInit");
     setStoreInit(storeinit);
 
-    let data = JSON.parse(sessionStorage.getItem("storeInit"));
+    let data = getSession("storeInit");
     setImageUrl(data?.DesignSetImageFol);
 
     const Collections = async () => {
