@@ -13,6 +13,7 @@ import Pako from 'pako';
 import { Box, Link, Tab, Tabs, tabsClasses, useMediaQuery } from '@mui/material';
 import { formatRedirectTitleLine, formatter } from '../../../../../../utils/Glob_Functions/GlobalFunction';
 import { mala_loginState } from '../../../Recoil/atom';
+import { getSession } from '../../../../../../hooks/useSession';
 
 const Album1 = () => {
     const [selectedAlbum, setSelectedAlbum] = useState();
@@ -30,8 +31,8 @@ const Album1 = () => {
         setImageUrl(data?.AlbumImageFol);
         setStoreInit(data)
 
-        const loginUserDetail = JSON?.parse(sessionStorage?.getItem('loginUserDetail'));
-        const storeInit = JSON?.parse(sessionStorage?.getItem('storeInit'));
+        const loginUserDetail = getSession('loginUserDetail');
+        const storeInit = getSession('storeInit');
         const { IsB2BWebsite } = storeInit;
         const visiterID = Cookies.get('visiterId');
         let finalID;

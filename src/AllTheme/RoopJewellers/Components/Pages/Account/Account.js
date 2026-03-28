@@ -131,7 +131,6 @@ export default function Account() {
         setIsLoginState(false);
         Cookies.remove('userLoginCookie');
         sessionStorage.setItem('LoginUser', false);
-        sessionStorage.removeItem('storeInit');
         sessionStorage.removeItem('loginUserDetail');
         sessionStorage.removeItem('remarks');
         sessionStorage.removeItem('selectedAddressId');

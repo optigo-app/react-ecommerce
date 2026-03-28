@@ -21,9 +21,9 @@ window.ResizeObserver = class extends resizeObserverErr {
 
 
 root.render(
-    <React.StrictMode>
-        <AppLoader />
-    </React.StrictMode>
+  <React.StrictMode>
+    <AppLoader />
+  </React.StrictMode>
 );
 
 

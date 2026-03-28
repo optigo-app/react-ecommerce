@@ -19,6 +19,7 @@ import { toast } from 'react-toastify';
 import { useAddress } from '../../../../../../utils/Glob_Functions/OrderFlow/useAddress';
 import Cookies from "js-cookie";
 import ConfirmationDialog from '../../../../../../utils/Glob_Functions/ConfirmationDialog/ConfirmationDialog';
+import { getSession } from '../../../../../../hooks/useSession';
 
 const CartPage = () => {
   const addressData = useAddress();
@@ -82,7 +83,7 @@ const CartPage = () => {
 
   const redirectUrl = `/loginOption/?LoginRedirect=/Delivery`;
   const handlePlaceOrder = () => {
-    let storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
+    let storeInit = getSession("storeInit");
     let priceData = finalCartData?.reduce(
       (total, item) => total + item?.FinalCost,
       0
@@ -125,7 +126,7 @@ const CartPage = () => {
   };
 
   useEffect(() => {
-    const storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
+    const storeInit = getSession("storeInit");
     setStoreInit(storeInit);
     if (storeInit?.IsPLW == 1) {
       if (addressData && addressData.addressData) {

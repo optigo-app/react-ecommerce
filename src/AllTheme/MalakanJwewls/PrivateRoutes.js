@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Storeinit } from '../../utils/API/Home/Storeinit/Storeinit';
+import { getSession } from '../../hooks/useSession';
 
 const PrivateRoutes = ({ isLoginStatus }) => {
     const [isLoading, setIsLoading] = useState(true);
     const location = useLocation();
-    const storeInit = JSON.parse(sessionStorage.getItem("storeInit"));
+    const storeInit = getSession("storeInit");
 
     useEffect(() => {
         const timeout = setTimeout(() => {

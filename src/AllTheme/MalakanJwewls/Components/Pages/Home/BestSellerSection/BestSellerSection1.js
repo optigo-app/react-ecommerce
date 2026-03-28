@@ -8,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 import Cookies from 'js-cookie';
 import imageNotFound from "../../../Assets/image-not-found.jpg"
 import { mala_loginState } from '../../../Recoil/atom';
+import { getSession } from '../../../../../../hooks/useSession';
 
 
 const ProductGrid = () => {
@@ -16,7 +17,7 @@ const ProductGrid = () => {
     const [storeInit, setStoreInit] = useState({});
 
     const navigation = useNavigate();
-    const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
+    const loginUserDetail = getSession("loginUserDetail");
     const islogin = useRecoilValue(mala_loginState);
     const [hoveredItem, setHoveredItem] = useState(null);
 
@@ -35,8 +36,8 @@ const ProductGrid = () => {
 
     useEffect(() => {
 
-        const loginUserDetail = JSON.parse(sessionStorage.getItem('loginUserDetail'));
-        const storeInit = JSON.parse(sessionStorage.getItem('storeInit'));
+        const loginUserDetail = getSession('loginUserDetail');
+        const storeInit = getSession('storeInit');
         const { IsB2BWebsite } = storeInit;
         const visiterID = Cookies.get('visiterId');
         let finalID;
@@ -46,10 +47,10 @@ const ProductGrid = () => {
             finalID = loginUserDetail?.id || '0';
         }
 
-        let storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
+        let storeinit = getSession("storeInit");
         setStoreInit(storeinit)
 
-        let data = JSON.parse(sessionStorage.getItem('storeInit'))
+        let data = getSession('storeInit')
         setImageUrl(data?.DesignImageFol);
 
         Get_Tren_BestS_NewAr_DesigSet_Album("GETBestSeller", finalID).then((response) => {

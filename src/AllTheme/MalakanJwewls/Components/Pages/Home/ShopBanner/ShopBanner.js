@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 import noimagefound from './../../../Assets/image-not-found.jpg';
 import { FiChevronRight } from "react-icons/fi";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
+import { getSession } from '../../../../../../hooks/useSession';
 
 const ShopBanner = () => {
   const [storeInit, setStoreInit] = useState();
@@ -22,10 +23,8 @@ const ShopBanner = () => {
   const navigation = useNavigate();
 
   const apiCall = () => {
-    const loginUserDetail = JSON?.parse(
-      sessionStorage?.getItem("loginUserDetail")
-    );
-    const storeInit = JSON?.parse(sessionStorage?.getItem("storeInit"));
+    const loginUserDetail = getSession("loginUserDetail");
+    const storeInit = getSession("storeInit");
     setImageUrl(storeInit?.AlbumImageFol);
     setStoreInit(storeInit);
     const visiterID = Cookies.get("visiterId");

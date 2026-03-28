@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,7 +11,7 @@
       content="elvee Jewels is a prestigious bridal jewelry brand crafting timeless pieces that celebrate romance, elegance, and cultural heritage with sophistication.
   "
     />
-<meta property="og:site_name" content="Elvee" />
+    <meta property="og:site_name" content="Elvee" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.elvee.in/" />
     <meta property="og:title" content="Elvee" />
@@ -39,6 +38,9 @@
     <link rel="icon" sizes="192x192" content="https://www.elvee.in/WebSiteStaticImage/logoIcon/androidCh2.png" />
     <link rel="preload" as="image" href="http://www.elvee.in/WebSiteStaticImage/Banner/middlebanner1.webp" type="image/webp" fetchpriority="high" />
     <meta name="google-site-verification" content="Zfl5MSO5F7484yYQu0U2oRh3pLYR06pMr2B-0k9ORTw" />
+
+    <!-- Pre-fetch StoreInit.json BEFORE React loads -->
+    <script src="%PUBLIC_URL%/storeInitPreload.js" data-store-init data-web="malakan.web"></script>
   </head>
 
   <body>
@@ -47,14 +49,14 @@
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Elvee",
-  "url": "https://www.elvee.in/"
-}
-</script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Elvee",
+      "url": "https://www.elvee.in/"
+    }
+  </script>
 
   <script type="application/ld+json">
     {
@@ -64,12 +66,7 @@
       "alternateName": "elvee",
       "url": "https://www.elvee.in/",
       "logo": "https://www.elvee.in/WebSiteStaticImage/logoIcon/webLogo.png",
-      "sameAs": [
-         "https://www.instagram.com/elvee.jewels",
-          "https://in.pinterest.com/elvee_jewels",
-          "https://www.facebook.com/elveejewels",
-          "https://www.linkedin.com/company/elvee-jewels"
-        ]
+      "sameAs": ["https://www.instagram.com/elvee.jewels", "https://in.pinterest.com/elvee_jewels", "https://www.facebook.com/elveejewels", "https://www.linkedin.com/company/elvee-jewels"]
     }
   </script>
 

@@ -277,7 +277,8 @@ module.exports = function (webpackEnv) {
               // Pending further investigation:
               // https://github.com/terser-js/terser/issues/120
               inline: 2,
-              drop_console: true,
+              drop_console: false,
+              pure_funcs: ['console.log', 'console.info', 'console.debug'],
             },
             mangle: {
               safari10: true,

@@ -9,20 +9,21 @@ import Cookies from 'js-cookie';
 import { formatRedirectTitleLine, formatter, formatTitleLine, storImagePath } from '../../../../../../utils/Glob_Functions/GlobalFunction';
 import noImageFound from "../../../Assets/image-not-found.jpg"
 import { mala_loginState } from '../../../Recoil/atom';
+import { getSession } from '../../../../../../hooks/useSession';
 
 const NewArrival = () => {
     const [newArrivalData, setNewArrivalData] = useState('');
     const [imageUrl, setImageUrl] = useState();
     const navigation = useNavigate();
-    const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
+    const loginUserDetail = getSession("loginUserDetail");
     const [storeInit, setStoreInit] = useState({});
     const [ring1ImageChange, setRing1ImageChange] = useState(false);
     const [ring2ImageChange, setRing2ImageChange] = useState(false);
     const islogin = useRecoilValue(mala_loginState);
 
     useEffect(() => {
-        const loginUserDetail = JSON.parse(sessionStorage.getItem('loginUserDetail'));
-        const storeInit = JSON.parse(sessionStorage.getItem('storeInit'));
+        const loginUserDetail = getSession('loginUserDetail');
+        const storeInit = getSession('storeInit');
         const { IsB2BWebsite } = storeInit;
         const visiterID = Cookies.get('visiterId');
         let finalID;

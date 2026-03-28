@@ -19,6 +19,7 @@ import pako from "pako";
 import { useRecoilValue } from 'recoil';
 import Cookies from 'js-cookie';
 import { mala_loginState } from '../../../Recoil/atom';
+import { getSession } from '../../../../../../hooks/useSession';
 
 const TrendingView = () => {
 
@@ -52,13 +53,13 @@ const TrendingView = () => {
     };
 
     useEffect(() => {
-        let storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
+        let storeinit = getSession("storeInit");
         setStoreInit(storeinit)
 
-        let data = JSON.parse(sessionStorage.getItem('storeInit'))
+        let data = getSession('storeInit');
         setImageUrl(data?.DesignImageFol);
-        const loginUserDetail = JSON.parse(sessionStorage.getItem('loginUserDetail'));
-        const storeInit = JSON.parse(sessionStorage.getItem('storeInit'));
+        const loginUserDetail = getSession('loginUserDetail');
+        const storeInit = getSession('storeInit');
         const { IsB2BWebsite } = storeInit;
         const visiterID = Cookies.get('visiterId');
         let finalID;

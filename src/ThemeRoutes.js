@@ -1,6 +1,6 @@
 // new Code
 
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import { Helmet } from "react-helmet";
 import { CurrencyComboAPI } from "./utils/API/Combo/CurrencyComboAPI";
@@ -24,7 +24,7 @@ import { stam_companyLogo, stam_companyLogoM } from "./AllTheme/StamFordJewels/C
 import { lov_companyLogo, lov_companyLogoM, lov_loginState } from "./AllTheme/LoveIn/Components/Recoil/atom";
 import { companyLogo, companyLogoM, loginState, smr_companyLogo, smr_companyLogoM, smr_loginState } from "./AllTheme/SmilingRock/Components/Recoil/atom";
 import { REACT_APP_WEB } from "./env";
-import { Box, CircularProgress } from "@mui/material";
+
 import { RegisterMasterApi } from "./utils/API/Auth/RegisterMasterApi";
 import { GETProductType } from "./utils/API/GETProductType/GETProductType";
 import ThemePicker from "./ThemePicker";
@@ -71,34 +71,15 @@ export default function ThemeRoutes() {
   const smrMA_setCompanyTitleLogo = useSetRecoilState(smrMA_companyLogo);
 
   const [title, setTitle] = useState("Loading...");
-  const [htmlContent, setHtmlContent] = useState(null);
   const [storeInitData, setStoreInitData] = useState(() => {
+    // Priority: window.__storeInit (set by AppLoader) > sessionStorage
+    if (window.__storeInit) return window.__storeInit;
     const saved = sessionStorage.getItem("storeInit");
     return saved ? JSON.parse(saved) : null;
   });
-  const start = performance.now();
   const [currentTheme, setCurrentTheme] = useState(detectThemeNumber());
   const [isStoreInitLoaded, setIsStoreInitLoaded] = useState(false);
   const hasApiBeenCalled = useRef(false);
-
-  const fetchWithRetry = (url, retries = 3, delay = 1000) => {
-    console.log("called");
-    return new Promise((resolve, reject) => {
-      const attemptFetch = (n) => {
-        fetch(url)
-          .then((response) => response.text())
-          .then(resolve)
-          .catch((error) => {
-            if (n === 0) {
-              reject(error);
-            } else {
-              setTimeout(() => attemptFetch(n - 1), delay);
-            }
-          });
-      };
-      attemptFetch(retries);
-    });
-  };
 
   // Initialize logos immediately
   useEffect(() => {
@@ -127,51 +108,85 @@ export default function ThemeRoutes() {
     smrMA_setCompanyTitleLogo(mobileLogo);
   }, []);
 
-  // Fetch store initialization data in parallel
+  // ============================================================
+  // Polling timer: continuously check for storeInit availability
+  // Reads from window.__storeInit (set by AppLoader/loadInit.js)
+  // or sessionStorage as fallback. If not found after 15s, refetch.
+  // ============================================================
   useEffect(() => {
-    const path = `${storInitDataPath()}/StoreInit.json`;
-    fetchWithRetry(path, 4, 1000)
-      .then((text) => {
-        try {
-          const jsonData = JSON?.parse(text);
-          if (jsonData) {
-            setHtmlContent(jsonData);
-            setStoreInitData(jsonData.rd[0]);
-            setIsStoreInitLoaded(true);
-
-            // Update theme if different from detected
-            if (jsonData.rd[0]?.Themeno && jsonData.rd[0].Themeno !== currentTheme) {
-              setCurrentTheme(jsonData.rd[0].Themeno);
-            }
-
-            sessionStorage.setItem("storeInit", JSON.stringify(jsonData.rd[0]));
-            sessionStorage.setItem("myAccountFlags", JSON.stringify(jsonData.rd1));
-            sessionStorage.setItem("CompanyInfoData", JSON.stringify(jsonData.rd2[0]));
-          } else {
-            alert("StoreInit.json not found");
-          }
-        } catch (error) {
-          alert("Cannot Read store Init");
-          console.error("Error parsing JSON:", error);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching the file:", error);
-      });
-  }, [currentTheme]);
-
-  // Handle title and visitor ID setup
-  useEffect(() => {
-    if (!storeInitData) {
-      console.error("ThemeRoutes: StoreInit is missing!");
-      window.location.reload(); // Failsafe
+    // Already have data from state initialization
+    if (storeInitData) {
+      console.log("✅ ThemeRoutes: storeInit already available from state init");
+      onStoreInitReady(storeInitData);
       return;
     }
 
-    const CompanyinfoData = JSON.parse(sessionStorage.getItem("CompanyInfoData"));
-    const storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
+    let attempts = 0;
+    const MAX_ATTEMPTS = 75; // 75 x 200ms = 15 seconds
+    const POLL_INTERVAL = 200; // check every 200ms
 
-    setTitle(storeinit?.BrowserTitle || "Jewelry Store");
+    const timerId = setInterval(() => {
+      attempts++;
+
+      // Check window.__storeInit first (fastest, no JSON parse)
+      const windowData = window.__storeInit;
+      if (windowData) {
+        console.log(`✅ ThemeRoutes: Found window.__storeInit on poll attempt ${attempts}`);
+        clearInterval(timerId);
+        setStoreInitData(windowData);
+
+        // Also ensure sessionStorage is synced
+        if (!sessionStorage.getItem("storeInit")) {
+          sessionStorage.setItem("storeInit", JSON.stringify(windowData));
+        }
+        if (window.__myAccountFlags && !sessionStorage.getItem("myAccountFlags")) {
+          sessionStorage.setItem("myAccountFlags", JSON.stringify(window.__myAccountFlags));
+        }
+        if (window.__CompanyInfoData && !sessionStorage.getItem("CompanyInfoData")) {
+          sessionStorage.setItem("CompanyInfoData", JSON.stringify(window.__CompanyInfoData));
+        }
+
+        onStoreInitReady(windowData);
+        return;
+      }
+
+      // Fallback: check sessionStorage
+      const sessionData = sessionStorage.getItem("storeInit");
+      if (sessionData) {
+        console.log(`✅ ThemeRoutes: Found sessionStorage storeInit on poll attempt ${attempts}`);
+        clearInterval(timerId);
+        const parsed = JSON.parse(sessionData);
+        setStoreInitData(parsed);
+        onStoreInitReady(parsed);
+        return;
+      }
+
+      // Timeout: refetch as last resort
+      if (attempts >= MAX_ATTEMPTS) {
+        console.warn("⚠️ ThemeRoutes: storeInit not found after 15s, refetching...");
+        clearInterval(timerId);
+        refetchStoreInit();
+      }
+    }, POLL_INTERVAL);
+
+    return () => clearInterval(timerId);
+  }, []);
+
+  // Called once storeInit data is available
+  const onStoreInitReady = (initData) => {
+    if (!initData) return;
+
+    // Update theme if the JSON has a different Themeno
+    if (initData.Themeno && initData.Themeno !== currentTheme) {
+      setCurrentTheme(initData.Themeno);
+    }
+
+    setIsStoreInitLoaded(true);
+    setTitle(initData.BrowserTitle || "Jewelry Store");
+
+    // Set up visitor ID from CompanyInfoData
+    const CompanyinfoData = window.__CompanyInfoData
+      || JSON.parse(sessionStorage.getItem("CompanyInfoData") || "null");
 
     if (CompanyinfoData) {
       const visiterId = CompanyinfoData?.VisitorId;
@@ -186,18 +201,46 @@ export default function ThemeRoutes() {
             Cookies.remove("visiterId", { path: "/" });
           }
         } catch (e) {
-          console.error("Error parsing visiterId cookie:", e);
+          // visiterId cookie is a plain string, not JSON — that's fine
         }
       }
     }
 
-    if (storeinit && !hasApiBeenCalled.current) {
+    // Call combo APIs once
+    if (!hasApiBeenCalled.current) {
       hasApiBeenCalled.current = true;
       setTimeout(() => {
         callAllApi();
-      }, 1000); // Reduced delay for faster API calls
+      }, 500);
     }
-  }, [isStoreInitLoaded]);
+  };
+
+  // Last-resort refetch if polling times out
+  const refetchStoreInit = async () => {
+    try {
+      const path = `${storInitDataPath()}/StoreInit.json`;
+      const response = await fetch(path);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const text = await response.text();
+      const jsonData = JSON.parse(text);
+
+      if (jsonData?.rd?.[0]) {
+        const rd0 = jsonData.rd[0];
+        window.__storeInit = rd0;
+        window.__myAccountFlags = jsonData.rd1;
+        window.__CompanyInfoData = jsonData.rd2?.[0] || {};
+        sessionStorage.setItem("storeInit", JSON.stringify(rd0));
+        sessionStorage.setItem("myAccountFlags", JSON.stringify(jsonData.rd1));
+        sessionStorage.setItem("CompanyInfoData", JSON.stringify(jsonData.rd2?.[0] || {}));
+
+        setStoreInitData(rd0);
+        onStoreInitReady(rd0);
+        console.log("✅ ThemeRoutes: Refetch successful");
+      }
+    } catch (error) {
+      console.error("❌ ThemeRoutes: Refetch failed:", error);
+    }
+  };
 
   // Paymaster fetch
   useEffect(() => {
