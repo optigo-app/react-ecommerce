@@ -15,7 +15,6 @@ import sarafflogo from './utils/assets/loader/sarafflogo.png';
 import shanthaLogo from './utils/assets/loader/shantha.png';
 
 
-
 // shantha.png
 
 
