@@ -164,7 +164,7 @@ const ElveeMetaData = {
 };
 
 const ElveeDefaultMetadata = {
-  title: "Elvee",
+  title: "elvee",
   description: "Elvee Jewels is a prestigious bridal jewelry brand crafting timeless pieces that celebrate romance, elegance, and cultural heritage with sophistication.",
   canonical: URL_ADDRESS,
   keywords: "Elvee, elvee ,bridal jewelry, elegant jewelry, fashion jewelry, Elvee jewels, ELvee Jewels Private limited, elveester, Elveester",
@@ -443,8 +443,8 @@ const createSchema = ({ logoUrl }) => {
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        name: "Elvee",
-        alternateName: "Elvee Jewels Private Limited",
+        name: "elvee",
+        alternateName: "elvee",
         url: "https://www.elvee.in/",
         potentialAction: {
           "@type": "SearchAction",
@@ -455,8 +455,8 @@ const createSchema = ({ logoUrl }) => {
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: "Elvee",
-        alternateName: "Elvee Jewels Private Limited",
+        name: "elvee",
+        alternateName: "elvee",
         url: "https://www.elvee.in/",
         logo: 'https://www.elvee.in/WebSiteStaticImage/logoIcon/webLogo.png',
         sameAs: [
