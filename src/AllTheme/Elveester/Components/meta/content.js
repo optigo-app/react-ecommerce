@@ -1,7 +1,9 @@
-import { IsSetupFor ,isSetupforMax } from "../Recoil/atom";
+import { IsSetupFor, isSetupforMax } from "../Recoil/atom";
 
 const ORG_URL = "https://www.elvee.in";
 const DEMO_URL_ADDRESS = "https://sonasons.optigoapps.com";
+const VIMAL_URL = "https://vimalgoldanddiamond.com";
+
 const URL_ADDRESS = IsSetupFor ? DEMO_URL_ADDRESS : ORG_URL;
 
 const ElveeMetaData = {
@@ -160,6 +162,165 @@ const ElveeMetaData = {
     description: "Frequently asked questions about Elvee.",
     canonical: `${URL_ADDRESS}/faqs`,
     keywords: "FAQs, help, common questions, support,FAQs",
+  },
+};
+
+const VimalMetaData = {
+  "/LoginOption": {
+    title: "Login | Vimal Gold and Diamond",
+    description: "Log in or sign up to Vimal Gold and Diamond using email or mobile.",
+    canonical: `${VIMAL_URL}/LoginOption`,
+    keywords: "Vimal login, sign in, register, email login, mobile login",
+  },
+  "/ContinueWithEmail": {
+    title: "Continue with Email | Vimal Gold and Diamond",
+    description: "Continue your login with email.",
+    canonical: `${VIMAL_URL}/ContinueWithEmail`,
+    keywords: "email login, continue login, Vimal login",
+  },
+  "/ContinueWithMobile": {
+    title: "Continue with Mobile | Vimal Gold and Diamond",
+    description: "Continue your login with mobile.",
+    canonical: `${VIMAL_URL}/ContinueWithMobile`,
+    keywords: "mobile login, OTP login, Vimal sign in",
+  },
+  "/LoginWithEmail": {
+    title: "Login with Email | Vimal Gold and Diamond",
+    description: "Log in using your email address.",
+    canonical: `${VIMAL_URL}/LoginWithEmail`,
+    keywords: "email login, secure login",
+  },
+  "/LoginWithEmailCode": {
+    title: "Login with Email Code | Vimal Gold and Diamond",
+    description: "Enter the code sent to your email to log in.",
+    canonical: `${VIMAL_URL}/LoginWithEmailCode`,
+    keywords: "email code login, OTP login",
+  },
+  "/LoginWithMobileCode": {
+    title: "Login with Mobile Code | Vimal Gold and Diamond",
+    description: "Enter the code sent to your mobile.",
+    canonical: `${VIMAL_URL}/LoginWithMobileCode`,
+    keywords: "mobile OTP login, SMS verification",
+  },
+  "/ForgotPass": {
+    title: "Forgot Password | Vimal Gold and Diamond",
+    description: "Reset your password using email or mobile.",
+    canonical: `${VIMAL_URL}/ForgotPass`,
+    keywords: "forgot password, reset password",
+  },
+  "/cartPage": {
+    title: "Cart | Vimal Gold and Diamond",
+    description: "Your shopping cart.",
+    canonical: `${VIMAL_URL}/cartPage`,
+    keywords: "shopping cart, checkout",
+  },
+  "/myWishList": {
+    title: "Wishlist | Vimal Gold and Diamond",
+    description: "Your wishlist items.",
+    canonical: `${VIMAL_URL}/myWishList`,
+    keywords: "wishlist, saved items",
+  },
+  "/Delivery": {
+    title: "Delivery | Vimal Gold and Diamond",
+    description: "Your delivery details.",
+    canonical: `${VIMAL_URL}/Delivery`,
+    keywords: "delivery info, shipping",
+  },
+  "/payment": {
+    title: "Payment | Vimal Gold and Diamond",
+    description: "Your payment details.",
+    canonical: `${VIMAL_URL}/payment`,
+    keywords: "payment, checkout, secure payment",
+  },
+  "/Confirmation": {
+    title: "Order Confirmation | Vimal Gold and Diamond",
+    description: "Your order confirmation.",
+    canonical: `${VIMAL_URL}/Confirmation`,
+    keywords: "order confirmation, purchase complete",
+  },
+  "/p/*": {
+    title: "Diamond Jewellery Collection | Vimal Gold and Diamond",
+    description: "Browse premium diamond jewellery collection.",
+    canonical: `${VIMAL_URL}/p`,
+    keywords: "diamond jewellery, rings, earrings, necklaces",
+  },
+  "/d/*": {
+    title: "Product Detail | Vimal Gold and Diamond",
+    description: "View detailed product information.",
+    canonical: `${VIMAL_URL}/d`,
+    keywords: "product detail, diamond product",
+  },
+  "/Lookbook": {
+    title: "Lookbook | Vimal Gold and Diamond",
+    description: "Explore latest jewellery collections.",
+    canonical: `${VIMAL_URL}/Lookbook`,
+    keywords: "lookbook, jewellery designs",
+  },
+  "/account": {
+    title: "My Account | Vimal Gold and Diamond",
+    description: "Manage your account details.",
+    canonical: `${VIMAL_URL}/account`,
+    keywords: "account settings, profile",
+  },
+  "/aboutUs": {
+    title: "About Us | Vimal Gold and Diamond",
+    description: "Learn about Vimal Gold and Diamond.",
+    canonical: `${VIMAL_URL}/aboutUs`,
+    keywords: "about Vimal, jewellery brand",
+  },
+  "/history": {
+    title: "Our History | Vimal Gold and Diamond",
+    description: "Explore our journey and milestones.",
+    canonical: `${VIMAL_URL}/history`,
+    keywords: "brand history, jewellery journey",
+  },
+  "/term&condition": {
+    title: "Terms and Conditions | Vimal Gold and Diamond",
+    description: "Read our terms and conditions.",
+    canonical: `${VIMAL_URL}/term&condition`,
+    keywords: "terms, policies, agreement",
+  },
+  "/customerServices": {
+    title: "Customer Services | Vimal Gold and Diamond",
+    description: "Contact our support team.",
+    canonical: `${VIMAL_URL}/customerServices`,
+    keywords: "customer support, help",
+  },
+  "/customize": {
+    title: "Customize Jewellery | Vimal Gold and Diamond",
+    description: "Customize your jewellery.",
+    canonical: `${VIMAL_URL}/customize`,
+    keywords: "custom jewellery, personalization",
+  },
+  "/privacy": {
+    title: "Privacy Policy | Vimal Gold and Diamond",
+    description: "Learn how we handle your data.",
+    canonical: `${VIMAL_URL}/privacy`,
+    keywords: "privacy policy, data security",
+  },
+  "/contact-us": {
+    title: "Contact Us | Vimal Gold and Diamond",
+    description: "Get in touch with us.",
+    canonical: `${VIMAL_URL}/contact-us`,
+    keywords: "contact, support",
+  },
+  "/careers": {
+    title: "Careers | Vimal Gold and Diamond",
+    description: "Explore job opportunities.",
+    canonical: `${VIMAL_URL}/careers`,
+    keywords: "careers, jobs",
+  },
+  "/appointment": {
+    title: "Book Appointment | Vimal Gold and Diamond",
+    description: "Schedule a visit or consultation.",
+    canonical: `${VIMAL_URL}/appointment`,
+    keywords: "appointment booking",
+  },
+  "/faqs": {
+    title: "FAQs | Vimal Gold and Diamond",
+    description: "Frequently asked questions.",
+    canonical: `${VIMAL_URL}/faqs`,
+    keywords: "FAQs, help",
   },
 };
 
@@ -336,82 +497,45 @@ const SonasonsDefaultMetadata = {
   keywords: "Sonasons, sonasons, bridal jewelry, elegant jewelry, fashion jewelry, Sonasons jewels, Sonasons Jewels Private Limited",
 };
 
+const VimalDefaultMetadata = {
+  title: "Vimal Gold and Diamond",
+  description: "Vimal Gold and Diamond offers premium real diamond jewellery including rings, necklaces, earrings and custom designs.",
+  canonical: VIMAL_URL,
+  keywords: "Vimal Gold and Diamond, diamond jewellery India, Surat diamond, engagement rings, gold jewellery",
+};
 
-  const isElveebreadcrumbData = [{ name: "Home", url: "https://www.elvee.in" }];
+const isElveebreadcrumbData = [{ name: "Home", url: "https://www.elvee.in" }];
 
-  const isSonasonsbreadcrumbData = [{ name: "Home", url: "https://sonasons.optigoapps.com/" }];
+const isSonasonsbreadcrumbData = [{ name: "Home", url: "https://sonasons.optigoapps.com/" }];
 
+const isVimalbreadcrumbData = [{ name: "Home", url: "https://vimalgoldanddiamond.com/" }];
 
-// const createSchema = ({  logoUrl }) => {
-//   if (isSetupforMax === true) {
-//     return {
-//       "@context": "https://schema.org",
-//       "@type": "WebSite",
-//       name: "Sonasons",
-//        "alternateName": "Sonasons Jewellery",
-//       url: `https://sonasons.optigoapps.com/n`,
-//       potentialAction: {
-//         "@type": "SearchAction",
-//         target: {
-//           "@type": "EntryPoint",
-//           urlTemplate: `https://sonasons.optigoapps.com/n/search?q={search_term_string}`,
-//         },
-//         "query-input": "required name=search_term_string",
-//       },
-//       about: {
-//         "@type": "Organization",
-//         name: "Sonasons",
-//         url: `https://sonasons.optigoapps.com/n`,
-//         logo: logoUrl || "https://sonasons.optigoapps.com/n/default-logo.png", // fallback logo
-//         sameAs: [
-//           "https://www.instagram.com/sonasons", 
-//           "https://www.facebook.com/sonasons",
-//           "https://www.linkedin.com/company/sonasons"
-//         ],
-//       },
-//       author: {
-//         "@type": "Organization",
-//         name: "Sonasons Team",
-//       },
-//     };
-//   } else {
-//     return {
-//       "@context": "https://schema.org",
-//       "@type": "WebSite",
-//       name: "Elvee",
-//       alternateName: "Elvee Jewels Private Limited",
-//       url: `${URL_ADDRESS}`,
-//          potentialAction: {
-//       "@type": "SearchAction",
-//       target: "https://www.elvee.in/search?q={search_term_string}",
-//       "query-input": "required name=search_term_string"
-//     },
-//       about: {
-//         "@type": "Organization",
-//         name: "Elvee",
-//         alternateName: "Elvee Jewels Private Limited",
-//         url: `${URL_ADDRESS}`,
-//         logo: logoUrl || "/default-elvee-logo.png", // fallback logo
-//         sameAs: [
-          // "https://www.instagram.com/elvee.jewels",
-          // "https://in.pinterest.com/elvee_jewels",
-          // "https://www.facebook.com/elveejewels",
-          // "https://www.linkedin.com/company/elvee-jewels"
-//         ],
-//       },
-//       author: {
-//         "@type": "Organization",
-//         name: "Elvee Jewels Team",
-//       },
-//     };
-//   }
-// };
-
-// Usage
-
+const createVimalSchema = ({ logoUrl }) => [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Vimal Gold and Diamond",
+    alternateName: "Vimal Diamonds",
+    url: "https://vimalgoldanddiamond.com/",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://vimalgoldanddiamond.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vimal Gold and Diamond",
+    url: "https://vimalgoldanddiamond.com/",
+    logo: logoUrl,
+    sameAs: ["https://www.instagram.com/", "https://www.facebook.com/"],
+  },
+];
 
 const createSchema = ({ logoUrl }) => {
   if (isSetupforMax === true) {
+    return createVimalSchema({ logoUrl });
     return [
       {
         "@context": "https://schema.org",
@@ -422,8 +546,8 @@ const createSchema = ({ logoUrl }) => {
         potentialAction: {
           "@type": "SearchAction",
           target: "https://sonasons.optigoapps.com/search?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+          "query-input": "required name=search_term_string",
+        },
       },
       {
         "@context": "https://schema.org",
@@ -431,12 +555,8 @@ const createSchema = ({ logoUrl }) => {
         name: "Sonasons",
         url: "https://sonasons.optigoapps.com/",
         logo: logoUrl,
-        sameAs: [
-          "https://www.instagram.com/sonasons",
-          "https://www.facebook.com/sonasons",
-          "https://www.linkedin.com/company/sonasons"
-        ]
-      }
+        sameAs: ["https://www.instagram.com/sonasons", "https://www.facebook.com/sonasons", "https://www.linkedin.com/company/sonasons"],
+      },
     ];
   } else {
     return [
@@ -449,8 +569,8 @@ const createSchema = ({ logoUrl }) => {
         potentialAction: {
           "@type": "SearchAction",
           target: "https://www.elvee.in/search?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+          "query-input": "required name=search_term_string",
+        },
       },
       {
         "@context": "https://schema.org",
@@ -458,25 +578,21 @@ const createSchema = ({ logoUrl }) => {
         name: "elvee",
         alternateName: "elvee",
         url: "https://www.elvee.in/",
-        logo: 'https://www.elvee.in/WebSiteStaticImage/logoIcon/webLogo.png',
-        sameAs: [
-         "https://www.instagram.com/elvee.jewels",
-          "https://in.pinterest.com/elvee_jewels",
-          "https://www.facebook.com/elveejewels",
-          "https://www.linkedin.com/company/elvee-jewels"
-        ]
-      }
+        logo: "https://www.elvee.in/WebSiteStaticImage/logoIcon/webLogo.png",
+        sameAs: ["https://www.instagram.com/elvee.jewels", "https://in.pinterest.com/elvee_jewels", "https://www.facebook.com/elveejewels", "https://www.linkedin.com/company/elvee-jewels"],
+      },
     ];
   }
 };
 
-const metaData = IsSetupFor ? SonasonsMetaData : ElveeMetaData;
-const defaultMetadata = IsSetupFor ? SonasonsDefaultMetadata : ElveeDefaultMetadata;
-const breadcrumbData = isSetupforMax ? isSonasonsbreadcrumbData : isElveebreadcrumbData;
+const Demo = false;
 
-export {
-    metaData,
-    defaultMetadata ,
-    createSchema,
-    breadcrumbData
-}
+const DemoMeta = Demo ? SonasonsMetaData : VimalMetaData;
+const DemoDefaultMetadata = Demo ? SonasonsDefaultMetadata : VimalDefaultMetadata;
+const DemoBreadcrumbData = Demo ? isSonasonsbreadcrumbData : isVimalbreadcrumbData;
+
+const metaData = IsSetupFor ? DemoMeta : ElveeMetaData;
+const defaultMetadata = IsSetupFor ? DemoDefaultMetadata : ElveeDefaultMetadata;
+const breadcrumbData = isSetupforMax ? DemoBreadcrumbData : isElveebreadcrumbData;
+
+export { metaData, defaultMetadata, createSchema, breadcrumbData };

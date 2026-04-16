@@ -96,7 +96,7 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
       type: "image",
       src: img,
     })) || [];
-    
+
 
   const showMarquee = isLogin && !isSetupforMax;
 
@@ -141,12 +141,12 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
           {showMarquee && <MarqueeBar />}
           {showMarquee && <JewelryShowcase data={SectionData} />}
           {showMarquee && <NewArrivalsSection />}
-          {!isSetupforMax &&  ShowBeforeLogin && <PromoComponent1 banner={middleBanner} />}
+          {!isSetupforMax && ShowBeforeLogin && <PromoComponent1 banner={middleBanner} />}
           {isSetupforMax && (
             <>
               <CategorySlider IsLoading={IsFetched} SectionData={SectionData.category} />
               {/* <MaxCollection banner={bannerlist?.categoryBanner} /> */}
-              <MaxShopBanner />
+              {/* <MaxShopBanner /> */}
               <CollectionsSlider IsLoading={IsFetched} SectionData={SectionData.collection} />
               <MaxDesignSet />
               <MaxGalleryView banner={bannerlist?.photoGallery} />
