@@ -42,7 +42,7 @@ export const redirectModal = atom({
 
 export const syncDataAtom = atom({
   key: "syncDataAtom",
-  default: { autocode: "", type: "", status: false }, 
+  default: { autocode: "", type: "", status: false },
 });
 
 export const syncProductListAtom = atom({
@@ -55,11 +55,11 @@ export const syncProductListAtom = atom({
 });
 
 
-const isSetup = "elvee" ;
-// const isSetup = "demo" ;
-const theme = "max" ;
-export const isSetupforMax = theme !== "max" ;
-// export const isSetupforMax = theme === "max" ;
+// const isSetup = "elvee";
+const isSetup = "demo";
+const theme = "max";
+// export const isSetupforMax = theme !== "max" ;
+export const isSetupforMax = theme === "max";
 
-export const IsSetupFor = isSetup === "demo" ;
+export const IsSetupFor = isSetup === "demo";
 

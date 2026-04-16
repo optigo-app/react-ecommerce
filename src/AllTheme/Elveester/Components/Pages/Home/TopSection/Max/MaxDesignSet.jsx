@@ -12,6 +12,8 @@ import { useRecoilValue } from "recoil";
 import { el_loginState } from "../../../../Recoil/atom";
 import '../../../../../../SmilingRock/Components/Pages/Home/DesignSet/DesignSet2.scss'
 import { formatter } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
+import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
+
 
 // MUI Imports
 import {
@@ -56,6 +58,13 @@ const MaxDesignSet = ({ data }) => {
   const productRefs = useRef({});
   const scrollRetries = useRef(0);
   const maxRetries = 10;
+
+  // shopthelook.jpg
+  //  { slug: "Ring", image: `${storImagePath()}/Category/new-image/rings.jpg` },
+  // "\\nzen\allpublish\Webstore\elvee.web\WebSiteStaticImage\Banner\shopthelook.jpg"
+
+
+  const BgImg = `${storImagePath()}/Banner/shopthelook.jpg`;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -287,7 +296,8 @@ const MaxDesignSet = ({ data }) => {
               {ProdCardImageFunc(slide) ? (
                 <Box
                   component="img"
-                  src="https://pipeline-theme-fashion.myshopify.com/cdn/shop/files/clothing-look-26.jpg?height=1366&v=1638651514&width=2048"
+                  // src="https://pipeline-theme-fashion.myshopify.com/cdn/shop/files/clothing-look-26.jpg?height=1366&v=1638651514&width=2048"
+                  src={BgImg}
                   alt="Design Set"
                   id={`product-${index}`}
                   ref={(el) => (productRefs.current[`product-${index}`] = el)}

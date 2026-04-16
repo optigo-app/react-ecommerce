@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import "./ContactUs.modul.scss";
 import { toast } from "react-toastify";
 import Footer from "../../Home/Footer/Footer";
@@ -9,6 +9,7 @@ import { storImagePath } from "../../../../../../utils/Glob_Functions/GlobalFunc
 import { ContactUsAPI } from "../../../../../../utils/API/ContactUs/ContactUsAPI";
 import CircularProgress from '@mui/material/CircularProgress'; // Import MUI CircularProgress
 import PageLoader from "../../../../../../utils/Glob_Functions/PageLoaderComponent/PageLoader";
+import { useEffect, useState } from "react";
 
 export default function ContactUs() {
   const [activeTab, setActiveTab] = useState("M1");
@@ -20,8 +21,8 @@ export default function ContactUs() {
   };
 
   useEffect(() => {
-    fetch(`${storImagePath()}/html/SonasonsContactPage.html`)
-      // fetch(`${storImagePath()}/html/ShreeDiaConatct.html`)
+    // fetch(`${storImagePath()}/html/SonasonsContactPage.html`)
+    fetch(`${storImagePath()}/html/ShreeDiaConatct.html`)
       // fetch(`${storImagePath()}/html/KamalikaContactpage.html`)
       .then((response) => response.text())
       .then((html) => {

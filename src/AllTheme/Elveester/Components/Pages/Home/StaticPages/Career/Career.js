@@ -22,6 +22,10 @@ const Career = () => {
             behavior: "smooth",
         });
     }, []);
+
+    const Title =
+        !IsSetupFor ? "SONASONS" : "Vimal Gold & Diamond"
+
     if (IsSetupFor) {
         return <>
             <div className="elev_career_page">
@@ -35,7 +39,7 @@ const Career = () => {
                     <section className="about-section">
                         <p>
                             We recruit for our boutiques and offices located in the India & International.
-                            SONASONS offers professional development opportunities for both experienced employees and beginners,
+                            {Title} offers professional development opportunities for both experienced employees and beginners,
                             working together in an environment of excellence.
                         </p>
                     </section>
@@ -50,7 +54,7 @@ const Career = () => {
                     <div className="join-team-content">
                         <h2>JOIN OUR TEAM</h2>
                         <p className='elv_join_team_desc'>
-                            Becoming The SONASONS team member means becoming part of a universe of passion where women and men use their entrepreneurial spirit and creativity,
+                            Becoming The {Title} team member means becoming part of a universe of passion where women and men use their entrepreneurial spirit and creativity,
                             looking for the pursuit of the requirement of tradition. <br />
                             As a human-sized luxury Maison, we hire talented people with strategic business minds and vision who still remain close to the ground and
                             result-oriented. <br /> We consider our employees as a key resource and strongly believe in the importance of individual performance to achieve
@@ -60,7 +64,7 @@ const Career = () => {
                 </div>
                 <div className="bar_elvee_sec">
                     <p>
-                        View all of our job offers, internship and apprenticeships on the SONASONS website in the "Talents" section.
+                        View all of our job offers, internship and apprenticeships on the {Title} website in the "Talents" section.
                     </p>
                     <button
                         onClick={() => setfromshow(!showfrom)}

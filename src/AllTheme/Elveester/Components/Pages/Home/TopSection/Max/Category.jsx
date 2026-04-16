@@ -22,6 +22,20 @@ const categories = [
   { slug: "Men's chain", image: `${storImagePath()}/Category/new-image/Mens'chain.jpg` },
 ];
 
+const VedicaCategories = [
+  { slug: "Ring", image: `${storImagePath()}/Category/new-image/rings.png` },
+  { slug: "Bangles", image: `${storImagePath()}/Category/new-image/bangles.png` },
+  { slug: "Pendants", image: `${storImagePath()}/Category/new-image/pendent.jpg` },
+  { slug: "Bracelet", image: `${storImagePath()}/Category/new-image/bracelets.png` },
+  { slug: "EARING", image: `${storImagePath()}/Category/new-image/earring.png` },
+  { slug: "NACKLACE", image: `${storImagePath()}/Category/new-image/Necklace.png` },
+  { slug: "Necklace", image: `${storImagePath()}/Category/new-image/Necklace.png` },
+  { slug: "Mangalsutra", image: `${storImagePath()}/Category/new-image/mangasutra.png` },
+  { slug: "Pendant", image: `${storImagePath()}/Category/new-image/pendant.png` }
+];
+
+
+
 const CategorySlider = ({ SectionData, IsLoading }) => {
   const [prevEl, setPrevEl] = useState(null);
   const [nextEl, setNextEl] = useState(null);
@@ -71,18 +85,34 @@ const CategorySlider = ({ SectionData, IsLoading }) => {
     return map[normalized] || `/fallback-image.jpg`;
   };
 
+  // const ImagesDemo = {
+  //   categoryImages: buildNormalizedMap({
+  //     Ring: `${storImagePath()}/Category/new-image/rings.jpg`,
+  //     Bangles: `${storImagePath()}/Category/new-image/Bangals1.png`,
+  //     Pendants: `${storImagePath()}/Category/new-image/pendent.jpg`,
+  //     Bracelet: `${storImagePath()}/Category/new-image/BRACELATE2.jpg`,
+  //     EARING: `${storImagePath()}/Category/new-image/Earings1.png`,
+  //     NACKLACE: `${storImagePath()}/Category/new-image/NECKLACE1.jpg`,
+  //     Mangalsutra: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg`,
+  //     "Men's chain": `${storImagePath()}/Category/new-image/Mens'chain.jpg`,
+  //   }),
+  // };
+
   const ImagesDemo = {
     categoryImages: buildNormalizedMap({
-      Ring: `${storImagePath()}/Category/new-image/rings.jpg`,
-      Bangles: `${storImagePath()}/Category/new-image/Bangals1.png`,
+      Ring: `${storImagePath()}/Category/new-image/rings.png`,
+      Bangles: `${storImagePath()}/Category/new-image/bangles.png`,
       Pendants: `${storImagePath()}/Category/new-image/pendent.jpg`,
-      Bracelet: `${storImagePath()}/Category/new-image/BRACELATE2.jpg`,
-      EARING: `${storImagePath()}/Category/new-image/Earings1.png`,
-      NACKLACE: `${storImagePath()}/Category/new-image/NECKLACE1.jpg`,
-      Mangalsutra: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg`,
-      "Men's chain": `${storImagePath()}/Category/new-image/Mens'chain.jpg`,
+      Bracelet: `${storImagePath()}/Category/new-image/bracelets.png`,
+      EARING: `${storImagePath()}/Category/new-image/earring.png`,
+      NACKLACE: `${storImagePath()}/Category/new-image/Necklace.png`,
+      Necklace: `${storImagePath()}/Category/new-image/Necklace.png`,
+      Mangalsutra: `${storImagePath()}/Category/new-image/mangasutra.png`,
+      Pendant: `${storImagePath()}/Category/new-image/pendant.png`
     }),
   };
+
+
 
   const FilterData = SectionData?.filter((cat) => ImagesDemo?.categoryImages[normalizeKey(cat?.CategoryName)]) || [];
 

@@ -114,6 +114,7 @@ export default function YourProfile() {
                     <CircularProgress className='loadingBarManage' />
                 </div>
             )}
+            
              <div className="sticky-header">
                 <MobViewHeader title="Your Profile" />
              </div>

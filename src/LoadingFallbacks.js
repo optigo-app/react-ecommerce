@@ -13,6 +13,7 @@ import ojasviLogo from './utils/assets/loader/ojasviLogo.png';
 import shinjiniLogo from './utils/assets/loader/shinjiniLogo.png';
 import sarafflogo from './utils/assets/loader/sarafflogo.png';
 import shanthaLogo from './utils/assets/loader/shantha.png';
+import vedicaLogo from './utils/assets/loader/vedica.png';
 
 
 // shantha.png
@@ -84,7 +85,7 @@ export const DefaultLoadingFallback = () => (
 );
 
 export const ElveeLoadingFallback = () => {
-  const Logo = IsSetupFor ? webLogo : Gif_Loder;
+  const Logo = IsSetupFor ? vedicaLogo : Gif_Loder;
   return (
     <>
       <Box

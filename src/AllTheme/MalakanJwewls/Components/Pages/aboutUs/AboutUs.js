@@ -60,8 +60,8 @@ export default function AboutUs() {
   // const banner = `${storImagePath()}/images/static/about2.jpg`;
 
   return (
-    <Sonsons banner={banner} aboutData={aboutData} valuesData={valuesData} />
-    // <ShreeDiamonds banner={banner} />
+    // <Sonsons banner={banner} aboutData={aboutData} valuesData={valuesData} />
+    <ShreeDiamonds banner={banner} />
     // <Kamalika banner={banner} />
   );
 }
