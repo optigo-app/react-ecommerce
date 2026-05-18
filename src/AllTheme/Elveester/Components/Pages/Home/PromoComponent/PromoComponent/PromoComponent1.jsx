@@ -4,6 +4,9 @@ import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalF
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { IsSetupFor } from "../../../../Recoil/atom";
 
+// Set to 0 to show Sonasons, 1 to show Elvee Jewels
+const promoMode = 0;
+
 const PromoComponent1 = ({ banner }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -56,7 +59,7 @@ const PromoComponent1 = ({ banner }) => {
             />
             <img
               src={imageSrc}
-              alt="Who We Are - Elvee Jewels"
+              alt={promoMode === 0 ? "Who We Are - Sonasons" : "Who We Are - Elvee Jewels"}
               style={{
                 width: "100%",
                 height: "auto",
@@ -69,7 +72,7 @@ const PromoComponent1 = ({ banner }) => {
         </Box>
 
         {/* Right Text Section */}
-        {IsSetupFor ?
+        {promoMode === 0 ?
           <>
             <Box
               className="promo-diamondBox_1"

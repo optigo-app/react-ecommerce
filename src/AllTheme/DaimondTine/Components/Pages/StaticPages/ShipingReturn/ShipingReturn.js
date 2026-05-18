@@ -15,8 +15,8 @@ export default function ShipingReturn() {
 
 
     useEffect(() => {
-        fetch(`${storImagePath()}/html/ShipingReturn.html`)
-        // fetch(`${storImagePath()}/html/ShipingReturnsona.html`)
+        // fetch(`${storImagePath()}/html/ShipingReturn.html`)
+        fetch(`${storImagePath()}/html/ShipingReturnsona.html`)
             .then((response) => response.text())
             .then((html) => {
                 setHtmlContent(html);
@@ -29,7 +29,7 @@ export default function ShipingReturn() {
     return (
         <div className='dt_faqMaindiv'>
             <div className='dt_FaqSubDivMain'>
-                <div  className='dt_Faq_Sub_Set' style={{ marginInline: '10%', paddingBottom: '80px' }}>
+                <div className='dt_Faq_Sub_Set' style={{ marginInline: '10%', paddingBottom: '80px' }}>
                     <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
                 </div>
             </div>

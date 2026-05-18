@@ -36,23 +36,24 @@ import SocialMediaVideoSection from "./VideoSection";
 const sliderData = [
   {
     imageUrl: "/images/HomePage/SocialMedia/socialMedia1.jpg",
-    link: "https://www.instagram.com/",
+    link: "https://www.instagram.com/vimalgoldanddiamond/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/instagram.png`,
   },
   {
     imageUrl: "/images/HomePage/SocialMedia/socialMedia2.jpg",
     link: "https://in.pinterest.com/",
-    icon: `${storImagePath()}/images/HomePage/SocialLinks/pinterest.png`,
-  },
-  {
-    imageUrl: "/images/HomePage/SocialMedia/socialMedia3.jpg",
-    link: "https://www.facebook.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/facebook.png`,
   },
   {
+    imageUrl: "/images/HomePage/SocialMedia/socialMedia3.jpg",
+    link: "https://www.facebook.com/VimalDiamondOfficial/",
+    icon: `${storImagePath()}/images/HomePage/SocialLinks/pinterest.png`,
+  },
+  {
     imageUrl: "/images/HomePage/SocialMedia/socialMedia4.jpg",
-    link: "https://www.linkedin.com/",
-    icon: `${storImagePath()}/images/HomePage/SocialLinks/linkedin.png`,
+    link: "https://www.youtube.com/@vimalgoldanddiamond",
+    icon: `${storImagePath()}/images/HomePage/SocialLinks/youtube.png`,
+    // icon: `${storImagePath()}/images/HomePage/SocialLinks/instagram.png`,
   },
 ];
 // https://www.elvee.in/WebSiteStaticImage/Banner/socialmediabanner1.png
@@ -105,20 +106,20 @@ const IconWrapper = styled(Box)(({ theme }) => ({
 // ------- Main Component -------
 export default function SocialMediaSection({ banner, demoVideo }) {
 
-    const updatedSlides = sliderData.map((item, i) => ({
-      ...item,
-      imageUrl: banner?.image?.[i] || item.imageUrl,
-      ...(IsSetupFor && demoVideo?.[i] ? { demoVideo: demoVideo[i] } : {}),
-    }));
-    
+  const updatedSlides = sliderData.map((item, i) => ({
+    ...item,
+    imageUrl: banner?.image?.[i] || item.imageUrl,
+    ...(IsSetupFor && demoVideo?.[i] ? { demoVideo: demoVideo[i] } : {}),
+  }));
 
-  if (IsSetupFor) {
-    return (
-      <>
-        <SocialMediaVideoSection videoData={updatedSlides} />
-      </>
-    );
-  }
+
+  // if (IsSetupFor) {
+  //   return (
+  //     <>
+  //       <SocialMediaVideoSection videoData={updatedSlides} />
+  //     </>
+  //   );
+  // }
 
   return (
     <Box name="mainSocialMediaConatinerID" className="mainSocialMediaConatiner" sx={{ width: "100%", px: { xs: 2, sm: 3, md: 4 } }}>

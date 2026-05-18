@@ -28,6 +28,8 @@ import MaxBestSeller from "../Max/MaxBestSeller";
 import MaxStore from "../Max/MaxStore";
 import StoreLocator from "../Max/SingleStore";
 import MaxShopBanner from "../Max/MaxShopBanner";
+import { GetHomeProductType } from "../../../../../../../utils/API/Home/GetProductType/GetHomeProductType";
+import ProductTypeSlider from "../Max/ProductTypeSlider";
 
 
 
@@ -39,6 +41,7 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
   const [SectionData, setSectionData] = useState({
     collection: [],
     category: [],
+    productType: [],
   });
   const [IsFetched, setIsFetched] = useState(true)
 
@@ -66,9 +69,12 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
       }
       const response = await HomeCollectionApi(finalID);
       const Response = await HomeCategoryApi(finalID);
+      const HomeProductType = await GetHomeProductType(finalID);
+      console.log("HomeProductType", HomeProductType);
       setSectionData({
         collection: response?.Data?.rd ?? [],
         category: Response?.Data?.rd ?? [],
+        productType: HomeProductType?.Data?.rd ?? [],
       });
       setIsFetched(false)
     } catch (error) {
@@ -148,6 +154,7 @@ const NewTopSection = ({ bannerlist, banner, socialMediaBanner, carousel, isLogi
               {/* <MaxCollection banner={bannerlist?.categoryBanner} /> */}
               {/* <MaxShopBanner /> */}
               <CollectionsSlider IsLoading={IsFetched} SectionData={SectionData.collection} />
+              <ProductTypeSlider IsLoading={IsFetched} SectionData={SectionData.productType} />
               <MaxDesignSet />
               <MaxGalleryView banner={bannerlist?.photoGallery} />
               <MaxNewArrivalsSection />

@@ -5,6 +5,8 @@ import { socialLink } from "../../../Constants/SocialLinks";
 import { Box } from "@mui/material";
 
 const SocialTab = ({ data, isThemeActive }) => {
+
+  const isSonaSons = 0 ? '#' : 'https://www.instagram.com/shantha_jewellers?igsh=MThrbTMwMXY5Ynk3eA%3D%3D&utm_source=qr';
   return (
     <Box className="hoq_main_SocialTab" sx={{ ...(isThemeActive && { marginBottom: "6rem" }) }}>
       <div className="header">
@@ -16,7 +18,7 @@ const SocialTab = ({ data, isThemeActive }) => {
             <div key={i} className="social_card" style={{ filter: i % 2 ? "grayscale(50)" : "" }}>
               <img src={data?.image[i]} alt={img} />
               <div className="icon_overlayer">
-                <a target="_blank" href={"https://www.instagram.com/shantha_jewellers?igsh=MThrbTMwMXY5Ynk3eA%3D%3D&utm_source=qr"}>
+                <a target="_blank" href={isSonaSons}>
                   {icon}
                 </a>
               </div>

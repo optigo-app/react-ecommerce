@@ -100,10 +100,10 @@ function Collection() {
         {/* Why shop with Shinjini Jewels? */}
 
         {/* For Sonasons */}
-        {/* Why Shop With Sonasons? */}
+        Why Shop With Sonasons?
 
         {/* For Vara */}
-        Why shop with Vara?
+        {/* Why shop with Vara? */}
 
         {/* For Ojasvi */}
         {/* Why shop with Ojasvi? */}

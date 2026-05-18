@@ -4,6 +4,9 @@ import CompanyData from "../../ComapnayData/CompanyData";
 import useHomeBannerImages from "../../../../../../../utils/Glob_Functions/ThemesBanner/ThemesBanner";
 import { IsSetupFor } from "../../../../Recoil/atom";
 
+// Set to 0 to show Sonasons, 1 to show Vimal Gold & Diamond
+const aboutMode = 0;
+
 const AboutUs = () => {
   const { aboutusBanner } = useHomeBannerImages();
 
@@ -88,7 +91,7 @@ const AboutUs = () => {
               </Grid>
               <Grid item xs={12} md={7}>
                 <Typography variant="body1" sx={{ color: mutedText, lineHeight: 1.9, fontSize: "1.1rem", mb: 3 }}>
-                  For over 26 years, Vimal Gold & Diamond has been a name synonymous with trust,
+                  For over 26 years, {aboutMode === 0 ? "Sonasons" : "Vimal Gold & Diamond"} has been a name synonymous with trust,
                   craftsmanship, and timeless elegance. What began as a passion for fine jewellery has
                   grown into a legacy of creating exquisite pieces that celebrate life’s most meaningful
                   moments.
@@ -112,7 +115,7 @@ const AboutUs = () => {
                   What Makes Us Special
                 </Typography>
                 <Typography variant="body1" sx={{ color: mutedText, fontSize: "1.1rem" }}>
-                  At Vimal Gold & Diamond, we go beyond jewellery — we create experiences.
+                  At {aboutMode === 0 ? "Sonasons" : "Vimal Gold & Diamond"}, we go beyond jewellery — we create experiences.
                 </Typography>
               </Box>
 
@@ -267,7 +270,7 @@ const AboutUs = () => {
                 A Promise You Can Wear
               </Typography>
               <Typography variant="body1" sx={{ color: mutedText, lineHeight: 2, maxWidth: "700px", mx: "auto", fontSize: "1.15rem" }}>
-                At Vimal Gold & Diamond, every piece is more than jewellery — it is a promise of quality,
+                At {aboutMode === 0 ? "Sonasons" : "Vimal Gold & Diamond"}, every piece is more than jewellery — it is a promise of quality,
                 elegance, and trust. A promise that stays with you, forever.
               </Typography>
             </Box>

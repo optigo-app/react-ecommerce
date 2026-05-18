@@ -117,7 +117,6 @@ const ProductList = () => {
   const [isOnlyProdLoading, setIsOnlyProdLoading] = useState(true);
   const [locationKey, setLocationKey] = useState();
   const [sortBySelect, setSortBySelect] = useState("Recommended");
-  console.log("🚀 ~ ProductList ~ sortBySelect:", sortBySelect);
   const [csQcCombo, setCsQcCombo] = useState([]);
   const [storeInit, setStoreInit] = useState({});
   const [metalColorCombo, setMetalColorCombo] = useState([]);
@@ -167,23 +166,6 @@ const ProductList = () => {
 
   let maxwidth464px = useMediaQuery("(max-width:464px)");
 
-  // useEffect(() => {
-  //   // Update the activeIcon based on the value of openGridModal
-  //   setActiveIcon(
-  //     openGridModal ? "double_view" : filter ? "view_grid" : "apps"
-  //   );
-  //   if (showFilter) {
-  //     setActiveIcon(
-  //       openGridModal ? "double_view" : filter ? "apps" : "view_grid"
-  //     );
-  //   } else {
-  //     setActiveIcon(
-  //       openGridModal ? "double_view" : filter ? "view_grid" : "apps"
-  //     );
-  //   }
-  // }, [openGridModal, filter, showFilter]);
-
-  // Temporary purpose
   useEffect(() => {
     let icon = "view_grid"; // default
 

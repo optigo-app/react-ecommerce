@@ -1,5 +1,38 @@
 # Changelog
 
+## 2026-05-02 — Add `ProductTypeSlider` component
+
+### Files Changed
+
+#### `src/AllTheme/Elveester/Components/Pages/Home/TopSection/Max/ProductTypeSlider.jsx` *(new)*
+- **Old behavior:** Empty placeholder component returning `<div>ProductTypeSlider</div>`.
+- **New behavior:** Full 3-card circular carousel (prev · active · next) matching the UI/animation of `CollectionsSlider`. Uses `ProductTypeName` field from API, normalized image map, glassmorphic arrow controls, skeleton loading state, and `ProductType` filter key for navigation.
+- **Key difference from CollectionsSlider:** Max 3 cards visible (offsets -1, 0, +1 only) — no far-left / far-right cards.
+- **Reason:** New home-page section to let users browse product types visually.
+
+#### `src/AllTheme/Elveester/Components/Pages/Home/TopSection/New/NewTopSection.js`
+- **Old behavior:** `SectionData` state had only `collection` and `category` keys; `GetHomeProductType` response was only `console.log`-ged. `ProductTypeSlider` was not rendered.
+- **New behavior:** `SectionData.productType` added; populated from `HomeProductType?.Data?.rd`. `<ProductTypeSlider>` rendered directly after `<CollectionsSlider>` inside the `isSetupforMax` block.
+- **Reversibility:** Remove the `<ProductTypeSlider …/>` line and the `productType` key from `SectionData` to restore prior behaviour.
+
+---
+
+## 2026-04-21 — Show Menu & Icons for B2C Guests (IsB2BWebsite == 0)
+
+### Files Changed
+
+#### `src/AllTheme/Elveester/Components/Pages/Home/Header/New/MaxMenu.jsx`
+- **Old behavior:** Desktop navigation bar (`menuItems`, New Arrivals, Offers) was only rendered when `islogin === true`, so B2C guests saw an empty header with no menu.
+- **New behavior:** Desktop nav is now rendered when `islogin || IsB2CWebsiteChek` — i.e., always visible on B2C sites regardless of login state.
+- **Also added:** A dedicated `useEffect` on mount that calls `getMenuApi()` immediately when `IsB2BWebsite === 0`, so menu data is fetched for guests before any login event fires.
+- **Reason:** B2C stores allow guest browsing; hiding the menu blocked navigation for unauthenticated visitors.
+
+#### `src/AllTheme/Elveester/Components/Pages/Home/Header/New/RightSideMenu.jsx`
+- **Old behavior:** Search icon and Cart icon were both gated by `islogin`, so B2C guests saw neither.
+- **New behavior:** `IsB2CWebsiteChek` (derived from `IsB2BWebsiteChek == 0`) is used to also show Search and Cart for B2C guests: `(islogin || IsB2CWebsiteChek)`.
+- **Unchanged:** Wishlist, Logout remain `islogin`-only (user-specific). Login icon already showed for `!islogin`.
+- **Reason:** B2C supports guest cart (via `visiterId`) and guest search — these icons must be accessible without login.
+
 ## 2025-03-28 — Fix StoreInit First-Load Initialization Failure
 
 ### Files Changed

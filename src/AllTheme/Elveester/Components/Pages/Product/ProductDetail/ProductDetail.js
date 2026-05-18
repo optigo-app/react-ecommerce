@@ -335,16 +335,16 @@ const ProductDetail = () => {
       markup: singleProd1?.DesignMarkUp ?? singleProd?.DesignMarkUp,
       UnitCostWithmarkup: singleProd1?.UnitCostWithMarkUp ?? singleProd?.UnitCostWithMarkUp,
       Remark: "",
-        Metal_Cost:singleProd?.Metal_Cost  ?? singleProd1?.Metal_Cost ,
-      Labour_Cost:singleProd?.Labour_Cost ?? singleProd1?.Labour_Cost,
-      Diamond_Cost:singleProd?.Diamond_Cost ?? singleProd1?.Diamond_Cost,
-      Diamond_SettingCost:singleProd?.Diamond_SettingCost ?? singleProd1?.Diamond_SettingCost,
-      ColorStone_Cost:singleProd?.ColorStone_Cost ?? singleProd1?.ColorStone_Cost,
-      ColorStone_SettingCost:singleProd?.ColorStone_SettingCost ?? singleProd1?.ColorStone_SettingCost,
-      Misc_Cost:singleProd?.Misc_Cost ?? singleProd1?.Misc_Cost,
-      Misc_SettingCost:singleProd?.Misc_SettingCost ?? singleProd1?.Misc_SettingCost,
-      Other_Cost:singleProd?.Other_Cost ?? singleProd1?.Other_Cost,
-      SolPrice:singleProd?.SolPric ?? singleProd1?.SolPrice
+      Metal_Cost: singleProd?.Metal_Cost ?? singleProd1?.Metal_Cost,
+      Labour_Cost: singleProd?.Labour_Cost ?? singleProd1?.Labour_Cost,
+      Diamond_Cost: singleProd?.Diamond_Cost ?? singleProd1?.Diamond_Cost,
+      Diamond_SettingCost: singleProd?.Diamond_SettingCost ?? singleProd1?.Diamond_SettingCost,
+      ColorStone_Cost: singleProd?.ColorStone_Cost ?? singleProd1?.ColorStone_Cost,
+      ColorStone_SettingCost: singleProd?.ColorStone_SettingCost ?? singleProd1?.ColorStone_SettingCost,
+      Misc_Cost: singleProd?.Misc_Cost ?? singleProd1?.Misc_Cost,
+      Misc_SettingCost: singleProd?.Misc_SettingCost ?? singleProd1?.Misc_SettingCost,
+      Other_Cost: singleProd?.Other_Cost ?? singleProd1?.Other_Cost,
+      SolPrice: singleProd?.SolPric ?? singleProd1?.SolPrice
     }
 
     if (cartFlag) {
@@ -429,17 +429,17 @@ const ProductDetail = () => {
       UnitCostWithmarkup:
         singleProd1?.UnitCostWithMarkUp ?? singleProd?.UnitCostWithMarkUp,
       Remark: "",
-       Metal_Cost:singleProd?.Metal_Cost  ?? singleProd1?.Metal_Cost ,
-      Labour_Cost:singleProd?.Labour_Cost ?? singleProd1?.Labour_Cost,
-      Diamond_Cost:singleProd?.Diamond_Cost ?? singleProd1?.Diamond_Cost,
-      Diamond_SettingCost:singleProd?.Diamond_SettingCost ?? singleProd1?.Diamond_SettingCost,
-      ColorStone_Cost:singleProd?.ColorStone_Cost ?? singleProd1?.ColorStone_Cost,
-      ColorStone_SettingCost:singleProd?.ColorStone_SettingCost ?? singleProd1?.ColorStone_SettingCost,
-      Misc_Cost:singleProd?.Misc_Cost ?? singleProd1?.Misc_Cost,
-      Misc_SettingCost:singleProd?.Misc_SettingCost ?? singleProd1?.Misc_SettingCost,
-      Other_Cost:singleProd?.Other_Cost ?? singleProd1?.Other_Cost,
-      SolPrice:singleProd?.SolPric ?? singleProd1?.SolPrice
-      
+      Metal_Cost: singleProd?.Metal_Cost ?? singleProd1?.Metal_Cost,
+      Labour_Cost: singleProd?.Labour_Cost ?? singleProd1?.Labour_Cost,
+      Diamond_Cost: singleProd?.Diamond_Cost ?? singleProd1?.Diamond_Cost,
+      Diamond_SettingCost: singleProd?.Diamond_SettingCost ?? singleProd1?.Diamond_SettingCost,
+      ColorStone_Cost: singleProd?.ColorStone_Cost ?? singleProd1?.ColorStone_Cost,
+      ColorStone_SettingCost: singleProd?.ColorStone_SettingCost ?? singleProd1?.ColorStone_SettingCost,
+      Misc_Cost: singleProd?.Misc_Cost ?? singleProd1?.Misc_Cost,
+      Misc_SettingCost: singleProd?.Misc_SettingCost ?? singleProd1?.Misc_SettingCost,
+      Other_Cost: singleProd?.Other_Cost ?? singleProd1?.Other_Cost,
+      SolPrice: singleProd?.SolPric ?? singleProd1?.SolPrice
+
     };
 
     if (e.target.checked === true) {
@@ -623,7 +623,7 @@ const ProductDetail = () => {
         csQcLocal?.filter(
           (ele) => {
             return ele?.QualityId == decodeobj?.c?.split(",")[0] &&
-            ele?.ColorId == decodeobj?.c?.split(",")[1];
+              ele?.ColorId == decodeobj?.c?.split(",")[1];
           }
         )[0] ?? `${decodeobj?.c?.split(",")[0]},${decodeobj?.c?.split(",")[1]}`;
     }

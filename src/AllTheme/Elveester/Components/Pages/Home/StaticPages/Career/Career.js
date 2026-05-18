@@ -24,7 +24,7 @@ const Career = () => {
     }, []);
 
     const Title =
-        !IsSetupFor ? "SONASONS" : "Vimal Gold & Diamond"
+        IsSetupFor ? "SONASONS" : "Vimal Gold & Diamond"
 
     if (IsSetupFor) {
         return <>

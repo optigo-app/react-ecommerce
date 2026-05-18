@@ -85,34 +85,25 @@ const CategorySlider = ({ SectionData, IsLoading }) => {
     return map[normalized] || `/fallback-image.jpg`;
   };
 
-  // const ImagesDemo = {
-  //   categoryImages: buildNormalizedMap({
-  //     Ring: `${storImagePath()}/Category/new-image/rings.jpg`,
-  //     Bangles: `${storImagePath()}/Category/new-image/Bangals1.png`,
-  //     Pendants: `${storImagePath()}/Category/new-image/pendent.jpg`,
-  //     Bracelet: `${storImagePath()}/Category/new-image/BRACELATE2.jpg`,
-  //     EARING: `${storImagePath()}/Category/new-image/Earings1.png`,
-  //     NACKLACE: `${storImagePath()}/Category/new-image/NECKLACE1.jpg`,
-  //     Mangalsutra: `${storImagePath()}/Category/new-image/Mangalsutra1.jpg`,
-  //     "Men's chain": `${storImagePath()}/Category/new-image/Mens'chain.jpg`,
-  //   }),
-  // };
-
   const ImagesDemo = {
     categoryImages: buildNormalizedMap({
-      Ring: `${storImagePath()}/Category/new-image/rings.png`,
-      Bangles: `${storImagePath()}/Category/new-image/bangles.png`,
-      Pendants: `${storImagePath()}/Category/new-image/pendent.jpg`,
-      Bracelet: `${storImagePath()}/Category/new-image/bracelets.png`,
-      EARING: `${storImagePath()}/Category/new-image/earring.png`,
-      NACKLACE: `${storImagePath()}/Category/new-image/Necklace.png`,
-      Necklace: `${storImagePath()}/Category/new-image/Necklace.png`,
-      Mangalsutra: `${storImagePath()}/Category/new-image/mangasutra.png`,
-      Pendant: `${storImagePath()}/Category/new-image/pendant.png`
+      Ring: `${storImagePath()}/Category/vedica/rings.png`,
+      Bangles: `${storImagePath()}/Category/vedica/bangles.png`,
+      BANGLES: `${storImagePath()}/Category/vedica/bangles.png`,
+      Bangle: `${storImagePath()}/Category/vedica/bangles.png`,
+      BANGLS: `${storImagePath()}/Category/vedica/bangles.png`,
+      BANGLSE: `${storImagePath()}/Category/vedica/bangles.png`,
+      Bracelet: `${storImagePath()}/Category/vedica/bracelets.png`,
+      EARING: `${storImagePath()}/Category/vedica/earring.png`,
+      Earrings: `${storImagePath()}/Category/vedica/earring.png`,
+      NACKLACE: `${storImagePath()}/Category/vedica/Necklace.png`,
+      Necklace: `${storImagePath()}/Category/vedica/Necklace.png`,
+      "MANGALSUTRA CHAINS": `${storImagePath()}/Category/vedica/mangasutra.png`,
+      Mangalsutra: `${storImagePath()}/Category/vedica/mangasutra.png`,
+      Pendant: `${storImagePath()}/Category/vedica/pendant.png`,
+      PENDANTS: `${storImagePath()}/Category/vedica/pendant.png`,
     }),
   };
-
-
 
   const FilterData = SectionData?.filter((cat) => ImagesDemo?.categoryImages[normalizeKey(cat?.CategoryName)]) || [];
 
@@ -234,8 +225,8 @@ const CategoryCard = ({ CategoryName, imgsrc }) => {
           fontSize: { xs: "0.8rem", md: "0.9rem" },
           letterSpacing: "0.1em",
           textTransform: "uppercase",
-          color: "#333",
-          fontWeight: 600,
+          color: "#000000ff",
+          fontWeight: 400,
           transition: "color 0.3s ease",
           textAlign: "center",
         }}

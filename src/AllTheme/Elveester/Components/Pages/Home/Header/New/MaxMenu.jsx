@@ -63,15 +63,17 @@ const MaxNavbar = () => {
     const navItemRefs = useRef({});
 
 
-    const MoveToTop = ()=>{
-    window.scrollTo({
-        top:0 ,
-        left : 0 ,
-        behavior:"smooth"
-    })
-}
+    const MoveToTop = () => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        })
+    }
 
     const IsB2BWebsiteChek = storeinit?.IsB2BWebsite;
+    // B2C = IsB2BWebsite === 0 (guests can browse without login)
+    const IsB2CWebsiteChek = storeinit?.IsB2BWebsite == 0;
 
     const GetCompanyLogo = async () => {
         try {
@@ -101,6 +103,14 @@ const MaxNavbar = () => {
 
     useEffect(() => {
         GetCompanyLogo();
+    }, []);
+
+    // 2026-04-21: For B2C sites, fetch menu on initial mount so guests see the menu without logging in.
+    useEffect(() => {
+        const storeData = JSON.parse(sessionStorage.getItem("storeInit"));
+        if (storeData?.IsB2BWebsite === 0) {
+            getMenuApi();
+        }
     }, []);
 
     useEffect(() => {
@@ -143,7 +153,9 @@ const MaxNavbar = () => {
 
         let storeinit = JSON.parse(sessionStorage.getItem("storeInit"));
         let isUserLogin = JSON.parse(sessionStorage.getItem("LoginUser"));
-        if (storeinit?.IsB2BWebsite === 0 || (storeinit?.IsB2BWebsite === 1 && isUserLogin === true)) {
+        if (storeinit?.IsB2BWebsite == 0 || (storeinit?.IsB2BWebsite == 1 && isUserLogin === true)) {
+            getMenuApi();
+        } else {
             getMenuApi();
         }
     }, [islogin]);
@@ -388,44 +400,6 @@ const MaxNavbar = () => {
 
 
 
-    // if (!islogin) {
-    //     return <>
-    //         <motion.div animate={controls} onHoverStart={() => setIsHovered(true)} onHoverEnd={() => setIsHovered(false)} style={{ position: "sticky", top: 0, zIndex: 999 }}>
-    //             <AppBar
-    //                 position="sticky"
-    //                 elevation={0}
-    //                 sx={{
-    //                     bgcolor: "transparent !important",
-    //                     top: 0,
-    //                 }}
-    //             >
-    //                 <Container
-    //                     maxWidth={false}
-    //                     disableGutters
-    //                     sx={{
-    //                         width: "100%",
-    //                         px: 0,
-    //                     }}
-    //                 >
-    //                     <Toolbar
-    //                         sx={{
-    //                             justifyContent: "space-between",
-    //                             px: { xs: 0, sm: 4 },
-    //                             minHeight: { xs: 52, sm: 62 },
-    //                             bgcolor: "transparent !important",
-    //                             color: isHovered || isScrolled ? "#000" : "#fff",
-    //                         }}
-    //                     >
-
-    //                         <WioNav IsSetupFor={IsSetupFor} compnyLogo={compnyLogo} isMobile={isMobile} handleDrawerToggle={handleDrawerToggle} />
-    //                     </Toolbar>
-    //                 </Container>
-    //             </AppBar>
-    //         </motion.div>
-    //     </>
-    // }
-
-
     return (
         <>
             {/* <OfferBar /> */}
@@ -497,14 +471,14 @@ const MaxNavbar = () => {
                                     </IconButton>
                                 )}
                                 <Box component={Link} to="/"
-                                onClick={MoveToTop}
+                                    onClick={MoveToTop}
                                 >
                                     <Box component="img" src={compnyLogo} alt="SHAYN" sx={{ width: IsSetupFor ? "150px" : "110px", cursor: "pointer" }} className="el_without_headerLogo_side" />
                                 </Box>
                             </Box>
 
-                            {/* Desktop Navigation */}
-                            {islogin && (<Box>
+                            {/* Desktop Navigation: visible when logged in (B2B) OR always for B2C */}
+                            {(islogin || IsB2CWebsiteChek) && (<Box>
                                 <Box>
                                     {!isMobile && !is1400px && (
                                         <>
@@ -756,7 +730,7 @@ const MaxNavbar = () => {
                                                     </Box>
                                                 ))}
 
-                                                {islogin && <Box
+                                                {(IsB2CWebsiteChek || islogin ) && <Box
                                                     sx={{ position: "relative" }}>
                                                     <Box
                                                         component={Link}
@@ -966,8 +940,8 @@ const MaxNavbar = () => {
                     }}
                 >
                     <Box
-                    onClick={MoveToTop}
-                    component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
+                        onClick={MoveToTop}
+                        component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
 
                     <Box
                         sx={{

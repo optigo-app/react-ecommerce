@@ -1,3 +1,17 @@
+https://3sonasonslite.optigoapps.com/ --> RoopJewellers
+https://2sonasonslite.optigoapps.com/ --> MalakanJewels
+https://1sonasonslite.optigoapps.com/ --> DiamondTine
+https://1sonasons.optigoapps.com
+https://2sonasons.optigoapps.com
+https://appsonasons.optigoapps.com
+https://nxt14.optigoapps.com
+https://nxt26.optigoapps.com
+https://nxt29.optigoapps.com
+https://sonasons.optigoapps.com
+https://sonasons.procatalog.in
+
+sonasonslite.optigoapps.com
+
 # E-commerce Web Performance Platform
 
 A multi-brand, multi-theme e-commerce jewelry platform built with React 18, Material-UI, and a custom theme engine. Supports dynamic branding, product catalogs, filtering, and performance optimizations.

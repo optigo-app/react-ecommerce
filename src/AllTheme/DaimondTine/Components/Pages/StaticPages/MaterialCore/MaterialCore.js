@@ -15,8 +15,8 @@ export default function MaterialCore() {
 
 
     useEffect(() => {
-        fetch(`${storImagePath()}/html/MaterialCore.html`)
-        // fetch(`${storImagePath()}/html/MaterialCoresona.html`)
+        // fetch(`${storImagePath()}/html/MaterialCore.html`)
+        fetch(`${storImagePath()}/html/MaterialCoresona.html`)
             .then((response) => response.text())
             .then((html) => {
                 setHtmlContent(html);
@@ -29,7 +29,7 @@ export default function MaterialCore() {
     return (
         <div className='dt_faqMaindiv'>
             <div className='dt_FaqSubDivMain'>
-                <div  className='dt_Faq_Sub_Set' style={{ marginInline: '10%', paddingBottom: '80px' }}>
+                <div className='dt_Faq_Sub_Set' style={{ marginInline: '10%', paddingBottom: '80px' }}>
                     <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
                 </div>
             </div>

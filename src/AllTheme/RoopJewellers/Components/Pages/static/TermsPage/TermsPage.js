@@ -366,7 +366,7 @@ const SonasonstermsData = {
     }
   ],
   conclusion: {
-    text: "These Terms and Conditions are designed to ensure a transparent and positive experience for all our valued customers at Shinjini Jewels. Your satisfaction and trust are our top priorities, and we are here to assist you throughout your jewelry journey."
+    text: "These Terms and Conditions are designed to ensure a transparent and positive experience for all our valued customers at Sonasons. Your satisfaction and trust are our top priorities, and we are here to assist you throughout your jewelry journey."
   }
 }
 
@@ -531,6 +531,7 @@ const Dummydata = {
 export default function TermsAndConditions() {
   const Shinjini = 1;
   const termsData = Shinjini === 1 ? ShinjinitermsData : SonasonstermsData;
+  const defaultTermjs = 1 ? SonasonstermsData : VaratermsData;
   return (
     // <div className="shinjini-terms">
     //   <Banner />
@@ -562,9 +563,9 @@ export default function TermsAndConditions() {
         <h1 className="vaara-title">Terms and Conditions</h1>
 
         <div className="vaara-content">
-          <p className="vaara-introduction">{VaratermsData.introduction.text}</p>
+          <p className="vaara-introduction">{defaultTermjs.introduction.text}</p>
 
-          {VaratermsData.sections.map((section, index) => (
+          {defaultTermjs.sections.map((section, index) => (
             <section key={index} className="vaara-section">
               <h2 className="vaara-section-title">{section.title}</h2>
               {section.content.map((item, itemIndex) => (
@@ -576,7 +577,7 @@ export default function TermsAndConditions() {
             </section>
           ))}
 
-          <p className="vaara-conclusion">{VaratermsData.conclusion.text}</p>
+          <p className="vaara-conclusion">{defaultTermjs.conclusion.text}</p>
         </div>
       </main>
     </div>
