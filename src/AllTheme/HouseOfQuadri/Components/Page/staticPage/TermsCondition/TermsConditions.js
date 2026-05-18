@@ -4,6 +4,9 @@ import "./TermsConditions.scss";
 import { Link } from "react-router-dom";
 import { Container, Typography, Box, List, ListItem, ListItemText, Divider } from "@mui/material";
 
+// Set to 0 to show Sonasons, 1 to show Shantha Jewellers
+const termsMode = 0;
+
 export default function TermsConditionPage() {
   const [htmlContent, setHtmlContent] = useState("");
 
@@ -41,6 +44,8 @@ export default function TermsConditionPage() {
 }
 
 const TermsAndConditions = () => {
+  const companyName = termsMode === 0 ? "Sonasons Jewellers" : "Shantha Jewellers";
+
   return (
     <Container maxWidth="md" className="font-tenor">
       <Box sx={{ py: 6 }}>
@@ -49,7 +54,7 @@ const TermsAndConditions = () => {
         </Typography>
 
         <Typography variant="body1" paragraph className="font-tenor">
-          Welcome to Shantha Jewellers. By accessing or using our website, mobile application, or online services, you agree to be bound by the following Terms and Conditions.
+          Welcome to {companyName}. By accessing or using our website, mobile application, or online services, you agree to be bound by the following Terms and Conditions.
         </Typography>
 
         <Divider sx={{ my: 3 }} />
@@ -60,7 +65,7 @@ const TermsAndConditions = () => {
           1. General
         </Typography>
 
-        <BulletList items={["Shantha Jewellers provides online viewing, purchase, and related jewellery services.", "Users must provide accurate personal and transaction information.", "Any misuse of the platform may lead to suspension or cancellation of access."]} />
+        <BulletList items={[`${companyName} provides online viewing, purchase, and related jewellery services.`, "Users must provide accurate personal and transaction information.", "Any misuse of the platform may lead to suspension or cancellation of access."]} />
 
         {/* 2. Product Information */}
         {/* 2. Product Information */}
@@ -89,7 +94,7 @@ const TermsAndConditions = () => {
           5. Shipping & Delivery
         </Typography>
 
-        <BulletList items={["Delivery timelines are indicative and may vary due to logistics or external factors.", "Customers must ensure availability at the delivery address.", "Shantha Jewellers is not responsible for delays beyond its control."]} />
+        <BulletList items={["Delivery timelines are indicative and may vary due to logistics or external factors.", "Customers must ensure availability at the delivery address.", `${companyName} is not responsible for delays beyond its control.`]} />
 
         {/* 6. Returns & Exchanges */}
         <Typography variant="h6" gutterBottom sx={{ mt: 3 }} className="font-tenor">

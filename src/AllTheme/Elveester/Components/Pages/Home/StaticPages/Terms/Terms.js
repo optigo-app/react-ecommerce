@@ -10,8 +10,8 @@ import { IsSetupFor, isSetupforMax } from "../../../../Recoil/atom";
 const Terms = () => {
     const { termsBanner } = useHomeBannerImages();
     const [firstImageLaod, setFirstImageLoad] = useState(false);
-    const Title = !IsSetupFor ? "SONASONS" : "Vimal Gold & Diamond";
-    const Link = !isSetupforMax ? "https://sonasons.optigoapps.com/" : "https://vimalgoldanddiamond.com/"
+    const Title = IsSetupFor ? "SONASONS" : "Vimal Gold & Diamond";
+    const Link = isSetupforMax ? "https://sonasons.optigoapps.com/" : "https://vimalgoldanddiamond.com/"
 
     const termsArr = [
         { title: "PRODUCT AVAILABILITY", desc: "All of our jewelry is designed and manufactured on-site. We develop new designs by brand wise such as modern jewellerires, high fashion jewelleries occassional orianted jewellery, plain gold jewelleries at every months. These new designs will appeare on our website also we present new products on gem and jewellery exhibitions at india and international sectors." },

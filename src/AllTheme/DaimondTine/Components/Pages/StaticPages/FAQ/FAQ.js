@@ -15,8 +15,8 @@ export default function FAQ() {
 
 
     useEffect(() => {
-        fetch(`${storImagePath()}/html/accoridan.html`)
-        // fetch(`${storImagePath()}/html/accoridansona.html`) 
+        // fetch(`${storImagePath()}/html/accoridan.html`)
+        fetch(`${storImagePath()}/html/accoridansona.html`)
             .then((response) => response.text())
             .then((html) => {
                 setHtmlContent(html);
@@ -29,7 +29,7 @@ export default function FAQ() {
     return (
         <div className='dt_faqMaindiv'>
             <div className='dt_FaqSubDivMain'>
-                <div  className='dt_Faq_Sub_Set' style={{ marginInline: '10%', paddingBottom: '80px' }}>
+                <div className='dt_Faq_Sub_Set' style={{ marginInline: '10%', paddingBottom: '80px' }}>
                     <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
                 </div>
             </div>

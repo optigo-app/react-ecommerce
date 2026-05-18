@@ -15,8 +15,8 @@ import { roop_CartNo, roop_companyLogo, roop_loginState } from "./Components/Rec
 import { storImagePath, storInitDataPath } from "../../utils/Glob_Functions/GlobalFunction";
 import { LoginWithEmailAPI } from "../../utils/API/Auth/LoginWithEmailAPI";
 import AboutUsVara from './Components/Pages/static/AboutUs/AboutUsVara';
-// import BrandsComponent from './Components/Pages/Home/BrandComponent/BrandComponents';
 import PrivacyPolicy from './Components/Pages/static/PrivacyPolicy/PrivacyPolicy';
+// import BrandsComponent from './Components/Pages/Home/BrandComponent/BrandComponents';
 // import AXboutUs from './Components/Pages/aboutUs/AQbout';
 
 
@@ -223,7 +223,7 @@ const RoopJewellers_App = () => {
     );
   }
 
-  const Vaara = 1;
+  const Vaara = 0;
 
   const Vara = Vaara == 0 ? <AXboutUs /> : <AboutUsVara />
 
@@ -238,7 +238,8 @@ const RoopJewellers_App = () => {
     >
       {/* <CircularProgress sx={{ color: 'rgba(255, 87, 34, 0.8)' }} /> */}
       <img
-        src={loaderImg1}
+        // src={loaderImg1}
+        src={loaderImg}
         alt="Loading..."
         height="100%"
         width="auto"
@@ -304,10 +305,10 @@ const RoopJewellers_App = () => {
             {/* <Route path="/privacyPolicy" element={<PrivacyPolicy />} /> */}
 
             {/* For vara */}
-            <Route
+            {Vaara === 1 && <Route
               path="/ManagementTeam"
               element={<ManagementTeam />}
-            />
+            />}
             <Route
               path="/terms-and-conditions"
 

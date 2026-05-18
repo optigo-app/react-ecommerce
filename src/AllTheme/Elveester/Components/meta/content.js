@@ -585,7 +585,7 @@ const createSchema = ({ logoUrl }) => {
   }
 };
 
-const Demo = false;
+const Demo = true;
 
 const DemoMeta = Demo ? SonasonsMetaData : VimalMetaData;
 const DemoDefaultMetadata = Demo ? SonasonsDefaultMetadata : VimalDefaultMetadata;

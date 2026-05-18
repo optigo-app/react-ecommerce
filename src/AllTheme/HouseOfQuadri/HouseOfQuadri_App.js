@@ -12,7 +12,7 @@ import Bespoke from "./Components/Page/Home/Bespokejewelry/Index";
 import AppointMent from "./Components/Page/Home/Appointment/Wrapper";
 import { Box } from "@mui/material";
 import useGlobalPreventSave from "../../utils/Glob_Functions/useGlobalPreventSave";
-import {ShanthaLoaderFallback} from '../../LoadingFallbacks'
+import { ShanthaLoaderFallback } from '../../LoadingFallbacks'
 
 // import Navbar from "./Components/Page/Home/Navbar/Navbar";
 // import Footer from "./Components/Page/Home/Footer/Footer";
@@ -287,9 +287,9 @@ const HouseOfQuadri_App = () => {
 
   const LoadingFallback = () => {
     // const Images =  !isThemeActive ? loaderImg :   storImagePath() + '/images/loader/loader.png'
-    if(isThemeActive){
-      return <ShanthaLoaderFallback/>
-    }
+    // if(isThemeActive){
+    //   return <ShanthaLoaderFallback/>
+    // }
     return <Box
       sx={{
         display: 'flex',

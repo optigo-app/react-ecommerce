@@ -84,7 +84,7 @@ export default function AboutUs() {
                                 jewelry is a beautiful creation of love and commitment and our artisans hallmark it with trust to adds “forever” to it.</p>
                         </div>
                     </div>
-                    <div className='about-daimondBoxMains' style={{ marginTop: '80px' }}>
+                    {/* <div className='about-daimondBoxMains' style={{ marginTop: '80px' }}>
                         <div className='about-daimondBox1'>
                             <p style={{ fontSize: '25px', color: '#3f3151' }}>RUSHIT PATEL
                                 (FOUNDER & MANAGING DIRECTOR)
@@ -102,7 +102,7 @@ export default function AboutUs() {
                         <div className='about-daimondBox2'>
                             <img src={data?.image?.[2]} className='about-daimondBox2-image' />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* <div>

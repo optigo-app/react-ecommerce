@@ -6,6 +6,7 @@ import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useRemoveAllConsole from "./hooks/useRemoveAllConsole";
 import { BroadcasterProvider } from "./AllTheme/Elveester/Components/utils/BoardCastContext";
+import '@fontsource-variable/plus-jakarta-sans/wght.css';
 
 
 function App() {

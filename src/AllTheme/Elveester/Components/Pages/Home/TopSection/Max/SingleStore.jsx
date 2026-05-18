@@ -138,13 +138,13 @@ const StoreLocator = () => {
                             {/* Details: Timings & Services */}
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                                 <Typography variant="body2" sx={{ color: "#4A4A4A", fontSize: "0.9rem" }}>
-                                    <Box component="span" sx={{ fontWeight: 700, color: "#000" }}>Timings:</Box> 11:00 am to 9:00 pm
+                                    <Box component="span" sx={{ fontWeight: 700, color: "#000" }}>Timings:</Box> 11:00 am to 8:00 pm
                                 </Typography>
 
-                                <Typography variant="body2" sx={{ color: "#4A4A4A", fontSize: "0.9rem" }}>
+                                {/* <Typography variant="body2" sx={{ color: "#4A4A4A", fontSize: "0.9rem" }}>
                                     <Box component="span" sx={{ fontWeight: 700, color: "#000" }}>Services:</Box> In-house stylist | Bridal Studio |
                                     Design Customization
-                                </Typography>
+                                </Typography> */}
                             </Box>
                         </Box>
                     </Grid>

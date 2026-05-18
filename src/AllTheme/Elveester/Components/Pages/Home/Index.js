@@ -6,17 +6,18 @@ import useHomeBannerImages from "../../../../../utils/Glob_Functions/ThemesBanne
 import { createSchema, breadcrumbData } from "../../meta/content";
 
 const NewTopSection = lazy(() => import("./TopSection/New/NewTopSection"));
-// const TabBasedNewSection = lazy(() => import("./TopSection/New/TabBasedNewSection"));
-// const TopSection = lazy(() => import("./TopSection/TopSection"));
-// const PromoComponent1 = lazy(() => import("./PromoComponent/PromoComponent/PromoComponent1"));
-// const BrandsComponent = lazy(() => import("./PromoComponent/BrandsComponent/BrandsComponent"));
-// const PromoComponent2 = lazy(() => import("./PromoComponent/PromoComponent/PromoComponent2"));
-// const Collection = lazy(() => import("./Collection/Collection"));
-// const Craftmenship = lazy(() => import("./Craftmenship/Craftmenship"));
-// const GaleryView = lazy(() => import("./GaleryView/GaleryView"));
-// const CompanyData = lazy(() => import("./ComapnayData/CompanyData"));
-// const AffiliationData = lazy(() => import("./PromoComponent/BrandsComponent/AffiliationData"));
-// const SocialMediaSection = lazy(() => import("./SocialMediaSection/SocialMediaSection"));
+const TabBasedNewSection = lazy(() => import("./TopSection/New/TabBasedNewSection"));
+const TopSection = lazy(() => import("./TopSection/TopSection"));
+const PromoComponent1 = lazy(() => import("./PromoComponent/PromoComponent/PromoComponent1"));
+const BrandsComponent = lazy(() => import("./PromoComponent/BrandsComponent/BrandsComponent"));
+const PromoComponent2 = lazy(() => import("./PromoComponent/PromoComponent/PromoComponent2"));
+const Collection = lazy(() => import("./Collection/Collection"));
+const OldCollection = lazy(() => import("./Collection/OldCollection"));
+const Craftmenship = lazy(() => import("./Craftmenship/Craftmenship"));
+const GaleryView = lazy(() => import("./GaleryView/GaleryView"));
+const CompanyData = lazy(() => import("./ComapnayData/CompanyData"));
+const AffiliationData = lazy(() => import("./PromoComponent/BrandsComponent/AffiliationData"));
+const SocialMediaSection = lazy(() => import("./SocialMediaSection/SocialMediaSection"));
 
 
 
@@ -55,10 +56,10 @@ function Home() {
       <div style={{ position: "relative !important" }}>
         {isLogin ? (
           <>
-            <NewTopSection
+            {/* <NewTopSection
               bannerlist={banner}
               demoVideo={banner?.demoVideo}
-              carousel={banner?.carousel?.image} isLogin={isLogin} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} />
+              carousel={banner?.carousel?.image} isLogin={isLogin} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} /> */}
             {/* <TabBasedNewSection
 
               carousel={banner?.carousel?.image}
@@ -66,26 +67,28 @@ function Home() {
               socialMediaBanner={banner?.socialMediaBanner2}
               banner={banner?.mainBanner}
             /> */}
+            <TopSection banner={banner?.mainBanner} />
+
           </>
 
         ) : (
           <>
-            {/* <TopSection banner={banner?.mainBanner} />
+            <TopSection banner={banner?.mainBanner} />
             <PromoComponent1 banner={banner?.middleBanner} />
             <BrandsComponent banner={banner?.brandlogo} />
             <PromoComponent2 banner={banner?.collectionBanner} />
-            <Collection banner={banner?.categoryBanner} />
+            <OldCollection banner={banner?.categoryBanner} />
             <Craftmenship banner={banner?.promotionalBanner} />
             <GaleryView banner={banner?.photoGallery} />
             <CompanyData />
             <AffiliationData banner={banner?.affiliation} />
-            <SocialMediaSection banner={banner?.socialMediaBanner2} /> */}
+            <SocialMediaSection banner={banner?.socialMediaBanner2} />
 
-            <NewTopSection
+            {/* <NewTopSection
               bannerlist={banner}
               middleBanner={banner?.middleBanner}
               demoVideo={banner?.demoVideo}
-              isLogin={isLogin} carousel={banner?.carousel?.image} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} />
+              isLogin={isLogin} carousel={banner?.carousel?.image} socialMediaBanner={banner?.socialMediaBanner2} banner={banner?.mainBanner} /> */}
           </>
         )}
       </div>

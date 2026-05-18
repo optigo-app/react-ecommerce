@@ -20,6 +20,9 @@ import { IsSetupFor } from "../../../../Recoil/atom";
     /* <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14005.185483771353!2d77.17787!3d28.6508434!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd1a09e5519d%3A0x3b79661648bf9139!2sVimal%20Gold%20And%20Diamond!5e0!3m2!1sen!2sin!4v1776339745027!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */
 }
 
+// Set to 0 to show Sonasons (Cosmic Kepler-186f Branch), 1 to show Vimal Gold & Diamond
+const contactMode = 0;
+
 export default function ContactPage() {
     const [loading, setLoading] = useState(false);
     const [names, setName] = useState({
@@ -151,7 +154,7 @@ export default function ContactPage() {
                     <>
                         <div className="elvee_grid-item">
                             <h2>Phone</h2>
-                            <p>+91 9811290235</p>
+                            <p>{contactMode === 0 ? "+91 99999 88888" : "+91 9811290235"}</p>
                         </div>
                     </>
                 ) : (
@@ -166,7 +169,7 @@ export default function ContactPage() {
                     <>
                         <div className="elvee_grid-item">
                             <h2>Email Address</h2>
-                            <p>info@vimalgoldanddiamond.com</p>
+                            <p>{contactMode === 0 ? "galaxy@sonasons.com" : "info@vimalgoldanddiamond.com"}</p>
                         </div>
                     </>
                 ) : (
@@ -178,8 +181,12 @@ export default function ContactPage() {
                 {IsSetupFor && (
                     <div className="elvee_grid-item">
                         <h2>Office Address</h2>
-                        <p>Vimal Gold And Diamond</p>
-                        <p>2106, Desh Bandhu Gupta Rd, Block 47, Beadonpura, Karol Bagh, New Delhi, Delhi, 110005</p>
+                        <p>{contactMode === 0 ? "Sonasons Galactic Headquarters" : "Vimal Gold And Diamond"}</p>
+                        <p>
+                            {contactMode === 0
+                                ? "Plot 42, Nebula Boulevard, Sector 9, Stardust City, Kepler-186f, Mars, 99999"
+                                : "2106, Desh Bandhu Gupta Rd, Block 47, Beadonpura, Karol Bagh, New Delhi, Delhi, 110005"}
+                        </p>
                     </div>
                 )}
             </div>
@@ -242,7 +249,12 @@ export default function ContactPage() {
                         height: "100%",
                     }}
                 >
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14005.185483771353!2d77.17787!3d28.6508434!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd1a09e5519d%3A0x3b79661648bf9139!2sVimal%20Gold%20And%20Diamond!5e0!3m2!1sen!2sin!4v1776339745027!5m2!1sen!2sin" width={"100%"} height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe
+                        src={contactMode === 0
+                            ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.2828242419437!2d72.8191344!3d21.1809209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04e438cc948fb%3A0x5712a989b70ef3a2!2sOrail%20Services%20-%20OptigoApps!5e0!3m2!1sen!2sin!4v1734596370112!5m2!1sen!2sin"
+                            : "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14005.185483771353!2d77.17787!3d28.6508434!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd1a09e5519d%3A0x3b79661648bf9139!2sVimal%20Gold%20And%20Diamond!5e0!3m2!1sen!2sin!4v1776339745027!5m2!1sen!2sin"
+                        }
+                        width={"100%"} height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </Box>
             )}
             {/* Show centralized loader when loading is true */}

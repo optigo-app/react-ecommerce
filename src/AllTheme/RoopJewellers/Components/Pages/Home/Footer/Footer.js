@@ -37,7 +37,8 @@ const Footer = ({ fromPage }) => {
           <div className='footerMoreOption'>
             <p className='footerMoreOptionData' onClick={() => { navigation('/contactUs'); window.scrollTo(0, 0); }}>CONTACT US</p>
             {/* For vara */}
-            <p className='footerMoreOptionData' style={{ textTransform: 'uppercase' }} onClick={() => { navigation('/managementTeam'); window.scrollTo(0, 0); }}>Management Team</p>
+            {/* vaaraV1 */}
+            {/* <p className='footerMoreOptionData' style={{ textTransform: 'uppercase' }} onClick={() => { navigation('/managementTeam'); window.scrollTo(0, 0); }}>Management Team</p> */}
 
             {/* For sonasons ,shinjini, Pacific, ojasvi */}
             {/* <p className='footerMoreOptionData' style={{ textTransform: 'uppercase' }} onClick={() => { navigation('/privacyPolicy'); window.scrollTo(0, 0); }}>Privacy Policy</p> */}
@@ -128,7 +129,8 @@ const Footer = ({ fromPage }) => {
             fontWeight: 500,
             marginInline: '0',
             marginBottom: "1%"
-          }}>© 2025, Varajewels</p>
+          }}>© 2025, Sonasons</p>
+          {/* // }}>© 2025, Varajewels</p> */}
 
           {/*  pacific diamonds */}
           {/* }}>© 2025, Pacific Diamonds</p> */}
@@ -146,14 +148,13 @@ const Footer = ({ fromPage }) => {
           {/* }}>© 2025, Varajewels</p> */}
 
           {/* vara  */}
-          {/* }}>© 2025, Sonasons</p> */}
 
           {/* prjewellers  */}
           {/* }}>© 2025, PR Jewellers</p> */}
         </div>
         <strong style={{ color: "white" }}>05082025</strong>
       </div>
-    </div >
+    </div>
   )
 }
 

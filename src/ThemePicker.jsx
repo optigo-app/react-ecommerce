@@ -22,19 +22,36 @@ const IsShreeDiamond = true;
 
 const themeConfig = {
   1: { Component: SmilingRock_App, Loader: LoadingFallback },
-  2: { Component: DaimondTine_App, Loader: PacificLoadingFallback },
-  3: { Component: Elveester_App, Loader: ElveeLoadingFallback },
+  2: {
+    Component: DaimondTine_App, Loader:
+      //  PacificLoadingFallback 
+      DefaultLoadingFallback
+  },
+  3: {
+    Component: Elveester_App, Loader:
+      // ElveeLoadingFallback
+      DefaultLoadingFallback
+  },
   4: { Component: SmilingRock_MobileApp_App, Loader: LoadingFallback },
   5: { Component: HemratnaProcatalog_App, Loader: ProcatalogLoadingFallback },
   6: { Component: Procatalog_App, Loader: ProcatalogLoadingFallback },
-  7: { Component: HouseOfQuadri_App, Loader: isThemeActive ? ShanthaLoaderFallback : LoadingFallback },
+  7: {
+    Component: HouseOfQuadri_App, Loader:
+      DefaultLoadingFallback
+    // isThemeActive ? ShanthaLoaderFallback : LoadingFallback 
+  },
   8: { Component: ForEveryRoutes, Loader: DefaultLoadingFallback },
   9: { Component: Procatalog_MobileApp_App, Loader: ProcatalogLoadingFallback },
   10: { Component: StamFordJewels_App, Loader: OjasviLoadingFallback },
-  11: { Component: RoopJewellers_App, Loader: VaraLoadingFallback },
+  11: {
+    Component: RoopJewellers_App, Loader:
+      //  VaraLoadingFallback
+      DefaultLoadingFallback
+  },
   12: {
     Component: MalakanJewels_App, Loader:
-      IsShreeDiamond ? ShreeDiamondsLoadingFallback : KamalikaJewelssLoadingFallback
+      // IsShreeDiamond ? ShreeDiamondsLoadingFallback : KamalikaJewelssLoadingFallback
+      DefaultLoadingFallback
   },
   13: { Component: LoveIn_App, Loader: ShinjiniLoadingFallback },
   14: { Component: Ornaz_App, Loader: ShreeDiamondsLoadingFallback },
@@ -48,12 +65,16 @@ export const themeEnvConfig = {
 
   "diamondtine.web": {
     Component: DaimondTine_App,
-    Loader: PacificLoadingFallback,
+    Loader:
+      //  PacificLoadingFallback 
+      DefaultLoadingFallback
   },
 
   "elvee.web": {
     Component: Elveester_App,
-    Loader: ElveeLoadingFallback,
+    Loader:
+      //  ElveeLoadingFallback,
+      DefaultLoadingFallback
   },
 
   "fgstore.mapp": {
@@ -75,7 +96,9 @@ export const themeEnvConfig = {
     Component: HouseOfQuadri_App,
     // Loader: VaraLoadingFallback,
     // Loader: LoadingFallback,
-    Loader: isThemeActive ? ShanthaLoaderFallback : LoadingFallback,
+    Loader:
+      DefaultLoadingFallback
+    // isThemeActive ? ShanthaLoaderFallback : LoadingFallback,
   },
 
   "forevery.web": {
@@ -96,12 +119,15 @@ export const themeEnvConfig = {
   "rpjewel.web": {
     Component: RoopJewellers_App,
     // Loader: SaraffLoadingFallback,
-    Loader: VaraLoadingFallback,
+    Loader:
+      //  VaraLoadingFallback,
+      DefaultLoadingFallback
   },
 
   "malakan.web": {
     Component: MalakanJewels_App,
-    Loader: IsShreeDiamond ? ShreeDiamondsLoadingFallback : KamalikaJewelssLoadingFallback
+    // Loader: IsShreeDiamond ? ShreeDiamondsLoadingFallback : KamalikaJewelssLoadingFallback
+    Loader: DefaultLoadingFallback
   },
 
   "lovein.web": {

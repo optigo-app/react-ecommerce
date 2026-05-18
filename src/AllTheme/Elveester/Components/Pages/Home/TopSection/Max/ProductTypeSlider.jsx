@@ -1,161 +1,39 @@
 import React, { useState } from "react";
-import { Box, Typography, Button, IconButton, useTheme, useMediaQuery ,Skeleton } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Skeleton,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import BrandsTitle from "./BrandsTitle";
 import MaxHeader from "./Header";
 import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 import { useNavigate } from "react-router-dom";
 
-const collections = [
-  {
-    id: 1,
-    title: "Everyday wear",
-    slug: "Everyday Wear",
-    subtitle: "A Timeless Heritage for The Modern Bride",
-    img: `${storImagePath()}/Banner/iconicCollection/Everyday wear.png`,
-  },
-  {
-    id: 2,
-    title: "Gen-z drops",
-    slug: "Gen-z drops",
-    subtitle: "Tuned to Timeless Tastes",
-    img: `${storImagePath()}/Banner/iconicCollection/Gen-z drops.png`,
-  },
-  {
-    id: 3,
-    title: "Night Out Glam",
-    slug: "Night Out Glam",
-    subtitle: "Your Style Must-Have",
-    img: `${storImagePath()}/Banner/iconicCollection/Night out glam.png`,
-  },
-  {
-    id: 4,
-    title: "Shopping All",
-    slug: "Shopping All",
-    subtitle: "For the Queen in Every Woman",
-    img: `${storImagePath()}/Banner/iconicCollection/Shop all.png`,
-  },
-  {
-    id: 5,
-    title: "Wedding Collection",
-    slug: "Wedding Collection",
-    subtitle: "By Tanishq",
-    img: `${storImagePath()}/Banner/iconicCollection/wedding collection.png`,
-  },
-];
+// ---------------------------------------------------------------------------
+// Card dimensions — same as CollectionsSlider
+// ---------------------------------------------------------------------------
+const CARD_WIDTH = 320;
+const CARD_HEIGHT = 450;
 
-const CARD_WIDTH = 320; // Base width of a card
-const CARD_HEIGHT = 450; // Base height
-
-const CollectionsSlider = ({ SectionData, IsLoading }) => {
-  const [activeIndex, setActiveIndex] = useState(2);
+// ---------------------------------------------------------------------------
+// ProductTypeSlider
+// ---------------------------------------------------------------------------
+// Props:
+//   SectionData  — Array from API: [{ ProductTypeName: "..." }, ...]
+//   IsLoading    — Boolean, shows skeleton while fetching
+// ---------------------------------------------------------------------------
+const ProductTypeSlider = ({ SectionData, IsLoading }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
 
-  const length = collections.length;
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % length);
-  };
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + length) % length);
-  };
-
-  const getCardStyle = (index) => {
-    let offset = index - activeIndex;
-    if (offset > length / 2) offset -= length;
-    if (offset < -length / 2) offset += length;
-    const isActive = offset === 0;
-    const isNext = offset === 1;
-    const isPrev = offset === -1;
-    let styles = {
-      // opacity: 0,
-      zIndex: 0,
-      transform: `translateX(0px) scale(0.5)`,
-      // filter: 'blur(5px)',
-      visibility: "hidden",
-    };
-
-    const spacing = isMobile ? 225 : 355;
-
-    if (isActive) {
-      styles = {
-        // opacity: 1,
-        zIndex: 10,
-        transform: `translateX(0px) scale(1.2)`, // Center pops out
-        // filter: 'blur(0px)',
-        visibility: "visible",
-        boxShadow: "0px 20px 50px rgba(0,0,0,0.6)",
-      };
-    } else if (isPrev) {
-      styles = {
-        // opacity: 0.6,
-        zIndex: 5,
-        transform: `translateX(-${spacing}px) scale(0.95)`,
-        // filter: 'blur(1px)',
-        visibility: "visible",
-      };
-    } else if (isNext) {
-      styles = {
-        // opacity: 0.6,
-        zIndex: 5,
-        transform: `translateX(${spacing}px) scale(0.95)`,
-        // filter: 'blur(1px)',
-        visibility: "visible",
-      };
-    } else if (offset === -2) {
-      // Far Left (visible but very small/dim)
-      styles = {
-        // opacity: 0.3,
-        zIndex: 1,
-        transform: `translateX(-${spacing * 1.8}px) scale(0.75)`,
-        // filter: 'blur(3px)',
-        visibility: "visible",
-      };
-    } else if (offset === 2) {
-      // Far Right (visible but very small/dim)
-      styles = {
-        // opacity: 0.3,
-        zIndex: 1,
-        transform: `translateX(${spacing * 1.8}px) scale(0.75)`,
-        // filter: 'blur(3px)',
-        visibility: "visible",
-      };
-    }
-
-    return styles;
-  };
-
-  const handleNavigate = (name) => {
-    let finalData = {
-      menuname: name,
-      FilterKey: "Collection",
-      FilterVal: name,
-      FilterKey1: "",
-      FilterVal1: "",
-      FilterKey2: "",
-      FilterVal2: "",
-    };
-    sessionStorage.setItem("menuparams", JSON.stringify(finalData));
-    const queryParameters1 = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`].filter(Boolean).join("/");
-    const queryParameters = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`].join(",");
-    const otherparamUrl = Object.entries({
-      b: finalData?.FilterKey,
-      g: finalData?.FilterKey1,
-      c: finalData?.FilterKey2,
-    })
-      .filter(([key, value]) => value !== undefined)
-      .map(([key, value]) => value)
-      .filter(Boolean)
-      .join(",");
-    const paginationParam = [`page=${finalData.page ?? 1}`, `size=${finalData.size ?? 50}`].join("&");
-    let menuEncoded = `${queryParameters}/${otherparamUrl}`;
-    const url = `/p/${finalData?.menuname}/${queryParameters1}/?M=${btoa(menuEncoded)}`;
-    navigate(url);
-  };
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  const normalizeKey = (key) => key?.toString().trim().toLowerCase();
 
   const buildNormalizedMap = (obj) => {
     const map = {};
@@ -164,35 +42,135 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
     });
     return map;
   };
-  const normalizeKey = (key) => key?.toString().trim().toLowerCase();
 
   const getImage = (map, key) => {
     const normalized = normalizeKey(key);
     return map[normalized] || `/fallback-image.jpg`;
   };
 
+  // ── Image map — add / update paths once the user provides the images ─────
   const ImagesDemo = {
-    CollectionImages: buildNormalizedMap({
-      "Everyday Wear": `${storImagePath()}/Banner/iconicCollection/Everyday wear.png`,
-      "Gen-z drops": `${storImagePath()}/Banner/iconicCollection/Gen-z drops.png`,
-      "Night Out Glam": `${storImagePath()}/Banner/iconicCollection/Night out glam.png`,
-      "Shopping All": `${storImagePath()}/Banner/iconicCollection/Shop all.png`,
-      "Wedding Collection": `${storImagePath()}/Banner/iconicCollection/wedding collection.png`,
+    ProductTypeImages: buildNormalizedMap({
+      "Diamond Jewellery": `${storImagePath()}/Banner/productType/diamond.jpeg`,
+      "Gold Jewellery": `${storImagePath()}/Banner/productType/gold.jpeg`,
+      "POLKI JEWELLERY": `${storImagePath()}/Banner/productType/polki.jpeg`,
     }),
   };
 
+  // Filter only items that have a mapped image
+  const FilterData =
+    SectionData?.filter(
+      (cat) =>
+        ImagesDemo?.ProductTypeImages[normalizeKey(cat?.ProductTypeName)]
+    ) || [];
 
-  const FilterData = SectionData?.filter((cat) => ImagesDemo?.CollectionImages[normalizeKey(cat?.CollectionName)]) || [];
+  const length = FilterData.length;
 
+  // ── Navigation ───────────────────────────────────────────────────────────
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % length);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + length) % length);
+  };
+
+  // ── Card positioning — MAX 3 cards (prev · active · next) ─────────────
+  // Only offset -1, 0, +1 are visible; everything else is hidden.
+  const getCardStyle = (index) => {
+    let offset = index - activeIndex;
+    // Wrap offset for circular navigation
+    if (offset > length / 2) offset -= length;
+    if (offset < -length / 2) offset += length;
+
+    const spacing = isMobile ? 225 : 355;
+
+    // Default — hidden
+    let styles = {
+      zIndex: 0,
+      transform: `translateX(0px) scale(0.5)`,
+      visibility: "hidden",
+      pointerEvents: "none",
+    };
+
+    if (offset === 0) {
+      // Active — centre card pops out
+      styles = {
+        zIndex: 10,
+        transform: `translateX(0px) scale(1.2)`,
+        visibility: "visible",
+        boxShadow: "0px 20px 50px rgba(0,0,0,0.6)",
+        pointerEvents: "auto",
+      };
+    } else if (offset === -1) {
+      // Previous card — left side
+      styles = {
+        zIndex: 5,
+        transform: `translateX(-${spacing}px) scale(0.95)`,
+        visibility: "visible",
+        pointerEvents: "auto",
+      };
+    } else if (offset === 1) {
+      // Next card — right side
+      styles = {
+        zIndex: 5,
+        transform: `translateX(${spacing}px) scale(0.95)`,
+        visibility: "visible",
+        pointerEvents: "auto",
+      };
+    }
+
+    return styles;
+  };
+
+  // ── Navigation handler (same logic as CollectionsSlider) ─────────────────
+  const handleNavigate = (name) => {
+    let finalData = {
+      menuname: name,
+      FilterKey: "product_type",
+      FilterVal: name,
+      FilterKey1: "",
+      FilterVal1: "",
+      FilterKey2: "",
+      FilterVal2: "",
+    };
+    sessionStorage.setItem("menuparams", JSON.stringify(finalData));
+    const queryParameters1 = [
+      finalData?.FilterKey && `${finalData.FilterVal}`,
+      finalData?.FilterKey1 && `${finalData.FilterVal1}`,
+      finalData?.FilterKey2 && `${finalData.FilterVal2}`,
+    ]
+      .filter(Boolean)
+      .join("/");
+    const queryParameters = [
+      finalData?.FilterKey && `${finalData.FilterVal}`,
+      finalData?.FilterKey1 && `${finalData.FilterVal1}`,
+      finalData?.FilterKey2 && `${finalData.FilterVal2}`,
+    ].join(",");
+    const otherparamUrl = Object.entries({
+      b: finalData?.FilterKey,
+      g: finalData?.FilterKey1,
+      c: finalData?.FilterKey2,
+    })
+      .filter(([, value]) => value !== undefined)
+      .map(([, value]) => value)
+      .filter(Boolean)
+      .join(",");
+    let menuEncoded = `${queryParameters}/${otherparamUrl}`;
+    const url = `/p/${finalData?.menuname}/${queryParameters1}/?M=${btoa(menuEncoded)}`;
+    navigate(url);
+  };
+
+  // ── Early returns ─────────────────────────────────────────────────────────
   if (IsLoading) {
-    return (
-      <CollectionSkeleton isMobile={isMobile} />
-    );
+    return <ProductTypeSkeleton isMobile={isMobile} />;
   }
 
   if (FilterData?.length === 0) {
-    return
+    return null;
   }
+
+  // ── Render ────────────────────────────────────────────────────────────────
   return (
     <Box
       sx={{
@@ -202,25 +180,25 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
         justifyContent: "center",
         overflow: "hidden",
         py: 5,
-        width: {
-          xs: "100%",
-          md: "95%",
-        },
-        borderRadius: {
-          xs: 0,
-          md: 5,
-        },
+        width: { xs: "100%", md: "95%" },
+        borderRadius: { xs: 0, md: 5 },
       }}
     >
+      {/* Section Header */}
       <Box textAlign="center" mb={5}>
-        <MaxHeader title={"Iconic Collection"} subtitle={"Let's take a glimpse at our featured collections before diving in!"} alignment="center" />
+        <MaxHeader
+          title={"Shop By Type"}
+          subtitle={"Explore our curated product categories crafted for every occasion!"}
+          alignment="center"
+        />
       </Box>
-      {/* Carousel Container */}
+
+      {/* Carousel — max 3 cards */}
       <Box
         sx={{
           position: "relative",
           width: "100%",
-          height: isMobile ? "350px" : "500px", // Container height
+          height: isMobile ? "350px" : "500px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -229,7 +207,10 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
       >
         {FilterData?.map((item, i) => {
           const styles = getCardStyle(i);
-          const Image = getImage(ImagesDemo.CollectionImages, item?.CollectionName);
+          const image = getImage(
+            ImagesDemo.ProductTypeImages,
+            item?.ProductTypeName
+          );
           return (
             <Box
               key={i}
@@ -239,20 +220,27 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
                 width: isMobile ? 200 : CARD_WIDTH,
                 height: isMobile ? 280 : CARD_HEIGHT,
                 borderRadius: "20px",
-                background: `url("${Image}")`,
+                background: `url("${image}")`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 transition: "all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)",
                 ...styles,
               }}
-              onClick={() => (activeIndex == i ? handleNavigate(item.CollectionName) : setActiveIndex(i))}
-            ></Box>
+              onClick={() =>
+                activeIndex === i
+                  ? handleNavigate(item.ProductTypeName)
+                  : setActiveIndex(i)
+              }
+            />
           );
         })}
       </Box>
 
-      {/* Controls */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 4, mt: 8, zIndex: 20 }}>
+      {/* Controls — same glassmorphic style as CollectionsSlider */}
+      <Box
+        sx={{ display: "flex", alignItems: "center", gap: 4, mt: 8, zIndex: 20 }}
+      >
+        {/* Prev */}
         <IconButton
           onClick={handlePrev}
           sx={{
@@ -264,21 +252,18 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
             border: "1px solid rgba(255, 255, 255, 0.25)",
             boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
             transition: "all 0.25s ease",
-
             "&:hover": {
               background: "rgba(255, 255, 255, 0.22)",
               boxShadow: "0 12px 30px rgba(0,0,0,0.25)",
               transform: "scale(1.05)",
             },
-
-            "&:active": {
-              transform: "scale(0.95)",
-            },
+            "&:active": { transform: "scale(0.95)" },
           }}
         >
           <ArrowBackIosNewIcon fontSize="small" />
         </IconButton>
-        {/* shop now! btn */}
+
+        {/* Shop Now */}
         <Button
           variant="outlined"
           size="large"
@@ -299,10 +284,14 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
               color: "#fff",
             },
           }}
-          onClick={() => handleNavigate(FilterData[activeIndex].CollectionName)}
+          onClick={() =>
+            handleNavigate(FilterData[activeIndex]?.ProductTypeName)
+          }
         >
           Shop Now!
         </Button>
+
+        {/* Next */}
         <IconButton
           onClick={handleNext}
           sx={{
@@ -314,16 +303,12 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
             border: "1px solid rgba(255, 255, 255, 0.25)",
             boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
             transition: "all 0.25s ease",
-
             "&:hover": {
               background: "rgba(255, 255, 255, 0.22)",
               boxShadow: "0 12px 30px rgba(0,0,0,0.25)",
               transform: "scale(1.05)",
             },
-
-            "&:active": {
-              transform: "scale(0.95)",
-            },
+            "&:active": { transform: "scale(0.95)" },
           }}
         >
           <ArrowForwardIosIcon fontSize="small" />
@@ -333,11 +318,14 @@ const CollectionsSlider = ({ SectionData, IsLoading }) => {
   );
 };
 
-export default CollectionsSlider;
+export default ProductTypeSlider;
 
-const CollectionSkeleton = ({ isMobile }) => {
-  const CARD_WIDTH = isMobile ? 200 : 320;
-  const CARD_HEIGHT = isMobile ? 280 : 450;
+// ---------------------------------------------------------------------------
+// Skeleton — matches the 3-card layout (left · center · right only)
+// ---------------------------------------------------------------------------
+const ProductTypeSkeleton = ({ isMobile }) => {
+  const cardW = isMobile ? 200 : CARD_WIDTH;
+  const cardH = isMobile ? 280 : CARD_HEIGHT;
   const spacing = isMobile ? 225 : 355;
 
   return (
@@ -352,7 +340,7 @@ const CollectionSkeleton = ({ isMobile }) => {
         width: { xs: "100%", md: "95%" },
       }}
     >
-      {/* Header Skeleton */}
+      {/* Header skeleton */}
       <Skeleton
         variant="text"
         width="35%"
@@ -361,7 +349,7 @@ const CollectionSkeleton = ({ isMobile }) => {
         animation="wave"
       />
 
-      {/* Same Carousel Layout */}
+      {/* 3-card carousel skeleton */}
       <Box
         sx={{
           position: "relative",
@@ -372,42 +360,40 @@ const CollectionSkeleton = ({ isMobile }) => {
           alignItems: "center",
         }}
       >
-        {/* Center */}
-        <Skeleton
-          variant="rectangular"
-          animation="wave"
-          sx={{
-            position: "absolute",
-            width: CARD_WIDTH,
-            height: CARD_HEIGHT,
-            borderRadius: "20px",
-            transform: "scale(1.2)",
-            zIndex: 10,
-          }}
-        />
-
         {/* Left */}
         <Skeleton
           variant="rectangular"
           animation="wave"
           sx={{
             position: "absolute",
-            width: CARD_WIDTH,
-            height: CARD_HEIGHT,
+            width: cardW,
+            height: cardH,
             borderRadius: "20px",
             transform: `translateX(-${spacing}px) scale(0.95)`,
             zIndex: 5,
           }}
         />
-
+        {/* Center */}
+        <Skeleton
+          variant="rectangular"
+          animation="wave"
+          sx={{
+            position: "absolute",
+            width: cardW,
+            height: cardH,
+            borderRadius: "20px",
+            transform: "scale(1.2)",
+            zIndex: 10,
+          }}
+        />
         {/* Right */}
         <Skeleton
           variant="rectangular"
           animation="wave"
           sx={{
             position: "absolute",
-            width: CARD_WIDTH,
-            height: CARD_HEIGHT,
+            width: cardW,
+            height: cardH,
             borderRadius: "20px",
             transform: `translateX(${spacing}px) scale(0.95)`,
             zIndex: 5,
@@ -415,10 +401,15 @@ const CollectionSkeleton = ({ isMobile }) => {
         />
       </Box>
 
-      {/* Controls Skeleton */}
+      {/* Controls skeleton */}
       <Box sx={{ display: "flex", gap: 4, mt: 8 }}>
         <Skeleton variant="circular" width={40} height={40} animation="wave" />
-        <Skeleton variant="rectangular" width={180} height={45} animation="wave" />
+        <Skeleton
+          variant="rectangular"
+          width={180}
+          height={45}
+          animation="wave"
+        />
         <Skeleton variant="circular" width={40} height={40} animation="wave" />
       </Box>
     </Box>

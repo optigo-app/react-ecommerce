@@ -220,10 +220,10 @@ const Elveester_app = () => {
       <HelmetProvider>
         <MetaPage />
         {getRedModal === true && <RedirectModal />}
-        {/* {showHeader && <Header hidden={true} />} */}
+        {showHeader && <Header hidden={false} />}
 
-        {!isSetupforMax && <PremiumNavbar />}
-        {isSetupforMax && <MaxNavbar />}
+        {/* {!isSetupforMax && <PremiumNavbar />} */}
+        {/* {isSetupforMax && <MaxNavbar />} */}
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             {/* Auth Flow  */}

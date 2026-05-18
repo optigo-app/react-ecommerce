@@ -1,14 +1,18 @@
 import { alpha } from "@mui/material";
 import { Box, IconButton, Badge } from "@mui/material";
 import { Search as SearchIcon, Heart as FavoriteIcon, User as PersonIcon, ShoppingCart as ShoppingBagIcon, LogOut } from "lucide-react";
-const RightSideMenu = ({ is768px ,isMobile, setSearchOpen, IsB2BWebsiteChek, storeinit, handleLogout, islogin, navigate, isHovered, isScrolled, cartCount, wishCount }) => {
+const RightSideMenu = ({ is768px, isMobile, setSearchOpen, IsB2BWebsiteChek, storeinit, handleLogout, islogin, navigate, isHovered, isScrolled, cartCount, wishCount }) => {
+  // B2C: IsB2BWebsite === 0 — guests can browse/search/cart without login
+  const IsB2CWebsiteChek = IsB2BWebsiteChek == 0;
+
   return (
     <>
-      <Box sx={{ display: "flex", alignItems: "center" ,
-                                        flex: 1,
-                                        justifyContent:'flex-end'
-       }}>
-        {islogin && (
+      <Box sx={{
+        display: "flex", alignItems: "center",
+        flex: 1,
+        justifyContent: 'flex-end'
+      }}>
+        {(islogin || IsB2CWebsiteChek) && (
           <IconButton
             onClick={() => setSearchOpen((prev) => !prev)}
             sx={{
@@ -22,27 +26,27 @@ const RightSideMenu = ({ is768px ,isMobile, setSearchOpen, IsB2BWebsiteChek, sto
         )}
 
         {!is768px && (
-          islogin && <IconButton
-          sx={{
-            "&:hover": { bgcolor: alpha("#fff", 0.08) },
-            color: isHovered || isScrolled ? "#000" : "#fff",
-          }}
-          onClick={() => navigate("/myWishList")}
-        >
-          <Badge badgeContent={wishCount} sx={{
-            "& .MuiBadge-badge": {
-              backgroundColor: "#000",
-              color: "#fff",
-              borderRadius: "50%",
-              padding: "0 6px",
-              fontSize: "10px",
-              width: "20px",
-              height: "20px !important",
-            }
-          }}>
-            <FavoriteIcon style={{ fontSize: "18px", color: "inherit" }} />
-          </Badge>
-        </IconButton>
+          (islogin || IsB2CWebsiteChek) && <IconButton
+            sx={{
+              "&:hover": { bgcolor: alpha("#fff", 0.08) },
+              color: isHovered || isScrolled ? "#000" : "#fff",
+            }}
+            onClick={() => navigate("/myWishList")}
+          >
+            <Badge badgeContent={wishCount} sx={{
+              "& .MuiBadge-badge": {
+                backgroundColor: "#000",
+                color: "#fff",
+                borderRadius: "50%",
+                padding: "0 6px",
+                fontSize: "10px",
+                width: "20px",
+                height: "20px !important",
+              }
+            }}>
+              <FavoriteIcon style={{ fontSize: "18px", color: "inherit" }} />
+            </Badge>
+          </IconButton>
         )}
         {IsB2BWebsiteChek == 0 ? (
           storeinit?.IsPLW ? (
@@ -80,7 +84,7 @@ const RightSideMenu = ({ is768px ,isMobile, setSearchOpen, IsB2BWebsiteChek, sto
           </>
         )}
 
-        {islogin && <IconButton
+        {(islogin || IsB2CWebsiteChek) && <IconButton
           sx={{
             "&:hover": { bgcolor: alpha("#fff", 0.08) },
             color: isHovered || isScrolled ? "#000" : "#fff",
@@ -88,7 +92,7 @@ const RightSideMenu = ({ is768px ,isMobile, setSearchOpen, IsB2BWebsiteChek, sto
           onClick={() => navigate("/CartPage")}
         >
           <Badge badgeContent={cartCount} sx={{
-             "& .MuiBadge-badge": {
+            "& .MuiBadge-badge": {
               backgroundColor: "#000",
               color: "#fff",
               borderRadius: "50%",

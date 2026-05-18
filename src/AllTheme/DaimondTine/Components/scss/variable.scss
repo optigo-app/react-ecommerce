@@ -1,6 +1,7 @@
+//   font-family: 'Plus Jakarta Sans Variable', sans-serif;
+
 @font-face {
-    font-family: 'Playfair Display';
-    src: url('./../Assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf');
+   font-family: 'Plus Jakarta Sans Variable', sans-serif;
 }
 
 // $homePageFontFamily: if($prim, $prim, $fontFamily1), sans-serif;
@@ -24,8 +25,7 @@
 
 $AuthBackgroundColor : '';
 
-$fontFamily1 : 'Poppins',
-sans-serif;
+$fontFamily1 : 'Plus Jakarta Sans Variable', sans-serif;
 
 //backgroundcolors
 
@@ -43,13 +43,15 @@ $primaryfontcolor2: #7d7f85;
 $homePageFontColor: #7d7f85;
 $titleColor: #000;
 $primaryfontcolorLight: #7d7f856e;
-$primaryFontFamilyMedium: "TT Commons Medium";
-$prim : "Playfair Display";
+// $primaryFontFamilyMedium: "TT Commons Medium";
+// $prim : "Playfair Display";
+$prim : 'Plus Jakarta Sans Variable', sans-serif;
+$primaryFontFamilyMedium : 'Plus Jakarta Sans Variable', sans-serif;
 
 //fontFamily
 
-$homePageFontFamily: "Poppins", sans-serif;
-$primaryFontFamily: "Poppins", sans-serif;
+$homePageFontFamily:'Plus Jakarta Sans Variable', sans-serif;
+$primaryFontFamily:'Plus Jakarta Sans Variable', sans-serif;
 
 
 // $homePageFontFamily: if($prim, $prim, $fontFamily1), sans-serif;

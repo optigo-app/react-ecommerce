@@ -5,6 +5,10 @@ import { toast } from "react-toastify";
 import { BespokeAPI } from "../../../../../../utils/API/Bespoke/BespokeAPI";
 import { ContactUsAPI } from "../../../../../../utils/API/ContactUs/ContactUsAPI";
 import PageLoader from "../../../../../../utils/Glob_Functions/PageLoaderComponent/PageLoader";
+
+// Set to 0 to show Sonasons (Cosmic Kepler-186f Branch), 1 to show Shantha Jewellers
+const contactFormMode = 0;
+
 const ContactForm = () => {
   const [loading, setLoading] = useState(false);
 
@@ -107,12 +111,13 @@ const ContactForm = () => {
           from you. Reach out to us anytime and our team will get back to you as soon as <br />
           possible.
         </p>
-        <span>Email : shantha.jewellers@gmail.com</span>
-        <p>Phone: +91 9962040229</p>
+        <span>Email : {contactFormMode === 0 ? "galaxy@sonasons.com" : "shantha.jewellers@gmail.com"}</span>
+        <p>Phone: {contactFormMode === 0 ? "+91 99999 88888" : "+91 9962040229"}</p>
         <address>
-          Address: 68, N Usman Rd, near State Bank of Travancore, <br />
-          Postal Colony, T. Nagar, Chennai, Tamil Nadu 600017
-          .
+          Address: {contactFormMode === 0
+            ? <>Plot 42, Nebula Boulevard, Sector 9, <br />Stardust City, Kepler-186f, Mars 99999</>
+            : <>68, N Usman Rd, near State Bank of Travancore, <br />Postal Colony, T. Nagar, Chennai, Tamil Nadu 600017</>
+          }
         </address>
       </div>
       <div className="contact_from">
@@ -196,17 +201,21 @@ const ContactForm = () => {
       </div>
 
       <Box
-      sx={{
-        width:'100%',
-        height:'450px'
-      }}
+        sx={{
+          width: '100%',
+          height: '450px'
+        }}
       >
-        <iframe title="google_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.948469280785!2d80.2266454841771!3d13.038952080624663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5266ff599f70c7%3A0xf6cba3a6a7e273!2sShantha%20Jewellers!5e0!3m2!1sen!2sin!4v1769235133829!5m2!1sen!2sin"
+        <iframe title="google_map"
+          src={contactFormMode === 0
+            ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.2828242419437!2d72.8191344!3d21.1809209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04e438cc948fb%3A0x5712a989b70ef3a2!2sOrail%20Services%20-%20OptigoApps!5e0!3m2!1sen!2sin!4v1734596370112!5m2!1sen!2sin"
+            : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.948469280785!2d80.2266454841771!3d13.038952080624663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5266ff599f70c7%3A0xf6cba3a6a7e273!2sShantha%20Jewellers!5e0!3m2!1sen!2sin!4v1769235133829!5m2!1sen!2sin"
+          }
           style={{
-          border: '0',
-          width:'100%',
-          height:'100%'
-        }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            border: '0',
+            width: '100%',
+            height: '100%'
+          }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </Box>
       <PageLoader loading={loading} />
     </div>

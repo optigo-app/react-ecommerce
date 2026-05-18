@@ -15,8 +15,8 @@ export default function Exchange() {
 
 
     useEffect(() => {
-        fetch(`${storImagePath()}/html/Exchange.html`)
-        // fetch(`${storImagePath()}/html/Exchangesona.html`)
+        // fetch(`${storImagePath()}/html/Exchange.html`)
+        fetch(`${storImagePath()}/html/Exchangesona.html`)
             .then((response) => response.text())
             .then((html) => {
                 setHtmlContent(html);
@@ -29,7 +29,7 @@ export default function Exchange() {
     return (
         <div className='dt_faqMaindiv'>
             <div className='dt_FaqSubDivMain'>
-                <div  className='dt_Faq_Sub_Set' style={{ marginInline: '10%', paddingBottom: '80px' }}>
+                <div className='dt_Faq_Sub_Set' style={{ marginInline: '10%', paddingBottom: '80px' }}>
                     <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
                 </div>
             </div>

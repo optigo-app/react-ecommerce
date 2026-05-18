@@ -436,8 +436,8 @@ const Header = () => {
             <div className="dai_headerMainTop">
                 <div className="div_contact_info first-dt">
                     <IoCallOutline style={{ height: "20px", width: "40px" }} />
-                    <a href={`tel:${'98108 76359'}`} className="Dt_FontFamilySet" style={{ fontSize: "12px", color: 'white', cursor: 'pointer', textDecoration: 'none', fontWeight: 500 }}>
-                        Call: +91-98108 76359
+                    <a href={`tel:${'9099887762'}`} className="Dt_FontFamilySet" style={{ fontSize: "12px", color: 'white', cursor: 'pointer', textDecoration: 'none', fontWeight: 500 }}>
+                        Call: +91-9099887762
                     </a>
                 </div>
                 <p className='Dt_FontFamilySet two-dt' style={{ margin: '0px', color: 'white', fontWeight: 500 }}>100% Natural Diamonds</p>

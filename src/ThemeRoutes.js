@@ -267,7 +267,13 @@ export default function ThemeRoutes() {
     const finalID = storeInit?.IsB2BWebsite === 0 ? (LoginUser === false ? visiterID : loginUserDetail?.id || "0") : loginUserDetail?.id || "0";
 
     // Call all APIs in parallel
-    Promise.all([callApiAndStore(MetalTypeComboAPI, "metalTypeCombo", finalID), callApiAndStore(DiamondQualityColorComboAPI, "diamondQualityColorCombo", finalID), callApiAndStore(MetalColorCombo, "MetalColorCombo", finalID), callApiAndStore(ColorStoneQualityColorComboAPI, "ColorStoneQualityColorCombo", finalID), callApiAndStore(CurrencyComboAPI, "CurrencyCombo", finalID), callApiAndStore(CountryCodeListApi, "CountryCodeListApi", finalID), callApiAndStore(RegisterMasterApi, "B2BRegisterMasterApi", finalID)])
+    Promise.all([callApiAndStore(MetalTypeComboAPI, "metalTypeCombo", finalID)
+      , callApiAndStore(DiamondQualityColorComboAPI, "diamondQualityColorCombo", finalID)
+      , callApiAndStore(MetalColorCombo, "MetalColorCombo", finalID)
+      , callApiAndStore(ColorStoneQualityColorComboAPI, "ColorStoneQualityColorCombo", finalID)
+      , callApiAndStore(CurrencyComboAPI, "CurrencyCombo", finalID),
+       callApiAndStore(CountryCodeListApi, "CountryCodeListApi", finalID),
+       callApiAndStore(RegisterMasterApi, "B2BRegisterMasterApi", finalID)])
       .then(() => {
         console.log("All combo APIs completed");
       })
