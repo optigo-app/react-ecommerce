@@ -51,9 +51,12 @@ const ProductTypeSlider = ({ SectionData, IsLoading }) => {
   // ── Image map — add / update paths once the user provides the images ─────
   const ImagesDemo = {
     ProductTypeImages: buildNormalizedMap({
+      "DIAMOND JEWELLERY": `${storImagePath()}/Banner/productType/diamond.jpeg`,
       "Diamond Jewellery": `${storImagePath()}/Banner/productType/diamond.jpeg`,
       "Gold Jewellery": `${storImagePath()}/Banner/productType/gold.jpeg`,
+      "GOLD JEWELLERY": `${storImagePath()}/Banner/productType/gold.jpeg`,
       "POLKI JEWELLERY": `${storImagePath()}/Banner/productType/polki.jpeg`,
+      "Polki Jewellery": `${storImagePath()}/Banner/productType/polki.jpeg`,
     }),
   };
 
