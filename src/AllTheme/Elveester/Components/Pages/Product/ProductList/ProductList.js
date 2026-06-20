@@ -35,6 +35,9 @@ import NewPagination from "./New/NewPagination";
 import NoProductFound from "./New/NoProductFound";
 import { useBroadcaster } from "../../../utils/BoardCastContext";
 
+const isVedica = true;
+
+
 const ProductList = () => {
   const location = useLocation();
   const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
@@ -620,15 +623,15 @@ const ProductList = () => {
             case "S":
               SearchVar = ele;
               break;
-                case 'T':
-            TrendingVar = ele;
-            break;
-          case 'B':
-            BestSellerVar = ele;
-            break;
-          case 'A':
-            AlbumVar = ele;
-            break;
+            case 'T':
+              TrendingVar = ele;
+              break;
+            case 'B':
+              BestSellerVar = ele;
+              break;
+            case 'A':
+              AlbumVar = ele;
+              break;
 
             default:
               return "";
@@ -651,15 +654,15 @@ const ProductList = () => {
           productlisttype = NewArrivalVar.split("=")[1];
         }
         if (TrendingVar) {
-        productlisttype = TrendingVar.split("=")[1]
-      } 
-       if (BestSellerVar) {
-        productlisttype = BestSellerVar.split("=")[1]
-      }
+          productlisttype = TrendingVar.split("=")[1]
+        }
+        if (BestSellerVar) {
+          productlisttype = BestSellerVar.split("=")[1]
+        }
 
-      if (AlbumVar) {
-        productlisttype = AlbumVar.split("=")[1]
-      }
+        if (AlbumVar) {
+          productlisttype = AlbumVar.split("=")[1]
+        }
 
         setprodListType(productlisttype);
         setDetailsMenu(productlisttype);
@@ -1034,7 +1037,7 @@ const ProductList = () => {
     let loginInfo = JSON.parse(sessionStorage.getItem("loginUserDetail"));
     const prodObj = {
       autocode: ele?.autocode,
-      Metalid: selectedMetalId ?? ele?.MetalPurityid,
+      Metalid: isVedica ? ele?.MetalPurityid : (selectedMetalId ?? ele?.MetalPurityid),
       MetalColorId: ele?.MetalColorid,
       DiaQCid: selectedDiaId ?? loginInfo?.cmboDiaQCid,
       CsQCid: selectedCsId ?? loginInfo?.cmboCSQCid,

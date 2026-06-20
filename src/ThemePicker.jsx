@@ -29,8 +29,9 @@ const themeConfig = {
   },
   3: {
     Component: Elveester_App, Loader:
-      // ElveeLoadingFallback
-      DefaultLoadingFallback
+      ElveeLoadingFallback
+    // DefaultLoadingFallback
+
   },
   4: { Component: SmilingRock_MobileApp_App, Loader: LoadingFallback },
   5: { Component: HemratnaProcatalog_App, Loader: ProcatalogLoadingFallback },
@@ -73,8 +74,16 @@ export const themeEnvConfig = {
   "elvee.web": {
     Component: Elveester_App,
     Loader:
-      //  ElveeLoadingFallback,
-      DefaultLoadingFallback
+      ElveeLoadingFallback,
+    // DefaultLoadingFallback
+  },
+
+
+  "vedica.web": {
+    Component: Elveester_App,
+    Loader:
+      ElveeLoadingFallback,
+    // DefaultLoadingFallback
   },
 
   "fgstore.mapp": {

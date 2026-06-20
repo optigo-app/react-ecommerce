@@ -163,7 +163,7 @@ const CartPage = () => {
   const [openDiscountModal, setOpenDiscountModal] = useState(false);
   const [couponData, setCouponData] = useState([]);
   const { broadcast } = useBroadcaster(); // Get the broadcaster
-const [summary, setSummary] = useState(null);
+  const [summary, setSummary] = useState(null);
 
 
   const fetchCouponData = async (finalID) => {
@@ -264,8 +264,8 @@ const [summary, setSummary] = useState(null);
   };
 
   const handleDiscountModalOpen = () => {
-    if(IsSetupFor){
-     handleMoveToOrder();
+    if (IsSetupFor) {
+      handleMoveToOrder();
       return;
     }
     setOpenDiscountModal(true);
@@ -309,9 +309,9 @@ const [summary, setSummary] = useState(null);
     if (finalCartData?.length && shouldRecalculate) {
       const result = calcCartMasterSummary(finalCartData || []);
       setSummary(result);
-      
+
       // Turn off recalculation until an update happens
-      setShouldRecalculate(false); 
+      setShouldRecalculate(false);
     }
   }, [finalCartData, shouldRecalculate]);
 

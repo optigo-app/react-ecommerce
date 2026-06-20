@@ -1,7 +1,7 @@
 import { IsSetupFor, isSetupforMax } from "../../Recoil/atom";
 
-const Title = IsSetupFor ? "Sonasons" : "Vimal Gold & Diamond";
-const Link = isSetupforMax ? "https://sonasons.optigoapps.com/" : "https://vimalgoldanddiamond.com/"
+const Title = !IsSetupFor ? "Sonasons" : "Vimal Gold & Diamond";
+const Link = !isSetupforMax ? "https://sonasons.optigoapps.com/" : "https://vimalgoldanddiamond.com/"
 
 export const websiteFaqs = [
   {

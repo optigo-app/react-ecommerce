@@ -5,7 +5,7 @@ import useHomeBannerImages from "../../../../../../../utils/Glob_Functions/Theme
 import { IsSetupFor } from "../../../../Recoil/atom";
 
 // Set to 0 to show Sonasons, 1 to show Vimal Gold & Diamond
-const aboutMode = 0;
+const aboutMode = 1;
 
 const AboutUs = () => {
   const { aboutusBanner } = useHomeBannerImages();

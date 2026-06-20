@@ -28,6 +28,7 @@ export const CartAndWishListAPI = async (type, obj, visiterId, type2 = "", stock
         "IsSolitaireWebsite": `${storeInit?.IsSolitaireWebsite ?? 0}`,
     }
 
+
     let body = {
         con: `{\"id\":\"Store\",\"mode\":\"ADDTOCART\",\"appuserid\":\"${customerEmail}\"}`,
         f: "onloadFirstTime (getdesignpricelist)",
