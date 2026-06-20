@@ -21,7 +21,7 @@ import { IsSetupFor } from "../../../../Recoil/atom";
 }
 
 // Set to 0 to show Sonasons (Cosmic Kepler-186f Branch), 1 to show Vimal Gold & Diamond
-const contactMode = 0;
+const contactMode = 1;
 
 export default function ContactPage() {
     const [loading, setLoading] = useState(false);

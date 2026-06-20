@@ -28,6 +28,7 @@ import PremiumNavbar from './Components/Pages/Home/Header/New/Navbar';
 import OfferBar from './Components/Pages/Home/Header/New/OfferBar';
 import Collection from './Components/Pages/Home/Collection/Collection';
 import MaxNavbar from './Components/Pages/Home/Header/New/MaxMenu';
+import { ElveeLoadingFallback } from '../../LoadingFallbacks';
 
 const Home = React.lazy(() => import('./Components/Pages/Home/Index'));
 // const PrivateRoutes = React.lazy(() => import('./PrivateRoutes'));
@@ -136,7 +137,9 @@ const Elveester_app = () => {
     let mobileLogo = `${storImagePath()}/logoIcon/mobileLogo.png`;
 
     el_setCompanyTitleLogo(webLogo);
+    console.log(webLogo, "webLogo")
     el_setCompanyTitleLogoM(mobileLogo);
+    console.log(mobileLogo, "mobileLogo")
 
     if (
       location?.pathname === '/menu'
@@ -149,35 +152,39 @@ const Elveester_app = () => {
     }
   }, [location?.pathname]);
 
-  const LoadingFallback = () => (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        backgroundColor: '#fff',
-      }}
-    >
-      {/* <CircularProgress sx={{ color: 'rgba(255, 87, 34, 0.8)' }} /> */}
-      <img
-        src={IsSetupFor ? el_companyTitleLogo : loaderImg}
-        alt="Loading..."
-        width="auto"
-        loading="lazy"
-        className={IsSetupFor ? "loading_logo_7946" : ""}
 
-        style={{
-          maxWidth: '200px',
-          width: '100%',
-          height: 'auto',
+  const LoadingFallback = () => {
+    return <ElveeLoadingFallback />
+    return (<>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+          backgroundColor: '#fff',
         }}
-      // style={{
-      //   animation: 'scaleUpDown 1.5s ease-in-out infinite', // Apply the animation here
-      // }}
-      />
-    </Box>
-  );
+      >
+        {/* <CircularProgress sx={{ color: 'rgba(255, 87, 34, 0.8)' }} /> */}
+        <img
+          src={IsSetupFor ? el_companyTitleLogo : loaderImg}
+          alt="Loading..."
+          width="auto"
+          loading="lazy"
+          className={IsSetupFor ? "loading_logo_7946" : ""}
+
+          style={{
+            maxWidth: '200px',
+            width: '100%',
+            height: 'auto',
+          }}
+        // style={{
+        //   animation: 'scaleUpDown 1.5s ease-in-out infinite', // Apply the animation here
+        // }}
+        />
+      </Box>
+    </>)
+  };
 
   function ProductListWrapper() {
     return (

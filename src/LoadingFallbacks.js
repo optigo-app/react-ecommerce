@@ -85,7 +85,8 @@ export const DefaultLoadingFallback = () => (
 );
 
 export const ElveeLoadingFallback = () => {
-  const Logo = IsSetupFor ? vedicaLogo : Gif_Loder;
+  const Logo = vedicaLogo
+  // IsSetupFor ? vedicaLogo : Gif_Loder;
   return (
     <>
       <Box

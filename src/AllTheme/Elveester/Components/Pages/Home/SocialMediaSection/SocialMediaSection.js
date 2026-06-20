@@ -113,13 +113,13 @@ export default function SocialMediaSection({ banner, demoVideo }) {
   }));
 
 
-  // if (IsSetupFor) {
-  //   return (
-  //     <>
-  //       <SocialMediaVideoSection videoData={updatedSlides} />
-  //     </>
-  //   );
-  // }
+  if (IsSetupFor) {
+    return (
+      <>
+        <SocialMediaVideoSection videoData={updatedSlides} />
+      </>
+    );
+  }
 
   return (
     <Box name="mainSocialMediaConatinerID" className="mainSocialMediaConatiner" sx={{ width: "100%", px: { xs: 2, sm: 3, md: 4 } }}>

@@ -41,6 +41,8 @@ import { DetailSkeleton } from '../ProductList/New/Skeleton';
 import ProductDetailsSection from './New/ProductDetailsSection';
 import { useBroadcaster } from "../../../utils/BoardCastContext";
 
+const isVedica = true;
+
 const ProductDetail = () => {
   const [maxWidth1400, setMaxWidth1400] = useState(false);
   const [maxWidth1000, setMaxWidth1000] = useState(false);
@@ -275,7 +277,12 @@ const ProductDetail = () => {
   useEffect(() => {
     if (metalTypeCombo.length) {
       const mtType = metalTypeCombo.find(ele => ele.Metalid === singleProd?.MetalPurityid)?.metaltype;
-      setMetalType(mtType);
+      if (isVedica) {
+        setMetalType(singleProd?.MetalTypePurity);
+      }
+      else {
+        setMetalType(mtType);
+      }
     }
     if (metalColorCombo.length) {
       const getCurrentMetalColor = mtColorLocal.find((ele) => ele?.id === singleProd?.MetalColorid)?.colorcode;
@@ -326,7 +333,7 @@ const ProductDetail = () => {
 
     const prodObj = {
       autocode: singleProd?.autocode,
-      Metalid: metal?.Metalid,
+      Metalid: isVedica ? singleProd?.MetalPurityid : metal?.Metalid,
       MetalColorId: mcArr?.id ?? singleProd?.MetalColorid,
       DiaQCid: `${dia?.QualityId ?? 0},${dia?.ColorId ?? 0}`,
       CsQCid: `${cs?.QualityId ?? 0},${cs?.ColorId ?? 0}`,
@@ -537,8 +544,13 @@ const ProductDetail = () => {
                 ele?.ColorId == (decodeobj?.c ? decodeobj?.c?.split(",")[1] : (logininfoInside?.cmboCSQCid ?? storeinitInside?.cmboCSQCid).split(",")[1])
             )[0]
         }
+        if (isVedica) {
+          setMetalType(singleProd?.MetalTypePurity);
+        }
+        else {
+          setMetalType(metalArr?.metaltype);
+        }
 
-        setMetalType(metalArr?.metaltype);
 
         setSelectDiaQc(`${diaArr?.Quality},${diaArr?.color}`);
 
@@ -1614,6 +1626,7 @@ const TableComponentsDia = ({ list, details }) => {
   );
 
 }
+
 const TableComponentsMISC = ({ list, details }) => {
 
   const pcsTotalVal = [];
