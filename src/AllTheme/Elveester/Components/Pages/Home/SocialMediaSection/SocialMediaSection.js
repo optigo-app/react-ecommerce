@@ -41,12 +41,12 @@ const sliderData = [
   },
   {
     imageUrl: "/images/HomePage/SocialMedia/socialMedia2.jpg",
-    link: "https://in.pinterest.com/",
+    link: "https://www.facebook.com/VimalDiamondOfficial/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/facebook.png`,
   },
   {
     imageUrl: "/images/HomePage/SocialMedia/socialMedia3.jpg",
-    link: "https://www.facebook.com/VimalDiamondOfficial/",
+    link: "https://in.pinterest.com/",
     icon: `${storImagePath()}/images/HomePage/SocialLinks/pinterest.png`,
   },
   {
