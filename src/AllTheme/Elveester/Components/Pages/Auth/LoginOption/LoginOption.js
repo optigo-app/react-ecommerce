@@ -37,11 +37,11 @@ export default function LoginOption() {
                             <p className='loginDiTile'>Log in or sign up in seconds</p>
                             <p style={{ textAlign: 'center', marginTop: '0px', fontSize: '14px' }}>Use your email or mobile no. to continue with the organization.</p>
                             <div className='smilingLoginOptionMain'>
-                                <div className='loginMail' onClick={() => navigation(`/ContinueWithEmail?${redirectEmailUrl?.startsWith('?') ? redirectEmailUrl.replace('?', '') : redirectEmailUrl}`)}>
+                                <div className='loginMail' onClick={() => navigation(`/ContinueWithEmail?${redirectEmailUrl?.startsWith('?') ? redirectEmailUrl.replace('?', '') : redirectEmailUrl}`, { replace: true })}>
                                     <IoMdMail style={{ height: '25px', width: '25px' }} />
                                     <p style={{ margin: '0px', fontSize: '20px', fontWeight: 500, paddingLeft: '25px' }}>Continue with email</p>
                                 </div>
-                                <div className='loginMobile' onClick={() => navigation(`/ContimueWithMobile?${redirectEmailUrl?.startsWith('?') ? redirectEmailUrl.replace('?', '') : redirectEmailUrl}`)}>
+                                <div className='loginMobile' onClick={() => navigation(`/ContimueWithMobile?${redirectEmailUrl?.startsWith('?') ? redirectEmailUrl.replace('?', '') : redirectEmailUrl}`, { replace: true })}>
                                     <FaMobileAlt style={{ height: '25px', width: '25px', marginRight: '10px' }} />
                                     <p style={{ margin: '0px', fontSize: '20px', fontWeight: 500, paddingLeft: '25px' }}>Log in with mobile</p>
                                 </div>

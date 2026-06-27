@@ -1,5 +1,5 @@
 import React, { memo, Suspense, useEffect, useState } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import './Components/scss/elvee_modules.scss';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { Box, CircularProgress } from '@mui/material';
@@ -237,28 +237,28 @@ const Elveester_app = () => {
             <Route path="/LoginOption" element={<LoginOption />} />
             <Route
               path="/ContinueWithEmail"
-              element={!islogin && <ContinueWithEmail />}
+              element={!islogin ? <ContinueWithEmail /> : <Navigate to="/" replace />}
             />
             <Route
               path="/ContimueWithMobile"
-              element={!islogin && <ContimueWithMobile />}
+              element={!islogin ? <ContimueWithMobile /> : <Navigate to="/" replace />}
             />
             <Route
               path="/LoginWithEmail"
-              element={!islogin && <LoginWithEmail />}
+              element={!islogin ? <LoginWithEmail /> : <Navigate to="/" replace />}
             />
-            <Route path="/Register" element={!islogin && <Register />} />
+            <Route path="/Register" element={!islogin ? <Register /> : <Navigate to="/" replace />} />
             <Route
               path="/LoginWithEmailCode"
-              element={!islogin && <LoginWithEmailCode />}
+              element={!islogin ? <LoginWithEmailCode /> : <Navigate to="/" replace />}
             />
             <Route
               path="/LoginWithMobileCode"
-              element={!islogin && <LoginWithMobileCode />}
+              element={!islogin ? <LoginWithMobileCode /> : <Navigate to="/" replace />}
             />
             <Route
               path="/ForgotPass"
-              element={!islogin && <ForgotPass />}
+              element={!islogin ? <ForgotPass /> : <Navigate to="/" replace />}
             />
 
             <Route path="/" element={<Home />} />

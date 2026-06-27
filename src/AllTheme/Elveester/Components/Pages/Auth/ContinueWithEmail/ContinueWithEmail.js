@@ -61,13 +61,13 @@ export default function ContinueWithEmail() {
             if (response.Data.rd[0].stat == 1 && response.Data.rd[0].islead == 1) {
                 toast.error('You are not a customer, contact to admin')
             } else if (response.Data.rd[0].stat == 1 && response.Data.rd[0].islead == 0) {
-                navigation(redirectEmailUrl, { state: { email: trimmedEmail } });
+                navigation(redirectEmailUrl, { replace: true, state: { email: trimmedEmail } });
                 // HandleNaviagteDirect(trimmedEmail)
                 if (trimmedEmail) {
                     sessionStorage.setItem("registerEmail", trimmedEmail);
                 }
             } else {
-                navigation(redirectSignUpUrl, { state: { email: trimmedEmail } });
+                navigation(redirectSignUpUrl, { replace: true, state: { email: trimmedEmail } });
             }
         }).catch((err) => console.log(err))
     };
