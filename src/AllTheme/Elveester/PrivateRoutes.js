@@ -47,6 +47,22 @@ const PrivateRoutes = ({ isLoginStatus }) => {
         return <Navigate to="/" />;
       }
     }
+  } else {
+    // B2C: guests can browse products and cart, but must login to proceed to order-flow
+    if (!isLoginStatus) {
+      if (
+        location.pathname.startsWith("/Delivery") ||
+        location.pathname.startsWith("/payment") ||
+        location.pathname.startsWith("/Confirmation") ||
+        location.pathname.startsWith("/account")
+      ) {
+        let storeInt = JSON.parse(sessionStorage.getItem("storeInit"));
+        if (!storeInt) {
+          Storeinit();
+        }
+        return <Navigate to={redirectUrl} />;
+      }
+    }
   }
   return <Outlet />;
 };

@@ -259,6 +259,13 @@ const CartPage = () => {
   }, []);
 
   const handleMoveToOrder = () => {
+    const LoginUser = JSON.parse(sessionStorage.getItem("LoginUser"));
+    const isB2C = storeinit?.IsB2BWebsite === 0;
+    if (isB2C && !LoginUser) {
+      const redirectUrl = `/loginOption/?LoginRedirect=${encodeURIComponent("/Delivery")}`;
+      navigate(redirectUrl, { replace: true });
+      return;
+    }
     navigate("/Delivery", { replace: true });
     sessionStorage.setItem("iscartData", randomNumber);
   };
