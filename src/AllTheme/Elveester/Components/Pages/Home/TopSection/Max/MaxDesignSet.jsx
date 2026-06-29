@@ -30,6 +30,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import BrandsTitle from "./BrandsTitle";
 import MaxHeader from "./Header";
+import { InTheSpotlight } from "./ui/HeaderJ";
 
 const gradientColors = [
   { "background": "linear-gradient(135deg, #4ca1af → #c4e0e5)", "color": "#FFFFFF" },
@@ -254,7 +255,11 @@ const MaxDesignSet = ({ data }) => {
             }} />
             {/* <BrandsTitle title={"Complete Your Look"} my={0} /> */}
             <Box sx={{ justifySelf: "center", textAlign: "center" }}>
-              <MaxHeader title={"Complete Your Look"} alignment="center" noExtraMb={true} />
+              {/* <MaxHeader title={"Complete Your Look"} alignment="center" noExtraMb={true} /> */}
+              <InTheSpotlight
+                title="Shop the look"
+                subtitle="Beautiful combinations crafted to complement each other."
+              />
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifySelf: { xs: "center", sm: "end", md: "end" }, marginTop: { sm: "27px", md: "0px" }, marginBottom: { xs: "25px", sm: "0px", md: "0px" } }}>
               {((storeInit?.IsB2BWebsite !== 1) || (storeInit?.IsB2BWebsite === 1 && islogin)) && (

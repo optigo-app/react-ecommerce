@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Button, IconButton, useTheme, useMediaQuery ,Skeleton } from "@mui/material";
+import { Box, Typography, Button, IconButton, useTheme, useMediaQuery, Skeleton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import BrandsTitle from "./BrandsTitle";

@@ -12,6 +12,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import MaxHeader from "./Header";
 import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 import { useNavigate } from "react-router-dom";
+import { InTheSpotlight } from "./ui/HeaderJ";
 
 // ---------------------------------------------------------------------------
 // Card dimensions — same as CollectionsSlider
@@ -189,10 +190,14 @@ const ProductTypeSlider = ({ SectionData, IsLoading }) => {
     >
       {/* Section Header */}
       <Box textAlign="center" mb={5}>
-        <MaxHeader
+        {/* <MaxHeader
           title={"Shop By Type"}
           subtitle={"Explore our curated product categories crafted for every occasion!"}
           alignment="center"
+        /> */}
+        <InTheSpotlight
+          title=" Designed Around You"
+          subtitle="Explore timeless essentials and statement pieces."
         />
       </Box>
 

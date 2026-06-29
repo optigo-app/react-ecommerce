@@ -451,7 +451,7 @@ const PremiumNavbar = () => {
                                     </IconButton>
                                 )}
                                 <Box component={Link} to="/">
-                                    <Box component="img" src={compnyLogo} alt="SHAYN" sx={{ width: IsSetupFor ? "150px" : "110px", cursor: "pointer" }} className="el_without_headerLogo_side" />
+                                    <Box component="img" src={compnyLogo} alt="logo" sx={{ width: IsSetupFor ? "150px" : "110px", cursor: "pointer" }} className="el_without_headerLogo_side" />
                                 </Box>
                             </Box>
 
@@ -555,7 +555,7 @@ const PremiumNavbar = () => {
             <Drawer anchor="left" open={mobileOpen} onClose={handleDrawerToggle} sx={{ "& .MuiDrawer-paper": { width: { xs: "90%", sm: 380 }, maxWidth: "100%", }, }} >
                 {DrawerSearchOpen && <DrawerSearchBar setSearchOpen={setDrawerSearchOpen} searchDataFucn={searchDataFucn} />}
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2, borderBottom: `1px solid ${alpha("#fff", 0.1)}` }}>
-                    <Box component="img" src={compnyLogoM} alt="SHAYN" sx={{
+                    <Box component="img" src={compnyLogoM} alt="logo" sx={{
                         width: IsSetupFor ? '110px' : 'auto'
                     }} />
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.6 }}>
@@ -1159,7 +1159,7 @@ export default PremiumNavbar;
 //                                         component="img"
 //                                         src={compnyLogo}
 
-//                                         alt="SHAYN"
+//                                         alt="logo"
 //                                         sx={{
 //                                             width: "85%",
 //                                             cursor: "pointer",
@@ -1470,7 +1470,7 @@ export default PremiumNavbar;
 //             >
 //                 {DrawerSearchOpen && <DrawerSearchBar setSearchOpen={setDrawerSearchOpen} searchDataFucn={searchDataFucn} />}
 //                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2, borderBottom: `1px solid ${alpha("#fff", 0.1)}` }}>
-//                     <Box component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
+//                     <Box component="img" src={compnyLogoM} alt="logo" sx={{}} />
 //                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.6 }}>
 //                         {islogin && <IconButton onClick={() => setDrawerSearchOpen((prev) => !prev)} sx={{ color: "#000" }}><SearchIcon style={{ fontSize: "18px", color: "inherit" }} /></IconButton>}
 //                         {islogin && <IconButton sx={{ color: "#000" }} onClick={() => navigateToMenu("/myWishList")}><Badge badgeContent={wishCount || 10} color="error"><FavoriteIcon style={{ fontSize: "18px", color: "inherit" }} /></Badge></IconButton>}
@@ -1931,7 +1931,7 @@ export default PremiumNavbar;
 // //                                         component="img"
 // //                                         src={compnyLogo}
 
-// //                                         alt="SHAYN"
+// //                                         alt="logo"
 // //                                         sx={{
 // //                                             width: "auto",
 // //                                             cursor: "pointer",
@@ -2321,7 +2321,7 @@ export default PremiumNavbar;
 // //                         borderBottom: `1px solid ${alpha("#fff", 0.1)}`,
 // //                     }}
 // //                 >
-// //                     <Box component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
+// //                     <Box component="img" src={compnyLogoM} alt="logo" sx={{}} />
 
 // //                     <Box
 // //                         sx={{

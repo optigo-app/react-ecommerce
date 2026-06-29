@@ -39,6 +39,7 @@ import { useNavigate } from "react-router-dom";
 import imageNotFound from "../../../../Assets/image-not-found.jpg";
 import ElveeTooltip from "../New/PremiumTooltip";
 import MaxHeader from "./Header";
+import { InTheSpotlight } from "./ui/HeaderJ";
 
 const SectionHeader = styled(Box)(({ theme }) => ({
   paddingBlock: theme.spacing(2),
@@ -159,9 +160,8 @@ const MaxNewArrivalsSection = () => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "auto", sm: "auto", md: "1fr auto 1fr" },
+          gridTemplateColumns: { xs: "1fr", md: "1fr auto 1fr" },
           alignItems: "center",
-          position: { xs: "relative", sm: "relative", md: "" }
         }}
       >
         {/* <SectionHeader>
@@ -169,17 +169,21 @@ const MaxNewArrivalsSection = () => {
         </SectionHeader> */}
         <Box
           sx={{
-            display: { xs: "none", sm: "none", md: "block" },
+            display: { xs: "none", md: "block" },
           }}
         />
         <Box sx={{ justifySelf: "center", textAlign: "center" }}>
-          <MaxHeader
+          {/* <MaxHeader
             title="New In"
             subtitle={
               "Every debut tells a story of artistry, of elegance, of you"
             }
             alignment={{ xs: "left", sm: "center" }}
             noExtraMb={true}
+          /> */}
+          <InTheSpotlight
+            title="New In Store"
+            subtitle="The newest additions to our collection."
           />
         </Box>
         <Box
@@ -187,12 +191,9 @@ const MaxNewArrivalsSection = () => {
             display: "flex",
             alignItems: "center",
             gap: 1,
-            justifySelf: { xs: "center", sm: "center", md: "end" },
-            marginBottom: { xs: "44px", sm: "44px", md: "0px" },
-            position: { xs: "absolute", sm: "", md: "" },
-            right: { xs: "0", sm: "0", md: "" },
-            top: 0,
-            marginTop: "44px",
+            justifySelf: { xs: "center", md: "end" },
+            marginTop: { xs: "12px", md: "0px" },
+            marginBottom: { xs: "24px", md: "0px" },
           }}
         >
           <IconButton

@@ -14,7 +14,7 @@ import SearchBarToggle from "./SearchBarToggle";
 import DrawerSearchBar from "./DrawerSearchbar";
 import { Masonry } from "@mui/lab";
 import { buildMenuItems } from './MenuBuilder';
-import { Search as SearchIcon ,Menu as MenuIcon, Heart as FavoriteIcon, User as PersonIcon, ShoppingCart as ShoppingBagIcon, LogOut } from "lucide-react";
+import { Search as SearchIcon, Menu as MenuIcon, Heart as FavoriteIcon, User as PersonIcon, ShoppingCart as ShoppingBagIcon, LogOut } from "lucide-react";
 
 const PremiumNavbar = () => {
     const theme = useTheme();
@@ -25,7 +25,7 @@ const PremiumNavbar = () => {
 
     // Navigation & Location
     const navigate = useNavigate();
-    const navigation = useNavigate(); 
+    const navigation = useNavigate();
     const location = useLocation();
 
     // Recoil State
@@ -41,15 +41,15 @@ const PremiumNavbar = () => {
     const [menuStack, setMenuStack] = useState([]);
     const [hoveredItem, setHoveredItem] = useState(null); // Tracks the top navbar ProductType (e.g. Diamond)
     const [activeSubMenu, setActiveSubMenu] = useState(null); // Tracks the Sidebar item (e.g. Bangle)
-    
+
     const [isScrolled, setIsScrolled] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [storeinit, setStoreInit] = useState(null);
     const [DrawerSearchOpen, setDrawerSearchOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
-    
+
     // Data State
-    const [multiMenuData, setMultiMenuData] = useState({}); 
+    const [multiMenuData, setMultiMenuData] = useState({});
 
     // Refs & Animations
     const controls = useAnimation();
@@ -59,11 +59,11 @@ const PremiumNavbar = () => {
     const getDynamicMenu = () => {
         try {
             const raw = sessionStorage.getItem("DyamicMenuList");
-            if (!raw) return null; 
-            return JSON.parse(raw); 
+            if (!raw) return null;
+            return JSON.parse(raw);
         } catch (err) {
             console.warn("Invalid DyamicMenuList:", err);
-            return null; 
+            return null;
         }
     };
     const DynamicMenu = getDynamicMenu();
@@ -146,7 +146,7 @@ const PremiumNavbar = () => {
 
             if (shouldFetch && DynamicMenu && DynamicMenu.length > 0) {
                 const topMenus = DynamicMenu.slice(0, 3);
-                
+
                 let finalId;
                 if (storeinitLocal?.IsB2BWebsite === 0) {
                     finalId = islogin === false ? visiterID : loginUserDetail?.id || "0";
@@ -158,7 +158,7 @@ const PremiumNavbar = () => {
                     const fetchPromises = topMenus.map(async (menuItem) => {
                         const menuName = menuItem.ProductTypeName;
                         const sessionKey = `cachedMenu_${menuName}`;
-                        
+
                         const cachedRaw = sessionStorage.getItem(sessionKey);
                         if (cachedRaw) {
                             return { name: menuName, data: JSON.parse(cachedRaw) };
@@ -191,7 +191,7 @@ const PremiumNavbar = () => {
         };
 
         fetchAllMenus();
-    }, [islogin]); 
+    }, [islogin]);
 
 
     const handelMenu = (param, param1, param2, event, isFilterKey2Ignore) => {
@@ -223,7 +223,7 @@ const PremiumNavbar = () => {
             sessionStorage.setItem("menuparams", JSON.stringify(finalData));
 
             const queryParameters1 = [finalData?.FilterKey && `${finalData.FilterVal}`, finalData?.FilterKey1 && `${finalData.FilterVal1}`, finalData?.FilterKey2 && `${finalData.FilterVal2}`].filter(Boolean).join("/");
-            
+
             const otherparamUrl = Object.entries({
                 b: finalData?.FilterKey,
                 g: finalData?.FilterKey1,
@@ -236,7 +236,7 @@ const PremiumNavbar = () => {
 
             let menuEncoded = `${queryParameters1}/${otherparamUrl}`;
             const url = `/p/${finalData?.menuname}/${queryParameters1}/?M=${btoa(menuEncoded)}`;
-            
+
             navigate(url);
             setMobileOpen(false);
             setActiveMenu(null);
@@ -321,7 +321,7 @@ const PremiumNavbar = () => {
                 <AppBar position="sticky" elevation={0} sx={{ bgcolor: "transparent !important", top: 0 }}>
                     <Container maxWidth={false} disableGutters sx={{ width: "100%", px: 0 }}>
                         <Toolbar sx={{ justifyContent: "space-between", px: { xs: 0, sm: 4 }, minHeight: { xs: 64, sm: 72 }, bgcolor: "transparent !important", color: isHovered || isScrolled ? "#000" : "#fff" }}>
-                            
+
                             {searchOpen && <SearchBarToggle searchOpen={searchOpen} setSearchOpen={setSearchOpen} searchDataFucn={searchDataFucn} />}
 
                             {!isMobile && is1400px && (
@@ -329,7 +329,7 @@ const PremiumNavbar = () => {
                                     <MenuIcon />
                                 </IconButton>
                             )}
-                            
+
                             {/* Logo Area */}
                             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                                 {isMobile && (
@@ -338,7 +338,7 @@ const PremiumNavbar = () => {
                                     </IconButton>
                                 )}
                                 <Box component={Link} to="/">
-                                    <Box component="img" src={compnyLogo} alt="SHAYN" sx={{ width: "auto", cursor: "pointer" }} className="el_without_headerLogo_side" />
+                                    <Box component="img" src={compnyLogo} alt="logo" sx={{ width: "auto", cursor: "pointer" }} className="el_without_headerLogo_side" />
                                 </Box>
                             </Box>
 
@@ -405,9 +405,9 @@ const PremiumNavbar = () => {
                                                                     }}
                                                                 >
                                                                     {/* LEFT SIDEBAR (The Main Menu Items) */}
-                                                                    <Box sx={{ 
-                                                                        width: "250px", 
-                                                                        borderRight: "1px solid #e0e0e0", 
+                                                                    <Box sx={{
+                                                                        width: "250px",
+                                                                        borderRight: "1px solid #e0e0e0",
                                                                         overflowY: "auto",
                                                                         bgcolor: "#fcfcfc",
                                                                         py: 2
@@ -417,8 +417,8 @@ const PremiumNavbar = () => {
                                                                                 key={mIndex}
                                                                                 onMouseEnter={() => setActiveSubMenu(menuItem)}
                                                                                 onClick={(e) => {
-                                                                                     handelMenu({ menuname: menuItem?.menuname, key: menuItem?.param0name, value: menuItem?.param0dataname }, {}, {}, e, menuItem?.IsFilterKey1Ignore);
-                                                                                     setHoveredItem(null);
+                                                                                    handelMenu({ menuname: menuItem?.menuname, key: menuItem?.param0name, value: menuItem?.param0dataname }, {}, {}, e, menuItem?.IsFilterKey1Ignore);
+                                                                                    setHoveredItem(null);
                                                                                 }}
                                                                                 sx={{
                                                                                     px: 4, py: 1.5,
@@ -439,9 +439,9 @@ const PremiumNavbar = () => {
                                                                     </Box>
 
                                                                     {/* RIGHT CONTENT AREA (The Sub Menus / Filters) */}
-                                                                    <Box sx={{ 
-                                                                        flex: 1, 
-                                                                        p: 4, 
+                                                                    <Box sx={{
+                                                                        flex: 1,
+                                                                        p: 4,
                                                                         overflowY: "auto",
                                                                         // Custom Scrollbar
                                                                         scrollbarWidth: "thin", scrollbarColor: "#bfbfbf transparent",
@@ -465,7 +465,7 @@ const PremiumNavbar = () => {
                                                                                                 setHoveredItem(null);
                                                                                             }}
                                                                                             sx={{
-                                                                                                fontWeight: 700, 
+                                                                                                fontWeight: 700,
                                                                                                 color: "#000",
                                                                                                 mb: 1.5,
                                                                                                 fontSize: "0.9rem",
@@ -493,8 +493,8 @@ const PremiumNavbar = () => {
                                                                                                         setHoveredItem(null);
                                                                                                     }}
                                                                                                     sx={{
-                                                                                                        fontSize: "0.85rem", 
-                                                                                                        color: "#666", 
+                                                                                                        fontSize: "0.85rem",
+                                                                                                        color: "#666",
                                                                                                         cursor: "pointer",
                                                                                                         textDecoration: "none",
                                                                                                         "&:hover": { color: "#000", textDecoration: "underline" }
@@ -516,7 +516,7 @@ const PremiumNavbar = () => {
                                                 </Box>
                                             );
                                         })}
-                                        
+
                                         {/* Static Links */}
                                         {islogin && (
                                             <>
@@ -569,17 +569,17 @@ const PremiumNavbar = () => {
             >
                 {DrawerSearchOpen && <DrawerSearchBar setSearchOpen={setDrawerSearchOpen} searchDataFucn={searchDataFucn} />}
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2, borderBottom: `1px solid ${alpha("#fff", 0.1)}` }}>
-                    <Box component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
+                    <Box component="img" src={compnyLogoM} alt="logo" sx={{}} />
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.6 }}>
                         {islogin && <IconButton onClick={() => setDrawerSearchOpen((prev) => !prev)} sx={{ color: "#000" }}><SearchIcon style={{ fontSize: "18px", color: "inherit" }} /></IconButton>}
                         {islogin && <IconButton sx={{ color: "#000" }} onClick={() => navigateToMenu("/myWishList")}><Badge badgeContent={wishCount || 10} color="error"><FavoriteIcon style={{ fontSize: "18px", color: "inherit" }} /></Badge></IconButton>}
                         <IconButton onClick={handleDrawerToggle}><CloseIcon /></IconButton>
                     </Box>
                 </Box>
-                
+
                 <MobileMenu
                     activeMenu={activeMenu}
-                    menuItems={Object.values(multiMenuData).flat()} 
+                    menuItems={Object.values(multiMenuData).flat()}
                     handleMobileMenuClick={handleMobileMenuClick}
                     handleMobileBack={handleMobileBack}
                     handelMenu={handelMenu}
@@ -1018,7 +1018,7 @@ export default PremiumNavbar;
 //                                         component="img"
 //                                         src={compnyLogo}
 
-//                                         alt="SHAYN"
+//                                         alt="logo"
 //                                         sx={{
 //                                             width: "auto",
 //                                             cursor: "pointer",
@@ -1408,7 +1408,7 @@ export default PremiumNavbar;
 //                         borderBottom: `1px solid ${alpha("#fff", 0.1)}`,
 //                     }}
 //                 >
-//                     <Box component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
+//                     <Box component="img" src={compnyLogoM} alt="logo" sx={{}} />
 
 //                     <Box
 //                         sx={{

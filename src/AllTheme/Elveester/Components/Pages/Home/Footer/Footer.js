@@ -42,15 +42,15 @@ const PremiumFooter = ({ el_companyTitleLogo, el_companyTitleLogoM }) => {
     const isLogin = useRecoilState(el_loginState)
     const storeInit = JSON?.parse(sessionStorage?.getItem("storeInit"));
     const [selectedFooteVal, setSelectedVal] = useState(0);
-const year = React.useMemo(() => new Date().getFullYear(), []);
+    const year = React.useMemo(() => new Date().getFullYear(), []);
 
-const MoveToTop = ()=>{
-    window.scrollTo({
-        top:0 ,
-        left : 0 ,
-        behavior:"smooth"
-    })
-}
+    const MoveToTop = () => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        })
+    }
 
     useEffect(() => {
         let interval;
@@ -224,7 +224,7 @@ const MoveToTop = ()=>{
                                         component="img"
                                         src={el_companyTitleLogo}
 
-                                        alt="SHAYN"
+                                        alt="logo"
                                         sx={{
                                             width: "auto",
                                             cursor: "pointer",

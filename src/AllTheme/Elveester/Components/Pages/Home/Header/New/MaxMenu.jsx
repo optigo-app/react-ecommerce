@@ -473,7 +473,7 @@ const MaxNavbar = () => {
                                 <Box component={Link} to="/"
                                     onClick={MoveToTop}
                                 >
-                                    <Box component="img" src={compnyLogo} alt="SHAYN" sx={{ width: IsSetupFor ? "150px" : "110px", cursor: "pointer" }} className="el_without_headerLogo_side" />
+                                    <Box component="img" src={compnyLogo} alt="logo" sx={{ width: IsSetupFor ? "150px" : "110px", cursor: "pointer" }} className="el_without_headerLogo_side" />
                                 </Box>
                             </Box>
 
@@ -941,7 +941,7 @@ const MaxNavbar = () => {
                 >
                     <Box
                         onClick={MoveToTop}
-                        component="img" src={compnyLogoM} alt="SHAYN" sx={{}} />
+                        component="img" src={compnyLogoM} alt="logo" sx={{}} />
 
                     <Box
                         sx={{
