@@ -2,6 +2,7 @@ import { Box, Typography, Grid, Container } from "@mui/material";
 import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 import MaxHeader from "./Header";
 import { useEffect, useState } from "react";
+import { InTheSpotlight } from "./ui/HeaderJ";
 
 const StoreLocator = () => {
     // Ensure this path function is working as expected in your project
@@ -35,7 +36,11 @@ const StoreLocator = () => {
                 flexDirection: 'column'
             }}
         >
-            <MaxHeader title="Physical Store " alignment="center" />
+            {/* <MaxHeader title="Physical Store " alignment="center" /> */}
+            <InTheSpotlight
+                title="  Visit Our Store"
+                subtitle="Experience exceptional craftsmanship in person."
+            />
 
             <Container maxWidth="xl" sx={{ mt: 4 }}>
                 <Grid container spacing={4} alignItems="center">

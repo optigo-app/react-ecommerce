@@ -10,6 +10,7 @@ import "swiper/css/free-mode";
 import { storImagePath } from "../../../../../../../utils/Glob_Functions/GlobalFunction";
 import MaxHeader from "./Header";
 import { useNavigate } from "react-router-dom";
+import { InTheSpotlight } from "./ui/HeaderJ";
 
 const categories = [
   { slug: "Ring", image: `${storImagePath()}/Category/new-image/rings.jpg` },
@@ -138,7 +139,15 @@ const CategorySlider = ({ SectionData, IsLoading }) => {
           padding: "0 !important",
         }}
       >
-        <MaxHeader title={"Essence of Style"} alignment="center" />
+        {/* Jewellery for Every Story
+Find pieces that reflect your unique style. */}
+
+        <InTheSpotlight
+          title="Jewellery for Every Story"
+          subtitle="Find pieces that reflect your unique style."
+        />
+
+        {/* <MaxHeader title={"Essence of Style"} alignment="center" /> */}
 
         <Box sx={{ position: "relative", px: { xs: 0, sm: 0, md: 4 } }}>
           <NavButton direction="left" ref={setPrevEl} />

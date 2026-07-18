@@ -5,6 +5,7 @@ import { Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
 import { Box, Typography, styled } from "@mui/material";
 import MaxHeader from '../TopSection/Max/Header'
+import { InTheSpotlight } from "../TopSection/Max/ui/HeaderJ";
 
 /* ---------- Styled Components ---------- */
 
@@ -54,7 +55,7 @@ export default function SocialMediaVideoSection({ videoData = [] }) {
     const video = videoRefs.current[index];
     if (video) {
       video.currentTime = 0;
-      video.play().catch(() => {});
+      video.play().catch(() => { });
     }
   };
 
@@ -81,10 +82,14 @@ export default function SocialMediaVideoSection({ videoData = [] }) {
           Social Media Videos
         </SectionTitle>
       </SectionHeader> */}
-      <MaxHeader
+      {/* <MaxHeader
       // title="Social Media Videos"
       title="Curated moments"
       alignment="center"
+      /> */}
+      <InTheSpotlight
+        title="WATCH & BUY"
+        subtitle="From Screen to Sparkle"
       />
 
       <Swiper

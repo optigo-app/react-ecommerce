@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import pako from "pako";
 import imageNotFound from "../../../../Assets/image-not-found.jpg";
 import MaxHeader from "./Header";
+import { InTheSpotlight } from "./ui/HeaderJ";
 
 const MaxGalleryView = ({ banner }) => {
   const loginUserDetail = JSON.parse(sessionStorage.getItem("loginUserDetail"));
@@ -122,9 +123,14 @@ const MaxGalleryView = ({ banner }) => {
         >
           TRENDING
         </Typography> */}
-      <MaxHeader
+      {/* <MaxHeader
         title="Trending Masterpieces"
         alignment="center"
+      /> */}
+      <InTheSpotlight
+        eyebrow="IN THE SPOTLIGHT"
+        title="The Spotlight Collection"
+        subtitle="The styles everyone is talking about."
       />
       {/* </Box> */}
 
