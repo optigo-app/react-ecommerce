@@ -167,6 +167,7 @@ const PremiumFooter = ({ el_companyTitleLogo, el_companyTitleLogoM }) => {
                 // { label: 'History', href: '/history' },
                 { label: 'Contact Us', href: '/contact-us' },
                 { label: 'Terms and Conditions', href: '/term&condition' },
+                { label: 'Blogs', href: '/blogs' },
             ],
         },
         {

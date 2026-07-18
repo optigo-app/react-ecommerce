@@ -1,40 +1,60 @@
-import React, { memo, Suspense, useEffect, useState } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import './Components/scss/elvee_modules.scss';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import { Box, CircularProgress } from '@mui/material';
+import React, { memo, Suspense, useEffect, useState } from "react";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import "./Components/scss/elvee_modules.scss";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { Box, CircularProgress } from "@mui/material";
 // import loaderImg from '../Elveester/Components/Assets/webLogo.png';
-import loaderImg from '../../utils/assets/loader/Gif_Loder.gif';
-import { el_companyLogo, el_companyLogoM, el_loginState, IsSetupFor, isSetupforMax, redirectModal, timerExpiredState } from './Components/Recoil/atom'
-import { storImagePath } from '../../utils/Glob_Functions/GlobalFunction';
-import CountdownTimerFnc from './Components/Pages/Home/CountdownTimer/CountdownTimerFnc';
+import loaderImg from "../../utils/assets/loader/Gif_Loder.gif";
+import {
+  el_companyLogo,
+  el_companyLogoM,
+  el_loginState,
+  IsSetupFor,
+  isSetupforMax,
+  redirectModal,
+  timerExpiredState,
+} from "./Components/Recoil/atom";
+import { storImagePath } from "../../utils/Glob_Functions/GlobalFunction";
+import CountdownTimerFnc from "./Components/Pages/Home/CountdownTimer/CountdownTimerFnc";
 import ReactGA from "react-ga4";
-import RedirectModal from './Components/Pages/Home/CountdownTimer/RedirectModal';
-import MetaData from './Components/meta/MetaData';
-import MetaPage from './Components/meta/Metapage';
-import { HelmetProvider } from 'react-helmet-async';
+import RedirectModal from "./Components/Pages/Home/CountdownTimer/RedirectModal";
+import MetaData from "./Components/meta/MetaData";
+import MetaPage from "./Components/meta/Metapage";
+import { HelmetProvider } from "react-helmet-async";
 
-import LoginOption from './Components/Pages/Auth/LoginOption/LoginOption';
-import ContinueWithEmail from './Components/Pages/Auth/ContinueWithEmail/ContinueWithEmail';
-import ContimueWithMobile from './Components/Pages/Auth/ContimueWithMobile/ContimueWithMobile';
-import LoginWithEmail from './Components/Pages/Auth/LoginWithEmail/LoginWithEmail';
-import LoginWithEmailCode from './Components/Pages/Auth/LoginWithEmailCode/LoginWithEmailCode';
-import LoginWithMobileCode from './Components/Pages/Auth/LoginWithMobileCode/LoginWithMobileCode';
-import Register from './Components/Pages/Auth/Registretion/Main';
-import ForgotPass from './Components/Pages/Auth/forgotPass/ForgotPass';
-import PrivateRoutes from './PrivateRoutes';
-import useGlobalPreventSave from '../../utils/Glob_Functions/useGlobalPreventSave';
-import PremiumNavbar from './Components/Pages/Home/Header/New/Navbar';
-import OfferBar from './Components/Pages/Home/Header/New/OfferBar';
-import Collection from './Components/Pages/Home/Collection/Collection';
-import MaxNavbar from './Components/Pages/Home/Header/New/MaxMenu';
-import { ElveeLoadingFallback } from '../../LoadingFallbacks';
+import LoginOption from "./Components/Pages/Auth/LoginOption/LoginOption";
+import ContinueWithEmail from "./Components/Pages/Auth/ContinueWithEmail/ContinueWithEmail";
+import ContimueWithMobile from "./Components/Pages/Auth/ContimueWithMobile/ContimueWithMobile";
+import LoginWithEmail from "./Components/Pages/Auth/LoginWithEmail/LoginWithEmail";
+import LoginWithEmailCode from "./Components/Pages/Auth/LoginWithEmailCode/LoginWithEmailCode";
+import LoginWithMobileCode from "./Components/Pages/Auth/LoginWithMobileCode/LoginWithMobileCode";
+import Register from "./Components/Pages/Auth/Registretion/Main";
+import ForgotPass from "./Components/Pages/Auth/forgotPass/ForgotPass";
+import PrivateRoutes from "./PrivateRoutes";
+import useGlobalPreventSave from "../../utils/Glob_Functions/useGlobalPreventSave";
+import PremiumNavbar from "./Components/Pages/Home/Header/New/Navbar";
+import OfferBar from "./Components/Pages/Home/Header/New/OfferBar";
+import Collection from "./Components/Pages/Home/Collection/Collection";
+import MaxNavbar from "./Components/Pages/Home/Header/New/MaxMenu";
+import { ElveeLoadingFallback } from "../../LoadingFallbacks";
+import BlogList from "./Components/Pages/blogs/Blogs/BlogList";
+import BlogDetail from "./Components/Pages/blogs/Blogs/BlogDetail";
 
-const Home = React.lazy(() => import('./Components/Pages/Home/Index'));
+const Home = React.lazy(() => import("./Components/Pages/Home/Index"));
 // const PrivateRoutes = React.lazy(() => import('./PrivateRoutes'));
-const CartDetails = React.lazy(() => import('./Components/Pages/Cart/Cart'));
-const Header = React.lazy(() => import('./Components/Pages/Home/Header/Header'));
-const Footer = React.lazy(() => import('./Components/Pages/Home/Footer/Footer'));
+const CartDetails = React.lazy(() => import("./Components/Pages/Cart/Cart"));
+const Header = React.lazy(
+  () => import("./Components/Pages/Home/Header/Header"),
+);
+const Footer = React.lazy(
+  () => import("./Components/Pages/Home/Footer/Footer"),
+);
 // const LoginOption = React.lazy(() => import('./Components/Pages/Auth/LoginOption/LoginOption'));
 // const ContinueWithEmail = React.lazy(() => import('./Components/Pages/Auth/ContinueWithEmail/ContinueWithEmail'));
 // const ContimueWithMobile = React.lazy(() => import('./Components/Pages/Auth/ContimueWithMobile/ContimueWithMobile'));
@@ -43,43 +63,83 @@ const Footer = React.lazy(() => import('./Components/Pages/Home/Footer/Footer'))
 // const LoginWithMobileCode = React.lazy(() => import('./Components/Pages/Auth/LoginWithMobileCode/LoginWithMobileCode'));
 // const Register = React.lazy(() => import('./Components/Pages/Auth/Registretion/Register'));
 // const ForgotPass = React.lazy(() => import('./Components/Pages/Auth/forgotPass/ForgotPass'));
-const ProductList = React.lazy(() => import('./Components/Pages/Product/ProductList/ProductList'));
-const ProductDetail = React.lazy(() => import('./Components/Pages/Product/ProductDetail/ProductDetail'));
-const Delivery = React.lazy(() => import('./Components/Pages/OrderFlow/DeliveryPage/Delivery'));
-const PaymentPage = React.lazy(() => import('./Components/Pages/OrderFlow/PaymentPage/PaymentPage'));
-const ConfirmationPage = React.lazy(() => import('./Components/Pages/OrderFlow/ConfirmationPage/ConfirmationPage'));
-const Wishlist = React.lazy(() => import('./Components/Pages/Wishlist/Wishlist'));
-const Account = React.lazy(() => import('./Components/Pages/Account/Account'));
-const Lookbook = React.lazy(() => import('./Components/Pages/LookBook/Lookbook'));
-const Customize = React.lazy(() => import('./Components/Pages/Home/StaticPages/Customize/Customize'));
-const CustomerCare = React.lazy(() => import('./Components/Pages/Home/StaticPages/Customercare/CustomerCare'));
-const Terms = React.lazy(() => import('./Components/Pages/Home/StaticPages/Terms/Terms'));
-const AboutUs = React.lazy(() => import('./Components/Pages/Home/StaticPages/AboutUs/AboutUs'));
-const Privacy = React.lazy(() => import('./Components/Pages/Home/StaticPages/Privacy/Privacy'));
-const ContactForm = React.lazy(() => import('./Components/Pages/Home/StaticPages/Contact/Contact'));
-const Career = React.lazy(() => import('./Components/Pages/Home/StaticPages/Career/Career'));
-const Faqs = React.lazy(() => import('./Components/Pages/Home/StaticPages/Faqs/Faqs'));
-const History = React.lazy(() => import('./Components/Pages/Home/StaticPages/History/History'));
-const Appointment = React.lazy(() => import('./Components/Pages/Home/StaticPages/BookAppointment/Appointment'));
-const OfferWrapper = React.lazy(() => import('./Components/Pages/OfferPage'));
-
+const ProductList = React.lazy(
+  () => import("./Components/Pages/Product/ProductList/ProductList"),
+);
+const ProductDetail = React.lazy(
+  () => import("./Components/Pages/Product/ProductDetail/ProductDetail"),
+);
+const Delivery = React.lazy(
+  () => import("./Components/Pages/OrderFlow/DeliveryPage/Delivery"),
+);
+const PaymentPage = React.lazy(
+  () => import("./Components/Pages/OrderFlow/PaymentPage/PaymentPage"),
+);
+const ConfirmationPage = React.lazy(
+  () =>
+    import("./Components/Pages/OrderFlow/ConfirmationPage/ConfirmationPage"),
+);
+const Wishlist = React.lazy(
+  () => import("./Components/Pages/Wishlist/Wishlist"),
+);
+const Account = React.lazy(() => import("./Components/Pages/Account/Account"));
+const Lookbook = React.lazy(
+  () => import("./Components/Pages/LookBook/Lookbook"),
+);
+const Customize = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/Customize/Customize"),
+);
+const CustomerCare = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/Customercare/CustomerCare"),
+);
+const Terms = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/Terms/Terms"),
+);
+const AboutUs = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/AboutUs/AboutUs"),
+);
+const Privacy = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/Privacy/Privacy"),
+);
+const ContactForm = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/Contact/Contact"),
+);
+const Career = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/Career/Career"),
+);
+const Faqs = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/Faqs/Faqs"),
+);
+const History = React.lazy(
+  () => import("./Components/Pages/Home/StaticPages/History/History"),
+);
+const Appointment = React.lazy(
+  () =>
+    import("./Components/Pages/Home/StaticPages/BookAppointment/Appointment"),
+);
+const OfferWrapper = React.lazy(() => import("./Components/Pages/OfferPage"));
 
 const Elveester_app = () => {
-
   const location = useLocation();
-  const islogin = useRecoilValue(el_loginState)
+  const islogin = useRecoilValue(el_loginState);
   const [showHeader, setShowHeader] = useState(true);
   const [showFooter, setShowFooter] = useState(true);
   const timerData = useSetRecoilState(timerExpiredState);
   const getRedModal = useRecoilValue(redirectModal);
   const setRedModal = useSetRecoilState(redirectModal);
-  const loginData = JSON.parse(sessionStorage.getItem('loginUserDetail'));
-  const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0 });
+  const loginData = JSON.parse(sessionStorage.getItem("loginUserDetail"));
+  const [contextMenu, setContextMenu] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+  });
 
-  const [el_companyTitleLogo, el_setCompanyTitleLogo] = useRecoilState(el_companyLogo)
-  const [el_companyTitleLogoM, el_setCompanyTitleLogoM] = useRecoilState(el_companyLogoM)
+  const [el_companyTitleLogo, el_setCompanyTitleLogo] =
+    useRecoilState(el_companyLogo);
+  const [el_companyTitleLogoM, el_setCompanyTitleLogoM] =
+    useRecoilState(el_companyLogoM);
 
-  useGlobalPreventSave()
+  useGlobalPreventSave();
 
   const handleContextMenu = (e) => {
     e.preventDefault();
@@ -97,8 +157,7 @@ const Elveester_app = () => {
         if (loginData?.IsTimeShow == 1) {
           timerData(timer);
           setRedModal(false);
-        }
-        else {
+        } else {
           setRedModal(false);
         }
       }
@@ -137,13 +196,11 @@ const Elveester_app = () => {
     let mobileLogo = `${storImagePath()}/logoIcon/mobileLogo.png`;
 
     el_setCompanyTitleLogo(webLogo);
-    console.log(webLogo, "webLogo")
+    console.log(webLogo, "webLogo");
     el_setCompanyTitleLogoM(mobileLogo);
-    console.log(mobileLogo, "mobileLogo")
+    console.log(mobileLogo, "mobileLogo");
 
-    if (
-      location?.pathname === '/menu'
-    ) {
+    if (location?.pathname === "/menu") {
       setShowHeader(false);
       setShowFooter(false);
     } else {
@@ -152,38 +209,38 @@ const Elveester_app = () => {
     }
   }, [location?.pathname]);
 
-
   const LoadingFallback = () => {
-    return <ElveeLoadingFallback />
-    return (<>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          backgroundColor: '#fff',
-        }}
-      >
-        {/* <CircularProgress sx={{ color: 'rgba(255, 87, 34, 0.8)' }} /> */}
-        <img
-          src={IsSetupFor ? el_companyTitleLogo : loaderImg}
-          alt="Loading..."
-          width="auto"
-          loading="lazy"
-          className={IsSetupFor ? "loading_logo_7946" : ""}
-
-          style={{
-            maxWidth: '200px',
-            width: '100%',
-            height: 'auto',
+    return <ElveeLoadingFallback />;
+    return (
+      <>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            backgroundColor: "#fff",
           }}
-        // style={{
-        //   animation: 'scaleUpDown 1.5s ease-in-out infinite', // Apply the animation here
-        // }}
-        />
-      </Box>
-    </>)
+        >
+          {/* <CircularProgress sx={{ color: 'rgba(255, 87, 34, 0.8)' }} /> */}
+          <img
+            src={IsSetupFor ? el_companyTitleLogo : loaderImg}
+            alt="Loading..."
+            width="auto"
+            loading="lazy"
+            className={IsSetupFor ? "loading_logo_7946" : ""}
+            style={{
+              maxWidth: "200px",
+              width: "100%",
+              height: "auto",
+            }}
+            // style={{
+            //   animation: 'scaleUpDown 1.5s ease-in-out infinite', // Apply the animation here
+            // }}
+          />
+        </Box>
+      </>
+    );
   };
 
   function ProductListWrapper() {
@@ -221,9 +278,13 @@ const Elveester_app = () => {
       </div>
     );
   }
+  function BlogDetailWrapper() {
+    const { id } = useParams();
+    return <BlogDetail id={id} />;
+  }
 
   return (
-    <div className="elvee_app_wrapper" >
+    <div className="elvee_app_wrapper">
       <HelmetProvider>
         <MetaPage />
         {getRedModal === true && <RedirectModal />}
@@ -237,24 +298,37 @@ const Elveester_app = () => {
             <Route path="/LoginOption" element={<LoginOption />} />
             <Route
               path="/ContinueWithEmail"
-              element={!islogin ? <ContinueWithEmail /> : <Navigate to="/" replace />}
+              element={
+                !islogin ? <ContinueWithEmail /> : <Navigate to="/" replace />
+              }
             />
             <Route
               path="/ContimueWithMobile"
-              element={!islogin ? <ContimueWithMobile /> : <Navigate to="/" replace />}
+              element={
+                !islogin ? <ContimueWithMobile /> : <Navigate to="/" replace />
+              }
             />
             <Route
               path="/LoginWithEmail"
-              element={!islogin ? <LoginWithEmail /> : <Navigate to="/" replace />}
+              element={
+                !islogin ? <LoginWithEmail /> : <Navigate to="/" replace />
+              }
             />
-            <Route path="/Register" element={!islogin ? <Register /> : <Navigate to="/" replace />} />
+            <Route
+              path="/Register"
+              element={!islogin ? <Register /> : <Navigate to="/" replace />}
+            />
             <Route
               path="/LoginWithEmailCode"
-              element={!islogin ? <LoginWithEmailCode /> : <Navigate to="/" replace />}
+              element={
+                !islogin ? <LoginWithEmailCode /> : <Navigate to="/" replace />
+              }
             />
             <Route
               path="/LoginWithMobileCode"
-              element={!islogin ? <LoginWithMobileCode /> : <Navigate to="/" replace />}
+              element={
+                !islogin ? <LoginWithMobileCode /> : <Navigate to="/" replace />
+              }
             />
             <Route
               path="/ForgotPass"
@@ -285,15 +359,19 @@ const Elveester_app = () => {
             <Route path="/careers" element={<Career />} />
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/faqs" element={<Faqs />} />
+            <Route path="/blogs" element={<BlogList />} />
+            <Route path="/blogs/:id" element={<BlogDetailWrapper />} />
           </Routes>
         </Suspense>
-        {showFooter && <Footer
-          el_companyTitleLogo={el_companyTitleLogo}
-          el_companyTitleLogoM={el_companyTitleLogoM}
-        />}
+        {showFooter && (
+          <Footer
+            el_companyTitleLogo={el_companyTitleLogo}
+            el_companyTitleLogoM={el_companyTitleLogoM}
+          />
+        )}
       </HelmetProvider>
     </div>
-  )
-}
+  );
+};
 
 export default memo(Elveester_app);
