@@ -529,9 +529,9 @@ const Dummydata = {
 
 
 export default function TermsAndConditions() {
-  const Shinjini = 1;
+  const Shinjini = 0;
   const termsData = Shinjini === 1 ? ShinjinitermsData : SonasonstermsData;
-  const defaultTermjs = 1 ? SonasonstermsData : VaratermsData;
+  const defaultTermjs = 0 ? SonasonstermsData : VaratermsData;
   return (
     // <div className="shinjini-terms">
     //   <Banner />

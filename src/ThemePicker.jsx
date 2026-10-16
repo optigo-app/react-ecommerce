@@ -46,8 +46,8 @@ const themeConfig = {
   10: { Component: StamFordJewels_App, Loader: OjasviLoadingFallback },
   11: {
     Component: RoopJewellers_App, Loader:
-      //  VaraLoadingFallback
-      DefaultLoadingFallback
+      VaraLoadingFallback
+    // DefaultLoadingFallback
   },
   12: {
     Component: MalakanJewels_App, Loader:
@@ -129,8 +129,8 @@ export const themeEnvConfig = {
     Component: RoopJewellers_App,
     // Loader: SaraffLoadingFallback,
     Loader:
-      //  VaraLoadingFallback,
-      DefaultLoadingFallback
+      VaraLoadingFallback,
+    // DefaultLoadingFallback
   },
 
   "malakan.web": {

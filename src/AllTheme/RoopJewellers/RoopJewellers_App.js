@@ -223,12 +223,14 @@ const RoopJewellers_App = () => {
     );
   }
 
-  const Vaara = 0;
+  const Vaara = 1;
 
   const Vara = Vaara == 0 ? <AXboutUs /> : <AboutUsVara />
 
-  const LoadingFallback = () => (
-    <Box
+  const LoadingFallback = () => {
+    const VaaraLogo = Vaara == 0 ? loaderImg : loaderImg1;
+    console.log(VaaraLogo)
+    return <Box
       sx={{
         display: 'flex',
         justifyContent: 'center',
@@ -239,7 +241,7 @@ const RoopJewellers_App = () => {
       {/* <CircularProgress sx={{ color: 'rgba(255, 87, 34, 0.8)' }} /> */}
       <img
         // src={loaderImg1}
-        src={loaderImg}
+        src={VaaraLogo}
         alt="Loading..."
         height="100%"
         width="auto"
@@ -249,7 +251,7 @@ const RoopJewellers_App = () => {
         }}
       />
     </Box>
-  );
+  };
 
   return (
     <>
@@ -347,7 +349,7 @@ const RoopJewellers_App = () => {
         }
 
         {/* For vara */}
-        {/* {  location.pathname !== "/404" &&           <BrandsComponent/>} */}
+        {/* {location.pathname !== "/404" && <BrandsComponent />} */}
         <StamScrollToTop />
       </Suspense>
     </>

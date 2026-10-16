@@ -10,16 +10,15 @@ export default function ManagementTeam() {
       <main className="vara_ManagementTeam">
         <Banner />
         <DirectorInfo />
-        <MemberList/>
+        <MemberList />
       </main>
     </>
   );
 }
 
 const Banner = ({ title = "MANAGEMENT TEAM" }) => {
-  const Image = `url(${
-    storImagePath() + "/images/management-team-banner.png"
-  })`;
+  const Image = `url(${storImagePath() + "/images/management-team-banner.png"
+    })`;
   return (
     <>
       <div
@@ -55,16 +54,16 @@ const DirectorInfo = () => {
               </div>
             </div>
             <div className="sec">
-            <div className="iamge_vara">
-            <img
-              src={storImagePath() + `/images/management-team/2.png`}
-              alt=""
-            />
+              <div className="iamge_vara">
+                <img
+                  src={storImagePath() + `/images/management-team/2.png`}
+                  alt=""
+                />
               </div>
               <div className="details_vara_abs">
-              <span className="vara_title">Keval Mavani</span>
-              <div className="line_vara"></div>
-              <small className="vara_sub_titlte">Director</small>
+                <span className="vara_title">Keval Mavani</span>
+                <div className="line_vara"></div>
+                <small className="vara_sub_titlte">Director</small>
               </div>
             </div>
           </div>
@@ -138,7 +137,7 @@ const DirectorInfo = () => {
   );
 };
 
-const MemberList = ()=>{
+const MemberList = () => {
   const teamMembers = [
     {
       name: 'Jaykishan Bhalala',
@@ -150,11 +149,11 @@ const MemberList = ()=>{
       role: 'Marketing (Head)',
       image: `${storImagePath()}/images/management-team/5.png`
     },
-    {
-      name: 'Anil Gujrati',
-      role: 'Production (Head)',
-      image: `${storImagePath()}/images/management-team/6.png`
-    },
+    // {
+    //   name: 'Anil Gujrati',
+    //   role: 'Production (Head)',
+    //   image: `${storImagePath()}/images/management-team/6.png`
+    // },
     {
       name: 'Ankita Panseriya',
       role: 'Sales (Head)',
@@ -165,42 +164,42 @@ const MemberList = ()=>{
       role: 'Accounts (Head)',
       image: `${storImagePath()}/images/management-team/8.png`
     },
-    {
-      name: 'Jaydip Talaviya',
-      role: 'Product Development (Head)',
-      image: `${storImagePath()}/images/management-team/9.png`
-    }
+    // {
+    //   name: 'Jaydip Talaviya',
+    //   role: 'Product Development (Head)',
+    //   image: `${storImagePath()}/images/management-team/9.png`
+    // }
   ]
   return <>
-  <main className="vaara-main">
-        <div className="vaara-content">
-          <h1 className="vaara-title">Strategic Team</h1>
-          <p className="vaara-subtitle">
-            Meet The Architects Of Our Success –<br />
-            The Leaders At Vara Jewels, Where<br />
-            Vision Meets Execution.
-          </p>
-          </div>
+    <main className="vaara-main">
+      <div className="vaara-content">
+        <h1 className="vaara-title">Strategic Team</h1>
+        <p className="vaara-subtitle">
+          Meet The Architects Of Our Success –<br />
+          The Leaders At Vara Jewels, Where<br />
+          Vision Meets Execution.
+        </p>
+      </div>
 
-          <div className="vaara-team-grid">
-            {teamMembers.map((member, index) => (
-              <div key={member.name} className="vaara-team-member">
-                <div className="vaara-image-container">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    width={300}
-                    height={400}
-                    className="vaara-member-image"
-                  />
-                </div>
-                <div className="vaara-member-info">
-                  <span className="vaara-member-name">{member.name}</span>
-                  <p className="vaara-member-role">{member.role}</p>
-                </div>
-              </div>
-            ))}
+      <div className="vaara-team-grid">
+        {teamMembers.map((member, index) => (
+          <div key={member.name} className="vaara-team-member">
+            <div className="vaara-image-container">
+              <img
+                src={member.image}
+                alt={member.name}
+                width={300}
+                height={400}
+                className="vaara-member-image"
+              />
+            </div>
+            <div className="vaara-member-info">
+              <span className="vaara-member-name">{member.name}</span>
+              <p className="vaara-member-role">{member.role}</p>
+            </div>
           </div>
-      </main>
+        ))}
+      </div>
+    </main>
   </>
 }
